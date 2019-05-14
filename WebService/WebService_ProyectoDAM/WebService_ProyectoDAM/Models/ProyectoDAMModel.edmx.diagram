@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e29999cc5e86404ea4ed2db59d62d7e2" Name="Diagram1">
-        <EntityTypeShape EntityType="ProyectoDAMModel.Apoyos" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoDAMModel.Jugador" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoDAMModel.Mensaje" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoDAMModel.Movimientos" Width="1.5" PointX="7.5" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoDAMModel.Partida" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoDAMModel.Pueblo" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoDAMModel.Tropas" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="2a1455f8935742608a38822ca6a8a80c" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="ProyectoDAMModel.Apoyos" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoDAMModel.Jugador" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoDAMModel.Mensaje" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoDAMModel.Movimientos" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoDAMModel.ordenReclutamiento" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoDAMModel.Partida" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoDAMModel.Pueblo" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoDAMModel.Tropas" Width="1.5" PointX="8.25" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="ProyectoDAMModel.FK__Apoyos__puebloDe__07C12930" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoDAMModel.FK__Apoyos__puebloOr__06CD04F7" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoDAMModel.FK__Jugador__id_Part__5CD6CB2B" ManuallyRouted="false" />
@@ -20,6 +21,8 @@
         <AssociationConnector Association="ProyectoDAMModel.FK__Pueblo__propieta__66603565" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoDAMModel.FK__Movimient__puebl__75A278F5" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoDAMModel.FK__Movimient__puebl__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoDAMModel.FK__ordenRecl__puebl__123EB7A3" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoDAMModel.FK__ordenRecl__tropa__1332DBDC" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

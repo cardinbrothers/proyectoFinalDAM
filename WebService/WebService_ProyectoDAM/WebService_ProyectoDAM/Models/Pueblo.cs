@@ -21,6 +21,7 @@ namespace WebService_ProyectoDAM.Models
             this.Apoyos1 = new HashSet<Apoyos>();
             this.Movimientos = new HashSet<Movimientos>();
             this.Movimientos1 = new HashSet<Movimientos>();
+            this.ordenReclutamiento = new HashSet<ordenReclutamiento>();
         }
     
         public int id_Pueblo { get; set; }
@@ -42,5 +43,7 @@ namespace WebService_ProyectoDAM.Models
         public virtual ICollection<Movimientos> Movimientos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimientos> Movimientos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ordenReclutamiento> ordenReclutamiento { get; set; }
     }
 }

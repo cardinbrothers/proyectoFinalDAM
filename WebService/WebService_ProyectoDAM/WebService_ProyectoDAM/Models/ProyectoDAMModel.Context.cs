@@ -29,6 +29,7 @@ namespace WebService_ProyectoDAM.Models
         public virtual DbSet<Jugador> Jugador { get; set; }
         public virtual DbSet<Mensaje> Mensaje { get; set; }
         public virtual DbSet<Movimientos> Movimientos { get; set; }
+        public virtual DbSet<ordenReclutamiento> ordenReclutamiento { get; set; }
         public virtual DbSet<Partida> Partida { get; set; }
         public virtual DbSet<Pueblo> Pueblo { get; set; }
         public virtual DbSet<Tropas> Tropas { get; set; }

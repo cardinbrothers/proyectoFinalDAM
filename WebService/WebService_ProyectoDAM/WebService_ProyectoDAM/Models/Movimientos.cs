@@ -25,7 +25,6 @@ namespace WebService_ProyectoDAM.Models
         public Nullable<int> piqueros { get; set; }
         public Nullable<int> caballeros { get; set; }
         public Nullable<int> paladines { get; set; }
-        public Nullable<bool> direccion { get; set; }
         public Nullable<int> vencedor { get; set; }
     
         public virtual Pueblo Pueblo { get; set; }

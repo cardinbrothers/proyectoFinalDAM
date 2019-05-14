@@ -17,6 +17,7 @@
           <Property Name="piqueros" Type="int" />
           <Property Name="caballeros" Type="int" />
           <Property Name="paladines" Type="int" />
+          <Property Name="horaFin" Type="date" />
         </EntityType>
         <EntityType Name="Jugador">
           <Key>
@@ -52,8 +53,18 @@
           <Property Name="piqueros" Type="int" />
           <Property Name="caballeros" Type="int" />
           <Property Name="paladines" Type="int" />
-          <Property Name="direccion" Type="bit" />
           <Property Name="vencedor" Type="int" />
+        </EntityType>
+        <EntityType Name="ordenReclutamiento">
+          <Key>
+            <PropertyRef Name="idOrden" />
+          </Key>
+          <Property Name="idOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pueblo" Type="int" Nullable="false" />
+          <Property Name="tropa" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="terminado" Type="binary" MaxLength="1" Nullable="false" />
+          <Property Name="horaFin" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Partida">
           <Key>
@@ -175,6 +186,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ordenRecl__puebl__123EB7A3">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="pueblo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordenRecl__tropa__1332DBDC">
+          <End Role="Tropas" Type="Self.Tropas" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tropas">
+              <PropertyRef Name="id_Tropas" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="tropa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Pueblo__propieta__66603565">
           <End Role="Jugador" Type="Self.Jugador" Multiplicity="0..1" />
           <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="*" />
@@ -192,6 +227,7 @@
           <EntitySet Name="Jugador" EntityType="Self.Jugador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movimientos" EntityType="Self.Movimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ordenReclutamiento" EntityType="Self.ordenReclutamiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Partida" EntityType="Self.Partida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pueblo" EntityType="Self.Pueblo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tropas" EntityType="Self.Tropas" Schema="dbo" store:Type="Tables" />
@@ -223,6 +259,14 @@
             <End Role="Pueblo" EntitySet="Pueblo" />
             <End Role="Movimientos" EntitySet="Movimientos" />
           </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__puebl__123EB7A3" Association="Self.FK__ordenRecl__puebl__123EB7A3">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__tropa__1332DBDC" Association="Self.FK__ordenRecl__tropa__1332DBDC">
+            <End Role="Tropas" EntitySet="Tropas" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
           <AssociationSet Name="FK__Pueblo__propieta__66603565" Association="Self.FK__Pueblo__propieta__66603565">
             <End Role="Jugador" EntitySet="Jugador" />
             <End Role="Pueblo" EntitySet="Pueblo" />
@@ -245,6 +289,7 @@
           <Property Name="piqueros" Type="Int32" />
           <Property Name="caballeros" Type="Int32" />
           <Property Name="paladines" Type="Int32" />
+          <Property Name="horaFin" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Pueblo" Relationship="Self.FK__Apoyos__puebloDe__07C12930" FromRole="Apoyos" ToRole="Pueblo" />
           <NavigationProperty Name="Pueblo1" Relationship="Self.FK__Apoyos__puebloOr__06CD04F7" FromRole="Apoyos" ToRole="Pueblo" />
         </EntityType>
@@ -288,10 +333,22 @@
           <Property Name="piqueros" Type="Int32" />
           <Property Name="caballeros" Type="Int32" />
           <Property Name="paladines" Type="Int32" />
-          <Property Name="direccion" Type="Boolean" />
           <Property Name="vencedor" Type="Int32" />
           <NavigationProperty Name="Pueblo" Relationship="Self.FK__Movimient__puebl__75A278F5" FromRole="Movimientos" ToRole="Pueblo" />
           <NavigationProperty Name="Pueblo1" Relationship="Self.FK__Movimient__puebl__76969D2E" FromRole="Movimientos" ToRole="Pueblo" />
+        </EntityType>
+        <EntityType Name="ordenReclutamiento">
+          <Key>
+            <PropertyRef Name="idOrden" />
+          </Key>
+          <Property Name="idOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pueblo" Type="Int32" Nullable="false" />
+          <Property Name="tropa" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="terminado" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
+          <Property Name="horaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Pueblo1" Relationship="Self.FK__ordenRecl__puebl__123EB7A3" FromRole="ordenReclutamiento" ToRole="Pueblo" />
+          <NavigationProperty Name="Tropas" Relationship="Self.FK__ordenRecl__tropa__1332DBDC" FromRole="ordenReclutamiento" ToRole="Tropas" />
         </EntityType>
         <EntityType Name="Partida">
           <Key>
@@ -324,6 +381,7 @@
           <NavigationProperty Name="Jugador" Relationship="Self.FK__Pueblo__propieta__66603565" FromRole="Pueblo" ToRole="Jugador" />
           <NavigationProperty Name="Movimientos" Relationship="Self.FK__Movimient__puebl__75A278F5" FromRole="Pueblo" ToRole="Movimientos" />
           <NavigationProperty Name="Movimientos1" Relationship="Self.FK__Movimient__puebl__76969D2E" FromRole="Pueblo" ToRole="Movimientos" />
+          <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__puebl__123EB7A3" FromRole="Pueblo" ToRole="ordenReclutamiento" />
         </EntityType>
         <EntityType Name="Tropas">
           <Key>
@@ -334,6 +392,7 @@
           <Property Name="potencia" Type="Int32" Nullable="false" />
           <Property Name="tiempoReclutamiento" Type="Time" Precision="7" />
           <Property Name="poblacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__tropa__1332DBDC" FromRole="Tropas" ToRole="ordenReclutamiento" />
         </EntityType>
         <Association Name="FK__Apoyos__puebloDe__07C12930">
           <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
@@ -431,11 +490,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ordenRecl__puebl__123EB7A3">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="pueblo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordenRecl__tropa__1332DBDC">
+          <End Role="Tropas" Type="Self.Tropas" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tropas">
+              <PropertyRef Name="id_Tropas" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="tropa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ProyectoDAMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Apoyos" EntityType="Self.Apoyos" />
           <EntitySet Name="Jugador" EntityType="Self.Jugador" />
           <EntitySet Name="Mensaje" EntityType="Self.Mensaje" />
           <EntitySet Name="Movimientos" EntityType="Self.Movimientos" />
+          <EntitySet Name="ordenReclutamiento" EntityType="Self.ordenReclutamiento" />
           <EntitySet Name="Partida" EntityType="Self.Partida" />
           <EntitySet Name="Pueblo" EntityType="Self.Pueblo" />
           <EntitySet Name="Tropas" EntityType="Self.Tropas" />
@@ -471,6 +555,14 @@
             <End Role="Pueblo" EntitySet="Pueblo" />
             <End Role="Movimientos" EntitySet="Movimientos" />
           </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__puebl__123EB7A3" Association="Self.FK__ordenRecl__puebl__123EB7A3">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__tropa__1332DBDC" Association="Self.FK__ordenRecl__tropa__1332DBDC">
+            <End Role="Tropas" EntitySet="Tropas" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -489,6 +581,7 @@
                 <ScalarProperty Name="piqueros" ColumnName="piqueros" />
                 <ScalarProperty Name="caballeros" ColumnName="caballeros" />
                 <ScalarProperty Name="paladines" ColumnName="paladines" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -527,8 +620,19 @@
                 <ScalarProperty Name="piqueros" ColumnName="piqueros" />
                 <ScalarProperty Name="caballeros" ColumnName="caballeros" />
                 <ScalarProperty Name="paladines" ColumnName="paladines" />
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="vencedor" ColumnName="vencedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ordenReclutamiento">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.ordenReclutamiento">
+              <MappingFragment StoreEntitySet="ordenReclutamiento">
+                <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+                <ScalarProperty Name="pueblo" ColumnName="pueblo" />
+                <ScalarProperty Name="tropa" ColumnName="tropa" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="terminado" ColumnName="terminado" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

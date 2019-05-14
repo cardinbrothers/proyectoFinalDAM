@@ -63,8 +63,8 @@
           <Property Name="pueblo" Type="int" Nullable="false" />
           <Property Name="tropa" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="int" />
-          <Property Name="terminado" Type="binary" MaxLength="1" Nullable="false" />
           <Property Name="horaFin" Type="date" Nullable="false" />
+          <Property Name="terminado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Partida">
           <Key>
@@ -345,8 +345,8 @@
           <Property Name="pueblo" Type="Int32" Nullable="false" />
           <Property Name="tropa" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Int32" />
-          <Property Name="terminado" Type="Binary" MaxLength="1" FixedLength="true" Nullable="false" />
           <Property Name="horaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="terminado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Pueblo1" Relationship="Self.FK__ordenRecl__puebl__123EB7A3" FromRole="ordenReclutamiento" ToRole="Pueblo" />
           <NavigationProperty Name="Tropas" Relationship="Self.FK__ordenRecl__tropa__1332DBDC" FromRole="ordenReclutamiento" ToRole="Tropas" />
         </EntityType>
@@ -631,8 +631,8 @@
                 <ScalarProperty Name="pueblo" ColumnName="pueblo" />
                 <ScalarProperty Name="tropa" ColumnName="tropa" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="terminado" ColumnName="terminado" />
                 <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="terminado" ColumnName="terminado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

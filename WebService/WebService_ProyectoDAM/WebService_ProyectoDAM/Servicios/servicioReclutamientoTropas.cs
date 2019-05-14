@@ -71,5 +71,72 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos el codigo del error
             return error; 
         }
+
+        // Metodo que completa una orden de reclutamiento y la añade al pueblo. 
+        public int completarOrdenReclutamiento(int idOrden)
+        {
+            // Devolvemos error 0 --> Todo correcto; 1 --> Orden ya completada; 2 --> Error desconocido
+            int error = 0;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Almacenamos la informacion de la orden de reclutamiento que hay que completar
+                    var ordenCompletada = (from register in context.ordenReclutamiento
+                                            where register.idOrden == idOrden
+                                            select register).FirstOrDefault();
+
+                    // Comprobamos que efectivamente no ha sido completada hasta ahora la orden
+                    if (ordenCompletada.terminado == false)
+                    {
+                        // Recogemos el pueblo al cual pertenece la orden
+                        var pueblo = (from register in context.Pueblo
+                                      where register.id_Pueblo == ordenCompletada.pueblo
+                                      select register).FirstOrDefault();
+                        
+                        // Incrementamos la tropa que corresponda
+                        switch (ordenCompletada.tropa)
+                        {
+                            case 0:
+                                pueblo.arqueros = pueblo.arqueros + ordenCompletada.cantidad;
+                                break;
+                            case 1:
+                                pueblo.ballesteros = pueblo.ballesteros + ordenCompletada.cantidad;
+                                break;
+                            case 2:
+                                pueblo.piqueros = pueblo.piqueros + ordenCompletada.cantidad;
+                                break;
+                            case 3:
+                                pueblo.caballeros = pueblo.caballeros + ordenCompletada.cantidad;
+                                break;
+                            case 4:
+                                pueblo.paladines = pueblo.paladines + ordenCompletada.cantidad;
+                                break;
+                        }
+
+                        // Marcamos comom completada la orden de reclutamiento
+                        ordenCompletada.terminado = true;
+
+                        // Guardamos los cambios en la base de datos
+                        context.SaveChanges();
+
+                    }
+                    else
+                    {
+                        // En caso de que ya se hubiera completado la orden devolvemos 1
+                        error = 1;
+                    }
+                }
+            }
+            catch
+            {
+                // En caso de que ocurra un error desconocido devolvemos 2 
+                error = 2;
+            }
+
+            // Devolvemos el codigo de error obtenido
+            return error;
+        }
     }
 }

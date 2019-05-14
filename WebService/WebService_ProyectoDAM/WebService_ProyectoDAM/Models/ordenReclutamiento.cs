@@ -18,8 +18,8 @@ namespace WebService_ProyectoDAM.Models
         public int pueblo { get; set; }
         public int tropa { get; set; }
         public Nullable<int> cantidad { get; set; }
-        public byte[] terminado { get; set; }
         public System.DateTime horaFin { get; set; }
+        public bool terminado { get; set; }
     
         public virtual Pueblo Pueblo1 { get; set; }
         public virtual Tropas Tropas { get; set; }

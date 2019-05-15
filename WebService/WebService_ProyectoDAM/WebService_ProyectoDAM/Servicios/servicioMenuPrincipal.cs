@@ -194,5 +194,116 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos la lista de partidas activas
             return error;
         }
+
+        // Metodo para iniciar sesion con un Usuario y contraseña
+        public int inciarSesion(infoJugadorEntity jugador)
+        {
+            // Valor entero que almacena un digito segun que error ocurra siendo: 
+            //      0 --> Nombre usuario y contraseña correcta
+            //      1 --> No existe el usuario para la partida indicada
+            //      2 --> Contrasñe incorrecta
+            //      3 --> Error desconocido
+
+            int error;
+            try
+            {
+
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos la contraseña de la base de datos
+                    var contraseña = (from register in context.Jugador
+                                     where register.nombreUsuario == jugador.nombreUsuario &&
+                                     register.id_Partida == jugador.id_partida
+                                     select register.contraseña).FirstOrDefault();
+
+                    // Comprobamos si existe el usuario
+                    if (contraseña != null)
+                    {
+                        // Creamos el objeto para comprobar las contraseñas
+                        StringComparer comparador = StringComparer.Ordinal;
+
+                        // Comprobamos que la contraseña recibida y la de la base de datos coincidan
+                        if (comparador.Compare(jugador.contraseña, contraseña) == 0)
+                        {
+                            // La contraseña es correcta
+                            error = 0;
+                        }
+                        else
+                        {
+                            // La contraseña es incorrecta
+                            error = 2;
+                        }
+                    }
+                    else
+                    {
+                        // No existe el usuario para esa partida
+                        error = 1;
+                    }
+                    
+                }
+            }
+            catch
+            {
+                // Error desconocido
+                error = 3;
+            }
+
+            // Devolvemos el codigo de error
+            return error;
+        }
+
+        // Metodo para obtener los parametros de una partida a partir de su id
+        public infoPartidaEntity obtenerParametrosPartida(int id_partida)
+        {
+            // Creamos el objeto para almacenar las datos de la partida
+            infoPartidaEntity partidaObtenida = null;
+
+            try
+            {
+
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos la informacion de la partida de la base de datos
+                    var partida = (from register in context.Partida
+                                   where register.activo == true && 
+                                   register.id_Partida == id_partida
+                                   select new
+                                   {
+                                       register.Modalidad,
+                                       register.Velocidad,
+                                       register.Duracion,
+                                       register.limiteJugadores,
+                                       register.limitePoblacion,
+                                       register.fechaInicio,
+                                       jugadoresActivos = (from register2 in context.Jugador
+                                                           where register2.id_Partida == register.id_Partida
+                                                           select register2.nombreUsuario).Count()
+                                   }).FirstOrDefault();
+
+                    // Si la partida exite
+                    if (partida != null)
+                    {
+                        // Almacenamos la informacion en el objeto que devolveremos
+                        partidaObtenida = new infoPartidaEntity();
+
+                        partidaObtenida.modalidad = partida.Modalidad;
+                        partidaObtenida.velocidad = partida.Velocidad;
+                        partidaObtenida.duracion = partida.Duracion;
+                        partidaObtenida.limiteJugadores = partida.limiteJugadores;
+                        partidaObtenida.limitePoblacion = partida.limitePoblacion;
+                        partidaObtenida.fechaInicio = partida.fechaInicio;
+                        partidaObtenida.jugadoresActivos = partida.jugadoresActivos;
+                    }
+                    
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos la informacion de la partida, si no existiera la partida devolvemos null
+            return partidaObtenida;
+        }
     }
 }

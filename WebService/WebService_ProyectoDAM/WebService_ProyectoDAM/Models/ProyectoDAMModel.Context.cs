@@ -16,7 +16,7 @@ namespace WebService_ProyectoDAM.Models
     public partial class ProyectoDAMEntities : DbContext
     {
         public ProyectoDAMEntities()
-            : base("name=ProyectoDAMEntities")
+            : base("name=ProyectoDAMEntitis")
         {
         }
     

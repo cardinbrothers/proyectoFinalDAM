@@ -27,6 +27,7 @@ namespace WebService_ProyectoDAM.Models
         public int limiteJugadores { get; set; }
         public int limitePoblacion { get; set; }
         public System.DateTime fechaInicio { get; set; }
+        public bool activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Jugador> Jugador { get; set; }

@@ -77,6 +77,7 @@
           <Property Name="limiteJugadores" Type="int" Nullable="false" />
           <Property Name="limitePoblacion" Type="int" Nullable="false" />
           <Property Name="fechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Pueblo">
           <Key>
@@ -361,6 +362,7 @@
           <Property Name="limiteJugadores" Type="Int32" Nullable="false" />
           <Property Name="limitePoblacion" Type="Int32" Nullable="false" />
           <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Jugador" Relationship="Self.FK__Jugador__id_Part__5CD6CB2B" FromRole="Partida" ToRole="Jugador" />
         </EntityType>
         <EntityType Name="Pueblo">
@@ -514,7 +516,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProyectoDAMEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProyectoDAMEntitis" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Apoyos" EntityType="Self.Apoyos" />
           <EntitySet Name="Jugador" EntityType="Self.Jugador" />
           <EntitySet Name="Mensaje" EntityType="Self.Mensaje" />
@@ -569,7 +571,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProyectoDAMModelStoreContainer" CdmEntityContainer="ProyectoDAMEntities">
+        <EntityContainerMapping StorageEntityContainer="ProyectoDAMModelStoreContainer" CdmEntityContainer="ProyectoDAMEntitis">
           <EntitySetMapping Name="Apoyos">
             <EntityTypeMapping TypeName="ProyectoDAMModel.Apoyos">
               <MappingFragment StoreEntitySet="Apoyos">
@@ -646,6 +648,7 @@
                 <ScalarProperty Name="limiteJugadores" ColumnName="limiteJugadores" />
                 <ScalarProperty Name="limitePoblacion" ColumnName="limitePoblacion" />
                 <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

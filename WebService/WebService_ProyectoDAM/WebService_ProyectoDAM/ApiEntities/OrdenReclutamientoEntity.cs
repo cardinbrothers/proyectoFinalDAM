@@ -7,6 +7,7 @@ namespace WebService_ProyectoDAM.ApiEntities
 {
     public class OrdenReclutamientoEntity
     {
+        public int id_Orden { get; set; }
 
         public int id_Tropa { get; set; }
 

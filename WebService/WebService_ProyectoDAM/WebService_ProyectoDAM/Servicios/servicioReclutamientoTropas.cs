@@ -59,6 +59,8 @@ namespace WebService_ProyectoDAM.Servicios
                         context.ordenReclutamiento.Add(insertOrden);
                         context.SaveChanges();
 
+                        // Almacenamos la informacion en la entidad que devolveremos al usuario
+                        resultado.id_Orden = context.ordenReclutamiento.Last().idOrden;  // ---------------!!!!!?!??!! COMPROBAR SI ESTO FUNCIONA?!?!?!
                         resultado.id_Tropa = idTropa;
                         resultado.cantidad = cantidad;
                         resultado.horaFin = DateTime.Now.AddSeconds(tiempoTotal);
@@ -180,6 +182,7 @@ namespace WebService_ProyectoDAM.Servicios
                             OrdenReclutamientoEntity ordenAuxiliar = new OrdenReclutamientoEntity(); // Creamos un objeto auxiliar para almacenar la informacion de la orden actual
 
                             // Almacenamos lo necesario en el objeto auxiliar
+                            ordenAuxiliar.id_Orden = orden.idOrden;
                             ordenAuxiliar.id_Tropa = orden.tropa;
                             ordenAuxiliar.cantidad = (int)orden.cantidad;
                             ordenAuxiliar.horaFin = orden.horaFin;
@@ -197,6 +200,46 @@ namespace WebService_ProyectoDAM.Servicios
 
             // Devolvemos la lista de ordenes
             return listaOrdenes;
+        }
+
+        public int cancelarReclutamiento(int idOrden)
+        {
+            // Devolvemos en el error 0 --> Todo correcto; 1 --> Falta poblacion; 2 --> Error desconocido
+            int error = 0;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Almacenamos la orden que hay que eliminar
+                    var ordenBorrar = (from register in context.ordenReclutamiento
+                                       where register.idOrden == idOrden && 
+                                       register.terminado == false
+                                       select register).FirstOrDefault();
+
+                    // Comprobamos que exista una orden con ese id y no haya terminado ya 
+                    if (ordenBorrar != null)
+                    {
+                        // Borramos la orden indicada
+                        context.ordenReclutamiento.Remove(ordenBorrar);
+                        context.SaveChanges();
+
+                    }
+                    else
+                    {
+                        // En caso de que no exista devolvemos 1
+                        error = 1;
+                    }
+                }
+            }
+            catch
+            {
+                // En caso de que ocurra un error desconocido devolvemos 2 
+                error = 2;
+            }
+
+            // Devolvemos la informacion de reclutamiento
+            return error;
         }
     }
 }

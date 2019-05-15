@@ -1,0 +1,701 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProyectoDAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apoyos">
+          <Key>
+            <PropertyRef Name="id_Apoyo" />
+          </Key>
+          <Property Name="id_Apoyo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="puebloOrigen" Type="int" Nullable="false" />
+          <Property Name="puebloDestino" Type="int" Nullable="false" />
+          <Property Name="arqueros" Type="int" />
+          <Property Name="ballesteros" Type="int" />
+          <Property Name="piqueros" Type="int" />
+          <Property Name="caballeros" Type="int" />
+          <Property Name="paladines" Type="int" />
+          <Property Name="horaFin" Type="date" />
+        </EntityType>
+        <EntityType Name="Jugador">
+          <Key>
+            <PropertyRef Name="nombreUsuario" />
+          </Key>
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="contraseña" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="id_Partida" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="id_Mensaje" />
+          </Key>
+          <Property Name="id_Mensaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuarioEmisor" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="usuarioReceptor" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="asunto" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="contenido" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="id_Movimiento" />
+          </Key>
+          <Property Name="id_Movimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="puebloOrigen" Type="int" Nullable="false" />
+          <Property Name="puebloDestino" Type="int" Nullable="false" />
+          <Property Name="tipoMovimiento" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="duracion" Type="time" Precision="7" Nullable="false" />
+          <Property Name="horaLlegada" Type="date" Nullable="false" />
+          <Property Name="arqueros" Type="int" />
+          <Property Name="ballesteros" Type="int" />
+          <Property Name="piqueros" Type="int" />
+          <Property Name="caballeros" Type="int" />
+          <Property Name="paladines" Type="int" />
+          <Property Name="vencedor" Type="int" />
+        </EntityType>
+        <EntityType Name="ordenReclutamiento">
+          <Key>
+            <PropertyRef Name="idOrden" />
+          </Key>
+          <Property Name="idOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pueblo" Type="int" Nullable="false" />
+          <Property Name="tropa" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="horaFin" Type="date" Nullable="false" />
+          <Property Name="terminado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="id_Partida" />
+          </Key>
+          <Property Name="id_Partida" Type="int" Nullable="false" />
+          <Property Name="Modalidad" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Velocidad" Type="int" Nullable="false" />
+          <Property Name="Duracion" Type="time" Precision="7" Nullable="false" />
+          <Property Name="limiteJugadores" Type="int" Nullable="false" />
+          <Property Name="limitePoblacion" Type="int" Nullable="false" />
+          <Property Name="fechaInicio" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pueblo">
+          <Key>
+            <PropertyRef Name="id_Pueblo" />
+          </Key>
+          <Property Name="id_Pueblo" Type="int" Nullable="false" />
+          <Property Name="propietario" Type="varchar" MaxLength="60" />
+          <Property Name="poblacion" Type="int" />
+          <Property Name="arqueros" Type="int" />
+          <Property Name="ballesteros" Type="int" />
+          <Property Name="piqueros" Type="int" />
+          <Property Name="caballeros" Type="int" />
+          <Property Name="paladines" Type="int" />
+          <Property Name="coordenadas" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Tropas">
+          <Key>
+            <PropertyRef Name="id_Tropas" />
+          </Key>
+          <Property Name="id_Tropas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="potencia" Type="int" Nullable="false" />
+          <Property Name="tiempoReclutamiento" Type="time" Precision="7" />
+          <Property Name="poblacion" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Apoyos__puebloDe__07C12930">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Apoyos" Type="Self.Apoyos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Apoyos">
+              <PropertyRef Name="puebloDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoyos__puebloOr__06CD04F7">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Apoyos" Type="Self.Apoyos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Apoyos">
+              <PropertyRef Name="puebloOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Jugador__id_Part__5CD6CB2B">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partida">
+              <PropertyRef Name="id_Partida" />
+            </Principal>
+            <Dependent Role="Jugador">
+              <PropertyRef Name="id_Partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mensaje__usuario__6B24EA82">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="nombreUsuario" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="usuarioEmisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mensaje__usuario__6C190EBB">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="nombreUsuario" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="usuarioReceptor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__puebl__75A278F5">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="puebloOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__puebl__76969D2E">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="puebloDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordenRecl__puebl__123EB7A3">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="pueblo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordenRecl__tropa__1332DBDC">
+          <End Role="Tropas" Type="Self.Tropas" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tropas">
+              <PropertyRef Name="id_Tropas" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="tropa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pueblo__propieta__66603565">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="0..1" />
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="nombreUsuario" />
+            </Principal>
+            <Dependent Role="Pueblo">
+              <PropertyRef Name="propietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoDAMModelStoreContainer">
+          <EntitySet Name="Apoyos" EntityType="Self.Apoyos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jugador" EntityType="Self.Jugador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ordenReclutamiento" EntityType="Self.ordenReclutamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partida" EntityType="Self.Partida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pueblo" EntityType="Self.Pueblo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tropas" EntityType="Self.Tropas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Apoyos__puebloDe__07C12930" Association="Self.FK__Apoyos__puebloDe__07C12930">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Apoyos" EntitySet="Apoyos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoyos__puebloOr__06CD04F7" Association="Self.FK__Apoyos__puebloOr__06CD04F7">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Apoyos" EntitySet="Apoyos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Jugador__id_Part__5CD6CB2B" Association="Self.FK__Jugador__id_Part__5CD6CB2B">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="Jugador" EntitySet="Jugador" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mensaje__usuario__6B24EA82" Association="Self.FK__Mensaje__usuario__6B24EA82">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mensaje__usuario__6C190EBB" Association="Self.FK__Mensaje__usuario__6C190EBB">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__puebl__75A278F5" Association="Self.FK__Movimient__puebl__75A278F5">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__puebl__76969D2E" Association="Self.FK__Movimient__puebl__76969D2E">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__puebl__123EB7A3" Association="Self.FK__ordenRecl__puebl__123EB7A3">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__tropa__1332DBDC" Association="Self.FK__ordenRecl__tropa__1332DBDC">
+            <End Role="Tropas" EntitySet="Tropas" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pueblo__propieta__66603565" Association="Self.FK__Pueblo__propieta__66603565">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Pueblo" EntitySet="Pueblo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoDAMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apoyos">
+          <Key>
+            <PropertyRef Name="id_Apoyo" />
+          </Key>
+          <Property Name="id_Apoyo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="puebloOrigen" Type="Int32" Nullable="false" />
+          <Property Name="puebloDestino" Type="Int32" Nullable="false" />
+          <Property Name="arqueros" Type="Int32" />
+          <Property Name="ballesteros" Type="Int32" />
+          <Property Name="piqueros" Type="Int32" />
+          <Property Name="caballeros" Type="Int32" />
+          <Property Name="paladines" Type="Int32" />
+          <Property Name="horaFin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Pueblo" Relationship="Self.FK__Apoyos__puebloDe__07C12930" FromRole="Apoyos" ToRole="Pueblo" />
+          <NavigationProperty Name="Pueblo1" Relationship="Self.FK__Apoyos__puebloOr__06CD04F7" FromRole="Apoyos" ToRole="Pueblo" />
+        </EntityType>
+        <EntityType Name="Jugador">
+          <Key>
+            <PropertyRef Name="nombreUsuario" />
+          </Key>
+          <Property Name="nombreUsuario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contraseña" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_Partida" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Partida" Relationship="Self.FK__Jugador__id_Part__5CD6CB2B" FromRole="Jugador" ToRole="Partida" />
+          <NavigationProperty Name="Mensaje" Relationship="Self.FK__Mensaje__usuario__6B24EA82" FromRole="Jugador" ToRole="Mensaje" />
+          <NavigationProperty Name="Mensaje1" Relationship="Self.FK__Mensaje__usuario__6C190EBB" FromRole="Jugador" ToRole="Mensaje" />
+          <NavigationProperty Name="Pueblo" Relationship="Self.FK__Pueblo__propieta__66603565" FromRole="Jugador" ToRole="Pueblo" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="id_Mensaje" />
+          </Key>
+          <Property Name="id_Mensaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuarioEmisor" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuarioReceptor" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="asunto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contenido" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Jugador" Relationship="Self.FK__Mensaje__usuario__6B24EA82" FromRole="Mensaje" ToRole="Jugador" />
+          <NavigationProperty Name="Jugador1" Relationship="Self.FK__Mensaje__usuario__6C190EBB" FromRole="Mensaje" ToRole="Jugador" />
+        </EntityType>
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="id_Movimiento" />
+          </Key>
+          <Property Name="id_Movimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="puebloOrigen" Type="Int32" Nullable="false" />
+          <Property Name="puebloDestino" Type="Int32" Nullable="false" />
+          <Property Name="tipoMovimiento" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="duracion" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="horaLlegada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="arqueros" Type="Int32" />
+          <Property Name="ballesteros" Type="Int32" />
+          <Property Name="piqueros" Type="Int32" />
+          <Property Name="caballeros" Type="Int32" />
+          <Property Name="paladines" Type="Int32" />
+          <Property Name="vencedor" Type="Int32" />
+          <NavigationProperty Name="Pueblo" Relationship="Self.FK__Movimient__puebl__75A278F5" FromRole="Movimientos" ToRole="Pueblo" />
+          <NavigationProperty Name="Pueblo1" Relationship="Self.FK__Movimient__puebl__76969D2E" FromRole="Movimientos" ToRole="Pueblo" />
+        </EntityType>
+        <EntityType Name="ordenReclutamiento">
+          <Key>
+            <PropertyRef Name="idOrden" />
+          </Key>
+          <Property Name="idOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pueblo" Type="Int32" Nullable="false" />
+          <Property Name="tropa" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="horaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="terminado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pueblo1" Relationship="Self.FK__ordenRecl__puebl__123EB7A3" FromRole="ordenReclutamiento" ToRole="Pueblo" />
+          <NavigationProperty Name="Tropas" Relationship="Self.FK__ordenRecl__tropa__1332DBDC" FromRole="ordenReclutamiento" ToRole="Tropas" />
+        </EntityType>
+        <EntityType Name="Partida">
+          <Key>
+            <PropertyRef Name="id_Partida" />
+          </Key>
+          <Property Name="id_Partida" Type="Int32" Nullable="false" />
+          <Property Name="Modalidad" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Velocidad" Type="Int32" Nullable="false" />
+          <Property Name="Duracion" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="limiteJugadores" Type="Int32" Nullable="false" />
+          <Property Name="limitePoblacion" Type="Int32" Nullable="false" />
+          <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Jugador" Relationship="Self.FK__Jugador__id_Part__5CD6CB2B" FromRole="Partida" ToRole="Jugador" />
+        </EntityType>
+        <EntityType Name="Pueblo">
+          <Key>
+            <PropertyRef Name="id_Pueblo" />
+          </Key>
+          <Property Name="id_Pueblo" Type="Int32" Nullable="false" />
+          <Property Name="propietario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="poblacion" Type="Int32" />
+          <Property Name="arqueros" Type="Int32" />
+          <Property Name="ballesteros" Type="Int32" />
+          <Property Name="piqueros" Type="Int32" />
+          <Property Name="caballeros" Type="Int32" />
+          <Property Name="paladines" Type="Int32" />
+          <Property Name="coordenadas" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Apoyos" Relationship="Self.FK__Apoyos__puebloDe__07C12930" FromRole="Pueblo" ToRole="Apoyos" />
+          <NavigationProperty Name="Apoyos1" Relationship="Self.FK__Apoyos__puebloOr__06CD04F7" FromRole="Pueblo" ToRole="Apoyos" />
+          <NavigationProperty Name="Jugador" Relationship="Self.FK__Pueblo__propieta__66603565" FromRole="Pueblo" ToRole="Jugador" />
+          <NavigationProperty Name="Movimientos" Relationship="Self.FK__Movimient__puebl__75A278F5" FromRole="Pueblo" ToRole="Movimientos" />
+          <NavigationProperty Name="Movimientos1" Relationship="Self.FK__Movimient__puebl__76969D2E" FromRole="Pueblo" ToRole="Movimientos" />
+          <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__puebl__123EB7A3" FromRole="Pueblo" ToRole="ordenReclutamiento" />
+        </EntityType>
+        <EntityType Name="Tropas">
+          <Key>
+            <PropertyRef Name="id_Tropas" />
+          </Key>
+          <Property Name="id_Tropas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="potencia" Type="Int32" Nullable="false" />
+          <Property Name="tiempoReclutamiento" Type="Time" Precision="7" />
+          <Property Name="poblacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__tropa__1332DBDC" FromRole="Tropas" ToRole="ordenReclutamiento" />
+        </EntityType>
+        <Association Name="FK__Apoyos__puebloDe__07C12930">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Apoyos" Type="Self.Apoyos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Apoyos">
+              <PropertyRef Name="puebloDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apoyos__puebloOr__06CD04F7">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Apoyos" Type="Self.Apoyos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Apoyos">
+              <PropertyRef Name="puebloOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Jugador__id_Part__5CD6CB2B">
+          <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partida">
+              <PropertyRef Name="id_Partida" />
+            </Principal>
+            <Dependent Role="Jugador">
+              <PropertyRef Name="id_Partida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mensaje__usuario__6B24EA82">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="nombreUsuario" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="usuarioEmisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mensaje__usuario__6C190EBB">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="nombreUsuario" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="usuarioReceptor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pueblo__propieta__66603565">
+          <End Role="Jugador" Type="Self.Jugador" Multiplicity="0..1" />
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jugador">
+              <PropertyRef Name="nombreUsuario" />
+            </Principal>
+            <Dependent Role="Pueblo">
+              <PropertyRef Name="propietario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__puebl__75A278F5">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="puebloOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movimient__puebl__76969D2E">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="puebloDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordenRecl__puebl__123EB7A3">
+          <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pueblo">
+              <PropertyRef Name="id_Pueblo" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="pueblo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordenRecl__tropa__1332DBDC">
+          <End Role="Tropas" Type="Self.Tropas" Multiplicity="1" />
+          <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tropas">
+              <PropertyRef Name="id_Tropas" />
+            </Principal>
+            <Dependent Role="ordenReclutamiento">
+              <PropertyRef Name="tropa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoDAMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apoyos" EntityType="Self.Apoyos" />
+          <EntitySet Name="Jugador" EntityType="Self.Jugador" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" />
+          <EntitySet Name="ordenReclutamiento" EntityType="Self.ordenReclutamiento" />
+          <EntitySet Name="Partida" EntityType="Self.Partida" />
+          <EntitySet Name="Pueblo" EntityType="Self.Pueblo" />
+          <EntitySet Name="Tropas" EntityType="Self.Tropas" />
+          <AssociationSet Name="FK__Apoyos__puebloDe__07C12930" Association="Self.FK__Apoyos__puebloDe__07C12930">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Apoyos" EntitySet="Apoyos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apoyos__puebloOr__06CD04F7" Association="Self.FK__Apoyos__puebloOr__06CD04F7">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Apoyos" EntitySet="Apoyos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Jugador__id_Part__5CD6CB2B" Association="Self.FK__Jugador__id_Part__5CD6CB2B">
+            <End Role="Partida" EntitySet="Partida" />
+            <End Role="Jugador" EntitySet="Jugador" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mensaje__usuario__6B24EA82" Association="Self.FK__Mensaje__usuario__6B24EA82">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mensaje__usuario__6C190EBB" Association="Self.FK__Mensaje__usuario__6C190EBB">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pueblo__propieta__66603565" Association="Self.FK__Pueblo__propieta__66603565">
+            <End Role="Jugador" EntitySet="Jugador" />
+            <End Role="Pueblo" EntitySet="Pueblo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__puebl__75A278F5" Association="Self.FK__Movimient__puebl__75A278F5">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movimient__puebl__76969D2E" Association="Self.FK__Movimient__puebl__76969D2E">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__puebl__123EB7A3" Association="Self.FK__ordenRecl__puebl__123EB7A3">
+            <End Role="Pueblo" EntitySet="Pueblo" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordenRecl__tropa__1332DBDC" Association="Self.FK__ordenRecl__tropa__1332DBDC">
+            <End Role="Tropas" EntitySet="Tropas" />
+            <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoDAMModelStoreContainer" CdmEntityContainer="ProyectoDAMEntities">
+          <EntitySetMapping Name="Apoyos">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.Apoyos">
+              <MappingFragment StoreEntitySet="Apoyos">
+                <ScalarProperty Name="id_Apoyo" ColumnName="id_Apoyo" />
+                <ScalarProperty Name="puebloOrigen" ColumnName="puebloOrigen" />
+                <ScalarProperty Name="puebloDestino" ColumnName="puebloDestino" />
+                <ScalarProperty Name="arqueros" ColumnName="arqueros" />
+                <ScalarProperty Name="ballesteros" ColumnName="ballesteros" />
+                <ScalarProperty Name="piqueros" ColumnName="piqueros" />
+                <ScalarProperty Name="caballeros" ColumnName="caballeros" />
+                <ScalarProperty Name="paladines" ColumnName="paladines" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jugador">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.Jugador">
+              <MappingFragment StoreEntitySet="Jugador">
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="id_Partida" ColumnName="id_Partida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mensaje">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.Mensaje">
+              <MappingFragment StoreEntitySet="Mensaje">
+                <ScalarProperty Name="id_Mensaje" ColumnName="id_Mensaje" />
+                <ScalarProperty Name="usuarioEmisor" ColumnName="usuarioEmisor" />
+                <ScalarProperty Name="usuarioReceptor" ColumnName="usuarioReceptor" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="asunto" ColumnName="asunto" />
+                <ScalarProperty Name="contenido" ColumnName="contenido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientos">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.Movimientos">
+              <MappingFragment StoreEntitySet="Movimientos">
+                <ScalarProperty Name="id_Movimiento" ColumnName="id_Movimiento" />
+                <ScalarProperty Name="puebloOrigen" ColumnName="puebloOrigen" />
+                <ScalarProperty Name="puebloDestino" ColumnName="puebloDestino" />
+                <ScalarProperty Name="tipoMovimiento" ColumnName="tipoMovimiento" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="horaLlegada" ColumnName="horaLlegada" />
+                <ScalarProperty Name="arqueros" ColumnName="arqueros" />
+                <ScalarProperty Name="ballesteros" ColumnName="ballesteros" />
+                <ScalarProperty Name="piqueros" ColumnName="piqueros" />
+                <ScalarProperty Name="caballeros" ColumnName="caballeros" />
+                <ScalarProperty Name="paladines" ColumnName="paladines" />
+                <ScalarProperty Name="vencedor" ColumnName="vencedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ordenReclutamiento">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.ordenReclutamiento">
+              <MappingFragment StoreEntitySet="ordenReclutamiento">
+                <ScalarProperty Name="idOrden" ColumnName="idOrden" />
+                <ScalarProperty Name="pueblo" ColumnName="pueblo" />
+                <ScalarProperty Name="tropa" ColumnName="tropa" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="horaFin" ColumnName="horaFin" />
+                <ScalarProperty Name="terminado" ColumnName="terminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partida">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.Partida">
+              <MappingFragment StoreEntitySet="Partida">
+                <ScalarProperty Name="id_Partida" ColumnName="id_Partida" />
+                <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
+                <ScalarProperty Name="Velocidad" ColumnName="Velocidad" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="limiteJugadores" ColumnName="limiteJugadores" />
+                <ScalarProperty Name="limitePoblacion" ColumnName="limitePoblacion" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pueblo">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.Pueblo">
+              <MappingFragment StoreEntitySet="Pueblo">
+                <ScalarProperty Name="id_Pueblo" ColumnName="id_Pueblo" />
+                <ScalarProperty Name="propietario" ColumnName="propietario" />
+                <ScalarProperty Name="poblacion" ColumnName="poblacion" />
+                <ScalarProperty Name="arqueros" ColumnName="arqueros" />
+                <ScalarProperty Name="ballesteros" ColumnName="ballesteros" />
+                <ScalarProperty Name="piqueros" ColumnName="piqueros" />
+                <ScalarProperty Name="caballeros" ColumnName="caballeros" />
+                <ScalarProperty Name="paladines" ColumnName="paladines" />
+                <ScalarProperty Name="coordenadas" ColumnName="coordenadas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tropas">
+            <EntityTypeMapping TypeName="ProyectoDAMModel.Tropas">
+              <MappingFragment StoreEntitySet="Tropas">
+                <ScalarProperty Name="id_Tropas" ColumnName="id_Tropas" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="potencia" ColumnName="potencia" />
+                <ScalarProperty Name="tiempoReclutamiento" ColumnName="tiempoReclutamiento" />
+                <ScalarProperty Name="poblacion" ColumnName="poblacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

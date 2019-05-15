@@ -132,6 +132,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiEntities\infoJugadorEntity.cs" />
     <Compile Include="ApiEntities\infoPartidaEntity.cs" />
     <Compile Include="ApiEntities\OrdenReclutamientoEntity.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

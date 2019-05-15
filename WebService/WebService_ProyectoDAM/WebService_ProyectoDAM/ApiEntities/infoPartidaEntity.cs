@@ -20,7 +20,9 @@ namespace WebService_ProyectoDAM.ApiEntities
 
         public int limitePoblacion { get; set; }
 
-        public DateTime fecjaInicio { get; set; }
+        public DateTime fechaInicio { get; set; }
+
+        public int jugadoresActivos { get; set; }
 
 
     }

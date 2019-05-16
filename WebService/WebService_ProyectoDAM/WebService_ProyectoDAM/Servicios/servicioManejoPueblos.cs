@@ -14,6 +14,8 @@ namespace WebService_ProyectoDAM.Servicios
         //
         // Hay que añadir variable id_partida a los pueblos? 
         //
+        // Hay que añadir un identificador a los mensajes para agruparlos por asunto, por ejemplo una froreign key a si mismo
+        //
         //-------------------------------------------
 
 
@@ -196,6 +198,46 @@ namespace WebService_ProyectoDAM.Servicios
 
             // Devolvemos la lista de pueblos
             return listaPueblos;
+        }
+
+        // Metodo para cambiar el propietario del pueblo
+        public void cambiarPropietarioPueblo(int id_pueblo, string nuevoPropietario)
+        {
+            try
+            {
+                using (var context = new ProyectoDAMEntitis())
+                {
+                    // Obtenemos el registro del pueblo que hay que cambiar
+                    var puebloCambiar = (from register in context.Pueblo
+                                         where register.id_Pueblo == id_pueblo
+                                         select register).FirstOrDefault();
+
+                    // Obtenemos el limite de poblacion de la partida
+                    var limitePoblacion = (from register in context.Partida
+                                           from register2 in context.Jugador
+                                           where register.id_Partida == register2.id_Partida &&
+                                           register.activo == true &&
+                                           register2.nombreUsuario == nuevoPropietario
+                                           select register.limitePoblacion).FirstOrDefault();
+
+                    // Cambiamos los valores del pueblo
+                    puebloCambiar.propietario = nuevoPropietario;
+                    puebloCambiar.poblacion = limitePoblacion;
+                    puebloCambiar.arqueros = 0;
+                    puebloCambiar.ballesteros = 0;
+                    puebloCambiar.piqueros = 0;
+                    puebloCambiar.caballeros = 0;
+                    puebloCambiar.paladines = 0;
+
+                    // Guardamos los cambios
+                    context.SaveChanges();
+
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

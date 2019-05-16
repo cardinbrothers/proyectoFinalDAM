@@ -14,14 +14,24 @@ namespace WebService_ProyectoDAM.Models
     
     public partial class Mensaje
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Mensaje()
+        {
+            this.Mensaje1 = new HashSet<Mensaje>();
+        }
+    
         public int id_Mensaje { get; set; }
         public string usuarioEmisor { get; set; }
         public string usuarioReceptor { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public string asunto { get; set; }
         public string contenido { get; set; }
+        public int mensajePadre { get; set; }
     
         public virtual Jugador Jugador { get; set; }
         public virtual Jugador Jugador1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Mensaje> Mensaje1 { get; set; }
+        public virtual Mensaje Mensaje2 { get; set; }
     }
 }

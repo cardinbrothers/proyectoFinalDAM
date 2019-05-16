@@ -19,7 +19,7 @@ namespace WebService_ProyectoDAM.ApiEntities
 
         public string contenido { get; set; }
 
-        public int mensajeDependido { get; set; }
+        public int mensajePadre { get; set; }
 
 
     }

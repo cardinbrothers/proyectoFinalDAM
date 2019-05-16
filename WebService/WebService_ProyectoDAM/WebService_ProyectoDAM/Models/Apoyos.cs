@@ -19,9 +19,6 @@ namespace WebService_ProyectoDAM.Models
         public int puebloDestino { get; set; }
         public Nullable<int> arqueros { get; set; }
         public Nullable<int> ballesteros { get; set; }
-        public Nullable<int> piqueros { get; set; }
-        public Nullable<int> caballeros { get; set; }
-        public Nullable<int> paladines { get; set; }
         public Nullable<System.DateTime> horaFin { get; set; }
     
         public virtual Pueblo Pueblo { get; set; }

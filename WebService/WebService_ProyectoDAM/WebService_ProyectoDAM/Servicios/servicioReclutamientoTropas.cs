@@ -24,7 +24,7 @@ namespace WebService_ProyectoDAM.Servicios
             {
 
 
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Almacenamos la informacion de la tropa necesaria para calcular si es posible el reclutamiento
                     var reclutamiento = (from register in context.Tropas
@@ -91,7 +91,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Almacenamos la informacion de la orden de reclutamiento que hay que completar
                     var ordenCompletada = (from register in context.ordenReclutamiento
@@ -158,7 +158,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Almacenamos todas las ordenes que no hayan sido completadas del pueblo recibido
                     var ordenesPueblo = from register in context.ordenReclutamiento
@@ -209,7 +209,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Almacenamos la orden que hay que eliminar
                     var ordenBorrar = (from register in context.ordenReclutamiento

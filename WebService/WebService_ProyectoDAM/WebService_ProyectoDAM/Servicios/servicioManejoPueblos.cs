@@ -9,20 +9,6 @@ namespace WebService_ProyectoDAM.Servicios
 {
     public class servicioManejoPueblos
     {
-
-        //-------------------------------------------
-        //
-        // Hay que añadir variable id_partida a los pueblos? 
-        //
-        // Hay que añadir un identificador a los mensajes para agruparlos por asunto, por ejemplo una froreign key a si mismo
-        //
-        //  Tratar el perder la conexion desde la app ¡APUNTALO!
-        //
-        //  Cambiar la tabla apoyos para que solo tenga las tropas defensivas puesto que solo puede mandar esas de apoyo duhhh
-        //
-        //-------------------------------------------
-
-
         public int crearPueblo(string nombreJugdor)
         {
             
@@ -31,7 +17,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos el limte de poblacion de la partida donde se crea el pueblo
                     var limitePoblacion = (from register in context.Partida
@@ -114,7 +100,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos el pueblo de la base de datos
                     var infoPueblo = (from register in context.Pueblo
@@ -158,7 +144,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos los pueblo de la base de datos
                     var infoPueblos = from register in context.Pueblo
@@ -204,7 +190,7 @@ namespace WebService_ProyectoDAM.Servicios
         {
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos el registro del pueblo que hay que cambiar
                     var puebloCambiar = (from register in context.Pueblo
@@ -247,7 +233,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // obtenemos una lista de las coordenadas que existen en la partida actualmente
                     var listaCoordenadas = from register in context.Jugador
@@ -277,7 +263,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos los pueblos del jugador de la base de datos
                     var infoPueblos = from register in context.Pueblo

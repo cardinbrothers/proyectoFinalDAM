@@ -203,13 +203,6 @@
       <DependentUpon>ProyectoDAMModel.edmx</DependentUpon>
       <LastGenOutput>ProyectoDAMModel.cs</LastGenOutput>
     </Content>
-    <EntityDeploy Include="Models\ProyectoDAMModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProyectoDAMModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ProyectoDAMModel.edmx.diagram">
-      <DependentUpon>ProyectoDAMModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -222,6 +215,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Models\ProyectoDAMModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProyectoDAMModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProyectoDAMModel.edmx.diagram">
+      <DependentUpon>ProyectoDAMModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

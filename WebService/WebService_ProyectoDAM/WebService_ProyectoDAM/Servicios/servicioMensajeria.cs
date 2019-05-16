@@ -22,7 +22,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos de la base de datos el usuario receptor del mensaje
                     var existeUsuario = (from register in context.Jugador
@@ -45,8 +45,6 @@ namespace WebService_ProyectoDAM.Servicios
                                 mensajeNuevo.fecha = DateTime.Now;
                                 mensajeNuevo.asunto = mensaje.asunto;
                                 mensajeNuevo.contenido = mensaje.contenido;
-                                //    !OJO!  Aqui hace falta crear la variable de referencia sobre uno mismo en la tabla mensajes
-                                //    y ponerla como que por defecto se referencie al id de ese mismo mensaje
 
                                 // Almacenamos el mensaje en la base de datos
                                 context.Mensaje.Add(mensajeNuevo);
@@ -87,12 +85,12 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-              using (var context = new ProyectoDAMEntitis())
+              using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos los mensajes principales del jugador
                     var listaPrincipales = from register in context.Mensaje
                                            where (register.usuarioEmisor == nombreUsuario || register.usuarioReceptor == nombreUsuario)
-                                           // && register.dependido == register.id_Mensaje  --> Lo de actualizar la base de datos
+                                           && register.mensajePadre == register.id_Mensaje 
                                            select register;
 
                     // Tratamos cada mensaje con un foreach
@@ -106,7 +104,7 @@ namespace WebService_ProyectoDAM.Servicios
                         mensajeAux.fecha = (DateTime)mensajePrincipal.fecha;
                         mensajeAux.contenido = mensajePrincipal.contenido;
                         mensajeAux.asunto = mensajePrincipal.asunto;
-                        // mensajeAux.mensajeDependido = mensajePrincipal.mensajeDependido;  Otra vez lo de cambiar la base de datos
+                        mensajeAux.mensajePadre = mensajePrincipal.mensajePadre; 
 
                         // Añadimos el objeto auxiliar a la lista de mensajes
                         bandejaMensajesPrincipales.Add(mensajeAux);
@@ -131,7 +129,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos los mensajes secundarios del id_mensaje recibido
                     var listaSecundarios = from register in context.Mensaje
@@ -150,7 +148,7 @@ namespace WebService_ProyectoDAM.Servicios
                         mensajeAux.fecha = (DateTime)mensajePrincipal.fecha;
                         mensajeAux.contenido = mensajePrincipal.contenido;
                         mensajeAux.asunto = mensajePrincipal.asunto;
-                        // mensajeAux.mensajeDependido = mensajePrincipal.mensajeDependido;  Otra vez lo de cambiar la base de datos
+                        mensajeAux.mensajePadre = mensajePrincipal.mensajePadre;
 
                         // Añadimos el objeto auxiliar a la lista de mensajes
                         bandejaMensajesSecundarios.Add(mensajeAux);
@@ -178,7 +176,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Comprobamos que haya un contenido del mensaje
                     if (mensaje.contenido != null)
@@ -189,7 +187,7 @@ namespace WebService_ProyectoDAM.Servicios
                         mensajeNuevo.usuarioReceptor = mensaje.usuarioReceptor;
                         mensajeNuevo.fecha = DateTime.Now;
                         mensajeNuevo.contenido = mensaje.contenido;
-                        //    !OJO!  mensaje.referente = mensaje.dependido
+                        mensajeNuevo.mensajePadre = mensaje.mensajePadre;
 
                         // Almacenamos el mensaje en la base de datos
                         context.Mensaje.Add(mensajeNuevo);

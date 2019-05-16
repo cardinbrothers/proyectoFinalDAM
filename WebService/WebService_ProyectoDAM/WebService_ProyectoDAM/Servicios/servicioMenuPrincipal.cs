@@ -15,15 +15,36 @@ namespace WebService_ProyectoDAM.Servicios
             // Variable para devolver un codigo de error 0--> Todo correcto; 
             //1 --> Error desconocido
             int error = 0;
-
+            int id_PartidaNueva;
             try
             {
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
+                    // Obtenemos el id mayor hasta la fecha
+                    var idPartidas = (from register in context.Partida
+                                      orderby register.id_Partida descending
+                                      select new
+                                      {
+                                          register.id_Partida
+                                      }).FirstOrDefault();
+
+                    // Comprobamos si ya hay un id de partida en la base de datos
+                    if (idPartidas != null)
+                    {
+                        // Introduciremos el id sumando uno más al último
+                        id_PartidaNueva = idPartidas.id_Partida + 1;
+                    }
+                    else
+                    {
+                        // Introducimos el primer id empezando por 0
+                        id_PartidaNueva = 1;
+                    }
+
                     // Creamos el objeto para insertar la nueva partida
                     Partida partidaCreada = new Partida();
 
                     // Introducimos los parametros de la partida
+                    partidaCreada.id_Partida = id_PartidaNueva;
                     partidaCreada.Modalidad = record.modalidad;
                     partidaCreada.Velocidad = record.velocidad;
                     partidaCreada.Duracion = record.duracion;
@@ -55,7 +76,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos las partidas de la base de datos
                     var listaPartidas = from register in context.Partida
@@ -118,7 +139,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Combrobamos si existe ya un jugador con ese nombre de usuario
                     var jugadores = (from register in context.Jugador
@@ -206,7 +227,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos la contraseña de la base de datos
                     var contraseña = (from register in context.Jugador
@@ -259,7 +280,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntitis())
+                using (var context = new ProyectoDAMEntities())
                 {
                     // Obtenemos la informacion de la partida de la base de datos
                     var partida = (from register in context.Partida

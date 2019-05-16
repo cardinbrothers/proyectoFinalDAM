@@ -37,19 +37,14 @@ namespace WebService_ProyectoDAM.Servicios
                                            where register.id_Partida == register2.id_Partida &&
                                            register.activo == true &&
                                            register2.nombreUsuario == nombreJugdor
-                                           select register.limitePoblacion).FirstOrDefault();
-
-                    // obtenemos una lista de las coordenadas que existen en la partida actualmente
-                    var listaCoordenadas = from register in context.Partida
-                                           from register2 in context.Jugador
-                                           from register3 in context.Pueblo
-                                           where register.id_Partida == register2.id_Partida &&
-                                           register.activo == true &&
-                                           register2.nombreUsuario == register3.propietario
-                                           select register3.coordenadas;
+                                           select new
+                                           {
+                                               register.limitePoblacion,
+                                               register.id_Partida
+                                           }).FirstOrDefault();
 
                     // Pasamos las coordenadas obteneidas a un objeto de tipo lista de cadenas
-                    List<string> coordenadasPartida = listaCoordenadas.ToList();
+                    List<string> coordenadasPartida = obtenerCoordsPartida(limitePoblacion.id_Partida);
 
                     // Generar coordenadas aleatoriaas (metodo)
                     coordenadas = generarCoordsAleatorias();
@@ -65,7 +60,7 @@ namespace WebService_ProyectoDAM.Servicios
 
                     // Introducimos los parametros del pueblo
                     puebloCreado.propietario = nombreJugdor;
-                    puebloCreado.poblacion = limitePoblacion;
+                    puebloCreado.poblacion = limitePoblacion.limitePoblacion;
                     puebloCreado.arqueros = 0;
                     puebloCreado.ballesteros = 0;
                     puebloCreado.piqueros = 0;
@@ -240,6 +235,36 @@ namespace WebService_ProyectoDAM.Servicios
             {
 
             }
+        }
+
+        // Metodo para obtener todas las coordenadas de los pueblos de una partida
+        public List<string> obtenerCoordsPartida(int id_partida)
+        {
+            // Creamos una lista donde alamacenar las corrdenadas
+            List<string> coordenadasPueblos = null;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntitis())
+                {
+                    // obtenemos una lista de las coordenadas que existen en la partida actualmente
+                    var listaCoordenadas = from register in context.Jugador
+                                           from register2 in context.Pueblo
+                                           where register.nombreUsuario == register2.propietario &&
+                                           register.id_Partida == id_partida
+                                           select register2.coordenadas;
+
+                    // Convertimos el resultado de la sentencia a tipo lista
+                    coordenadasPueblos = listaCoordenadas.ToList();
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos la lista de coordenadas de pueblos
+            return coordenadasPueblos;
         }
     }
 }

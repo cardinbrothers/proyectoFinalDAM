@@ -18,6 +18,8 @@ namespace WebService_ProyectoDAM.Servicios
         //
         //  Tratar el perder la conexion desde la app ¡APUNTALO!
         //
+        //  Cambiar la tabla apoyos para que solo tenga las tropas defensivas puesto que solo puede mandar esas de apoyo duhhh
+        //
         //-------------------------------------------
 
 
@@ -265,6 +267,56 @@ namespace WebService_ProyectoDAM.Servicios
 
             // Devolvemos la lista de coordenadas de pueblos
             return coordenadasPueblos;
+        }
+
+        // Metodo que devuelve la potencia total de cada jugador
+        public int obtenerPotenciaJugador(string jugadorPropietario)
+        {
+            // Creamos la variable para almacenar la potenciaTotal
+            int potenciaTotal = 0;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntitis())
+                {
+                    // Obtenemos los pueblos del jugador de la base de datos
+                    var infoPueblos = from register in context.Pueblo
+                                      where register.propietario == jugadorPropietario
+                                      select register;
+
+                    // Obtenemos los valores de potencia de cada tropa
+                    var potenciaTropas = from register in context.Tropas
+                                         orderby register.id_Tropas
+                                         select register.potencia;
+
+                    // convertimos a lista los valores de potencia de cada tropa
+                    var listaPotencia = potenciaTropas.ToList();
+
+                    // Para cada pueblo obtenido añadimos su potencia a la potencia total
+                    foreach (var pueblo in infoPueblos)
+                    {
+                        // Un pueblo de base aporta 10 de potencia
+                        int potenciaPueblo = 10;
+
+                        // Añadimos la potencia de las tropas del pueblo a la suma 
+                        potenciaPueblo += (int)pueblo.arqueros * listaPotencia[0];
+                        potenciaPueblo += (int)pueblo.ballesteros * listaPotencia[1];
+                        potenciaPueblo += (int)pueblo.piqueros * listaPotencia[2];
+                        potenciaPueblo += (int)pueblo.caballeros * listaPotencia[3];
+                        potenciaPueblo += (int)pueblo.paladines * listaPotencia[4];
+
+                        // Añadimos la potencia del pueblo a la total
+                        potenciaTotal += potenciaPueblo;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos la lista de pueblos
+            return potenciaTotal;
         }
     }
 }

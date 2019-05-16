@@ -13,9 +13,9 @@ namespace WebService_ProyectoDAM.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProyectoDAMEntities : DbContext
+    public partial class ProyectoDAMEntitis : DbContext
     {
-        public ProyectoDAMEntities()
+        public ProyectoDAMEntitis()
             : base("name=ProyectoDAMEntitis")
         {
         }

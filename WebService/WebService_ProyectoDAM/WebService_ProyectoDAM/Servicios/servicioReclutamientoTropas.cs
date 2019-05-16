@@ -10,10 +10,10 @@ namespace WebService_ProyectoDAM.Servicios
     public class servicioReclutamientoTropas
     {
         // Metodo encargado de poner la orden de reclutamiento de tropas en caso de ser posible y devuelve la informacion de la orden de reclutamiento
-        public OrdenReclutamientoEntity reclutarTropas(int idPueblo, int idTropa, int cantidad)
+        public ordenReclutamientoEntity reclutarTropas(int idPueblo, int idTropa, int cantidad)
         {
             //Creamos el objeto que devolveremos 
-            OrdenReclutamientoEntity resultado = new OrdenReclutamientoEntity();
+            ordenReclutamientoEntity resultado = new ordenReclutamientoEntity();
 
             // Devolvemos en el error 0 --> Todo correcto; 1 --> Falta poblacion; 2 --> Error desconocido
             resultado.error = 0;
@@ -24,7 +24,7 @@ namespace WebService_ProyectoDAM.Servicios
             {
 
 
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Almacenamos la informacion de la tropa necesaria para calcular si es posible el reclutamiento
                     var reclutamiento = (from register in context.Tropas
@@ -91,7 +91,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Almacenamos la informacion de la orden de reclutamiento que hay que completar
                     var ordenCompletada = (from register in context.ordenReclutamiento
@@ -151,14 +151,14 @@ namespace WebService_ProyectoDAM.Servicios
         }
 
         // Metodo que obtiene todas las ordenes que no hayan terminado y completa aquellas que si
-        public List<OrdenReclutamientoEntity> obtenerOrdenesActivas(int idPueblo)
+        public List<ordenReclutamientoEntity> obtenerOrdenesActivas(int idPueblo)
         {
             // Creamos la lista de ordenes que devolveremos
-            List<OrdenReclutamientoEntity> listaOrdenes = new List<OrdenReclutamientoEntity>();
+            List<ordenReclutamientoEntity> listaOrdenes = new List<ordenReclutamientoEntity>();
 
             try
             {
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Almacenamos todas las ordenes que no hayan sido completadas del pueblo recibido
                     var ordenesPueblo = from register in context.ordenReclutamiento
@@ -179,7 +179,7 @@ namespace WebService_ProyectoDAM.Servicios
                         {
                             // En caso de que no se haya expirado aun la tenemos que devolver
 
-                            OrdenReclutamientoEntity ordenAuxiliar = new OrdenReclutamientoEntity(); // Creamos un objeto auxiliar para almacenar la informacion de la orden actual
+                            ordenReclutamientoEntity ordenAuxiliar = new ordenReclutamientoEntity(); // Creamos un objeto auxiliar para almacenar la informacion de la orden actual
 
                             // Almacenamos lo necesario en el objeto auxiliar
                             ordenAuxiliar.id_Orden = orden.idOrden;
@@ -209,7 +209,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Almacenamos la orden que hay que eliminar
                     var ordenBorrar = (from register in context.ordenReclutamiento

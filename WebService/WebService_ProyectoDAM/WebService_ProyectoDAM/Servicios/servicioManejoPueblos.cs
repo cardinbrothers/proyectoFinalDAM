@@ -16,6 +16,8 @@ namespace WebService_ProyectoDAM.Servicios
         //
         // Hay que añadir un identificador a los mensajes para agruparlos por asunto, por ejemplo una froreign key a si mismo
         //
+        //  Tratar el perder la conexion desde la app ¡APUNTALO!
+        //
         //-------------------------------------------
 
 

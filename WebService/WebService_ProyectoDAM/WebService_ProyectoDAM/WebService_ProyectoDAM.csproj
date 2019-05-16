@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="ApiEntities\infoJugadorEntity.cs" />
     <Compile Include="ApiEntities\infoPartidaEntity.cs" />
+    <Compile Include="ApiEntities\mensajesEntity.cs" />
     <Compile Include="ApiEntities\ordenReclutamientoEntity.cs" />
     <Compile Include="ApiEntities\puebloEntity.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -186,6 +187,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\servicioManejoPueblos.cs" />
+    <Compile Include="Servicios\servicioMensajeria.cs" />
     <Compile Include="Servicios\servicioMenuPrincipal.cs" />
     <Compile Include="Servicios\servicioReclutamientoTropas.cs" />
   </ItemGroup>

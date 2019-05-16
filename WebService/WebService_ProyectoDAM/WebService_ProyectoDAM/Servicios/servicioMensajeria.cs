@@ -166,9 +166,51 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos la lista de mensajes
             return bandejaMensajesSecundarios;
         }
+
+        // Metodo para mandar responder a un hilo de mensajes
+        public int responderMensaje(mensajesEntity mensaje)
+        {
+            // Valor entero que almacena un digito segun que error ocurra siendo: 
+            //      0 --> Todo correcto
+            //      1 --> Contenido vacio
+            //      2 --> Error desconocido
+            int error = 0;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntitis())
+                {
+                    // Comprobamos que haya un contenido del mensaje
+                    if (mensaje.contenido != null)
+                    {
+                        // Creamos el mensaje que almacenaremos en la base de datos
+                        Mensaje mensajeNuevo = new Mensaje();
+                        mensajeNuevo.usuarioEmisor = mensaje.usuarioEmisor;
+                        mensajeNuevo.usuarioReceptor = mensaje.usuarioReceptor;
+                        mensajeNuevo.fecha = DateTime.Now;
+                        mensajeNuevo.contenido = mensaje.contenido;
+                        //    !OJO!  mensaje.referente = mensaje.dependido
+
+                        // Almacenamos el mensaje en la base de datos
+                        context.Mensaje.Add(mensajeNuevo);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        // No tiene contenido el mensaje
+                        error = 1;
+                    }
+                }
+            }
+            catch
+            {
+                // Error desconocido
+                error = 2;
+            }
+
+            // Devolvemos el codigo de error
+            return error;
+        }
+
     }
-
-
-
-    // Metodo para responder a un mensaje
 }

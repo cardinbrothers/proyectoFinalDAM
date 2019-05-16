@@ -9,8 +9,6 @@ namespace WebService_ProyectoDAM.Servicios
 {
     public class servicioMenuPrincipal
     {
-        // Metodos: Crear Partida, Obtener Partida, Crear Puenta, Iniciar sesion
-
         // Metodo que crea una partida a partir de los parametros recibidos
         public int crearPartida(infoPartidaEntity record)
         {
@@ -20,7 +18,7 @@ namespace WebService_ProyectoDAM.Servicios
 
             try
             {
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Creamos el objeto para insertar la nueva partida
                     Partida partidaCreada = new Partida();
@@ -57,7 +55,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Obtenemos las partidas de la base de datos
                     var listaPartidas = from register in context.Partida
@@ -120,7 +118,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Combrobamos si existe ya un jugador con ese nombre de usuario
                     var jugadores = (from register in context.Jugador
@@ -208,7 +206,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Obtenemos la contraseña de la base de datos
                     var contraseña = (from register in context.Jugador
@@ -261,7 +259,7 @@ namespace WebService_ProyectoDAM.Servicios
             try
             {
 
-                using (var context = new ProyectoDAMEntities())
+                using (var context = new ProyectoDAMEntitis())
                 {
                     // Obtenemos la informacion de la partida de la base de datos
                     var partida = (from register in context.Partida

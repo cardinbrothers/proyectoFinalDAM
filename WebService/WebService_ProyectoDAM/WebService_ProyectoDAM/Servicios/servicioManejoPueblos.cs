@@ -85,7 +85,7 @@ namespace WebService_ProyectoDAM.Servicios
             return error;
         }
 
-        //_ Metodo que genera coordenadas aleatorias
+        // Metodo que genera coordenadas aleatorias
         private string generarCoordsAleatorias()
         {
             // Creamos las variables necesarias
@@ -103,6 +103,99 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos las coordenadas
             return coordenadas;
 
+        }
+
+        // Metodo que devuelve los parametros de un pueblo
+        public puebloEntity obtenerPueblo (int id_Pueblo)
+        {
+            // Creamos el objeto de pueblo
+            puebloEntity puebloObtenido = null;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntitis())
+                {
+                    // Obtenemos el pueblo de la base de datos
+                    var infoPueblo = (from register in context.Pueblo
+                                      where register.id_Pueblo == id_Pueblo
+                                      select register).FirstOrDefault();
+
+                    // Coomprobamos si existe
+                    if (infoPueblo != null)
+                    {
+                        puebloObtenido = new puebloEntity();
+
+                        // Introducimos los datos del pueblo en el objeto a devolver
+                        puebloObtenido.propietario = infoPueblo.propietario;
+                        puebloObtenido.poblacionRestante = (int)infoPueblo.poblacion;
+                        puebloObtenido.coordenadas = infoPueblo.coordenadas;
+                        puebloObtenido.arqueros = (int)infoPueblo.arqueros;
+                        puebloObtenido.ballesteros = (int)infoPueblo.ballesteros;
+                        puebloObtenido.piqueros = (int)infoPueblo.piqueros;
+                        puebloObtenido.caballeros = (int)infoPueblo.caballeros;
+                        puebloObtenido.paladines = (int)infoPueblo.paladines;
+
+                    }
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos los datos del pueblo
+            return puebloObtenido;
+        }
+
+        // Metodo que devuelve los parametros de todos los pueblos de un jugador
+        public List<puebloEntity> obtenerListaPueblos(string jugadorPropietario)
+        {
+            // Creamos la lista de pueblos
+            List<puebloEntity> listaPueblos = new List<puebloEntity>();
+
+            try
+            {
+                using (var context = new ProyectoDAMEntitis())
+                {
+                    // Obtenemos los pueblo de la base de datos
+                    var infoPueblos = from register in context.Pueblo
+                                      where register.propietario == jugadorPropietario
+                                      select register;
+
+                    // Para cada pueblo obtenido añadimos sus datos a la lista
+                    foreach (var pueblo in infoPueblos)
+                    {
+                        // Creamos un objeto auxiliar
+                        puebloEntity puebloAux = new puebloEntity();
+
+                        // Introducimos los datos del pueblo en el objeto auxiliar
+                        puebloAux.id_Pueblo = pueblo.id_Pueblo;
+                        puebloAux.propietario = pueblo.propietario;
+                        puebloAux.poblacionRestante = (int)pueblo.poblacion;
+                        puebloAux.coordenadas = pueblo.coordenadas;
+                        puebloAux.arqueros = (int)pueblo.arqueros;
+                        puebloAux.ballesteros = (int)pueblo.ballesteros;
+                        puebloAux.piqueros = (int)pueblo.piqueros;
+                        puebloAux.caballeros = (int)pueblo.caballeros;
+                        puebloAux.paladines = (int)pueblo.paladines;
+
+                        // Añadimos el objeto auxiliar a la lista
+                        listaPueblos.Add(puebloAux);
+
+                    }
+
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos la lista de pueblos
+            return listaPueblos;
         }
     }
 }

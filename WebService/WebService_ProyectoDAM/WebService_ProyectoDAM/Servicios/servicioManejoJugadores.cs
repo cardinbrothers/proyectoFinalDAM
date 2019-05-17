@@ -83,7 +83,35 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos la lista
             return listaClasificacion;
         }
+
+        // Metodo para borrar todos los jugadores de una partida acabada
+        public void borrarJugadores(int id_Partida)
+        {
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos todos los jugadores de la partida
+                    var jugadores = from register in context.Jugador
+                                    where register.id_Partida == id_Partida
+                                    select register;
+
+                    // Tratamos cada jugador con un foreach
+                    foreach (var jugador in jugadores)
+                    {
+                        // Borramos el jugador de la tabla jugadores
+                        context.Jugador.Remove(jugador);
+                    }
+
+                    // Confirmamos los cambios
+                    context.SaveChanges();
+                }
+            }
+            catch
+            {
+                
+            }
+        }
+
     }
 }
-
-// Metodos: Obtener todos los jugadores; Obtener clasificacion; Obtener ganador partida;

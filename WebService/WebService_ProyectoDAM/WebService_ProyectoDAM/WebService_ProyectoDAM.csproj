@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiEntities\apoyosEntity.cs" />
+    <Compile Include="ApiEntities\potenciajugadorEntity.cs" />
     <Compile Include="ApiEntities\infoJugadorEntity.cs" />
     <Compile Include="ApiEntities\infoPartidaEntity.cs" />
     <Compile Include="ApiEntities\mensajesEntity.cs" />
@@ -189,6 +190,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\servicioManejoApoyos.cs" />
+    <Compile Include="Servicios\servicioManejoJugadores.cs" />
     <Compile Include="Servicios\servicioManejoPueblos.cs" />
     <Compile Include="Servicios\servicioMensajeria.cs" />
     <Compile Include="Servicios\servicioMenuPrincipal.cs" />

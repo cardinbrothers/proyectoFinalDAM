@@ -244,6 +244,32 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos el codigo del error
             return error;
         }
+
+        // Metodo que finaliza todos los apoyos que hayan superado su limite
+        public void finalizarApoyosExpirados()
+        {
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // obtenemos los apoyos que han superado su limite de tiempo
+                    var apoyosFinalizados = from register in context.Apoyos
+                                            where register.horaFin > DateTime.Now
+                                            select register;
+
+                    // Tratamos cada apoyo con un foreach
+                    foreach (var apoyo in apoyosFinalizados)
+                    {
+                        // Llamamos al metodo que realiza la logica de finalizar un apoyo mandandole el id
+                        apoyoFinalizado(apoyo.id_Apoyo);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
 

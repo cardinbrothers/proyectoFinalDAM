@@ -60,7 +60,7 @@ namespace WebService_ProyectoDAM.Servicios
                         context.SaveChanges();
 
                         // Almacenamos los datos del apoyo en el objeto que devolvemos
-                        apoyoCreado.id_Apoyo = insertApoyo.id_Apoyo;
+                        apoyoCreado.id_Apoyo = insertApoyo.id_Apoyo;   // No se yo si esto funciona y ya contiene el id del apoyo eh !OJO!
                         apoyoCreado.puebloOrigen = insertApoyo.puebloOrigen;
                         apoyoCreado.puebloDestino = insertApoyo.puebloDestino;
                         apoyoCreado.ballesteros = (int)insertApoyo.ballesteros;
@@ -78,8 +78,119 @@ namespace WebService_ProyectoDAM.Servicios
 
             // Devolvemos el objeto
             return apoyoCreado;
-        } 
+        }
+
+        // Metodo que gestiona la vuelta de un apoyo a su pueblo de origen cuando finaliza
+        public int apoyoFinalizado(int id_Apoyo)
+        {
+            // Codigo de error que devolveremos 
+            // 0 --> Todo correcto
+            // 1 --> Apoyo no finalizado
+            // 2 --> Error descoocido
+            int error = 0; 
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos el registro de apoyo que hay que gestionar
+                    var apoyo = (from register in context.Apoyos
+                                where register.id_Apoyo == id_Apoyo &&
+                                register.horaFin > DateTime.Now
+                                select register).FirstOrDefault();
+
+                    // Comprobamos si el apoyo existe y ha finalizado ya
+                    if (apoyo != null)
+                    {
+                        // Obtenemos el registro del pueblo de origen del apoyo
+                        var puebloOrigen = (from register in context.Pueblo
+                                            where register.id_Pueblo == apoyo.puebloOrigen
+                                            select register).FirstOrDefault();
+
+                        // Obtenemos el registro del pueblo destino del apoyo
+                        var puebloDestino = (from register in context.Pueblo
+                                            where register.id_Pueblo == apoyo.puebloDestino
+                                            select register).FirstOrDefault();
+
+                        // Modificamos los campos de arqueros y ballesteros en ambos pueblos
+                        puebloOrigen.arqueros += apoyo.arqueros;
+                        puebloOrigen.ballesteros += apoyo.ballesteros;
+                        puebloDestino.arqueros -= apoyo.arqueros;
+                        puebloDestino.ballesteros -= apoyo.ballesteros;
+
+                        // Borramos el registro de apoyo de su tabla y confirmamos los cambios
+                        context.Apoyos.Remove(apoyo);
+                        context.SaveChanges();                 
+
+                    }
+                    else
+                    {
+                        // No existe un apoyo con ese id que haya finalizado
+                        error = 1;
+                    }
+                }
+            }
+            catch
+            {
+                // Error desconocido
+                error = 2;
+            }
+
+            // Devolvemos el codigo de error
+            return error;
+        }
+
+        // Metodo que devuelve todos los apyos cuyo destino es el el pueblo indicado y devuelve aquellos que hayan acabado
+        public List<apoyosEntity> obtenerApoyosActivos(int id_pueblo)
+        {
+            // Creamos la lista para devolver los apoyos del pueblo
+            List<apoyosEntity> listaApoyosActivos = new List<apoyosEntity>();
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos todos los apoyos del pueblo
+                    var listaApoyos = from register in context.Apoyos
+                                      where register.puebloDestino == id_pueblo
+                                      select register;
+
+                    // Tratamos cada apoyo con un foreach
+                    foreach (var apoyo in listaApoyos)
+                    {
+                        // Comprobamos si el apoyo ha pasado ya la fecha de finalizacion
+                        if (apoyo.horaFin > DateTime.Now)
+                        {
+                            // Llamamamos al metodo para realizar las acciones correspondientes
+                            apoyoFinalizado(apoyo.id_Apoyo);
+                        }
+                        else
+                        {
+                            // si no ha finalizado almacenamos sus datos en una obeto auxiliar
+                            apoyosEntity apoyoAux = new apoyosEntity();
+                            apoyoAux.id_Apoyo = apoyo.id_Apoyo;
+                            apoyoAux.puebloOrigen = apoyo.puebloOrigen;
+                            apoyoAux.puebloDestino = apoyo.puebloDestino;
+                            apoyoAux.arqueros = (int)apoyo.arqueros;
+                            apoyoAux.ballesteros = (int)apoyo.ballesteros;
+                            apoyoAux.horaFin = (DateTime)apoyo.horaFin;
+
+                            // Añadimos el objeto auxiliar a la lista que devolveremos
+                            listaApoyosActivos.Add(apoyoAux);
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos la lista
+            return listaApoyosActivos;
+        }
     }
 }
 
-// Metodos: Llegada apoyo; vuelta apoyo; obtener apoyos de un pueblo; actualizar apoyo
+// Metodos: Llegada apoyo; vuelta apoyo; obtener apoyos de un pueblo; actualizar apoyo; actualizar todos los apoyos

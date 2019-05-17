@@ -50,10 +50,10 @@ namespace WebService_ProyectoDAM.Servicios
         }
 
         // Metodo que devuelve la clasificacion de todos los jugadores de una partida
-        public List<potenciajugadorEntity> obtenerClasificacion(int id_Partida)
+        public List<potenciaJugadorEntity> obtenerClasificacion(int id_Partida)
         {
             // Creamos la lista que devolveremos
-            List<potenciajugadorEntity> listaClasificacion = new List<potenciajugadorEntity>();
+            List<potenciaJugadorEntity> listaClasificacion = new List<potenciaJugadorEntity>();
 
             try
             {
@@ -64,7 +64,7 @@ namespace WebService_ProyectoDAM.Servicios
                 foreach (var jugador in obtenerJugadores(id_Partida))
                 {
                     // Creamos un objeto auxiliar para almacenar el nombre y la potencia del jugador
-                    potenciajugadorEntity potenciaAux = new potenciajugadorEntity();
+                    potenciaJugadorEntity potenciaAux = new potenciaJugadorEntity();
                     potenciaAux.nombreJugador = jugador.nombreUsuario;
                     potenciaAux.potenciaJugador = objPueblos.obtenerPotenciaJugador(jugador.nombreUsuario);
 

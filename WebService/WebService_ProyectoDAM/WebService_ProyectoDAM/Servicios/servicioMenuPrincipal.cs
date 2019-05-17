@@ -20,7 +20,8 @@ namespace WebService_ProyectoDAM.Servicios
             {
                 using (var context = new ProyectoDAMEntities())
                 {
-                    // Obtenemos el id mayor hasta la fecha
+                    // Obtenemos el id mayor hasta la fecha  
+                    // Esto que oH?? ??  Cambialo cuando crees la base de datos de nuevo
                     var idPartidas = (from register in context.Partida
                                       orderby register.id_Partida descending
                                       select new
@@ -326,34 +327,42 @@ namespace WebService_ProyectoDAM.Servicios
         }
 
         // Metodo que realiza todas las acciones necesarias para acabar una partida y devuelve el jugador ganador
-        public potenciajugadorEntity obtenerGanador(int id_Partida)
+        public potenciaJugadorEntity comprobarFinalizacion(int id_Partida)
         {
             // Creamos el objeto que devolveremos con el jugador ganador
-            potenciajugadorEntity jugadorGanador = new potenciajugadorEntity();
+            potenciaJugadorEntity jugadorGanador = null;
 
             try
             {
-                // Creamos un objeto del servicio de manejo de jugador para llamar a sus metodos
-                servicioManejoJugadores objJugadores = new servicioManejoJugadores();
-
-                // obtenemos el jugador con mayor clasificacion
-                jugadorGanador = objJugadores.obtenerClasificacion(id_Partida)[0];
-
-                // Borramos los jugadores de la partida
-                objJugadores.borrarJugadores(id_Partida);
-
                 using (var context = new ProyectoDAMEntities())
                 {
+                    // Creamos un objeto del servicio de manejo de jugador para llamar a sus metodos
+                    servicioManejoJugadores objJugadores = new servicioManejoJugadores();
+
+
                     // obtenemos el registro de la partida
                     var partida = (from register in context.Partida
-                                  where register.id_Partida == id_Partida
-                                  select register).FirstOrDefault();
+                                   where register.id_Partida == id_Partida
+                                   select register).FirstOrDefault();
 
-                    // Cambiamos el valor de activo a falso
-                    partida.activo = false;
+                    // Comprobamos si la partida ha acabado
+                    if (partida.fechaInicio + partida.Duracion > DateTime.Now)
+                    {
+                        // Inicializamos el objeto de jugadorGanador
+                        jugadorGanador = new potenciaJugadorEntity();
 
-                    // Confirmamos cambios
-                    context.SaveChanges();
+                        // obtenemos el jugador con mayor clasificacion
+                        jugadorGanador = objJugadores.obtenerClasificacion(id_Partida)[0];
+
+                        // Borramos los jugadores de la partida
+                        objJugadores.borrarJugadores(id_Partida);
+
+                        // Cambiamos el valor de activo a falso
+                        partida.activo = false;
+
+                        // Confirmamos cambios
+                        context.SaveChanges();
+                    }                   
                 }
             }
             catch
@@ -366,5 +375,3 @@ namespace WebService_ProyectoDAM.Servicios
         }
     }
 }
-
-// Comprobar si la partida esta acabada; Acabar partida

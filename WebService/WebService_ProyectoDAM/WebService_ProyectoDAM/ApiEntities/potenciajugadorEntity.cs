@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebService_ProyectoDAM.ApiEntities
 {
-    public class potenciajugadorEntity
+    public class potenciaJugadorEntity
     {
         public string nombreJugador { get; set; }
 

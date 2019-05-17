@@ -86,7 +86,7 @@ namespace WebService_ProyectoDAM.Servicios
             // Codigo de error que devolveremos 
             // 0 --> Todo correcto
             // 1 --> Apoyo no finalizado
-            // 2 --> Error descoocido
+            // 2 --> Error desconocido
             int error = 0; 
 
             try
@@ -190,7 +190,61 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos la lista
             return listaApoyosActivos;
         }
+
+        // Metodo que permite actualizar las tropas perdidas de un apoyo
+        public int actualizarApoyo(int id_Apoyo, int cantArqueros, int cantBallesteros)
+        {
+            // Codigo de error que devolveremos 
+            // 0 --> Todo correcto
+            // 1 --> Apoyo no existe
+            // 2 --> Error desconocido
+            int error = 0;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos el apoyo cuyo id recibimos de la base de datos
+                    var apoyo = (from register in context.Apoyos
+                                 where register.id_Apoyo == id_Apoyo
+                                 select register).FirstOrDefault();
+
+                    // Conmprobamos si el apoyo existe
+                    if (apoyo != null)
+                    {
+                        // Obtenemos el registro del pueblo de origen del apoyo
+                        var puebloOrigen = (from register in context.Pueblo
+                                            where register.id_Pueblo == apoyo.puebloOrigen
+                                            select register).FirstOrDefault();
+
+                        // Modificamos los arqueros y ballesteros del pueblo origen
+                        puebloOrigen.arqueros -= cantArqueros;
+                        puebloOrigen.ballesteros -= cantBallesteros;
+
+                        // Modificamos los arqueros y ballesteros del apoyo
+                        apoyo.ballesteros -= cantBallesteros;
+                        apoyo.arqueros -= cantArqueros;
+
+                        // Confirmamos los cambios
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        // El apoyo no existe
+                        error = 1;
+                    }
+                }
+            }
+            catch
+            {
+                // Error desconocido
+                error = 2;
+            }
+
+            // Devolvemos el codigo del error
+            return error;
+        }
     }
 }
 
-// Metodos: Llegada apoyo; vuelta apoyo; obtener apoyos de un pueblo; actualizar apoyo; actualizar todos los apoyos
+// Metodos: Llegada apoyo; vuelta apoyo; obtener apoyos de un pueblo; actualizar apoyo; Finalizar todos los apoyos

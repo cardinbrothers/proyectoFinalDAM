@@ -304,5 +304,56 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos la lista de pueblos
             return potenciaTotal;
         }
+
+        // Metodo que obtiene las tropas defensivas propias de un pueblo
+        public tropasDefensivasEntity obtenerDefRealPueblo(int id_Pueblo)
+        {
+            // Creamos el objeto que devolveremos con las tropas defensivas del pueblo
+            tropasDefensivasEntity tropasDefensivas = new tropasDefensivasEntity();
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos las tropas defensivas totales del pueblo
+                    var pueblo = (from register in context.Pueblo
+                                  where register.id_Pueblo == id_Pueblo
+                                  select new
+                                  {
+                                      register.arqueros,
+                                      register.ballesteros
+                                  }).FirstOrDefault();
+
+                    // Obtenemos todas las tropas apoyadas en ese pueblo
+                    var apoyos = from register in context.Apoyos
+                                 where register.puebloDestino == id_Pueblo
+                                 select new
+                                 {
+                                     register.arqueros,
+                                     register.ballesteros
+                                 };
+
+                    // Introducimos las tropas defensivas totales del pueblo en el objeto que devolveremos
+                    tropasDefensivas.arqueros = (int)pueblo.arqueros;
+                    tropasDefensivas.ballesteros = (int)pueblo.ballesteros;
+
+                    // Tratamos cada apoyo con un foreach
+                    foreach (var apoyo in apoyos)
+                    {
+                        // Restamos las tropas del apoyo al total del pueblo 
+                        tropasDefensivas.arqueros -= (int)apoyo.arqueros;
+                        tropasDefensivas.ballesteros -= (int)apoyo.ballesteros;
+                    }
+
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos el objeto con las tropas propias del pueblo
+            return tropasDefensivas;
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace WebService_ProyectoDAM.ApiEntities
 {
     public class movimientossEntity
     {
-        public int id_Apoyo { get; set; }
+        public int id_Movimiento { get; set; }
 
         public int puebloOrigen { get; set; }
 
@@ -28,6 +28,8 @@ namespace WebService_ProyectoDAM.ApiEntities
         public int caballeros { get; set; }
 
         public int paladines { get; set; }
+
+        public int vencedor { get; set; }
 
     }
 }

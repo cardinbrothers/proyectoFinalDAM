@@ -148,13 +148,16 @@ namespace WebService_ProyectoDAM.Servicios
             {
                 using (var context = new ProyectoDAMEntities())
                 {
+                    // Obtenemos la informacion del movimiento de la base de datos
                     var infoAtaque = (from register in context.Movimientos
                                      where id_Movimiento == register.id_Movimiento && 
                                      register.vencedor == -1
                                      select register).FirstOrDefault();
 
+                    // Comprobamos si el movimiento existe
                     if (infoAtaque != null)
                     {
+                        // Obtenemos la informacion de las tropas de la base de datos
                         var infoTropa = from register in context.Tropas
                                         orderby register.id_Tropas
                                         select new
@@ -163,58 +166,82 @@ namespace WebService_ProyectoDAM.Servicios
                                             register.potencia
                                         };
 
+                        // Pasamos los registros de tropas de la base de datos a una lista
                         var tropas = infoTropa.ToList();
 
+                        // Obtenemos la informacion del pueblo defensor de la batalla
                         var infoPuebloDefensor = (from register in context.Pueblo
                                              where register.id_Pueblo == infoAtaque.puebloDestino
                                              select register).FirstOrDefault();
 
+                        // Obtenemos la informacion del pueblo atacante de la batalla 
                         var infoPuebloAtacante = (from register in context.Pueblo
                                               where register.id_Pueblo == infoAtaque.puebloOrigen
                                               select register).FirstOrDefault();
 
+                        // Obtenemos los apoyos destinados en el pueblo defensor de la batalla
                         var infoApoyos = from register in context.Apoyos
                                          where register.puebloDestino == infoAtaque.puebloDestino &&
                                          register.horaFin > DateTime.Now
                                          select register;
 
+                        // Creamos los objetos de los servicios de manejo de pueblos y apoyos para llamar a sus metodos
                         servicioManejoPueblos servicioPueblo  = new servicioManejoPueblos();
                         servicioManejoApoyos servicioApoyo = new servicioManejoApoyos();
 
+                        // Calculamos la potencia total del jugador defensor multiplicando las tropas en su pueblo por su potencia
                         int potenciaDefJugador = (int)infoPuebloDefensor.arqueros * tropas[0].potencia + (int)infoPuebloDefensor.ballesteros * tropas[1].potencia;
 
+                        // Calculamos la potencia total del jugador atacante multiplicando las tropas en el movimiento por su potencia
                         int potenciaAtqJugador = (int)infoAtaque.piqueros * tropas[2].potencia + (int)infoAtaque.caballeros * tropas[3].potencia + (int)infoAtaque.paladines * tropas[4].potencia;
 
+                        // Calculamos el resultado de la batalla restando la potencia del atacante por la potencia del defensor
                         int resultadoBatalla = potenciaAtqJugador - potenciaDefJugador;
 
+                        // Comprobamos si el resultado es menor que 0 (el defensor es quien gana) (si es igual a 0 es un empate)
                         if (resultadoBatalla <= 0)
                         {
+                            // Paramos el resultado de batalla a positivo para realizar los calculos necesarios
                             resultadoBatalla = resultadoBatalla * -1;
+
+                            // Calculamos el ratio de perdidas dividiendo la potencia original del defensor por el resultado de batalla y lo redondeamos a 2 decimales
                             double ratioPerdidas = Math.Round((double)potenciaDefJugador / resultadoBatalla, 2);
 
+                            // Comprobamos si el resultado fue un empate o victoria del defensor
                             if (resultadoBatalla == 0)
                             {
+                                // En caso de empate cambiamos el campo de vencedor de ataque a 0
                                 infoAtaque.vencedor = 0;
                             }
                             else
                             {
+                                // En caso de victoria del defensor cambiamos el campo de vencedor de ataque a 0
                                 infoAtaque.vencedor = 1;
 
                             }
 
+                            // Cambiamos la poblacion del pueblo atacante para sumarle la poblacion que ocupaban las tropas perdidas en el ataque
                             infoPuebloAtacante.poblacion += infoAtaque.piqueros * tropas[2].poblacion + infoAtaque.caballeros * tropas[3].poblacion + infoAtaque.paladines * tropas[4].poblacion;
 
+                            // Obtenemos las tropas propias del pueblo, (sin contar apoyos) y les restamos las tropas perdidas 
+                            //(calculadas restando las propias a la division del ratio de perdidas al numero de tropas)
+                            // del total, además de sumar la poblacion de las tropas perdidas
                             tropasDefensivasEntity tropasDefensivas = servicioPueblo.obtenerDefRealPueblo(infoPuebloDefensor.id_Pueblo);
-                            infoPuebloDefensor.arqueros -= (int)Math.Round(tropasDefensivas.arqueros / ratioPerdidas);
-                            infoPuebloDefensor.ballesteros -= (int)Math.Round(tropasDefensivas.ballesteros / ratioPerdidas);
-                            infoPuebloDefensor.poblacion += (int)Math.Round(tropasDefensivas.arqueros / ratioPerdidas) * tropas[0].poblacion
-                                + (int)Math.Round(tropasDefensivas.ballesteros / ratioPerdidas) * tropas[1].poblacion;
+                            int arquerosPerdidos = tropasDefensivas.arqueros - (int)Math.Round(tropasDefensivas.arqueros / ratioPerdidas);
+                            int ballesterosPerdidos = tropasDefensivas.ballesteros - (int)Math.Round(tropasDefensivas.ballesteros / ratioPerdidas);
 
+                            infoPuebloDefensor.arqueros -= arquerosPerdidos;
+                            infoPuebloDefensor.ballesteros -= ballesterosPerdidos;
+                            infoPuebloDefensor.poblacion += arquerosPerdidos * tropas[0].poblacion + ballesterosPerdidos * tropas[1].poblacion;
+
+                            // Por cada apoyo en los apoyos destinados en el pueblo defensor ==>
                             foreach ( var apoyo in infoApoyos)
                             {
-                                int arquerosPerdidos = (int)Math.Round((int)apoyo.arqueros / ratioPerdidas);
-                                int ballesterosPerdidos = (int)Math.Round((int)apoyo.ballesteros / ratioPerdidas);
+                                // Calculamos las tropas perdidas del apoyo en concreto
+                                arquerosPerdidos = (int)apoyo.arqueros - (int)Math.Round((int)apoyo.arqueros / ratioPerdidas);
+                                ballesterosPerdidos = (int)apoyo.ballesteros - (int)Math.Round((int)apoyo.ballesteros / ratioPerdidas);
 
+                                // Llamamos al metodo encargado de realizar las acciones correspondientes a la perdida de tropas del apoyo
                                 servicioApoyo.actualizarApoyo(apoyo.id_Apoyo, arquerosPerdidos, ballesterosPerdidos);
                             }
 
@@ -222,34 +249,46 @@ namespace WebService_ProyectoDAM.Servicios
                         }
                         else
                         {
+                            // Calculamos el ratio de perdidas
                             double ratioPerdidas = Math.Round((double)potenciaDefJugador / resultadoBatalla, 2);
 
+                            // Cambiamos el campo de vencedor del movimiento a 2 porque el vencedor es el atacante
                             infoAtaque.vencedor = 2;
 
-                            int piqueros = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
-                            int caballeros = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
-                            int paladines = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
+                            // Calculamos las tropas supervivientes de cada tipo
+                            int piquerosSupervivientes = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
+                            int caballerosSupervivientes = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
+                            int paladinessupervivientes = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
 
-                            infoPuebloAtacante.piqueros += piqueros;
-                            infoPuebloAtacante.caballeros += caballeros;
-                            infoPuebloAtacante.paladines += paladines;
-                            infoPuebloAtacante.poblacion += piqueros * tropas[2].poblacion + caballeros * tropas[3].poblacion + paladines * tropas[4].poblacion;
+                            // Sumamos las tropas supervivientes al pueblo atacante y restamos la poblacion de aquellas que no sobrevivieron
+                            infoPuebloAtacante.piqueros += piquerosSupervivientes;
+                            infoPuebloAtacante.caballeros += caballerosSupervivientes;
+                            infoPuebloAtacante.paladines += paladinessupervivientes;
+                            infoPuebloAtacante.poblacion += (infoAtaque.piqueros - piquerosSupervivientes) * tropas[2].poblacion 
+                                + (infoAtaque.caballeros - caballerosSupervivientes) * tropas[3].poblacion 
+                                + (infoAtaque.paladines - paladinessupervivientes) * tropas[4].poblacion;
 
+                            // Obtenemos las tropas propias del pueblo defensor y le restamos al total estas puesto que pierden tpdas y sumamos la poblacion que se libera
                             tropasDefensivasEntity tropasDefensivas = servicioPueblo.obtenerDefRealPueblo(infoPuebloDefensor.id_Pueblo);
                             infoPuebloDefensor.arqueros -= tropasDefensivas.arqueros;
                             infoPuebloDefensor.ballesteros -= tropasDefensivas.ballesteros;
                             infoPuebloDefensor.poblacion += tropasDefensivas.arqueros * tropas[0].poblacion + tropasDefensivas.ballesteros * tropas[1].poblacion;
 
+                            // Por cada apoyo hacemos lo propio
                             foreach (var apoyo in infoApoyos)
                             {
+                                // Obtenemos las tropas perdidas
                                 int arquerosPerdidos = (int)apoyo.arqueros;
                                 int ballesterosPerdidos = (int)apoyo.ballesteros;
 
+                                // Llamamos al metodo que actualiza las tropas del apoyo
                                 servicioApoyo.actualizarApoyo(apoyo.id_Apoyo, arquerosPerdidos, ballesterosPerdidos);
                             }
 
-                            if (paladines > 0)
+                            // Comprobamos si sobrevivió al menos un paladin
+                            if (paladinessupervivientes > 0)
                             {
+                                // En caso de que sobreviviera un paladin llamamos al metod que realiza el cambio de poseion del pueblo
                                 servicioPueblo.cambiarPropietarioPueblo(infoPuebloDefensor.id_Pueblo, infoPuebloAtacante.propietario);
                             }
                         }
@@ -261,6 +300,11 @@ namespace WebService_ProyectoDAM.Servicios
             {
                 
             }
+        }
+
+        public movimientossEntity obtenedorVencedorBatalla(int id_movimiento)
+        {
+            
         }
     }
 }

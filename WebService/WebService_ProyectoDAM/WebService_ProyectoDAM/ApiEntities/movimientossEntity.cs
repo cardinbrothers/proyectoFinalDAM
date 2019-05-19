@@ -15,7 +15,7 @@ namespace WebService_ProyectoDAM.ApiEntities
 
         public string tipoMovimiento { get; set; }
 
-        public DateTime horaLlegda { get; set; }
+        public DateTime horaLlegada { get; set; }
 
         public TimeSpan duracion { get; set; }
 

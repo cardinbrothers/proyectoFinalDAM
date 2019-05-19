@@ -302,14 +302,45 @@ namespace WebService_ProyectoDAM.Servicios
             }
         }
 
-        public movimientossEntity obtenedorVencedorBatalla(int id_movimiento)
+        // Metodo que devuelve un codigo con el vencedor de la batalla
+        public int obtenedorVencedorBatalla(int id_movimiento)
         {
-            
+            // Codigo que devolveremos con el vencedor de la batalla:
+            // -2 --> Batalla inexistente
+            // -1 --> No ha ocurrido aun la batalla
+            // 0 --> Empate
+            // 1 --> El vencedor es el defensor
+            // 2 --> El vencedor es el atacante
+            int resultadoMovimiento = -2;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos la informacion del movimiento de la base de datos
+                    var resultadoVencedor = (from register in context.Movimientos
+                                            where register.id_Movimiento == id_movimiento && 
+                                            register.tipoMovimiento == "ataque"
+                                            select register).FirstOrDefault();
+
+                    // Comprobamos que exista el movimiento
+                    if (resultadoVencedor != null)
+                    {
+                        // Almacenamos el codigo del vencedor en la variable que devolvemos
+                        resultadoMovimiento = (int)resultadoVencedor.vencedor;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos la variable con el codigo del vencedor
+            return resultadoMovimiento;
         }
     }
 }
-
-// Metodos: RealizarApoyo; RealizarAtaque; ObtenerMovimientos; LlegadaMovimiento; Batalla; ObtenerVencedor;
 
     // Mira con la clase timer deberias poder hacer guay lo de los metodos de llegada de movimientos, pero ojo por que habría que implementar el async ese
     // Si no podemos hacer eso hay que tener cuidado de que no llamen 2 clientes al mismo servicio por la misma batalla

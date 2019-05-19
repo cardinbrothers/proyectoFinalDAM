@@ -381,5 +381,89 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos el objeto con las tropas propias del pueblo
             return tropasDefensivas;
         }
+
+        // Metodo que obtiene el tiempo que tardan las tropas en ir de una coordinada a otra
+        public TimeSpan obtenerDistancia(string coordenada1, string coordenada2, int id_Partida)
+        {
+            // Creamos un objeto TimeSpan para devolver con el tiempo que se tarda en realizar el movimietno
+            TimeSpan tiempoDistancia = new TimeSpan();
+
+            try
+            {
+                // Creamos un array de caracteres para separar una cadena por "," "(" y ")" puesto que las coordenadas estan en formato (x,y)
+                char[] separador = { ',', '(', ')' };
+
+                // Obenemos los valores de ambos ejes de las dos coordenadas
+                string[] ejes1 = coordenada1.Split(separador, StringSplitOptions.RemoveEmptyEntries);
+                string[] ejes2 = coordenada2.Split(separador, StringSplitOptions.RemoveEmptyEntries);
+
+                // Pasamos a enteros los valores de los ejes
+                int x1 = Convert.ToInt32(ejes1[0]);
+                int y1 = Convert.ToInt32(ejes1[1]);
+                int x2 = Convert.ToInt32(ejes2[0]);
+                int y2 = Convert.ToInt32(ejes2[1]);
+
+                // Calculamos la distancia gracias al teorema de pitagoras
+                double distancia = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+                distancia = Math.Sqrt(distancia);
+
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos la variable de velocidad de la base de datos
+                    var variableVelocidad = (from register in context.Partida
+                                             where register.id_Partida == id_Partida &&
+                                             register.activo == true
+                                             select register.Velocidad).FirstOrDefault();
+
+                    // Comprobamos si existe la partida
+                    if (variableVelocidad != 0)
+                    {
+                        // Calculamos los minutos multiplicando la distancia por 0.5 y por la velocidad de la partida
+                        int minutos = (int)Math.Round(distancia * 0.5 * variableVelocidad);
+
+                        // Iniciamos el objeto TimeSpan con los minutos calculados
+                        tiempoDistancia = new TimeSpan(0, minutos, 0);
+                    }
+                    
+                }
+
+               
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos el objeto con el tiempo que se tarda
+            return tiempoDistancia;
+        }
+
+        // Metodo para obtener el id de un pueblo a partir de sus coordenadas
+        public int obtenerId(string coords, int id_Partida)
+        {
+            // Creamos la variable entera donde almacenaremos el id del pueblo, -1 si no existe
+            int id_pueblo = -1;
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Obtenemos el id de la base de datos
+                    id_pueblo = (from register in context.Pueblo
+                                 from register2 in context.Jugador
+                                 where register.propietario == register2.nombreUsuario &&
+                                 register.coordenadas == coords &&
+                                 register2.id_Partida == id_Partida
+                                 select register.id_Pueblo).FirstOrDefault();
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos el id
+            return id_pueblo;
+        }
     }
 }

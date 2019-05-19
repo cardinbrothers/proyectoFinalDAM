@@ -85,7 +85,7 @@ namespace WebService_ProyectoDAM.Servicios
         {
             // Codigo de error que devolveremos 
             // 0 --> Todo correcto
-            // 1 --> Apoyo no finalizado
+            // 1 --> Apoyo no existente
             // 2 --> Error desconocido
             int error = 0; 
 
@@ -95,8 +95,7 @@ namespace WebService_ProyectoDAM.Servicios
                 {
                     // Obtenemos el registro de apoyo que hay que gestionar
                     var apoyo = (from register in context.Apoyos
-                                where register.id_Apoyo == id_Apoyo &&
-                                register.horaFin > DateTime.Now
+                                where register.id_Apoyo == id_Apoyo
                                 select register).FirstOrDefault();
 
                     // Comprobamos si el apoyo existe y ha finalizado ya
@@ -125,7 +124,7 @@ namespace WebService_ProyectoDAM.Servicios
                     }
                     else
                     {
-                        // No existe un apoyo con ese id que haya finalizado
+                        // No existe un apoyo
                         error = 1;
                     }
                 }
@@ -217,9 +216,27 @@ namespace WebService_ProyectoDAM.Servicios
                                             where register.id_Pueblo == apoyo.puebloOrigen
                                             select register).FirstOrDefault();
 
-                        // Modificamos los arqueros y ballesteros del pueblo origen
-                        puebloOrigen.arqueros -= cantArqueros;
-                        puebloOrigen.ballesteros -= cantBallesteros;
+                        // Obtenemos el registro del pueblo destino del apoyo
+                        var puebloDestino = (from register in context.Pueblo
+                                            where register.id_Pueblo == apoyo.puebloDestino
+                                            select register).FirstOrDefault();
+
+                        var infoTropa = from register in context.Tropas
+                                        orderby register.id_Tropas
+                                        select new
+                                        {
+                                            register.poblacion,
+                                            register.potencia
+                                        };
+
+                        var tropas = infoTropa.ToList();
+
+                        // Modificamos la poblacion del pueblo origen
+                        puebloOrigen.poblacion += cantArqueros * tropas[0].poblacion + cantArqueros * tropas[1].poblacion;
+
+                        // Modificamos los arqueros y ballesteros del pueblo destino
+                        puebloDestino.arqueros -= cantArqueros;
+                        puebloDestino.ballesteros -= cantBallesteros;
 
                         // Modificamos los arqueros y ballesteros del apoyo
                         apoyo.ballesteros -= cantBallesteros;

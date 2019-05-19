@@ -205,6 +205,32 @@ namespace WebService_ProyectoDAM.Servicios
                                            register2.nombreUsuario == nuevoPropietario
                                            select register.limitePoblacion).FirstOrDefault();
 
+                    // Obtenemos los apoyos originados del pueblo
+                    var apoyos = from register in context.Apoyos
+                                 where register.puebloOrigen == id_pueblo &&
+                                 register.horaFin > DateTime.Now
+                                 select register;
+
+                    // Obtenemos los movimientos originados del pueblo
+                    var movimientos = from register in context.Movimientos
+                                      where register.puebloOrigen == id_pueblo &&
+                                      register.horaLlegada > DateTime.Now &&
+                                      register.vencedor == -1
+                                      select register;
+
+                    // Creamos un objeto del servicio de apoyos y finalizamos los apoyos del puebllo
+                    servicioManejoApoyos manejoApoyos = new servicioManejoApoyos();
+                    foreach (var apoyo in apoyos)
+                    {
+                        manejoApoyos.apoyoFinalizado(apoyo.id_Apoyo);
+                    }
+
+                    // Cancelamos los movimientos del pueblo estableciendo el campo de vencedor a 3
+                    foreach (var movimiento in movimientos)
+                    {
+                        movimiento.vencedor = 3;
+                    }
+
                     // Cambiamos los valores del pueblo
                     puebloCambiar.propietario = nuevoPropietario;
                     puebloCambiar.poblacion = limitePoblacion;

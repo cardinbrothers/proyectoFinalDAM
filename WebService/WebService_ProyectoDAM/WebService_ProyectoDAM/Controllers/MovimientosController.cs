@@ -14,14 +14,5 @@ namespace WebService_ProyectoDAM.Controllers
     public class MovimientosController : ApiController
     {
         servicioManejoMovimientos servicio = new servicioManejoMovimientos();
-
-        [Route("pruebaTimer")]
-        [HttpGet]
-        public int pruebaTimer()
-        {
-            int a = servicio.timerPrueba();
-
-            return a;
-        }
     }
 }

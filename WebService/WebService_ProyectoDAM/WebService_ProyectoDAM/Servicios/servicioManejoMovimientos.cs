@@ -368,6 +368,3 @@ namespace WebService_ProyectoDAM.Servicios
 
     }
 }
-
-    // Mira con la clase timer deberias poder hacer guay lo de los metodos de llegada de movimientos, pero ojo por que habría que implementar el async ese
-    // Si no podemos hacer eso hay que tener cuidado de que no llamen 2 clientes al mismo servicio por la misma batalla

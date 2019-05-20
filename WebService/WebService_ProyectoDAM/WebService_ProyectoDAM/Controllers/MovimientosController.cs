@@ -14,5 +14,30 @@ namespace WebService_ProyectoDAM.Controllers
     public class MovimientosController : ApiController
     {
         servicioManejoMovimientos servicio = new servicioManejoMovimientos();
+
+        [Route("realizarMovimiento")]
+        [HttpPost]
+        public void realizarMovimientos([FromBody] movimientossEntity record)
+        {
+            servicio.realizarMovimiento(record);
+        }
+
+        [Route("obtenerMovimientos")]
+        [HttpGet]
+        public string obtenerMovimientos(int id_pueblo)
+        {
+            var json = JsonConvert.SerializeObject(servicio.obtenerMovimientosActivos(id_pueblo));
+
+            return json;
+        }
+
+        [Route("obtenerVencedor")]
+        [HttpGet]
+        public int obtenerVencedor(int id_movimiento)
+        {
+            int result = servicio.obtenedorVencedorBatalla(id_movimiento);
+
+            return result;
+        }
     }
 }

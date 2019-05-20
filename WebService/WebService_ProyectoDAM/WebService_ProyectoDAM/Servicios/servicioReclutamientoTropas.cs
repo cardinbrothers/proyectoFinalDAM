@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using WebService_ProyectoDAM.Models;
 using WebService_ProyectoDAM.ApiEntities;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace WebService_ProyectoDAM.Servicios
 {
@@ -60,10 +62,14 @@ namespace WebService_ProyectoDAM.Servicios
                         context.SaveChanges();
 
                         // Almacenamos la informacion en la entidad que devolveremos al usuario
-                        resultado.id_Orden = context.ordenReclutamiento.Last().idOrden;  // ---------------!!!!!?!??!! COMPROBAR SI ESTO FUNCIONA?!?!?!
+                        //resultado.id_Orden = context.ordenReclutamiento.Last().idOrden;  // ---------------!!!!!?!??!! COMPROBAR SI ESTO FUNCIONA?!?!?!
+                        resultado.id_Orden = insertOrden.idOrden;
                         resultado.id_Tropa = idTropa;
                         resultado.cantidad = cantidad;
                         resultado.horaFin = DateTime.Now.AddSeconds(tiempoTotal);
+
+                        // Creamos un hilo aparte que desactivará la partida cuando esta acabe
+                        Task.Run(() => terminadoReclutamiento(insertOrden.horaFin, insertOrden.idOrden));
 
                     }
                     else
@@ -83,6 +89,27 @@ namespace WebService_ProyectoDAM.Servicios
             return resultado;
         }
 
+        // Metodo en segundo plano que finaliza el reclutamienti cuando este cumple su tiempo de reclutamiento
+        public async void terminadoReclutamiento(DateTime horaFin, int id_Orden)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    // Mandamos al hilo esperar por que pase el tiempo indicado
+                    Thread.Sleep(horaFin - DateTime.Now);
+
+                    // Llamamos al metodo que realiza la logica de finalizacion del apoyo
+                    completarOrdenReclutamiento(id_Orden);
+                }
+                catch
+                {
+
+                }
+
+            });
+        }
+
         // Metodo que completa una orden de reclutamiento y la añade al pueblo. 
         public int completarOrdenReclutamiento(int idOrden)
         {
@@ -99,7 +126,7 @@ namespace WebService_ProyectoDAM.Servicios
                                            select register).FirstOrDefault();
 
                     // Comprobamos que efectivamente no ha sido completada hasta ahora la orden
-                    if (ordenCompletada.terminado == false)
+                    if (ordenCompletada != null && ordenCompletada.terminado == false)
                     {
                         // Recogemos el pueblo al cual pertenece la orden
                         var pueblo = (from register in context.Pueblo
@@ -202,6 +229,7 @@ namespace WebService_ProyectoDAM.Servicios
             return listaOrdenes;
         }
 
+        // Metodo para cancelar el reclutamiento indicado
         public int cancelarReclutamiento(int idOrden)
         {
             // Devolvemos en el error 0 --> Todo correcto; 1 --> Falta poblacion; 2 --> Error desconocido

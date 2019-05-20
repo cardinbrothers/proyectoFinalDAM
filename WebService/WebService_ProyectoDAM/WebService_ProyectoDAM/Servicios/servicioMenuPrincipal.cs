@@ -7,6 +7,9 @@ using WebService_ProyectoDAM.Models;
 
 namespace WebService_ProyectoDAM.Servicios
 {
+
+    // OYE!!! QUITAR PARAMETROS PARTIDA
+
     public class servicioMenuPrincipal
     {
         // Metodo que crea una partida a partir de los parametros recibidos
@@ -144,13 +147,14 @@ namespace WebService_ProyectoDAM.Servicios
                 {
                     // Combrobamos si existe ya un jugador con ese nombre de usuario
                     var jugadores = (from register in context.Jugador
-                                     where register.nombreUsuario == jugador.nombreUsuario
+                                     where register.nombreUsuario == jugador.nombreUsuario &&
+                                     register.id_Partida == jugador.id_partida
                                      select new
                                      {
                                          register.nombreUsuario
                                      }).FirstOrDefault();
 
-                    if (jugadores != null)
+                    if (jugadores == null)
                     {
                         // Almacenamos el numero de jugadores actuales para la partida 
                         var numJugadores = (from register in context.Jugador
@@ -342,11 +346,12 @@ namespace WebService_ProyectoDAM.Servicios
 
                     // obtenemos el registro de la partida
                     var partida = (from register in context.Partida
-                                   where register.id_Partida == id_Partida
+                                   where register.id_Partida == id_Partida &&
+                                   register.activo == true
                                    select register).FirstOrDefault();
 
                     // Comprobamos si la partida ha acabado
-                    if (partida.fechaInicio + partida.Duracion > DateTime.Now)
+                    if (partida.fechaInicio + partida.Duracion < DateTime.Now)
                     {
                         // Inicializamos el objeto de jugadorGanador
                         jugadorGanador = new potenciaJugadorEntity();
@@ -355,7 +360,7 @@ namespace WebService_ProyectoDAM.Servicios
                         jugadorGanador = objJugadores.obtenerClasificacion(id_Partida)[0];
 
                         // Borramos los jugadores de la partida
-                        objJugadores.borrarJugadores(id_Partida);
+                        objJugadores.borrarJugadores(id_Partida); // No funciona por que no hay borrado en cascada
 
                         // Cambiamos el valor de activo a falso
                         partida.activo = false;

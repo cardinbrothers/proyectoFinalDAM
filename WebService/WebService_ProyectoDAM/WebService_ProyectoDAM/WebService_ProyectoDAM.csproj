@@ -147,6 +147,7 @@
     <Compile Include="Controllers\JugadoresController.cs" />
     <Compile Include="Controllers\MenuPrincipalController.cs" />
     <Compile Include="Controllers\MovimientosController.cs" />
+    <Compile Include="Controllers\PueblosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

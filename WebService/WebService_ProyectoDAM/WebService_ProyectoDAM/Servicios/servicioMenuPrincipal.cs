@@ -228,6 +228,10 @@ namespace WebService_ProyectoDAM.Servicios
 
                                 context.Jugador.Add(jugadorNuevo);
                                 context.SaveChanges();
+
+                                // Creamos un pueblo para el jugador
+                                servicioManejoPueblos objPueblos = new servicioManejoPueblos();
+                                objPueblos.crearPueblo(jugadorNuevo.nombreUsuario);
                             }
                             else
                             {

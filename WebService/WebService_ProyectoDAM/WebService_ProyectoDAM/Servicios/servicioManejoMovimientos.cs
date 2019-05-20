@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using WebService_ProyectoDAM.ApiEntities;
 using WebService_ProyectoDAM.Models;
@@ -53,6 +54,27 @@ namespace WebService_ProyectoDAM.Servicios
             }
         }
 
+        // Metodo en segundo plano que gestiona la llegada del movimiento
+        public async void llegadaMovimiento(TimeSpan tiempo, int id_movimiento)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    // Mandamos al hilo esperar por que pase el tiempo indicado
+                    Thread.Sleep(tiempo);
+
+                    // Llamamos al metodo que comprueba que haya acabado el movimiento y realiza lo correspondiente
+                    comprobarMovimientoAcabado(id_movimiento);                  
+                }
+                catch
+                {
+
+                }
+
+            });
+        }
+
         // Metodo que devuelve todos los movimientos enviados y recibidos actualmente por un pueblo
         public List<movimientossEntity> obtenerMovimientosActivos(int id_Pueblo)
         {
@@ -102,8 +124,8 @@ namespace WebService_ProyectoDAM.Servicios
             return listaMovimientos;
         }
 
-        // Metodo que comprueba que movimentos han ocurrido ya y llama a los metodos que realicen las acciones correspondientes
-        public void comprobarMovimientosAcabados()
+        // Metodo que comprueba si un movimentos han ocurrido ya y llama a los metodos que realicen las acciones correspondientes
+        public void comprobarMovimientoAcabado(int id_movimiento)
         {
             try
             {
@@ -111,7 +133,8 @@ namespace WebService_ProyectoDAM.Servicios
                 {
                     // Obtenemos la lista de movimientos terminados
                     var movimentosAcabados = from register in context.Movimientos
-                                             where register.horaLlegada < DateTime.Now &&
+                                             where register.id_Movimiento == id_movimiento &&
+                                             register.horaLlegada < DateTime.Now &&
                                              register.vencedor == -1
                                              select register;
 
@@ -339,6 +362,7 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos la variable con el codigo del vencedor
             return resultadoMovimiento;
         }
+
     }
 }
 

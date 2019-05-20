@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace WebService_ProyectoDAM.Controllers
 {
+    [RoutePrefix("api/values")]
     public class ValuesController : ApiController
     {
         // GET api/values
@@ -34,6 +35,13 @@ namespace WebService_ProyectoDAM.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+
+        [Route("ping")]
+        [HttpGet]
+        public IHttpActionResult Ping()
+        {
+            return Ok("pong!");
         }
     }
 }

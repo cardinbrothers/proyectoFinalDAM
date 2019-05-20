@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using WebService_ProyectoDAM.Models;
 using WebService_ProyectoDAM.ApiEntities;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace WebService_ProyectoDAM.Servicios
 {
@@ -67,6 +69,9 @@ namespace WebService_ProyectoDAM.Servicios
                         apoyoCreado.arqueros = (int)insertApoyo.arqueros;
                         apoyoCreado.horaFin = (DateTime)insertApoyo.horaFin;
 
+                        // Creamos un hilo aparte que trata la finalizacion del apoyo
+                        Task.Run(() => terminadoApoyo((DateTime)insertApoyo.horaFin, insertApoyo.id_Apoyo));
+
                     }
 
                 }
@@ -78,6 +83,27 @@ namespace WebService_ProyectoDAM.Servicios
 
             // Devolvemos el objeto
             return apoyoCreado;
+        }
+
+        // Metodo en segundo plano que finaliza un apoyo cuando este cumple su tiempo de expiracion
+        public async void terminadoApoyo(DateTime horaFin, int id_Apoyo)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    // Mandamos al hilo esperar por que pase el tiempo indicado
+                    Thread.Sleep(horaFin - DateTime.Now);
+
+                    // Llamamos al metodo que realiza la logica de finalizacion del apoyo
+                    apoyoFinalizado(id_Apoyo);
+                }
+                catch
+                {
+
+                }
+
+            });
         }
 
         // Metodo que gestiona la vuelta de un apoyo a su pueblo de origen cuando finaliza

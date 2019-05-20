@@ -46,6 +46,9 @@ namespace WebService_ProyectoDAM.Servicios
                     context.Movimientos.Add(insertMovimiento);
                     context.SaveChanges();
 
+                    // Creamos un hilo aparte que trata la finalizacion del movimiento
+                    Task.Run(() => llegadaMovimiento(insertMovimiento.duracion, insertMovimiento.id_Movimiento));
+
                 }
             }
             catch

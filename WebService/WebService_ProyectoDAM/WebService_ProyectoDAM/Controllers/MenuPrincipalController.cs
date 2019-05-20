@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Results;
 using WebService_ProyectoDAM.ApiEntities;
 using WebService_ProyectoDAM.Servicios;
 using Newtonsoft.Json;

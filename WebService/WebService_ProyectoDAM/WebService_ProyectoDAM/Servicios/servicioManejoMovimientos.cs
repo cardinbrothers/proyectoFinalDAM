@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using WebService_ProyectoDAM.ApiEntities;
 using WebService_ProyectoDAM.Models;
@@ -339,6 +340,36 @@ namespace WebService_ProyectoDAM.Servicios
             // Devolvemos la variable con el codigo del vencedor
             return resultadoMovimiento;
         }
+
+        public int timerPrueba()
+        {
+            using (var context = new ProyectoDAMEntities())
+            {
+                // Creamos el objeto para insertar la nueva partida
+                Partida partidaCreada = new Partida();
+                TimeSpan tiempo = new TimeSpan(0, 0, 60);
+
+                // Introducimos los parametros de la partida
+                partidaCreada.id_Partida = 52;
+                partidaCreada.Modalidad = "e";
+                partidaCreada.Velocidad = 3;
+                partidaCreada.Duracion = tiempo;
+                partidaCreada.limiteJugadores = 2;
+                partidaCreada.limitePoblacion = 2;
+                partidaCreada.fechaInicio = DateTime.Now;
+                partidaCreada.activo = true;
+
+                // Insertamos la partida
+                context.Partida.Add(partidaCreada);
+                context.SaveChanges();
+
+                
+
+            }
+
+            return 0;
+        }
+
     }
 }
 

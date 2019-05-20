@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using WebService_ProyectoDAM.ApiEntities;
 using WebService_ProyectoDAM.Models;
@@ -8,7 +10,7 @@ using WebService_ProyectoDAM.Models;
 namespace WebService_ProyectoDAM.Servicios
 {
 
-    // OYE!!! QUITAR PARAMETROS PARTIDA
+    // OYE!!! QUITAR PARAMETROS PARTIDA lo del tipo y añaidr ganador a la tabla de la base de datos          
 
     public class servicioMenuPrincipal
     {
@@ -60,6 +62,10 @@ namespace WebService_ProyectoDAM.Servicios
                     // Insertamos la partida
                     context.Partida.Add(partidaCreada);
                     context.SaveChanges();
+
+                    // Creamos un hilo aparte que desactivará la partida cuando esta acabe
+                    Task.Run(() => desactivarPartida(partidaCreada.Duracion, partidaCreada.id_Partida));
+
                 }
             }
             catch
@@ -69,6 +75,43 @@ namespace WebService_ProyectoDAM.Servicios
 
             // Devolvemos el codigo de error
             return error;
+        }
+        
+        // Metodo que desactiva una partida despues de esperar el tiempo indicado
+        public async void desactivarPartida(TimeSpan tiempo, int id_Partida)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+
+                    // Mandamos al hilo esperar por que pase el tiempo indicado
+                    Thread.Sleep(tiempo);
+
+                    using (var context = new ProyectoDAMEntities())
+                    {
+                        // Obtenemos el registro de la partida
+                        var partida = (from register in context.Partida
+                                       where register.id_Partida == id_Partida
+                                       select register).FirstOrDefault();
+
+                        // Comprobamos que el registro no sea nulo
+                        if (partida != null)
+                        {
+                            // Establecemos el campo activo a falso
+                            partida.activo = false;
+
+                            // Confirmamos los cambios a la base de datos
+                            context.SaveChanges();
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
+
+            });
         }
 
         // Metodo que obtiene todas las partidas activas atualmente
@@ -346,12 +389,11 @@ namespace WebService_ProyectoDAM.Servicios
 
                     // obtenemos el registro de la partida
                     var partida = (from register in context.Partida
-                                   where register.id_Partida == id_Partida &&
-                                   register.activo == true
+                                   where register.id_Partida == id_Partida
                                    select register).FirstOrDefault();
 
                     // Comprobamos si la partida ha acabado
-                    if (partida.fechaInicio + partida.Duracion < DateTime.Now)
+                    if (partida.activo == false)
                     {
                         // Inicializamos el objeto de jugadorGanador
                         jugadorGanador = new potenciaJugadorEntity();
@@ -361,9 +403,6 @@ namespace WebService_ProyectoDAM.Servicios
 
                         // Borramos los jugadores de la partida
                         objJugadores.borrarJugadores(id_Partida); // No funciona por que no hay borrado en cascada
-
-                        // Cambiamos el valor de activo a falso
-                        partida.activo = false;
 
                         // Confirmamos cambios
                         context.SaveChanges();

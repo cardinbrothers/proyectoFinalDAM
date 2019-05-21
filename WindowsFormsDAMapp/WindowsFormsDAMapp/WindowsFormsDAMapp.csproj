@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="formBandejaEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formBandejaEntrada.Designer.cs">
+      <DependentUpon>formBandejaEntrada.cs</DependentUpon>
+    </Compile>
     <Compile Include="formClasificacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="formBandejaEntrada.resx">
+      <DependentUpon>formBandejaEntrada.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formClasificacion.resx">
       <DependentUpon>formClasificacion.cs</DependentUpon>
     </EmbeddedResource>

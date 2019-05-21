@@ -58,6 +58,18 @@
     <Compile Include="formMenuPrincipal.Designer.cs">
       <DependentUpon>formMenuPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="formReclutamiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formReclutamiento.Designer.cs">
+      <DependentUpon>formReclutamiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formVisionGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formVisionGeneral.Designer.cs">
+      <DependentUpon>formVisionGeneral.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="formInicioSesion.resx">
@@ -65,6 +77,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formMenuPrincipal.resx">
       <DependentUpon>formMenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formReclutamiento.resx">
+      <DependentUpon>formReclutamiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formVisionGeneral.resx">
+      <DependentUpon>formVisionGeneral.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

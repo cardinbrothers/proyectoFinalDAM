@@ -10,8 +10,6 @@ namespace WebService_ProyectoDAM.ApiEntities
     {
         public int id_Partida { get; set; }
 
-        public string modalidad { get; set; }
-
         public int velocidad { get; set; }
 
         public TimeSpan duracion { get; set; }
@@ -23,6 +21,8 @@ namespace WebService_ProyectoDAM.ApiEntities
         public DateTime fechaInicio { get; set; }
 
         public int jugadoresActivos { get; set; }
+
+        public string jugadorGanador { get; set; }
 
 
     }

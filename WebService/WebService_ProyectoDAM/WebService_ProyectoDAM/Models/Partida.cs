@@ -21,13 +21,13 @@ namespace WebService_ProyectoDAM.Models
         }
     
         public int id_Partida { get; set; }
-        public string Modalidad { get; set; }
         public int Velocidad { get; set; }
         public System.TimeSpan Duracion { get; set; }
         public int limiteJugadores { get; set; }
         public int limitePoblacion { get; set; }
         public System.DateTime fechaInicio { get; set; }
         public bool activo { get; set; }
+        public string jugadorGanador { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Jugador> Jugador { get; set; }

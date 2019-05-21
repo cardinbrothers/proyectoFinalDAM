@@ -315,5 +315,3 @@ namespace WebService_ProyectoDAM.Servicios
         }
     }
 }
-
-// Metodos: Llegada apoyo; vuelta apoyo; obtener apoyos de un pueblo; actualizar apoyo; Finalizar todos los apoyos

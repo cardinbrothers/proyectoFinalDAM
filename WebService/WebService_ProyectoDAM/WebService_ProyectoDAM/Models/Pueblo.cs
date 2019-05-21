@@ -18,31 +18,25 @@ namespace WebService_ProyectoDAM.Models
         public Pueblo()
         {
             this.Apoyos = new HashSet<Apoyos>();
-            this.Apoyos1 = new HashSet<Apoyos>();
             this.Movimientos = new HashSet<Movimientos>();
-            this.Movimientos1 = new HashSet<Movimientos>();
             this.ordenReclutamiento = new HashSet<ordenReclutamiento>();
         }
     
         public int id_Pueblo { get; set; }
         public string propietario { get; set; }
-        public Nullable<int> poblacion { get; set; }
-        public Nullable<int> arqueros { get; set; }
-        public Nullable<int> ballesteros { get; set; }
-        public Nullable<int> piqueros { get; set; }
-        public Nullable<int> caballeros { get; set; }
-        public Nullable<int> paladines { get; set; }
+        public int poblacion { get; set; }
+        public int arqueros { get; set; }
+        public int ballesteros { get; set; }
+        public int piqueros { get; set; }
+        public int caballeros { get; set; }
+        public int paladines { get; set; }
         public string coordenadas { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Apoyos> Apoyos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Apoyos> Apoyos1 { get; set; }
         public virtual Jugador Jugador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Movimientos> Movimientos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Movimientos> Movimientos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ordenReclutamiento> ordenReclutamiento { get; set; }
     }

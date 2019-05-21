@@ -17,11 +17,10 @@ namespace WebService_ProyectoDAM.Models
         public int id_Apoyo { get; set; }
         public int puebloOrigen { get; set; }
         public int puebloDestino { get; set; }
-        public Nullable<int> arqueros { get; set; }
-        public Nullable<int> ballesteros { get; set; }
-        public Nullable<System.DateTime> horaFin { get; set; }
+        public int arqueros { get; set; }
+        public int ballesteros { get; set; }
+        public System.DateTime horaFin { get; set; }
     
         public virtual Pueblo Pueblo { get; set; }
-        public virtual Pueblo Pueblo1 { get; set; }
     }
 }

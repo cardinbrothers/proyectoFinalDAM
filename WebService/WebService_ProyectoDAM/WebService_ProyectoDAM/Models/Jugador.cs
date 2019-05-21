@@ -18,7 +18,6 @@ namespace WebService_ProyectoDAM.Models
         public Jugador()
         {
             this.Mensaje = new HashSet<Mensaje>();
-            this.Mensaje1 = new HashSet<Mensaje>();
             this.Pueblo = new HashSet<Pueblo>();
         }
     
@@ -29,8 +28,6 @@ namespace WebService_ProyectoDAM.Models
         public virtual Partida Partida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mensaje> Mensaje { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mensaje> Mensaje1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pueblo> Pueblo { get; set; }
     }

@@ -20,14 +20,13 @@ namespace WebService_ProyectoDAM.Models
         public string tipoMovimiento { get; set; }
         public System.TimeSpan duracion { get; set; }
         public System.DateTime horaLlegada { get; set; }
-        public Nullable<int> arqueros { get; set; }
-        public Nullable<int> ballesteros { get; set; }
-        public Nullable<int> piqueros { get; set; }
-        public Nullable<int> caballeros { get; set; }
-        public Nullable<int> paladines { get; set; }
-        public Nullable<int> vencedor { get; set; }
+        public int arqueros { get; set; }
+        public int ballesteros { get; set; }
+        public int piqueros { get; set; }
+        public int caballeros { get; set; }
+        public int paladines { get; set; }
+        public int vencedor { get; set; }
     
         public virtual Pueblo Pueblo { get; set; }
-        public virtual Pueblo Pueblo1 { get; set; }
     }
 }

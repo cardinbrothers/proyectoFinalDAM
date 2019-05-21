@@ -10,7 +10,7 @@ using WebService_ProyectoDAM.Models;
 namespace WebService_ProyectoDAM.Servicios
 {
 
-    // OYE!!! QUITAR PARAMETROS PARTIDA lo del tipo y añaidr ganador a la tabla de la base de datos          
+    // OYE!!! mira de probar el insertApoyo y quitar los (int) y (dateTime) sobrantes   
 
     public class servicioMenuPrincipal
     {
@@ -20,38 +20,15 @@ namespace WebService_ProyectoDAM.Servicios
             // Variable para devolver un codigo de error 0--> Todo correcto; 
             //1 --> Error desconocido
             int error = 0;
-            int id_PartidaNueva;
+
             try
             {
                 using (var context = new ProyectoDAMEntities())
                 {
-                    // Obtenemos el id mayor hasta la fecha  
-                    // Esto que oH?? ??  Cambialo cuando crees la base de datos de nuevo
-                    var idPartidas = (from register in context.Partida
-                                      orderby register.id_Partida descending
-                                      select new
-                                      {
-                                          register.id_Partida
-                                      }).FirstOrDefault();
-
-                    // Comprobamos si ya hay un id de partida en la base de datos
-                    if (idPartidas != null)
-                    {
-                        // Introduciremos el id sumando uno más al último
-                        id_PartidaNueva = idPartidas.id_Partida + 1;
-                    }
-                    else
-                    {
-                        // Introducimos el primer id empezando por 0
-                        id_PartidaNueva = 1;
-                    }
-
                     // Creamos el objeto para insertar la nueva partida
                     Partida partidaCreada = new Partida();
 
                     // Introducimos los parametros de la partida
-                    partidaCreada.id_Partida = id_PartidaNueva;
-                    partidaCreada.Modalidad = record.modalidad;
                     partidaCreada.Velocidad = record.velocidad;
                     partidaCreada.Duracion = record.duracion;
                     partidaCreada.limiteJugadores = record.limiteJugadores;
@@ -98,8 +75,22 @@ namespace WebService_ProyectoDAM.Servicios
                         // Comprobamos que el registro no sea nulo
                         if (partida != null)
                         {
+                            servicioManejoJugadores objJugadores = new servicioManejoJugadores();
+
+                            // Inicializamos el objeto de jugadorGanador
+                            potenciaJugadorEntity jugadorGanador = new potenciaJugadorEntity();
+
+                            // obtenemos el jugador con mayor clasificacion
+                            jugadorGanador = objJugadores.obtenerClasificacion(id_Partida)[0];
+
                             // Establecemos el campo activo a falso
                             partida.activo = false;
+
+                            // Establecemos el jugador ganador
+                            partida.jugadorGanador = jugadorGanador.nombreJugador;
+
+                            // Borramos los jugadores de la partida
+                            objJugadores.borrarJugadores(id_Partida);
 
                             // Confirmamos los cambios a la base de datos
                             context.SaveChanges();
@@ -131,7 +122,6 @@ namespace WebService_ProyectoDAM.Servicios
                                         select new
                                         {
                                             register.id_Partida,
-                                            register.Modalidad,
                                             register.Velocidad,
                                             register.Duracion,
                                             register.limiteJugadores,
@@ -150,7 +140,6 @@ namespace WebService_ProyectoDAM.Servicios
 
                         // Introducimos los paramtros de una partida en el objeto auxiliar
                         partidaAux.id_Partida = partida.id_Partida;
-                        partidaAux.modalidad = partida.Modalidad;
                         partidaAux.velocidad = partida.Velocidad;
                         partidaAux.duracion = partida.Duracion;
                         partidaAux.limiteJugadores = partida.limiteJugadores;
@@ -340,7 +329,6 @@ namespace WebService_ProyectoDAM.Servicios
                                    register.id_Partida == id_partida
                                    select new
                                    {
-                                       register.Modalidad,
                                        register.Velocidad,
                                        register.Duracion,
                                        register.limiteJugadores,
@@ -357,7 +345,6 @@ namespace WebService_ProyectoDAM.Servicios
                         // Almacenamos la informacion en el objeto que devolveremos
                         partidaObtenida = new infoPartidaEntity();
 
-                        partidaObtenida.modalidad = partida.Modalidad;
                         partidaObtenida.velocidad = partida.Velocidad;
                         partidaObtenida.duracion = partida.Duracion;
                         partidaObtenida.limiteJugadores = partida.limiteJugadores;
@@ -402,14 +389,9 @@ namespace WebService_ProyectoDAM.Servicios
                         // Inicializamos el objeto de jugadorGanador
                         jugadorGanador = new potenciaJugadorEntity();
 
-                        // obtenemos el jugador con mayor clasificacion
-                        jugadorGanador = objJugadores.obtenerClasificacion(id_Partida)[0];
+                        // obtenemos el jugador ganador
+                        jugadorGanador.nombreJugador = partida.jugadorGanador;
 
-                        // Borramos los jugadores de la partida
-                        objJugadores.borrarJugadores(id_Partida); // No funciona por que no hay borrado en cascada
-
-                        // Confirmamos cambios
-                        context.SaveChanges();
                     }                   
                 }
             }

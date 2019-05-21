@@ -1332,7 +1332,7 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "Mapa";
-            this.Text = "formMapa";
+            this.Text = "Mapa";
             this.Load += new System.EventHandler(this.Mapa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_9_9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_8_9)).EndInit();

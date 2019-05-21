@@ -114,13 +114,13 @@ namespace WebService_ProyectoDAM.Servicios
 
                         // Introducimos los datos del pueblo en el objeto a devolver
                         puebloObtenido.propietario = infoPueblo.propietario;
-                        puebloObtenido.poblacionRestante = (int)infoPueblo.poblacion;
+                        puebloObtenido.poblacionRestante = infoPueblo.poblacion;
                         puebloObtenido.coordenadas = infoPueblo.coordenadas;
-                        puebloObtenido.arqueros = (int)infoPueblo.arqueros;
-                        puebloObtenido.ballesteros = (int)infoPueblo.ballesteros;
-                        puebloObtenido.piqueros = (int)infoPueblo.piqueros;
-                        puebloObtenido.caballeros = (int)infoPueblo.caballeros;
-                        puebloObtenido.paladines = (int)infoPueblo.paladines;
+                        puebloObtenido.arqueros = infoPueblo.arqueros;
+                        puebloObtenido.ballesteros = infoPueblo.ballesteros;
+                        puebloObtenido.piqueros = infoPueblo.piqueros;
+                        puebloObtenido.caballeros = infoPueblo.caballeros;
+                        puebloObtenido.paladines = infoPueblo.paladines;
 
                     }
 
@@ -160,13 +160,13 @@ namespace WebService_ProyectoDAM.Servicios
                         // Introducimos los datos del pueblo en el objeto auxiliar
                         puebloAux.id_Pueblo = pueblo.id_Pueblo;
                         puebloAux.propietario = pueblo.propietario;
-                        puebloAux.poblacionRestante = (int)pueblo.poblacion;
+                        puebloAux.poblacionRestante = pueblo.poblacion;
                         puebloAux.coordenadas = pueblo.coordenadas;
-                        puebloAux.arqueros = (int)pueblo.arqueros;
-                        puebloAux.ballesteros = (int)pueblo.ballesteros;
-                        puebloAux.piqueros = (int)pueblo.piqueros;
-                        puebloAux.caballeros = (int)pueblo.caballeros;
-                        puebloAux.paladines = (int)pueblo.paladines;
+                        puebloAux.arqueros = pueblo.arqueros;
+                        puebloAux.ballesteros = pueblo.ballesteros;
+                        puebloAux.piqueros = pueblo.piqueros;
+                        puebloAux.caballeros = pueblo.caballeros;
+                        puebloAux.paladines = pueblo.paladines;
 
                         // Añadimos el objeto auxiliar a la lista
                         listaPueblos.Add(puebloAux);
@@ -311,11 +311,11 @@ namespace WebService_ProyectoDAM.Servicios
                         int potenciaPueblo = 10;
 
                         // Añadimos la potencia de las tropas del pueblo a la suma 
-                        potenciaPueblo += (int)pueblo.arqueros * listaPotencia[0];
-                        potenciaPueblo += (int)pueblo.ballesteros * listaPotencia[1];
-                        potenciaPueblo += (int)pueblo.piqueros * listaPotencia[2];
-                        potenciaPueblo += (int)pueblo.caballeros * listaPotencia[3];
-                        potenciaPueblo += (int)pueblo.paladines * listaPotencia[4];
+                        potenciaPueblo += pueblo.arqueros * listaPotencia[0];
+                        potenciaPueblo += pueblo.ballesteros * listaPotencia[1];
+                        potenciaPueblo += pueblo.piqueros * listaPotencia[2];
+                        potenciaPueblo += pueblo.caballeros * listaPotencia[3];
+                        potenciaPueblo += pueblo.paladines * listaPotencia[4];
 
                         // Añadimos la potencia del pueblo a la total
                         potenciaTotal += potenciaPueblo;
@@ -360,15 +360,15 @@ namespace WebService_ProyectoDAM.Servicios
                                  };
 
                     // Introducimos las tropas defensivas totales del pueblo en el objeto que devolveremos
-                    tropasDefensivas.arqueros = (int)pueblo.arqueros;
-                    tropasDefensivas.ballesteros = (int)pueblo.ballesteros;
+                    tropasDefensivas.arqueros = pueblo.arqueros;
+                    tropasDefensivas.ballesteros = pueblo.ballesteros;
 
                     // Tratamos cada apoyo con un foreach
                     foreach (var apoyo in apoyos)
                     {
                         // Restamos las tropas del apoyo al total del pueblo 
-                        tropasDefensivas.arqueros -= (int)apoyo.arqueros;
-                        tropasDefensivas.ballesteros -= (int)apoyo.ballesteros;
+                        tropasDefensivas.arqueros -= apoyo.arqueros;
+                        tropasDefensivas.ballesteros -= apoyo.ballesteros;
                     }
 
                 }

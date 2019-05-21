@@ -65,12 +65,12 @@ namespace WebService_ProyectoDAM.Servicios
                         apoyoCreado.id_Apoyo = insertApoyo.id_Apoyo;   // No se yo si esto funciona y ya contiene el id del apoyo eh !OJO!
                         apoyoCreado.puebloOrigen = insertApoyo.puebloOrigen;
                         apoyoCreado.puebloDestino = insertApoyo.puebloDestino;
-                        apoyoCreado.ballesteros = (int)insertApoyo.ballesteros;
-                        apoyoCreado.arqueros = (int)insertApoyo.arqueros;
-                        apoyoCreado.horaFin = (DateTime)insertApoyo.horaFin;
+                        apoyoCreado.ballesteros = insertApoyo.ballesteros;
+                        apoyoCreado.arqueros = insertApoyo.arqueros;
+                        apoyoCreado.horaFin = insertApoyo.horaFin;
 
                         // Creamos un hilo aparte que trata la finalizacion del apoyo
-                        Task.Run(() => terminadoApoyo((DateTime)insertApoyo.horaFin, insertApoyo.id_Apoyo));
+                        Task.Run(() => terminadoApoyo(insertApoyo.horaFin, insertApoyo.id_Apoyo));
 
                     }
 
@@ -196,9 +196,9 @@ namespace WebService_ProyectoDAM.Servicios
                             apoyoAux.id_Apoyo = apoyo.id_Apoyo;
                             apoyoAux.puebloOrigen = apoyo.puebloOrigen;
                             apoyoAux.puebloDestino = apoyo.puebloDestino;
-                            apoyoAux.arqueros = (int)apoyo.arqueros;
-                            apoyoAux.ballesteros = (int)apoyo.ballesteros;
-                            apoyoAux.horaFin = (DateTime)apoyo.horaFin;
+                            apoyoAux.arqueros = apoyo.arqueros;
+                            apoyoAux.ballesteros = apoyo.ballesteros;
+                            apoyoAux.horaFin = apoyo.horaFin;
 
                             // Añadimos el objeto auxiliar a la lista que devolveremos
                             listaApoyosActivos.Add(apoyoAux);

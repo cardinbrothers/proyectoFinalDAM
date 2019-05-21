@@ -106,12 +106,12 @@ namespace WebService_ProyectoDAM.Servicios
                         movimientoAux.tipoMovimiento = movimiento.tipoMovimiento;
                         movimientoAux.duracion = movimiento.duracion;
                         movimientoAux.horaLlegada = movimiento.horaLlegada;
-                        movimientoAux.arqueros = (int)movimiento.arqueros;
-                        movimientoAux.ballesteros = (int)movimiento.ballesteros;
-                        movimientoAux.piqueros = (int)movimiento.piqueros;
-                        movimientoAux.caballeros = (int)movimiento.caballeros;
-                        movimientoAux.paladines = (int)movimiento.paladines;
-                        movimientoAux.vencedor = (int)movimiento.vencedor;
+                        movimientoAux.arqueros = movimiento.arqueros;
+                        movimientoAux.ballesteros = movimiento.ballesteros;
+                        movimientoAux.piqueros = movimiento.piqueros;
+                        movimientoAux.caballeros = movimiento.caballeros;
+                        movimientoAux.paladines = movimiento.paladines;
+                        movimientoAux.vencedor = movimiento.vencedor;
 
                         // Añadimos la variable auxiliar a la lista que devolveremos
                         listaMovimientos.Add(movimientoAux);
@@ -216,10 +216,10 @@ namespace WebService_ProyectoDAM.Servicios
                         servicioManejoApoyos servicioApoyo = new servicioManejoApoyos();
 
                         // Calculamos la potencia total del jugador defensor multiplicando las tropas en su pueblo por su potencia
-                        int potenciaDefJugador = (int)infoPuebloDefensor.arqueros * tropas[0].potencia + (int)infoPuebloDefensor.ballesteros * tropas[1].potencia;
+                        int potenciaDefJugador = infoPuebloDefensor.arqueros * tropas[0].potencia + infoPuebloDefensor.ballesteros * tropas[1].potencia;
 
                         // Calculamos la potencia total del jugador atacante multiplicando las tropas en el movimiento por su potencia
-                        int potenciaAtqJugador = (int)infoAtaque.piqueros * tropas[2].potencia + (int)infoAtaque.caballeros * tropas[3].potencia + (int)infoAtaque.paladines * tropas[4].potencia;
+                        int potenciaAtqJugador = infoAtaque.piqueros * tropas[2].potencia + infoAtaque.caballeros * tropas[3].potencia + infoAtaque.paladines * tropas[4].potencia;
 
                         // Calculamos el resultado de la batalla restando la potencia del atacante por la potencia del defensor
                         int resultadoBatalla = potenciaAtqJugador - potenciaDefJugador;
@@ -264,8 +264,8 @@ namespace WebService_ProyectoDAM.Servicios
                             foreach ( var apoyo in infoApoyos)
                             {
                                 // Calculamos las tropas perdidas del apoyo en concreto
-                                arquerosPerdidos = (int)apoyo.arqueros - (int)Math.Round((int)apoyo.arqueros / ratioPerdidas);
-                                ballesterosPerdidos = (int)apoyo.ballesteros - (int)Math.Round((int)apoyo.ballesteros / ratioPerdidas);
+                                arquerosPerdidos = apoyo.arqueros - (int)Math.Round(apoyo.arqueros / ratioPerdidas);
+                                ballesterosPerdidos = apoyo.ballesteros - (int)Math.Round(apoyo.ballesteros / ratioPerdidas);
 
                                 // Llamamos al metodo encargado de realizar las acciones correspondientes a la perdida de tropas del apoyo
                                 servicioApoyo.actualizarApoyo(apoyo.id_Apoyo, arquerosPerdidos, ballesterosPerdidos);
@@ -282,9 +282,9 @@ namespace WebService_ProyectoDAM.Servicios
                             infoAtaque.vencedor = 2;
 
                             // Calculamos las tropas supervivientes de cada tipo
-                            int piquerosSupervivientes = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
-                            int caballerosSupervivientes = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
-                            int paladinessupervivientes = (int)Math.Round((int)infoAtaque.piqueros / ratioPerdidas);
+                            int piquerosSupervivientes = (int)Math.Round(infoAtaque.piqueros / ratioPerdidas);
+                            int caballerosSupervivientes = (int)Math.Round(infoAtaque.piqueros / ratioPerdidas);
+                            int paladinessupervivientes = (int)Math.Round(infoAtaque.piqueros / ratioPerdidas);
 
                             // Sumamos las tropas supervivientes al pueblo atacante y restamos la poblacion de aquellas que no sobrevivieron
                             infoPuebloAtacante.piqueros += piquerosSupervivientes;
@@ -304,8 +304,8 @@ namespace WebService_ProyectoDAM.Servicios
                             foreach (var apoyo in infoApoyos)
                             {
                                 // Obtenemos las tropas perdidas
-                                int arquerosPerdidos = (int)apoyo.arqueros;
-                                int ballesterosPerdidos = (int)apoyo.ballesteros;
+                                int arquerosPerdidos = apoyo.arqueros;
+                                int ballesterosPerdidos = apoyo.ballesteros;
 
                                 // Llamamos al metodo que actualiza las tropas del apoyo
                                 servicioApoyo.actualizarApoyo(apoyo.id_Apoyo, arquerosPerdidos, ballesterosPerdidos);
@@ -353,7 +353,7 @@ namespace WebService_ProyectoDAM.Servicios
                     if (resultadoVencedor != null)
                     {
                         // Almacenamos el codigo del vencedor en la variable que devolvemos
-                        resultadoMovimiento = (int)resultadoVencedor.vencedor;
+                        resultadoMovimiento = resultadoVencedor.vencedor;
                     }
                 }
             }

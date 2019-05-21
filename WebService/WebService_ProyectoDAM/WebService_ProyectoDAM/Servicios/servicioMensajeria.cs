@@ -101,7 +101,7 @@ namespace WebService_ProyectoDAM.Servicios
                         mensajeAux.id_Mensaje = mensajePrincipal.id_Mensaje;
                         mensajeAux.usuarioReceptor = mensajePrincipal.usuarioReceptor;
                         mensajeAux.usuarioEmisor = mensajePrincipal.usuarioEmisor;
-                        mensajeAux.fecha = (DateTime)mensajePrincipal.fecha;
+                        mensajeAux.fecha = mensajePrincipal.fecha;
                         mensajeAux.contenido = mensajePrincipal.contenido;
                         mensajeAux.asunto = mensajePrincipal.asunto;
                         mensajeAux.mensajePadre = mensajePrincipal.mensajePadre; 
@@ -145,7 +145,7 @@ namespace WebService_ProyectoDAM.Servicios
                         mensajeAux.id_Mensaje = mensajePrincipal.id_Mensaje;
                         mensajeAux.usuarioReceptor = mensajePrincipal.usuarioReceptor;
                         mensajeAux.usuarioEmisor = mensajePrincipal.usuarioEmisor;
-                        mensajeAux.fecha = (DateTime)mensajePrincipal.fecha;
+                        mensajeAux.fecha = mensajePrincipal.fecha;
                         mensajeAux.contenido = mensajePrincipal.contenido;
                         mensajeAux.asunto = mensajePrincipal.asunto;
                         mensajeAux.mensajePadre = mensajePrincipal.mensajePadre;

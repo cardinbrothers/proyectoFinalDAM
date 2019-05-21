@@ -211,7 +211,7 @@ namespace WebService_ProyectoDAM.Servicios
                             // Almacenamos lo necesario en el objeto auxiliar
                             ordenAuxiliar.id_Orden = orden.idOrden;
                             ordenAuxiliar.id_Tropa = orden.tropa;
-                            ordenAuxiliar.cantidad = (int)orden.cantidad;
+                            ordenAuxiliar.cantidad = orden.cantidad;
                             ordenAuxiliar.horaFin = orden.horaFin;
 
                             // Añadimos el objeto auxiliar a la lista que devolveremos

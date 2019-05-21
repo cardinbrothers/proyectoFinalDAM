@@ -6,6 +6,7 @@ using System.Web.Http;
 using WebService_ProyectoDAM.ApiEntities;
 using WebService_ProyectoDAM.Servicios;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace WebService_ProyectoDAM.Controllers
 {
@@ -19,6 +20,7 @@ namespace WebService_ProyectoDAM.Controllers
         [HttpGet]
         public IHttpActionResult Ping()
         {
+            string a = System.Web.HttpUtility.UrlEncode("alamás", Encoding.UTF7);
             return Ok("pong!");
         }
 

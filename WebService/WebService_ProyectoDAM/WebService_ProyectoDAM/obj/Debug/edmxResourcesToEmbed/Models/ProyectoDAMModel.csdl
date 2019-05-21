@@ -7,11 +7,10 @@
     <Property Name="id_Apoyo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="puebloOrigen" Type="Int32" Nullable="false" />
     <Property Name="puebloDestino" Type="Int32" Nullable="false" />
-    <Property Name="arqueros" Type="Int32" />
-    <Property Name="ballesteros" Type="Int32" />
-    <Property Name="horaFin" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Pueblo" Relationship="Self.FK__Apoyos__puebloDe__07C12930" FromRole="Apoyos" ToRole="Pueblo" />
-    <NavigationProperty Name="Pueblo1" Relationship="Self.FK__Apoyos__puebloOr__06CD04F7" FromRole="Apoyos" ToRole="Pueblo" />
+    <Property Name="arqueros" Type="Int32" Nullable="false" />
+    <Property Name="ballesteros" Type="Int32" Nullable="false" />
+    <Property Name="horaFin" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Pueblo" Relationship="Self.FK__Apoyos__puebloDe__797309D9" FromRole="Apoyos" ToRole="Pueblo" />
   </EntityType>
   <EntityType Name="Jugador">
     <Key>
@@ -20,10 +19,9 @@
     <Property Name="nombreUsuario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="contraseña" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="id_Partida" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Partida" Relationship="Self.FK__Jugador__id_Part__5CD6CB2B" FromRole="Jugador" ToRole="Partida" />
-    <NavigationProperty Name="Mensaje" Relationship="Self.FK__Mensaje__usuario__6B24EA82" FromRole="Jugador" ToRole="Mensaje" />
-    <NavigationProperty Name="Mensaje1" Relationship="Self.FK__Mensaje__usuario__6C190EBB" FromRole="Jugador" ToRole="Mensaje" />
-    <NavigationProperty Name="Pueblo" Relationship="Self.FK__Pueblo__propieta__66603565" FromRole="Jugador" ToRole="Pueblo" />
+    <NavigationProperty Name="Partida" Relationship="Self.FK__Jugador__id_Part__66603565" FromRole="Jugador" ToRole="Partida" />
+    <NavigationProperty Name="Mensaje" Relationship="Self.FK__Mensaje__usuario__68487DD7" FromRole="Jugador" ToRole="Mensaje" />
+    <NavigationProperty Name="Pueblo" Relationship="Self.FK__Pueblo__propieta__6E01572D" FromRole="Jugador" ToRole="Pueblo" />
   </EntityType>
   <EntityType Name="Mensaje">
     <Key>
@@ -32,14 +30,11 @@
     <Property Name="id_Mensaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="usuarioEmisor" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="usuarioReceptor" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="asunto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="mensajePadre" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Jugador" Relationship="Self.FK__Mensaje__usuario__6B24EA82" FromRole="Mensaje" ToRole="Jugador" />
-    <NavigationProperty Name="Jugador1" Relationship="Self.FK__Mensaje__usuario__6C190EBB" FromRole="Mensaje" ToRole="Jugador" />
-    <NavigationProperty Name="Mensaje1" Relationship="Self.FK__Mensaje__mensaje__2739D489" FromRole="Mensaje" ToRole="Mensaje1" />
-    <NavigationProperty Name="Mensaje2" Relationship="Self.FK__Mensaje__mensaje__2739D489" FromRole="Mensaje1" ToRole="Mensaje" />
+    <NavigationProperty Name="Jugador" Relationship="Self.FK__Mensaje__usuario__68487DD7" FromRole="Mensaje" ToRole="Jugador" />
   </EntityType>
   <EntityType Name="Movimientos">
     <Key>
@@ -51,14 +46,13 @@
     <Property Name="tipoMovimiento" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="duracion" Type="Time" Nullable="false" Precision="7" />
     <Property Name="horaLlegada" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="arqueros" Type="Int32" />
-    <Property Name="ballesteros" Type="Int32" />
-    <Property Name="piqueros" Type="Int32" />
-    <Property Name="caballeros" Type="Int32" />
-    <Property Name="paladines" Type="Int32" />
-    <Property Name="vencedor" Type="Int32" />
-    <NavigationProperty Name="Pueblo" Relationship="Self.FK__Movimient__puebl__75A278F5" FromRole="Movimientos" ToRole="Pueblo" />
-    <NavigationProperty Name="Pueblo1" Relationship="Self.FK__Movimient__puebl__76969D2E" FromRole="Movimientos" ToRole="Pueblo" />
+    <Property Name="arqueros" Type="Int32" Nullable="false" />
+    <Property Name="ballesteros" Type="Int32" Nullable="false" />
+    <Property Name="piqueros" Type="Int32" Nullable="false" />
+    <Property Name="caballeros" Type="Int32" Nullable="false" />
+    <Property Name="paladines" Type="Int32" Nullable="false" />
+    <Property Name="vencedor" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Pueblo" Relationship="Self.FK__Movimient__puebl__6A30C649" FromRole="Movimientos" ToRole="Pueblo" />
   </EntityType>
   <EntityType Name="ordenReclutamiento">
     <Key>
@@ -67,45 +61,43 @@
     <Property Name="idOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="pueblo" Type="Int32" Nullable="false" />
     <Property Name="tropa" Type="Int32" Nullable="false" />
-    <Property Name="cantidad" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
     <Property Name="horaFin" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="terminado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Pueblo1" Relationship="Self.FK__ordenRecl__puebl__123EB7A3" FromRole="ordenReclutamiento" ToRole="Pueblo" />
-    <NavigationProperty Name="Tropas" Relationship="Self.FK__ordenRecl__tropa__1332DBDC" FromRole="ordenReclutamiento" ToRole="Tropas" />
+    <NavigationProperty Name="Pueblo1" Relationship="Self.FK__ordenRecl__puebl__6C190EBB" FromRole="ordenReclutamiento" ToRole="Pueblo" />
+    <NavigationProperty Name="Tropas" Relationship="Self.FK__ordenRecl__tropa__6D0D32F4" FromRole="ordenReclutamiento" ToRole="Tropas" />
   </EntityType>
   <EntityType Name="Partida">
     <Key>
       <PropertyRef Name="id_Partida" />
     </Key>
-    <Property Name="id_Partida" Type="Int32" Nullable="false" />
-    <Property Name="Modalidad" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="id_Partida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Velocidad" Type="Int32" Nullable="false" />
     <Property Name="Duracion" Type="Time" Nullable="false" Precision="7" />
     <Property Name="limiteJugadores" Type="Int32" Nullable="false" />
     <Property Name="limitePoblacion" Type="Int32" Nullable="false" />
     <Property Name="fechaInicio" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="activo" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Jugador" Relationship="Self.FK__Jugador__id_Part__5CD6CB2B" FromRole="Partida" ToRole="Jugador" />
+    <Property Name="jugadorGanador" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Jugador" Relationship="Self.FK__Jugador__id_Part__66603565" FromRole="Partida" ToRole="Jugador" />
   </EntityType>
   <EntityType Name="Pueblo">
     <Key>
       <PropertyRef Name="id_Pueblo" />
     </Key>
-    <Property Name="id_Pueblo" Type="Int32" Nullable="false" />
-    <Property Name="propietario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="poblacion" Type="Int32" />
-    <Property Name="arqueros" Type="Int32" />
-    <Property Name="ballesteros" Type="Int32" />
-    <Property Name="piqueros" Type="Int32" />
-    <Property Name="caballeros" Type="Int32" />
-    <Property Name="paladines" Type="Int32" />
-    <Property Name="coordenadas" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Apoyos" Relationship="Self.FK__Apoyos__puebloDe__07C12930" FromRole="Pueblo" ToRole="Apoyos" />
-    <NavigationProperty Name="Apoyos1" Relationship="Self.FK__Apoyos__puebloOr__06CD04F7" FromRole="Pueblo" ToRole="Apoyos" />
-    <NavigationProperty Name="Jugador" Relationship="Self.FK__Pueblo__propieta__66603565" FromRole="Pueblo" ToRole="Jugador" />
-    <NavigationProperty Name="Movimientos" Relationship="Self.FK__Movimient__puebl__75A278F5" FromRole="Pueblo" ToRole="Movimientos" />
-    <NavigationProperty Name="Movimientos1" Relationship="Self.FK__Movimient__puebl__76969D2E" FromRole="Pueblo" ToRole="Movimientos" />
-    <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__puebl__123EB7A3" FromRole="Pueblo" ToRole="ordenReclutamiento" />
+    <Property Name="id_Pueblo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="propietario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="poblacion" Type="Int32" Nullable="false" />
+    <Property Name="arqueros" Type="Int32" Nullable="false" />
+    <Property Name="ballesteros" Type="Int32" Nullable="false" />
+    <Property Name="piqueros" Type="Int32" Nullable="false" />
+    <Property Name="caballeros" Type="Int32" Nullable="false" />
+    <Property Name="paladines" Type="Int32" Nullable="false" />
+    <Property Name="coordenadas" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Apoyos" Relationship="Self.FK__Apoyos__puebloDe__797309D9" FromRole="Pueblo" ToRole="Apoyos" />
+    <NavigationProperty Name="Jugador" Relationship="Self.FK__Pueblo__propieta__6E01572D" FromRole="Pueblo" ToRole="Jugador" />
+    <NavigationProperty Name="Movimientos" Relationship="Self.FK__Movimient__puebl__6A30C649" FromRole="Pueblo" ToRole="Movimientos" />
+    <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__puebl__6C190EBB" FromRole="Pueblo" ToRole="ordenReclutamiento" />
   </EntityType>
   <EntityType Name="Tropas">
     <Key>
@@ -114,12 +106,14 @@
     <Property Name="id_Tropas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="potencia" Type="Int32" Nullable="false" />
-    <Property Name="tiempoReclutamiento" Type="Time" Precision="7" />
+    <Property Name="tiempoReclutamiento" Type="Time" Nullable="false" Precision="7" />
     <Property Name="poblacion" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__tropa__1332DBDC" FromRole="Tropas" ToRole="ordenReclutamiento" />
+    <NavigationProperty Name="ordenReclutamiento" Relationship="Self.FK__ordenRecl__tropa__6D0D32F4" FromRole="Tropas" ToRole="ordenReclutamiento" />
   </EntityType>
-  <Association Name="FK__Apoyos__puebloDe__07C12930">
-    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+  <Association Name="FK__Apoyos__puebloDe__797309D9">
+    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Apoyos" Type="Self.Apoyos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Pueblo">
@@ -130,20 +124,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Apoyos__puebloOr__06CD04F7">
-    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
-    <End Role="Apoyos" Type="Self.Apoyos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Pueblo">
-        <PropertyRef Name="id_Pueblo" />
-      </Principal>
-      <Dependent Role="Apoyos">
-        <PropertyRef Name="puebloOrigen" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Jugador__id_Part__5CD6CB2B">
-    <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+  <Association Name="FK__Jugador__id_Part__66603565">
+    <End Role="Partida" Type="Self.Partida" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Jugador" Type="Self.Jugador" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Partida">
@@ -154,8 +138,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Mensaje__usuario__6B24EA82">
-    <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
+  <Association Name="FK__Mensaje__usuario__68487DD7">
+    <End Role="Jugador" Type="Self.Jugador" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Jugador">
@@ -166,20 +152,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Mensaje__usuario__6C190EBB">
-    <End Role="Jugador" Type="Self.Jugador" Multiplicity="1" />
-    <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Jugador">
-        <PropertyRef Name="nombreUsuario" />
-      </Principal>
-      <Dependent Role="Mensaje">
-        <PropertyRef Name="usuarioReceptor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Pueblo__propieta__66603565">
-    <End Role="Jugador" Type="Self.Jugador" Multiplicity="0..1" />
+  <Association Name="FK__Pueblo__propieta__6E01572D">
+    <End Role="Jugador" Type="Self.Jugador" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Jugador">
@@ -190,20 +166,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Mensaje__mensaje__2739D489">
-    <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="1" />
-    <End Role="Mensaje1" Type="Self.Mensaje" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mensaje">
-        <PropertyRef Name="id_Mensaje" />
-      </Principal>
-      <Dependent Role="Mensaje1">
-        <PropertyRef Name="mensajePadre" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Movimient__puebl__75A278F5">
-    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+  <Association Name="FK__Movimient__puebl__6A30C649">
+    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Pueblo">
@@ -214,20 +180,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Movimient__puebl__76969D2E">
-    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
-    <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Pueblo">
-        <PropertyRef Name="id_Pueblo" />
-      </Principal>
-      <Dependent Role="Movimientos">
-        <PropertyRef Name="puebloDestino" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ordenRecl__puebl__123EB7A3">
-    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1" />
+  <Association Name="FK__ordenRecl__puebl__6C190EBB">
+    <End Role="Pueblo" Type="Self.Pueblo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Pueblo">
@@ -238,8 +194,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ordenRecl__tropa__1332DBDC">
-    <End Role="Tropas" Type="Self.Tropas" Multiplicity="1" />
+  <Association Name="FK__ordenRecl__tropa__6D0D32F4">
+    <End Role="Tropas" Type="Self.Tropas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ordenReclutamiento" Type="Self.ordenReclutamiento" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tropas">
@@ -250,7 +208,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ProyectoDAMEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ProyectoDAMEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Apoyos" EntityType="Self.Apoyos" />
     <EntitySet Name="Jugador" EntityType="Self.Jugador" />
     <EntitySet Name="Mensaje" EntityType="Self.Mensaje" />
@@ -259,47 +217,31 @@
     <EntitySet Name="Partida" EntityType="Self.Partida" />
     <EntitySet Name="Pueblo" EntityType="Self.Pueblo" />
     <EntitySet Name="Tropas" EntityType="Self.Tropas" />
-    <AssociationSet Name="FK__Apoyos__puebloDe__07C12930" Association="Self.FK__Apoyos__puebloDe__07C12930">
+    <AssociationSet Name="FK__Apoyos__puebloDe__797309D9" Association="Self.FK__Apoyos__puebloDe__797309D9">
       <End Role="Pueblo" EntitySet="Pueblo" />
       <End Role="Apoyos" EntitySet="Apoyos" />
     </AssociationSet>
-    <AssociationSet Name="FK__Apoyos__puebloOr__06CD04F7" Association="Self.FK__Apoyos__puebloOr__06CD04F7">
-      <End Role="Pueblo" EntitySet="Pueblo" />
-      <End Role="Apoyos" EntitySet="Apoyos" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Jugador__id_Part__5CD6CB2B" Association="Self.FK__Jugador__id_Part__5CD6CB2B">
+    <AssociationSet Name="FK__Jugador__id_Part__66603565" Association="Self.FK__Jugador__id_Part__66603565">
       <End Role="Partida" EntitySet="Partida" />
       <End Role="Jugador" EntitySet="Jugador" />
     </AssociationSet>
-    <AssociationSet Name="FK__Mensaje__usuario__6B24EA82" Association="Self.FK__Mensaje__usuario__6B24EA82">
+    <AssociationSet Name="FK__Mensaje__usuario__68487DD7" Association="Self.FK__Mensaje__usuario__68487DD7">
       <End Role="Jugador" EntitySet="Jugador" />
       <End Role="Mensaje" EntitySet="Mensaje" />
     </AssociationSet>
-    <AssociationSet Name="FK__Mensaje__usuario__6C190EBB" Association="Self.FK__Mensaje__usuario__6C190EBB">
-      <End Role="Jugador" EntitySet="Jugador" />
-      <End Role="Mensaje" EntitySet="Mensaje" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Pueblo__propieta__66603565" Association="Self.FK__Pueblo__propieta__66603565">
+    <AssociationSet Name="FK__Pueblo__propieta__6E01572D" Association="Self.FK__Pueblo__propieta__6E01572D">
       <End Role="Jugador" EntitySet="Jugador" />
       <End Role="Pueblo" EntitySet="Pueblo" />
     </AssociationSet>
-    <AssociationSet Name="FK__Mensaje__mensaje__2739D489" Association="Self.FK__Mensaje__mensaje__2739D489">
-      <End Role="Mensaje" EntitySet="Mensaje" />
-      <End Role="Mensaje1" EntitySet="Mensaje" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Movimient__puebl__75A278F5" Association="Self.FK__Movimient__puebl__75A278F5">
+    <AssociationSet Name="FK__Movimient__puebl__6A30C649" Association="Self.FK__Movimient__puebl__6A30C649">
       <End Role="Pueblo" EntitySet="Pueblo" />
       <End Role="Movimientos" EntitySet="Movimientos" />
     </AssociationSet>
-    <AssociationSet Name="FK__Movimient__puebl__76969D2E" Association="Self.FK__Movimient__puebl__76969D2E">
-      <End Role="Pueblo" EntitySet="Pueblo" />
-      <End Role="Movimientos" EntitySet="Movimientos" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ordenRecl__puebl__123EB7A3" Association="Self.FK__ordenRecl__puebl__123EB7A3">
+    <AssociationSet Name="FK__ordenRecl__puebl__6C190EBB" Association="Self.FK__ordenRecl__puebl__6C190EBB">
       <End Role="Pueblo" EntitySet="Pueblo" />
       <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
     </AssociationSet>
-    <AssociationSet Name="FK__ordenRecl__tropa__1332DBDC" Association="Self.FK__ordenRecl__tropa__1332DBDC">
+    <AssociationSet Name="FK__ordenRecl__tropa__6D0D32F4" Association="Self.FK__ordenRecl__tropa__6D0D32F4">
       <End Role="Tropas" EntitySet="Tropas" />
       <End Role="ordenReclutamiento" EntitySet="ordenReclutamiento" />
     </AssociationSet>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ProyectoDAMModelStoreContainer" CdmEntityContainer="ProyectoDAMEntities1">
+  <EntityContainerMapping StorageEntityContainer="ProyectoDAMModelStoreContainer" CdmEntityContainer="ProyectoDAMEntities">
     <EntitySetMapping Name="Apoyos">
       <EntityTypeMapping TypeName="ProyectoDAMModel.Apoyos">
         <MappingFragment StoreEntitySet="Apoyos">
@@ -69,13 +69,13 @@
       <EntityTypeMapping TypeName="ProyectoDAMModel.Partida">
         <MappingFragment StoreEntitySet="Partida">
           <ScalarProperty Name="id_Partida" ColumnName="id_Partida" />
-          <ScalarProperty Name="Modalidad" ColumnName="Modalidad" />
           <ScalarProperty Name="Velocidad" ColumnName="Velocidad" />
           <ScalarProperty Name="Duracion" ColumnName="Duracion" />
           <ScalarProperty Name="limiteJugadores" ColumnName="limiteJugadores" />
           <ScalarProperty Name="limitePoblacion" ColumnName="limitePoblacion" />
           <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
           <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="jugadorGanador" ColumnName="jugadorGanador" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

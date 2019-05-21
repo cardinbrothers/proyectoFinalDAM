@@ -49,7 +49,7 @@ namespace WebService_ProyectoDAM.Servicios
                     if (reclutamiento.poblacion * cantidad < pueblo.poblacion)
                     {
                         // Calculamos cuanto tarda en total en realizarse el reclutamiento
-                        tiempoTotal = reclutamiento.tiempoReclutamiento.Value.TotalSeconds * cantidad;
+                        tiempoTotal = reclutamiento.tiempoReclutamiento.TotalSeconds * cantidad;
 
                         // Almacenamos toda la informacion necesaria en la tabla de ordenesReclutamiento
                         ordenReclutamiento insertOrden = new ordenReclutamiento();

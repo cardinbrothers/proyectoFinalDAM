@@ -10,7 +10,7 @@ using WebService_ProyectoDAM.Models;
 namespace WebService_ProyectoDAM.Servicios
 {
 
-    // OYE!!! mira de probar el insertApoyo y quitar los (int) y (dateTime) sobrantes   
+    // OYE!!! mira de probar el insertApoyo y el insertReclutamiento
 
     public class servicioMenuPrincipal
     {

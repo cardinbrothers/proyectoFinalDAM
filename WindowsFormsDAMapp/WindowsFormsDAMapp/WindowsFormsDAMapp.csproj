@@ -58,6 +58,12 @@
     <Compile Include="formClasificacion.Designer.cs">
       <DependentUpon>formClasificacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="formEnviarMensaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formEnviarMensaje.Designer.cs">
+      <DependentUpon>formEnviarMensaje.cs</DependentUpon>
+    </Compile>
     <Compile Include="formInicioSesion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formClasificacion.resx">
       <DependentUpon>formClasificacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formEnviarMensaje.resx">
+      <DependentUpon>formEnviarMensaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formInicioSesion.resx">
       <DependentUpon>formInicioSesion.cs</DependentUpon>

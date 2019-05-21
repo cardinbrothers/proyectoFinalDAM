@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsDAMapp
 {
-    public partial class formEnviarMensaje : Form
+    public partial class formContestarMensaje : Form
     {
-        public formEnviarMensaje()
+        public formContestarMensaje()
         {
             InitializeComponent();
-        }
-
-        private void FormEnviarMensaje_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

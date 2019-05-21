@@ -101,11 +101,14 @@
             // 
             // btn_recargar
             // 
-            this.btn_recargar.Location = new System.Drawing.Point(292, 29);
+            this.btn_recargar.BackColor = System.Drawing.Color.Transparent;
+            this.btn_recargar.BackgroundImage = global::WindowsFormsDAMapp.Properties.Resources.refresh;
+            this.btn_recargar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_recargar.Location = new System.Drawing.Point(289, 29);
             this.btn_recargar.Name = "btn_recargar";
-            this.btn_recargar.Size = new System.Drawing.Size(21, 21);
+            this.btn_recargar.Size = new System.Drawing.Size(24, 23);
             this.btn_recargar.TabIndex = 3;
-            this.btn_recargar.UseVisualStyleBackColor = true;
+            this.btn_recargar.UseVisualStyleBackColor = false;
             // 
             // btnCrearPartida
             // 
@@ -159,6 +162,12 @@
             // cbx_velocidad
             // 
             this.cbx_velocidad.FormattingEnabled = true;
+            this.cbx_velocidad.Items.AddRange(new object[] {
+            "x1",
+            "x2",
+            "x4",
+            "x8",
+            "x16"});
             this.cbx_velocidad.Location = new System.Drawing.Point(550, 72);
             this.cbx_velocidad.Name = "cbx_velocidad";
             this.cbx_velocidad.Size = new System.Drawing.Size(189, 21);
@@ -167,6 +176,13 @@
             // cbx_Durarcion
             // 
             this.cbx_Durarcion.FormattingEnabled = true;
+            this.cbx_Durarcion.Items.AddRange(new object[] {
+            "1 min",
+            "5 min",
+            "20 min",
+            "1 hora",
+            "2 horas",
+            "6 horas"});
             this.cbx_Durarcion.Location = new System.Drawing.Point(550, 120);
             this.cbx_Durarcion.Name = "cbx_Durarcion";
             this.cbx_Durarcion.Size = new System.Drawing.Size(189, 21);
@@ -175,6 +191,11 @@
             // cbx_limiteJugadores
             // 
             this.cbx_limiteJugadores.FormattingEnabled = true;
+            this.cbx_limiteJugadores.Items.AddRange(new object[] {
+            "2",
+            "4",
+            "8",
+            "16"});
             this.cbx_limiteJugadores.Location = new System.Drawing.Point(550, 164);
             this.cbx_limiteJugadores.Name = "cbx_limiteJugadores";
             this.cbx_limiteJugadores.Size = new System.Drawing.Size(189, 21);
@@ -183,6 +204,12 @@
             // cbx_limitePoblacion
             // 
             this.cbx_limitePoblacion.FormattingEnabled = true;
+            this.cbx_limitePoblacion.Items.AddRange(new object[] {
+            "5",
+            "10",
+            "20",
+            "50",
+            "100"});
             this.cbx_limitePoblacion.Location = new System.Drawing.Point(550, 210);
             this.cbx_limitePoblacion.Name = "cbx_limitePoblacion";
             this.cbx_limitePoblacion.Size = new System.Drawing.Size(189, 21);

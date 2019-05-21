@@ -279,7 +279,7 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formMovimientos";
-            this.Text = "formMovimientos";
+            this.Text = "Movimientos";
             this.ResumeLayout(false);
             this.PerformLayout();
 

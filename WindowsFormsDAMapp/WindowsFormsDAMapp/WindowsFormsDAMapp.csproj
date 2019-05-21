@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="formClasificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formClasificacion.Designer.cs">
+      <DependentUpon>formClasificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="formInicioSesion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="formClasificacion.resx">
+      <DependentUpon>formClasificacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formInicioSesion.resx">
       <DependentUpon>formInicioSesion.cs</DependentUpon>
     </EmbeddedResource>

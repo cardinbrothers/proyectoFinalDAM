@@ -35,7 +35,6 @@
             this.col_plazasLibres = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lab_velocidad = new System.Windows.Forms.Label();
             this.lab_PartidasActivas = new System.Windows.Forms.Label();
-            this.btn_recargar = new System.Windows.Forms.Button();
             this.btnCrearPartida = new System.Windows.Forms.Button();
             this.lab_crearPartida = new System.Windows.Forms.Label();
             this.lab_duracion = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.cbx_Durarcion = new System.Windows.Forms.ComboBox();
             this.cbx_limiteJugadores = new System.Windows.Forms.ComboBox();
             this.cbx_limitePoblacion = new System.Windows.Forms.ComboBox();
+            this.btn_recargar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lsv_PartidasActivas
@@ -98,17 +98,6 @@
             this.lab_PartidasActivas.Size = new System.Drawing.Size(121, 16);
             this.lab_PartidasActivas.TabIndex = 2;
             this.lab_PartidasActivas.Text = "Partidas Activas";
-            // 
-            // btn_recargar
-            // 
-            this.btn_recargar.BackColor = System.Drawing.Color.Transparent;
-            this.btn_recargar.BackgroundImage = global::WindowsFormsDAMapp.Properties.Resources.refresh;
-            this.btn_recargar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_recargar.Location = new System.Drawing.Point(289, 29);
-            this.btn_recargar.Name = "btn_recargar";
-            this.btn_recargar.Size = new System.Drawing.Size(24, 23);
-            this.btn_recargar.TabIndex = 3;
-            this.btn_recargar.UseVisualStyleBackColor = false;
             // 
             // btnCrearPartida
             // 
@@ -214,6 +203,17 @@
             this.cbx_limitePoblacion.Name = "cbx_limitePoblacion";
             this.cbx_limitePoblacion.Size = new System.Drawing.Size(189, 21);
             this.cbx_limitePoblacion.TabIndex = 19;
+            // 
+            // btn_recargar
+            // 
+            this.btn_recargar.BackColor = System.Drawing.Color.Transparent;
+            this.btn_recargar.BackgroundImage = global::WindowsFormsDAMapp.Properties.Resources.refresh;
+            this.btn_recargar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_recargar.Location = new System.Drawing.Point(289, 29);
+            this.btn_recargar.Name = "btn_recargar";
+            this.btn_recargar.Size = new System.Drawing.Size(24, 23);
+            this.btn_recargar.TabIndex = 3;
+            this.btn_recargar.UseVisualStyleBackColor = false;
             // 
             // frm_MenuPrincipal
             // 

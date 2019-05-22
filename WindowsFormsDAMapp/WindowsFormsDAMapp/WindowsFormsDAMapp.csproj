@@ -46,96 +46,105 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="formBandejaEntrada.cs">
+    <Compile Include="Entidades\apoyosEntity.cs" />
+    <Compile Include="Entidades\infoJugadorEntity.cs" />
+    <Compile Include="Entidades\infoPartidaEntity.cs" />
+    <Compile Include="Entidades\mensajesEntity.cs" />
+    <Compile Include="Entidades\movimientossEntity.cs" />
+    <Compile Include="Entidades\OrdenReclutamientoEntity.cs" />
+    <Compile Include="Entidades\potenciajugadorEntity.cs" />
+    <Compile Include="Entidades\puebloEntity.cs" />
+    <Compile Include="Entidades\tropasDefensivasEntity.cs" />
+    <Compile Include="Formularios\formBandejaEntrada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formBandejaEntrada.Designer.cs">
+    <Compile Include="Formularios\formBandejaEntrada.Designer.cs">
       <DependentUpon>formBandejaEntrada.cs</DependentUpon>
     </Compile>
-    <Compile Include="formClasificacion.cs">
+    <Compile Include="Formularios\formClasificacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formClasificacion.Designer.cs">
+    <Compile Include="Formularios\formClasificacion.Designer.cs">
       <DependentUpon>formClasificacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="formContestarMensaje.cs">
+    <Compile Include="Formularios\formContestarMensaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formContestarMensaje.Designer.cs">
+    <Compile Include="Formularios\formContestarMensaje.Designer.cs">
       <DependentUpon>formContestarMensaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="formEnviarMensaje.cs">
+    <Compile Include="Formularios\formEnviarMensaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formEnviarMensaje.Designer.cs">
+    <Compile Include="Formularios\formEnviarMensaje.Designer.cs">
       <DependentUpon>formEnviarMensaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="formInicioSesion.cs">
+    <Compile Include="Formularios\formInicioSesion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formInicioSesion.Designer.cs">
+    <Compile Include="Formularios\formInicioSesion.Designer.cs">
       <DependentUpon>formInicioSesion.cs</DependentUpon>
     </Compile>
-    <Compile Include="formMapa.cs">
+    <Compile Include="Formularios\formMapa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formMapa.Designer.cs">
+    <Compile Include="Formularios\formMapa.Designer.cs">
       <DependentUpon>formMapa.cs</DependentUpon>
     </Compile>
-    <Compile Include="formMenuPrincipal.cs">
+    <Compile Include="Formularios\formMenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formMenuPrincipal.Designer.cs">
+    <Compile Include="Formularios\formMenuPrincipal.Designer.cs">
       <DependentUpon>formMenuPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="formMovimientos.cs">
+    <Compile Include="Formularios\formMovimientos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formMovimientos.Designer.cs">
+    <Compile Include="Formularios\formMovimientos.Designer.cs">
       <DependentUpon>formMovimientos.cs</DependentUpon>
     </Compile>
-    <Compile Include="formReclutamiento.cs">
+    <Compile Include="Formularios\formReclutamiento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formReclutamiento.Designer.cs">
+    <Compile Include="Formularios\formReclutamiento.Designer.cs">
       <DependentUpon>formReclutamiento.cs</DependentUpon>
     </Compile>
-    <Compile Include="formVisionGeneral.cs">
+    <Compile Include="Formularios\formVisionGeneral.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formVisionGeneral.Designer.cs">
+    <Compile Include="Formularios\formVisionGeneral.Designer.cs">
       <DependentUpon>formVisionGeneral.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="formBandejaEntrada.resx">
+    <EmbeddedResource Include="Formularios\formBandejaEntrada.resx">
       <DependentUpon>formBandejaEntrada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formClasificacion.resx">
+    <EmbeddedResource Include="Formularios\formClasificacion.resx">
       <DependentUpon>formClasificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formContestarMensaje.resx">
+    <EmbeddedResource Include="Formularios\formContestarMensaje.resx">
       <DependentUpon>formContestarMensaje.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formEnviarMensaje.resx">
+    <EmbeddedResource Include="Formularios\formEnviarMensaje.resx">
       <DependentUpon>formEnviarMensaje.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formInicioSesion.resx">
+    <EmbeddedResource Include="Formularios\formInicioSesion.resx">
       <DependentUpon>formInicioSesion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formMapa.resx">
+    <EmbeddedResource Include="Formularios\formMapa.resx">
       <DependentUpon>formMapa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formMenuPrincipal.resx">
+    <EmbeddedResource Include="Formularios\formMenuPrincipal.resx">
       <DependentUpon>formMenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formMovimientos.resx">
+    <EmbeddedResource Include="Formularios\formMovimientos.resx">
       <DependentUpon>formMovimientos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formReclutamiento.resx">
+    <EmbeddedResource Include="Formularios\formReclutamiento.resx">
       <DependentUpon>formReclutamiento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formVisionGeneral.resx">
+    <EmbeddedResource Include="Formularios\formVisionGeneral.resx">
       <DependentUpon>formVisionGeneral.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

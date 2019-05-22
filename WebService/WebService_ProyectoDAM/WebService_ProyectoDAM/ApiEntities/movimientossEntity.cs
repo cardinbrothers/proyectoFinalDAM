@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebService_ProyectoDAM.ApiEntities
 {
-    public class movimientossEntity
+    public class movimientosEntity
     {
         public int id_Movimiento { get; set; }
 

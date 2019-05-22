@@ -17,18 +17,18 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("realizarMovimiento")]
         [HttpPost]
-        public void realizarMovimientos([FromBody] movimientossEntity record)
+        public void realizarMovimientos([FromBody] movimientosEntity record)
         {
             servicio.realizarMovimiento(record);
         }
 
         [Route("obtenerMovimientos")]
         [HttpGet]
-        public string obtenerMovimientos(int id_pueblo)
+        public List<movimientosEntity> obtenerMovimientos(int id_pueblo)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerMovimientosActivos(id_pueblo));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerMovimientosActivos(id_pueblo));
 
-            return json;
+            return servicio.obtenerMovimientosActivos(id_pueblo);
         }
 
         [Route("obtenerVencedor")]

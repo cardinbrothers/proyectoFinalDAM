@@ -24,20 +24,20 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("obtenerMensajesP")]
         [HttpGet]
-        public string obtenerMensajesP(string nombreUsuario)
+        public List<mensajesEntity> obtenerMensajesP(string nombreUsuario)
         {
-            var json = JsonConvert.SerializeObject(servicio.listaMensajesPrinciapales(nombreUsuario));
+            //var json = JsonConvert.SerializeObject(servicio.listaMensajesPrinciapales(nombreUsuario));
 
-            return json;
+            return servicio.listaMensajesPrinciapales(nombreUsuario);
         }
 
         [Route("obtenerMensajesS")]
         [HttpGet]
-        public string obtenerMensajesS(int id_Mensaje)
+        public List<mensajesEntity> obtenerMensajesS(int id_Mensaje)
         {
-            var json = JsonConvert.SerializeObject(servicio.listaMensajesSecundarios(id_Mensaje));
+            //var json = JsonConvert.SerializeObject(servicio.listaMensajesSecundarios(id_Mensaje));
 
-            return json;
+            return servicio.listaMensajesSecundarios(id_Mensaje);
         }
 
         [Route("responderMensaje")]

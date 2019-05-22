@@ -17,20 +17,20 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("reclutarTropas")]
         [HttpPost]
-        public string reclutarTropas(int idPueblo, int idTropa, int cantidad)
+        public ordenReclutamientoEntity reclutarTropas(int idPueblo, int idTropa, int cantidad)
         {
-            var json = JsonConvert.SerializeObject(servicio.reclutarTropas(idPueblo, idTropa, cantidad));
+            //var json = JsonConvert.SerializeObject(servicio.reclutarTropas(idPueblo, idTropa, cantidad));
 
-            return json;
+            return servicio.reclutarTropas(idPueblo, idTropa, cantidad);
         }
 
         [Route("obtenerOrdenes")]
         [HttpGet]
-        public string obtenerOrdenes(int idPueblo)
+        public List<ordenReclutamientoEntity> obtenerOrdenes(int idPueblo)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerOrdenesActivas(idPueblo));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerOrdenesActivas(idPueblo));
 
-            return json;
+            return servicio.obtenerOrdenesActivas(idPueblo);
         }
 
         [Route("cancelar")]

@@ -17,20 +17,20 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("obtenerPueblo")]
         [HttpGet]
-        public string obtenerPueblo(int id_Pueblo)
+        public puebloEntity obtenerPueblo(int id_Pueblo)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerPueblo(id_Pueblo));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerPueblo(id_Pueblo));
 
-            return json;
+            return servicio.obtenerPueblo(id_Pueblo);
         }
 
         [Route("obtenerListaPueblos")]
         [HttpGet]
-        public string obtenerListaPueblos(string propietario)
+        public List<puebloEntity> obtenerListaPueblos(string propietario)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerListaPueblos(propietario));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerListaPueblos(propietario));
 
-            return json;
+            return servicio.obtenerListaPueblos(propietario);
         }
 
         [Route("obtenerCoords")]
@@ -49,11 +49,11 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("obtenerDefReal")]
         [HttpGet]
-        public string obtenerDefReal(int id_Pueblo)
+        public tropasDefensivasEntity obtenerDefReal(int id_Pueblo)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerDefRealPueblo(id_Pueblo));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerDefRealPueblo(id_Pueblo));
 
-            return json;
+            return servicio.obtenerDefRealPueblo(id_Pueblo);
         }
 
         [Route("obtenerDistancia")]

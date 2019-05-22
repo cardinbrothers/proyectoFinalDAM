@@ -42,11 +42,11 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("partidasActivas")]
         [HttpGet]
-        public string getPartidasActivas()
+        public List<infoPartidaEntity> getPartidasActivas()
         {
-            var json = JsonConvert.SerializeObject(servicio.partidasActivas());
+            //var json = JsonConvert.SerializeObject(servicio.partidasActivas());
 
-            return json;
+            return servicio.partidasActivas();
         }
 
         [Route("crearJugador")]
@@ -65,20 +65,20 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("parametrosPartida")]
         [HttpGet]
-        public string obtenerParametrosPartida(int id_Partida)
+        public infoPartidaEntity obtenerParametrosPartida(int id_Partida)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerParametrosPartida(id_Partida));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerParametrosPartida(id_Partida));
 
-            return json;
+            return servicio.obtenerParametrosPartida(id_Partida);
         }
 
         [Route("comprobarFinallizacion")]
         [HttpGet]
-        public string comprobarFinalizacion(int id_Partida)
+        public potenciaJugadorEntity comprobarFinalizacion(int id_Partida)
         {
-            var json = JsonConvert.SerializeObject(servicio.comprobarFinalizacion(id_Partida));
+            //var json = JsonConvert.SerializeObject(servicio.comprobarFinalizacion(id_Partida));
 
-            return json;
+            return servicio.comprobarFinalizacion(id_Partida);
         }
 
     }

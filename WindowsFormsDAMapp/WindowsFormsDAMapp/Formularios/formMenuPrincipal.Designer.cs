@@ -56,7 +56,7 @@
             this.col_plazasLibres});
             this.lsv_PartidasActivas.Location = new System.Drawing.Point(12, 54);
             this.lsv_PartidasActivas.Name = "lsv_PartidasActivas";
-            this.lsv_PartidasActivas.Size = new System.Drawing.Size(301, 277);
+            this.lsv_PartidasActivas.Size = new System.Drawing.Size(337, 277);
             this.lsv_PartidasActivas.TabIndex = 0;
             this.lsv_PartidasActivas.UseCompatibleStateImageBehavior = false;
             this.lsv_PartidasActivas.View = System.Windows.Forms.View.Details;
@@ -72,7 +72,7 @@
             // col_tiempoRestante
             // 
             this.col_tiempoRestante.Text = "Tiempo Restante";
-            this.col_tiempoRestante.Width = 100;
+            this.col_tiempoRestante.Width = 136;
             // 
             // col_plazasLibres
             // 
@@ -214,6 +214,7 @@
             this.btn_recargar.Size = new System.Drawing.Size(24, 23);
             this.btn_recargar.TabIndex = 3;
             this.btn_recargar.UseVisualStyleBackColor = false;
+            this.btn_recargar.Click += new System.EventHandler(this.Btn_recargar_Click);
             // 
             // frm_MenuPrincipal
             // 

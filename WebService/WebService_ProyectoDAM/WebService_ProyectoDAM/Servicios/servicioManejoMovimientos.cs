@@ -12,7 +12,7 @@ namespace WebService_ProyectoDAM.Servicios
     public class servicioManejoMovimientos
     {
         // Metodo que realiza un nuevo movimiento
-        public void realizarMovimiento(movimientossEntity movimiento)
+        public void realizarMovimiento(movimientosEntity movimiento)
         {
             try
             {
@@ -79,10 +79,10 @@ namespace WebService_ProyectoDAM.Servicios
         }
 
         // Metodo que devuelve todos los movimientos enviados y recibidos actualmente por un pueblo
-        public List<movimientossEntity> obtenerMovimientosActivos(int id_Pueblo)
+        public List<movimientosEntity> obtenerMovimientosActivos(int id_Pueblo)
         {
             // Creamos la lista para devolver los movientos del pueblo
-            List<movimientossEntity> listaMovimientos = new List<movimientossEntity>();
+            List<movimientosEntity> listaMovimientos = new List<movimientosEntity>();
 
             try
             {
@@ -99,7 +99,7 @@ namespace WebService_ProyectoDAM.Servicios
                     foreach (var movimiento in movimientos)
                     {
                         // Creamos un objeto auxiliar para almacenar la informacion de el movimiento
-                        movimientossEntity movimientoAux = new movimientossEntity();
+                        movimientosEntity movimientoAux = new movimientosEntity();
                         movimientoAux.id_Movimiento = movimiento.id_Movimiento;
                         movimientoAux.puebloOrigen = movimiento.puebloOrigen;
                         movimientoAux.puebloDestino = movimiento.puebloDestino;

@@ -17,20 +17,20 @@ namespace WebService_ProyectoDAM.Controllers
 
         [Route("obtenerJugadores")]
         [HttpGet]
-        public string obtenerJugadores(int id_Partida)
+        public List<infoJugadorEntity> obtenerJugadores(int id_Partida)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerJugadores(id_Partida));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerJugadores(id_Partida));
 
-            return json;
+            return servicio.obtenerJugadores(id_Partida);
         }
 
         [Route("obtenerClasificacion")]
         [HttpGet]
-        public string obtenerClasificacion(int id_Partida)
+        public List<potenciaJugadorEntity> obtenerClasificacion(int id_Partida)
         {
-            var json = JsonConvert.SerializeObject(servicio.obtenerClasificacion(id_Partida));
+            //var json = JsonConvert.SerializeObject(servicio.obtenerClasificacion(id_Partida));
 
-            return json;
+            return servicio.obtenerClasificacion(id_Partida);
         }
 
     }

@@ -56,7 +56,7 @@ namespace WebService_ProyectoDAM.Servicios
                         insertOrden.cantidad = cantidad;
                         insertOrden.pueblo = idPueblo;
                         insertOrden.tropa = idTropa;
-                        insertOrden.horaFin = DateTime.Now.AddSeconds(tiempoTotal);
+                        insertOrden.horaFin = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").AddSeconds(tiempoTotal);
 
                         context.ordenReclutamiento.Add(insertOrden);
                         context.SaveChanges();
@@ -66,7 +66,7 @@ namespace WebService_ProyectoDAM.Servicios
                         resultado.id_Orden = insertOrden.idOrden;
                         resultado.id_Tropa = idTropa;
                         resultado.cantidad = cantidad;
-                        resultado.horaFin = DateTime.Now.AddSeconds(tiempoTotal);
+                        resultado.horaFin = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").AddSeconds(tiempoTotal);
 
                         // Creamos un hilo aparte que desactivará la partida cuando esta acabe
                         Task.Run(() => terminadoReclutamiento(insertOrden.horaFin, insertOrden.idOrden));
@@ -97,7 +97,7 @@ namespace WebService_ProyectoDAM.Servicios
                 try
                 {
                     // Mandamos al hilo esperar por que pase el tiempo indicado
-                    Thread.Sleep(horaFin - DateTime.Now);
+                    Thread.Sleep(horaFin - TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"));
 
                     // Llamamos al metodo que realiza la logica de finalizacion del apoyo
                     completarOrdenReclutamiento(id_Orden);
@@ -197,7 +197,7 @@ namespace WebService_ProyectoDAM.Servicios
                     foreach (var orden in ordenesPueblo)
                     {
                         // Comprobamos si la hora de finalizar ya ha excedido la hora actual
-                        if (orden.horaFin > DateTime.Now)
+                        if (orden.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"))
                         {
                             // Llamamos al metodo que completa la orden de reclutamiento
                             completarOrdenReclutamiento(orden.idOrden);

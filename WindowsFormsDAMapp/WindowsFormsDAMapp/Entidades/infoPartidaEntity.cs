@@ -12,7 +12,7 @@ namespace WindowsFormsDAMapp.Entidades
 
         public int velocidad { get; set; }
 
-        public TimeSpan duracion { get; set; }
+        public string duracion { get; set; }
 
         public int limiteJugadores { get; set; }
 

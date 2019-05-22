@@ -10,6 +10,8 @@ namespace WindowsFormsDAMapp.Helpers
     {
         const string cadenaConexion = @"https://webserviceproyectodam20190522124503.azurewebsites.net";
 
+        //const string cadenaConexion = @"http://localhost:60001";
+
         public string CadenaConexion
         {
             get { return cadenaConexion; }

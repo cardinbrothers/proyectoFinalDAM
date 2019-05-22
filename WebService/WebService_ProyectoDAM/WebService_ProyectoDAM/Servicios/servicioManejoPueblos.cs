@@ -208,13 +208,13 @@ namespace WebService_ProyectoDAM.Servicios
                     // Obtenemos los apoyos originados del pueblo
                     var apoyos = from register in context.Apoyos
                                  where register.puebloOrigen == id_pueblo &&
-                                 register.horaFin > DateTime.Now
+                                 register.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
                                  select register;
 
                     // Obtenemos los movimientos originados del pueblo
                     var movimientos = from register in context.Movimientos
                                       where register.puebloOrigen == id_pueblo &&
-                                      register.horaLlegada > DateTime.Now &&
+                                      register.horaLlegada > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time") &&
                                       register.vencedor == -1
                                       select register;
 

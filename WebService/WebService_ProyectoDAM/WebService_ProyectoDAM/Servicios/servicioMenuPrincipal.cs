@@ -32,7 +32,7 @@ namespace WebService_ProyectoDAM.Servicios
                     partidaCreada.Duracion = record.duracion;
                     partidaCreada.limiteJugadores = record.limiteJugadores;
                     partidaCreada.limitePoblacion = record.limitePoblacion;
-                    partidaCreada.fechaInicio = DateTime.Now;
+                    partidaCreada.fechaInicio = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
                     partidaCreada.activo = true;
 
                     // Insertamos la partida
@@ -83,8 +83,13 @@ namespace WebService_ProyectoDAM.Servicios
                             // Inicializamos el objeto de jugadorGanador
                             potenciaJugadorEntity jugadorGanador = new potenciaJugadorEntity();
 
-                            // obtenemos el jugador con mayor clasificacion
-                            jugadorGanador = objJugadores.obtenerClasificacion(id_Partida)[0];
+                            var clasificacion = objJugadores.obtenerClasificacion(id_Partida);
+
+                            if (clasificacion.Count != 0)
+                            {
+                                // obtenemos el jugador con mayor clasificacion
+                                jugadorGanador = clasificacion[0];
+                            }
 
                             // Establecemos el campo activo a falso
                             partida.activo = false;
@@ -210,7 +215,7 @@ namespace WebService_ProyectoDAM.Servicios
                         if (numJugadores < partida.limiteJugadores)
                         {
                             // Comprobamos si la partida no se ha terminado aun
-                            if (partida.fechaInicio.AddSeconds(Convert.ToInt32(partida.Duracion.TotalSeconds)) >= DateTime.Now)
+                            if (partida.fechaInicio.AddSeconds(Convert.ToInt32(partida.Duracion.TotalSeconds)) >= TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"))
                             {
                                 // Introducimos la informacion del usuario en la base de datos
                                 Jugador jugadorNuevo = new Jugador();

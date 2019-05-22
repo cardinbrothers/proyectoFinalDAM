@@ -107,6 +107,7 @@
             this.btnCrearPartida.TabIndex = 4;
             this.btnCrearPartida.Text = "Partida Nueva";
             this.btnCrearPartida.UseVisualStyleBackColor = true;
+            this.btnCrearPartida.Click += new System.EventHandler(this.BtnCrearPartida_Click);
             // 
             // lab_crearPartida
             // 
@@ -124,9 +125,9 @@
             this.lab_duracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lab_duracion.Location = new System.Drawing.Point(389, 121);
             this.lab_duracion.Name = "lab_duracion";
-            this.lab_duracion.Size = new System.Drawing.Size(62, 16);
+            this.lab_duracion.Size = new System.Drawing.Size(101, 16);
             this.lab_duracion.TabIndex = 13;
-            this.lab_duracion.Text = "Duracion";
+            this.lab_duracion.Text = "Duracion (mins)";
             // 
             // lab_limiteJugadores
             // 
@@ -152,11 +153,11 @@
             // 
             this.cbx_velocidad.FormattingEnabled = true;
             this.cbx_velocidad.Items.AddRange(new object[] {
-            "x1",
-            "x2",
-            "x4",
-            "x8",
-            "x16"});
+            "1",
+            "2",
+            "4",
+            "8",
+            "16"});
             this.cbx_velocidad.Location = new System.Drawing.Point(550, 72);
             this.cbx_velocidad.Name = "cbx_velocidad";
             this.cbx_velocidad.Size = new System.Drawing.Size(189, 21);
@@ -166,12 +167,12 @@
             // 
             this.cbx_Durarcion.FormattingEnabled = true;
             this.cbx_Durarcion.Items.AddRange(new object[] {
-            "1 min",
-            "5 min",
-            "20 min",
-            "1 hora",
-            "2 horas",
-            "6 horas"});
+            "1",
+            "5",
+            "20",
+            "60",
+            "120",
+            "360"});
             this.cbx_Durarcion.Location = new System.Drawing.Point(550, 120);
             this.cbx_Durarcion.Name = "cbx_Durarcion";
             this.cbx_Durarcion.Size = new System.Drawing.Size(189, 21);
@@ -209,7 +210,7 @@
             this.btn_recargar.BackColor = System.Drawing.Color.Transparent;
             this.btn_recargar.BackgroundImage = global::WindowsFormsDAMapp.Properties.Resources.refresh;
             this.btn_recargar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_recargar.Location = new System.Drawing.Point(289, 29);
+            this.btn_recargar.Location = new System.Drawing.Point(325, 29);
             this.btn_recargar.Name = "btn_recargar";
             this.btn_recargar.Size = new System.Drawing.Size(24, 23);
             this.btn_recargar.TabIndex = 3;

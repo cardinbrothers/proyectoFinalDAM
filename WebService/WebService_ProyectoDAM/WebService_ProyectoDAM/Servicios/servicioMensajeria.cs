@@ -42,7 +42,7 @@ namespace WebService_ProyectoDAM.Servicios
                                 Mensaje mensajeNuevo = new Mensaje();
                                 mensajeNuevo.usuarioEmisor = mensaje.usuarioEmisor;
                                 mensajeNuevo.usuarioReceptor = mensaje.usuarioReceptor;
-                                mensajeNuevo.fecha = DateTime.Now;
+                                mensajeNuevo.fecha = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
                                 mensajeNuevo.asunto = mensaje.asunto;
                                 mensajeNuevo.contenido = mensaje.contenido;
 
@@ -185,7 +185,7 @@ namespace WebService_ProyectoDAM.Servicios
                         Mensaje mensajeNuevo = new Mensaje();
                         mensajeNuevo.usuarioEmisor = mensaje.usuarioEmisor;
                         mensajeNuevo.usuarioReceptor = mensaje.usuarioReceptor;
-                        mensajeNuevo.fecha = DateTime.Now;
+                        mensajeNuevo.fecha = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
                         mensajeNuevo.contenido = mensaje.contenido;
                         mensajeNuevo.mensajePadre = mensaje.mensajePadre;
 

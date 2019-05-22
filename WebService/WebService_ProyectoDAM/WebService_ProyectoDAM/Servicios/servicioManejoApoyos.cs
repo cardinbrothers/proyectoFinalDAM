@@ -93,7 +93,7 @@ namespace WebService_ProyectoDAM.Servicios
                 try
                 {
                     // Mandamos al hilo esperar por que pase el tiempo indicado
-                    Thread.Sleep(horaFin - DateTime.Now);
+                    Thread.Sleep(horaFin - TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"));
 
                     // Llamamos al metodo que realiza la logica de finalizacion del apoyo
                     apoyoFinalizado(id_Apoyo);
@@ -184,7 +184,7 @@ namespace WebService_ProyectoDAM.Servicios
                     foreach (var apoyo in listaApoyos)
                     {
                         // Comprobamos si el apoyo ha pasado ya la fecha de finalizacion
-                        if (apoyo.horaFin > DateTime.Now)
+                        if (apoyo.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"))
                         {
                             // Llamamamos al metodo para realizar las acciones correspondientes
                             apoyoFinalizado(apoyo.id_Apoyo);
@@ -297,8 +297,8 @@ namespace WebService_ProyectoDAM.Servicios
                 {
                     // obtenemos los apoyos que han superado su limite de tiempo
                     var apoyosFinalizados = from register in context.Apoyos
-                                            where register.horaFin > DateTime.Now
-                                            select register;
+                                            where register.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
+                    select register;
 
                     // Tratamos cada apoyo con un foreach
                     foreach (var apoyo in apoyosFinalizados)

@@ -32,6 +32,12 @@ namespace WindowsFormsDAMapp
 
             // Obtenemos la lista de partidas activas y las introducimos en el listview
             introducirPartidas(obtenerListaPartidas());
+
+            // Ponemos valores por defecto en los comboBox
+            cbx_Durarcion.SelectedIndex = 0;
+            cbx_limiteJugadores.SelectedIndex = 0;
+            cbx_limitePoblacion.SelectedIndex = 0;
+            cbx_velocidad.SelectedIndex = 0;
         }
 
         // Metodo que obtiene las partidas de la base de datos
@@ -66,7 +72,7 @@ namespace WindowsFormsDAMapp
                 ListViewItem itemAux = new ListViewItem("Partida " + partida.id_Partida.ToString());
 
                 // Calculamos el tiempo restante de la partida y las plazas libres restantes
-                TimeSpan tiempoRestante = (partida.fechaInicio.TimeOfDay + partida.duracion) - DateTime.Now.TimeOfDay;
+                TimeSpan tiempoRestante = (partida.fechaInicio.TimeOfDay + Convert.ToDateTime(partida.duracion).TimeOfDay) - DateTime.Now.TimeOfDay;
                 int plazasLibres = partida.limiteJugadores - partida.jugadoresActivos;
 
                 // Añadimos el resto de informacion al item de listview
@@ -79,46 +85,40 @@ namespace WindowsFormsDAMapp
             }
         }
 
+        // Metodo asociado al evento click del boton recargar 
         private void Btn_recargar_Click(object sender, EventArgs e)
         {
             // Obtenemos la lista de partidas activas y las introducimos en el listview
             introducirPartidas(obtenerListaPartidas());
         }
 
-        //public async Task<string> InsertFichaje(RegisterRequest registerRequest)
-        //{
+        private void BtnCrearPartida_Click(object sender, EventArgs e)
+        {
+            // Creamos un objeto de entidad de partida
+            infoPartidaEntity partidaNueva = new infoPartidaEntity();
 
-        //    RegisterResult registerResult;
-        //    var response = "3";
-
-
-        //    // Controlador/metodo en el new restrequest
-        //    var request = new RestRequest("AccessRecords/one", Method.POST);
-        //    request.AddJsonBody(new ApiAccessRecord
-        //    {
-        //        accessPointId = registerRequest.TagId,
-        //        Type = (int)registerRequest.Type,
-        //        Id = registerRequest.IdUser
-
-        //    });
-
-        //    try
-        //    {
-
-        //        response = Execute<ApiAccessRecord>(request);
+            // Guardamos la informacion seleccionada por el usuario
+            partidaNueva.velocidad = Convert.ToInt32(cbx_velocidad.SelectedItem.ToString());
+            partidaNueva.duracion = new TimeSpan(0,Convert.ToInt32(cbx_Durarcion.SelectedItem.ToString()),0).ToString();
+            partidaNueva.limiteJugadores = Convert.ToInt32(cbx_limiteJugadores.SelectedItem.ToString());
+            partidaNueva.limitePoblacion = Convert.ToInt32(cbx_limitePoblacion.SelectedItem.ToString());
 
 
-        //    }
-        //    catch (Exception e)
-        //    {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Partida/crearPartida", Method.POST);
 
-        //        Console.Write(e.Message);
-        //        registerResult = new RegisterResult { Result = RegisterResults.Exception };
-        //    }
+            // Añadimos la informacion de la partida nueva a la peticion
+            peticion.AddJsonBody(partidaNueva);
 
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
 
+            // Deserializamos el resultado de la peticion recibido para tenerlo en una lista de objetos
+            int result = JsonConvert.DeserializeObject<int>(response.Content);
 
-        //    return response;
-        //}
+            // Obtenemos la lista de partidas activas y las introducimos en el listview
+            introducirPartidas(obtenerListaPartidas());
+
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace WebService_ProyectoDAM.Servicios
                     insertMovimiento.puebloOrigen = movimiento.puebloOrigen;
                     insertMovimiento.puebloDestino = movimiento.puebloDestino;
                     insertMovimiento.duracion = movimiento.duracion;
-                    insertMovimiento.horaLlegada = DateTime.Now.AddSeconds(movimiento.duracion.TotalSeconds);
+                    insertMovimiento.horaLlegada = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").AddSeconds(movimiento.duracion.TotalSeconds);
                     insertMovimiento.arqueros = movimiento.arqueros;
                     insertMovimiento.ballesteros = movimiento.ballesteros;
                     insertMovimiento.piqueros = movimiento.piqueros;
@@ -92,8 +92,8 @@ namespace WebService_ProyectoDAM.Servicios
                     var movimientos = from register in context.Movimientos
                                       where (register.puebloOrigen == id_Pueblo ||
                                       register.puebloDestino == id_Pueblo) &&
-                                      register.horaLlegada > DateTime.Now
-                                      select register;
+                                      register.horaLlegada > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
+                    select register;
 
                     // Tratamos cada moviento con un foreach
                     foreach (var movimiento in movimientos)
@@ -137,7 +137,7 @@ namespace WebService_ProyectoDAM.Servicios
                     // Obtenemos la lista de movimientos terminados
                     var movimentosAcabados = from register in context.Movimientos
                                              where register.id_Movimiento == id_movimiento &&
-                                             register.horaLlegada < DateTime.Now &&
+                                             register.horaLlegada < TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time") &&
                                              register.vencedor == -1
                                              select register;
 
@@ -208,7 +208,7 @@ namespace WebService_ProyectoDAM.Servicios
                         // Obtenemos los apoyos destinados en el pueblo defensor de la batalla
                         var infoApoyos = from register in context.Apoyos
                                          where register.puebloDestino == infoAtaque.puebloDestino &&
-                                         register.horaFin > DateTime.Now
+                                         register.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
                                          select register;
 
                         // Creamos los objetos de los servicios de manejo de pueblos y apoyos para llamar a sus metodos

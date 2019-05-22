@@ -45,6 +45,7 @@
             this.cbx_limiteJugadores = new System.Windows.Forms.ComboBox();
             this.cbx_limitePoblacion = new System.Windows.Forms.ComboBox();
             this.btn_recargar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lsv_PartidasActivas
@@ -55,11 +56,13 @@
             this.col_tiempoRestante,
             this.col_plazasLibres});
             this.lsv_PartidasActivas.Location = new System.Drawing.Point(12, 54);
+            this.lsv_PartidasActivas.MultiSelect = false;
             this.lsv_PartidasActivas.Name = "lsv_PartidasActivas";
             this.lsv_PartidasActivas.Size = new System.Drawing.Size(337, 277);
             this.lsv_PartidasActivas.TabIndex = 0;
             this.lsv_PartidasActivas.UseCompatibleStateImageBehavior = false;
             this.lsv_PartidasActivas.View = System.Windows.Forms.View.Details;
+            this.lsv_PartidasActivas.DoubleClick += new System.EventHandler(this.Lsv_PartidasActivas_DoubleClick);
             // 
             // col_Partida
             // 
@@ -151,6 +154,7 @@
             // 
             // cbx_velocidad
             // 
+            this.cbx_velocidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_velocidad.FormattingEnabled = true;
             this.cbx_velocidad.Items.AddRange(new object[] {
             "1",
@@ -165,6 +169,7 @@
             // 
             // cbx_Durarcion
             // 
+            this.cbx_Durarcion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_Durarcion.FormattingEnabled = true;
             this.cbx_Durarcion.Items.AddRange(new object[] {
             "1",
@@ -180,6 +185,7 @@
             // 
             // cbx_limiteJugadores
             // 
+            this.cbx_limiteJugadores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_limiteJugadores.FormattingEnabled = true;
             this.cbx_limiteJugadores.Items.AddRange(new object[] {
             "2",
@@ -193,6 +199,7 @@
             // 
             // cbx_limitePoblacion
             // 
+            this.cbx_limitePoblacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_limitePoblacion.FormattingEnabled = true;
             this.cbx_limitePoblacion.Items.AddRange(new object[] {
             "5",
@@ -217,11 +224,21 @@
             this.btn_recargar.UseVisualStyleBackColor = false;
             this.btn_recargar.Click += new System.EventHandler(this.Btn_recargar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(423, 265);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "label1";
+            // 
             // frm_MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 350);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cbx_limitePoblacion);
             this.Controls.Add(this.cbx_limiteJugadores);
             this.Controls.Add(this.cbx_Durarcion);
@@ -237,6 +254,7 @@
             this.Controls.Add(this.lsv_PartidasActivas);
             this.Name = "frm_MenuPrincipal";
             this.Text = "Menu Principal";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Frm_MenuPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.frm_MenuPrincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -262,6 +280,7 @@
         private System.Windows.Forms.ComboBox cbx_Durarcion;
         private System.Windows.Forms.ComboBox cbx_limiteJugadores;
         private System.Windows.Forms.ComboBox cbx_limitePoblacion;
+        private System.Windows.Forms.Label label1;
     }
 }
 

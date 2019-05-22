@@ -16,7 +16,9 @@ namespace WindowsFormsDAMapp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_MenuPrincipal());
+            frm_MenuPrincipal main = new frm_MenuPrincipal();
+            main.Show();
+            Application.Run();
         }
     }
 }

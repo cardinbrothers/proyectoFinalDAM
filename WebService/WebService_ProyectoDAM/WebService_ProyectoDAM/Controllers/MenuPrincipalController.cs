@@ -57,7 +57,7 @@ namespace WebService_ProyectoDAM.Controllers
         }
 
         [Route("iniciarSesion")]
-        [HttpGet]
+        [HttpPost]
         public int iniciarSesion([FromBody] infoJugadorEntity record)
         {
             return servicio.inciarSesion(record);

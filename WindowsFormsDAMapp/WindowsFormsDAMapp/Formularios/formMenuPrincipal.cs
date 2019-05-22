@@ -69,7 +69,7 @@ namespace WindowsFormsDAMapp
             foreach (var partida in listaPartidas)
             {
                 // Creamos unListViewItem auxiliar y almacenamos el id de partida
-                ListViewItem itemAux = new ListViewItem("Partida " + partida.id_Partida.ToString());
+                ListViewItem itemAux = new ListViewItem(partida.id_Partida.ToString());
 
                 // Calculamos el tiempo restante de la partida y las plazas libres restantes
                 TimeSpan tiempoRestante = (partida.fechaInicio.TimeOfDay + Convert.ToDateTime(partida.duracion).TimeOfDay) - DateTime.Now.TimeOfDay;
@@ -119,6 +119,41 @@ namespace WindowsFormsDAMapp
             // Obtenemos la lista de partidas activas y las introducimos en el listview
             introducirPartidas(obtenerListaPartidas());
 
+        }
+
+        // Metodo asignado al evento de dobleClick del listview
+        private void Lsv_PartidasActivas_DoubleClick(object sender, EventArgs e)
+        {
+            // Creamos un objeto de sesion
+            sessionInfo infoSesion = new sessionInfo();
+
+            // Introducimos el id de partida seleccinado
+            infoSesion.id_partida = Convert.ToInt32(lsv_PartidasActivas.Items[lsv_PartidasActivas.SelectedIndices[0]].Text);
+
+            // Creamos un objeto del formulario de inicio de sesion
+            formInicioSesion inicioSesion = new formInicioSesion(infoSesion);
+
+            // Lanzamos el objeto de inicio de sesion   
+            inicioSesion.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
+
+        // Metodo asociado al evento close del formulario
+        private void Frm_MenuPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Form)sender).FormClosed -= Frm_MenuPrincipal_FormClosed;
+
+            // Comprobamos si hay otro formulario ejecutandose, en caso de que no cerramos la aplicacion
+            if (Application.OpenForms.Count == 0)
+            {
+                Application.ExitThread();
+            }
+            else
+            {
+                Application.OpenForms[0].FormClosed += Frm_MenuPrincipal_FormClosed;
+            }
         }
     }
 }

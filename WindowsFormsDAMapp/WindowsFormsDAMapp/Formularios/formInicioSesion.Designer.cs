@@ -81,6 +81,7 @@
             this.btn_iniciarSesion.TabIndex = 18;
             this.btn_iniciarSesion.Text = "Conectarse";
             this.btn_iniciarSesion.UseVisualStyleBackColor = true;
+            this.btn_iniciarSesion.Click += new System.EventHandler(this.Btn_iniciarSesion_Click);
             // 
             // btn_crearCuenta
             // 
@@ -91,6 +92,7 @@
             this.btn_crearCuenta.TabIndex = 19;
             this.btn_crearCuenta.Text = "Crear cuenta";
             this.btn_crearCuenta.UseVisualStyleBackColor = true;
+            this.btn_crearCuenta.Click += new System.EventHandler(this.Btn_crearCuenta_Click);
             // 
             // lab_partida
             // 

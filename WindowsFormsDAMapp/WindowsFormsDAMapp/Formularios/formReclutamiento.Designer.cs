@@ -70,6 +70,8 @@
             this.tbx_caballero = new System.Windows.Forms.TextBox();
             this.tbx_paladin = new System.Windows.Forms.TextBox();
             this.btn_reclutar = new System.Windows.Forms.Button();
+            this.cbx_pueblos = new System.Windows.Forms.ComboBox();
+            this.lab_Pueblos = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_reclutamiento
@@ -136,7 +138,7 @@
             // 
             this.lab_cola.AutoSize = true;
             this.lab_cola.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_cola.Location = new System.Drawing.Point(12, 70);
+            this.lab_cola.Location = new System.Drawing.Point(5, 105);
             this.lab_cola.Name = "lab_cola";
             this.lab_cola.Size = new System.Drawing.Size(36, 16);
             this.lab_cola.TabIndex = 31;
@@ -148,7 +150,7 @@
             this.col_tropa,
             this.col_cantidad,
             this.col_tiempoRestante});
-            this.lsv_cola.Location = new System.Drawing.Point(17, 89);
+            this.lsv_cola.Location = new System.Drawing.Point(10, 124);
             this.lsv_cola.Name = "lsv_cola";
             this.lsv_cola.Size = new System.Drawing.Size(246, 280);
             this.lsv_cola.TabIndex = 32;
@@ -171,7 +173,7 @@
             // btn_cancelar
             // 
             this.btn_cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cancelar.Location = new System.Drawing.Point(76, 388);
+            this.btn_cancelar.Location = new System.Drawing.Point(69, 423);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(101, 34);
             this.btn_cancelar.TabIndex = 33;
@@ -182,7 +184,7 @@
             // 
             this.lab_tropa.AutoSize = true;
             this.lab_tropa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa.Location = new System.Drawing.Point(287, 118);
+            this.lab_tropa.Location = new System.Drawing.Point(280, 153);
             this.lab_tropa.Name = "lab_tropa";
             this.lab_tropa.Size = new System.Drawing.Size(45, 16);
             this.lab_tropa.TabIndex = 34;
@@ -192,7 +194,7 @@
             // 
             this.lab_poblacion.AutoSize = true;
             this.lab_poblacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion.Location = new System.Drawing.Point(534, 118);
+            this.lab_poblacion.Location = new System.Drawing.Point(527, 153);
             this.lab_poblacion.Name = "lab_poblacion";
             this.lab_poblacion.Size = new System.Drawing.Size(69, 16);
             this.lab_poblacion.TabIndex = 35;
@@ -202,7 +204,7 @@
             // 
             this.lab_tiempo.AutoSize = true;
             this.lab_tiempo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tiempo.Location = new System.Drawing.Point(454, 118);
+            this.lab_tiempo.Location = new System.Drawing.Point(447, 153);
             this.lab_tiempo.Name = "lab_tiempo";
             this.lab_tiempo.Size = new System.Drawing.Size(55, 16);
             this.lab_tiempo.TabIndex = 36;
@@ -212,7 +214,7 @@
             // 
             this.lab_potencia.AutoSize = true;
             this.lab_potencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_potencia.Location = new System.Drawing.Point(369, 118);
+            this.lab_potencia.Location = new System.Drawing.Point(362, 153);
             this.lab_potencia.Name = "lab_potencia";
             this.lab_potencia.Size = new System.Drawing.Size(61, 16);
             this.lab_potencia.TabIndex = 37;
@@ -222,7 +224,7 @@
             // 
             this.lab_potencia1.AutoSize = true;
             this.lab_potencia1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_potencia1.Location = new System.Drawing.Point(393, 151);
+            this.lab_potencia1.Location = new System.Drawing.Point(386, 186);
             this.lab_potencia1.Name = "lab_potencia1";
             this.lab_potencia1.Size = new System.Drawing.Size(15, 16);
             this.lab_potencia1.TabIndex = 41;
@@ -232,7 +234,7 @@
             // 
             this.lab_tiempo1.AutoSize = true;
             this.lab_tiempo1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tiempo1.Location = new System.Drawing.Point(454, 151);
+            this.lab_tiempo1.Location = new System.Drawing.Point(447, 186);
             this.lab_tiempo1.Name = "lab_tiempo1";
             this.lab_tiempo1.Size = new System.Drawing.Size(56, 16);
             this.lab_tiempo1.TabIndex = 40;
@@ -242,7 +244,7 @@
             // 
             this.lab_tropa1.AutoSize = true;
             this.lab_tropa1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa1.Location = new System.Drawing.Point(287, 151);
+            this.lab_tropa1.Location = new System.Drawing.Point(280, 186);
             this.lab_tropa1.Name = "lab_tropa1";
             this.lab_tropa1.Size = new System.Drawing.Size(56, 16);
             this.lab_tropa1.TabIndex = 38;
@@ -252,7 +254,7 @@
             // 
             this.lab_potencia2.AutoSize = true;
             this.lab_potencia2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_potencia2.Location = new System.Drawing.Point(386, 187);
+            this.lab_potencia2.Location = new System.Drawing.Point(379, 222);
             this.lab_potencia2.Name = "lab_potencia2";
             this.lab_potencia2.Size = new System.Drawing.Size(22, 16);
             this.lab_potencia2.TabIndex = 45;
@@ -262,7 +264,7 @@
             // 
             this.lab_tiempo2.AutoSize = true;
             this.lab_tiempo2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tiempo2.Location = new System.Drawing.Point(454, 187);
+            this.lab_tiempo2.Location = new System.Drawing.Point(447, 222);
             this.lab_tiempo2.Name = "lab_tiempo2";
             this.lab_tiempo2.Size = new System.Drawing.Size(56, 16);
             this.lab_tiempo2.TabIndex = 44;
@@ -272,7 +274,7 @@
             // 
             this.lab_tropa2.AutoSize = true;
             this.lab_tropa2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa2.Location = new System.Drawing.Point(287, 187);
+            this.lab_tropa2.Location = new System.Drawing.Point(280, 222);
             this.lab_tropa2.Name = "lab_tropa2";
             this.lab_tropa2.Size = new System.Drawing.Size(69, 16);
             this.lab_tropa2.TabIndex = 42;
@@ -282,7 +284,7 @@
             // 
             this.lab_potencia3.AutoSize = true;
             this.lab_potencia3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_potencia3.Location = new System.Drawing.Point(386, 223);
+            this.lab_potencia3.Location = new System.Drawing.Point(379, 258);
             this.lab_potencia3.Name = "lab_potencia3";
             this.lab_potencia3.Size = new System.Drawing.Size(22, 16);
             this.lab_potencia3.TabIndex = 49;
@@ -292,7 +294,7 @@
             // 
             this.lab_tiempo3.AutoSize = true;
             this.lab_tiempo3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tiempo3.Location = new System.Drawing.Point(454, 223);
+            this.lab_tiempo3.Location = new System.Drawing.Point(447, 258);
             this.lab_tiempo3.Name = "lab_tiempo3";
             this.lab_tiempo3.Size = new System.Drawing.Size(56, 16);
             this.lab_tiempo3.TabIndex = 48;
@@ -302,7 +304,7 @@
             // 
             this.lab_tropa3.AutoSize = true;
             this.lab_tropa3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa3.Location = new System.Drawing.Point(287, 223);
+            this.lab_tropa3.Location = new System.Drawing.Point(280, 258);
             this.lab_tropa3.Name = "lab_tropa3";
             this.lab_tropa3.Size = new System.Drawing.Size(55, 16);
             this.lab_tropa3.TabIndex = 46;
@@ -312,7 +314,7 @@
             // 
             this.lab_potencia4.AutoSize = true;
             this.lab_potencia4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_potencia4.Location = new System.Drawing.Point(386, 263);
+            this.lab_potencia4.Location = new System.Drawing.Point(379, 298);
             this.lab_potencia4.Name = "lab_potencia4";
             this.lab_potencia4.Size = new System.Drawing.Size(22, 16);
             this.lab_potencia4.TabIndex = 53;
@@ -322,7 +324,7 @@
             // 
             this.lab_tiempo4.AutoSize = true;
             this.lab_tiempo4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tiempo4.Location = new System.Drawing.Point(454, 263);
+            this.lab_tiempo4.Location = new System.Drawing.Point(447, 298);
             this.lab_tiempo4.Name = "lab_tiempo4";
             this.lab_tiempo4.Size = new System.Drawing.Size(56, 16);
             this.lab_tiempo4.TabIndex = 52;
@@ -332,7 +334,7 @@
             // 
             this.lab_tropa4.AutoSize = true;
             this.lab_tropa4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa4.Location = new System.Drawing.Point(287, 263);
+            this.lab_tropa4.Location = new System.Drawing.Point(280, 298);
             this.lab_tropa4.Name = "lab_tropa4";
             this.lab_tropa4.Size = new System.Drawing.Size(67, 16);
             this.lab_tropa4.TabIndex = 50;
@@ -342,7 +344,7 @@
             // 
             this.lab_potencia5.AutoSize = true;
             this.lab_potencia5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_potencia5.Location = new System.Drawing.Point(393, 300);
+            this.lab_potencia5.Location = new System.Drawing.Point(386, 335);
             this.lab_potencia5.Name = "lab_potencia5";
             this.lab_potencia5.Size = new System.Drawing.Size(15, 16);
             this.lab_potencia5.TabIndex = 57;
@@ -352,7 +354,7 @@
             // 
             this.lab_tiempo5.AutoSize = true;
             this.lab_tiempo5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tiempo5.Location = new System.Drawing.Point(454, 300);
+            this.lab_tiempo5.Location = new System.Drawing.Point(447, 335);
             this.lab_tiempo5.Name = "lab_tiempo5";
             this.lab_tiempo5.Size = new System.Drawing.Size(56, 16);
             this.lab_tiempo5.TabIndex = 56;
@@ -362,7 +364,7 @@
             // 
             this.lab_tropa5.AutoSize = true;
             this.lab_tropa5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa5.Location = new System.Drawing.Point(287, 300);
+            this.lab_tropa5.Location = new System.Drawing.Point(280, 335);
             this.lab_tropa5.Name = "lab_tropa5";
             this.lab_tropa5.Size = new System.Drawing.Size(54, 16);
             this.lab_tropa5.TabIndex = 54;
@@ -372,7 +374,7 @@
             // 
             this.lab_poblacion5.AutoSize = true;
             this.lab_poblacion5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion5.Location = new System.Drawing.Point(558, 300);
+            this.lab_poblacion5.Location = new System.Drawing.Point(551, 335);
             this.lab_poblacion5.Name = "lab_poblacion5";
             this.lab_poblacion5.Size = new System.Drawing.Size(22, 16);
             this.lab_poblacion5.TabIndex = 62;
@@ -382,7 +384,7 @@
             // 
             this.lab_poblacion4.AutoSize = true;
             this.lab_poblacion4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion4.Location = new System.Drawing.Point(565, 263);
+            this.lab_poblacion4.Location = new System.Drawing.Point(558, 298);
             this.lab_poblacion4.Name = "lab_poblacion4";
             this.lab_poblacion4.Size = new System.Drawing.Size(15, 16);
             this.lab_poblacion4.TabIndex = 61;
@@ -392,7 +394,7 @@
             // 
             this.lab_poblacion3.AutoSize = true;
             this.lab_poblacion3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion3.Location = new System.Drawing.Point(565, 223);
+            this.lab_poblacion3.Location = new System.Drawing.Point(558, 258);
             this.lab_poblacion3.Name = "lab_poblacion3";
             this.lab_poblacion3.Size = new System.Drawing.Size(15, 16);
             this.lab_poblacion3.TabIndex = 60;
@@ -402,7 +404,7 @@
             // 
             this.lab_poblacion2.AutoSize = true;
             this.lab_poblacion2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion2.Location = new System.Drawing.Point(565, 187);
+            this.lab_poblacion2.Location = new System.Drawing.Point(558, 222);
             this.lab_poblacion2.Name = "lab_poblacion2";
             this.lab_poblacion2.Size = new System.Drawing.Size(15, 16);
             this.lab_poblacion2.TabIndex = 59;
@@ -412,7 +414,7 @@
             // 
             this.lab_poblacion1.AutoSize = true;
             this.lab_poblacion1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion1.Location = new System.Drawing.Point(565, 151);
+            this.lab_poblacion1.Location = new System.Drawing.Point(558, 186);
             this.lab_poblacion1.Name = "lab_poblacion1";
             this.lab_poblacion1.Size = new System.Drawing.Size(15, 16);
             this.lab_poblacion1.TabIndex = 58;
@@ -420,35 +422,35 @@
             // 
             // tbx_arquero
             // 
-            this.tbx_arquero.Location = new System.Drawing.Point(603, 150);
+            this.tbx_arquero.Location = new System.Drawing.Point(596, 185);
             this.tbx_arquero.Name = "tbx_arquero";
             this.tbx_arquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_arquero.TabIndex = 63;
             // 
             // tbx_ballestero
             // 
-            this.tbx_ballestero.Location = new System.Drawing.Point(603, 186);
+            this.tbx_ballestero.Location = new System.Drawing.Point(596, 221);
             this.tbx_ballestero.Name = "tbx_ballestero";
             this.tbx_ballestero.Size = new System.Drawing.Size(50, 20);
             this.tbx_ballestero.TabIndex = 64;
             // 
             // tbx_piquero
             // 
-            this.tbx_piquero.Location = new System.Drawing.Point(603, 222);
+            this.tbx_piquero.Location = new System.Drawing.Point(596, 257);
             this.tbx_piquero.Name = "tbx_piquero";
             this.tbx_piquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_piquero.TabIndex = 65;
             // 
             // tbx_caballero
             // 
-            this.tbx_caballero.Location = new System.Drawing.Point(603, 262);
+            this.tbx_caballero.Location = new System.Drawing.Point(596, 297);
             this.tbx_caballero.Name = "tbx_caballero";
             this.tbx_caballero.Size = new System.Drawing.Size(50, 20);
             this.tbx_caballero.TabIndex = 66;
             // 
             // tbx_paladin
             // 
-            this.tbx_paladin.Location = new System.Drawing.Point(603, 299);
+            this.tbx_paladin.Location = new System.Drawing.Point(596, 334);
             this.tbx_paladin.Name = "tbx_paladin";
             this.tbx_paladin.Size = new System.Drawing.Size(50, 20);
             this.tbx_paladin.TabIndex = 67;
@@ -456,18 +458,38 @@
             // btn_reclutar
             // 
             this.btn_reclutar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_reclutar.Location = new System.Drawing.Point(408, 335);
+            this.btn_reclutar.Location = new System.Drawing.Point(401, 370);
             this.btn_reclutar.Name = "btn_reclutar";
             this.btn_reclutar.Size = new System.Drawing.Size(101, 34);
             this.btn_reclutar.TabIndex = 68;
             this.btn_reclutar.Text = "Reclutar";
             this.btn_reclutar.UseVisualStyleBackColor = true;
             // 
+            // cbx_pueblos
+            // 
+            this.cbx_pueblos.FormattingEnabled = true;
+            this.cbx_pueblos.Location = new System.Drawing.Point(69, 65);
+            this.cbx_pueblos.Name = "cbx_pueblos";
+            this.cbx_pueblos.Size = new System.Drawing.Size(94, 21);
+            this.cbx_pueblos.TabIndex = 70;
+            // 
+            // lab_Pueblos
+            // 
+            this.lab_Pueblos.AutoSize = true;
+            this.lab_Pueblos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_Pueblos.Location = new System.Drawing.Point(5, 66);
+            this.lab_Pueblos.Name = "lab_Pueblos";
+            this.lab_Pueblos.Size = new System.Drawing.Size(58, 16);
+            this.lab_Pueblos.TabIndex = 69;
+            this.lab_Pueblos.Text = "Pueblos";
+            // 
             // formReclutamiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 434);
+            this.ClientSize = new System.Drawing.Size(673, 469);
+            this.Controls.Add(this.cbx_pueblos);
+            this.Controls.Add(this.lab_Pueblos);
             this.Controls.Add(this.btn_reclutar);
             this.Controls.Add(this.tbx_paladin);
             this.Controls.Add(this.tbx_caballero);
@@ -558,5 +580,7 @@
         private System.Windows.Forms.TextBox tbx_caballero;
         private System.Windows.Forms.TextBox tbx_paladin;
         private System.Windows.Forms.Button btn_reclutar;
+        private System.Windows.Forms.ComboBox cbx_pueblos;
+        private System.Windows.Forms.Label lab_Pueblos;
     }
 }

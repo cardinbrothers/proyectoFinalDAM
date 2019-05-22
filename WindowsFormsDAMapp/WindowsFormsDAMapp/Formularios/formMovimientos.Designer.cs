@@ -50,6 +50,8 @@
             this.tbx_CoordAtaque = new System.Windows.Forms.TextBox();
             this.lab_coord2 = new System.Windows.Forms.Label();
             this.btn_Atacar = new System.Windows.Forms.Button();
+            this.cbx_pueblos = new System.Windows.Forms.ComboBox();
+            this.lab_Pueblos = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_reclutamiento
@@ -114,35 +116,35 @@
             // 
             // tbx_paladin
             // 
-            this.tbx_paladin.Location = new System.Drawing.Point(550, 162);
+            this.tbx_paladin.Location = new System.Drawing.Point(543, 178);
             this.tbx_paladin.Name = "tbx_paladin";
             this.tbx_paladin.Size = new System.Drawing.Size(50, 20);
             this.tbx_paladin.TabIndex = 92;
             // 
             // tbx_caballero
             // 
-            this.tbx_caballero.Location = new System.Drawing.Point(550, 125);
+            this.tbx_caballero.Location = new System.Drawing.Point(543, 141);
             this.tbx_caballero.Name = "tbx_caballero";
             this.tbx_caballero.Size = new System.Drawing.Size(50, 20);
             this.tbx_caballero.TabIndex = 91;
             // 
             // tbx_piquero
             // 
-            this.tbx_piquero.Location = new System.Drawing.Point(550, 85);
+            this.tbx_piquero.Location = new System.Drawing.Point(543, 101);
             this.tbx_piquero.Name = "tbx_piquero";
             this.tbx_piquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_piquero.TabIndex = 90;
             // 
             // tbx_ballestero
             // 
-            this.tbx_ballestero.Location = new System.Drawing.Point(150, 121);
+            this.tbx_ballestero.Location = new System.Drawing.Point(143, 137);
             this.tbx_ballestero.Name = "tbx_ballestero";
             this.tbx_ballestero.Size = new System.Drawing.Size(50, 20);
             this.tbx_ballestero.TabIndex = 89;
             // 
             // tbx_arquero
             // 
-            this.tbx_arquero.Location = new System.Drawing.Point(150, 85);
+            this.tbx_arquero.Location = new System.Drawing.Point(143, 101);
             this.tbx_arquero.Name = "tbx_arquero";
             this.tbx_arquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_arquero.TabIndex = 88;
@@ -151,7 +153,7 @@
             // 
             this.lab_tropa5.AutoSize = true;
             this.lab_tropa5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa5.Location = new System.Drawing.Point(447, 163);
+            this.lab_tropa5.Location = new System.Drawing.Point(440, 179);
             this.lab_tropa5.Name = "lab_tropa5";
             this.lab_tropa5.Size = new System.Drawing.Size(54, 16);
             this.lab_tropa5.TabIndex = 80;
@@ -161,7 +163,7 @@
             // 
             this.lab_tropa4.AutoSize = true;
             this.lab_tropa4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa4.Location = new System.Drawing.Point(447, 126);
+            this.lab_tropa4.Location = new System.Drawing.Point(440, 142);
             this.lab_tropa4.Name = "lab_tropa4";
             this.lab_tropa4.Size = new System.Drawing.Size(67, 16);
             this.lab_tropa4.TabIndex = 77;
@@ -171,7 +173,7 @@
             // 
             this.lab_tropa3.AutoSize = true;
             this.lab_tropa3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa3.Location = new System.Drawing.Point(447, 86);
+            this.lab_tropa3.Location = new System.Drawing.Point(440, 102);
             this.lab_tropa3.Name = "lab_tropa3";
             this.lab_tropa3.Size = new System.Drawing.Size(55, 16);
             this.lab_tropa3.TabIndex = 74;
@@ -181,7 +183,7 @@
             // 
             this.lab_tropa2.AutoSize = true;
             this.lab_tropa2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa2.Location = new System.Drawing.Point(47, 122);
+            this.lab_tropa2.Location = new System.Drawing.Point(40, 138);
             this.lab_tropa2.Name = "lab_tropa2";
             this.lab_tropa2.Size = new System.Drawing.Size(69, 16);
             this.lab_tropa2.TabIndex = 71;
@@ -191,7 +193,7 @@
             // 
             this.lab_tropa1.AutoSize = true;
             this.lab_tropa1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_tropa1.Location = new System.Drawing.Point(47, 86);
+            this.lab_tropa1.Location = new System.Drawing.Point(40, 102);
             this.lab_tropa1.Name = "lab_tropa1";
             this.lab_tropa1.Size = new System.Drawing.Size(56, 16);
             this.lab_tropa1.TabIndex = 68;
@@ -200,7 +202,7 @@
             // btn_apoyar
             // 
             this.btn_apoyar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_apoyar.Location = new System.Drawing.Point(75, 254);
+            this.btn_apoyar.Location = new System.Drawing.Point(68, 270);
             this.btn_apoyar.Name = "btn_apoyar";
             this.btn_apoyar.Size = new System.Drawing.Size(101, 34);
             this.btn_apoyar.TabIndex = 93;
@@ -209,7 +211,7 @@
             // 
             // tbx_coordApoyo
             // 
-            this.tbx_coordApoyo.Location = new System.Drawing.Point(151, 203);
+            this.tbx_coordApoyo.Location = new System.Drawing.Point(144, 219);
             this.tbx_coordApoyo.Name = "tbx_coordApoyo";
             this.tbx_coordApoyo.Size = new System.Drawing.Size(50, 20);
             this.tbx_coordApoyo.TabIndex = 95;
@@ -218,7 +220,7 @@
             // 
             this.lab_coord.AutoSize = true;
             this.lab_coord.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_coord.Location = new System.Drawing.Point(48, 204);
+            this.lab_coord.Location = new System.Drawing.Point(41, 220);
             this.lab_coord.Name = "lab_coord";
             this.lab_coord.Size = new System.Drawing.Size(91, 16);
             this.lab_coord.TabIndex = 94;
@@ -226,7 +228,7 @@
             // 
             // tbx_CoordAtaque
             // 
-            this.tbx_CoordAtaque.Location = new System.Drawing.Point(550, 203);
+            this.tbx_CoordAtaque.Location = new System.Drawing.Point(543, 219);
             this.tbx_CoordAtaque.Name = "tbx_CoordAtaque";
             this.tbx_CoordAtaque.Size = new System.Drawing.Size(50, 20);
             this.tbx_CoordAtaque.TabIndex = 98;
@@ -235,7 +237,7 @@
             // 
             this.lab_coord2.AutoSize = true;
             this.lab_coord2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_coord2.Location = new System.Drawing.Point(447, 204);
+            this.lab_coord2.Location = new System.Drawing.Point(440, 220);
             this.lab_coord2.Name = "lab_coord2";
             this.lab_coord2.Size = new System.Drawing.Size(91, 16);
             this.lab_coord2.TabIndex = 97;
@@ -244,18 +246,38 @@
             // btn_Atacar
             // 
             this.btn_Atacar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Atacar.Location = new System.Drawing.Point(474, 254);
+            this.btn_Atacar.Location = new System.Drawing.Point(467, 270);
             this.btn_Atacar.Name = "btn_Atacar";
             this.btn_Atacar.Size = new System.Drawing.Size(101, 34);
             this.btn_Atacar.TabIndex = 96;
             this.btn_Atacar.Text = "Atacar";
             this.btn_Atacar.UseVisualStyleBackColor = true;
             // 
+            // cbx_pueblos
+            // 
+            this.cbx_pueblos.FormattingEnabled = true;
+            this.cbx_pueblos.Location = new System.Drawing.Point(75, 65);
+            this.cbx_pueblos.Name = "cbx_pueblos";
+            this.cbx_pueblos.Size = new System.Drawing.Size(94, 21);
+            this.cbx_pueblos.TabIndex = 100;
+            // 
+            // lab_Pueblos
+            // 
+            this.lab_Pueblos.AutoSize = true;
+            this.lab_Pueblos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_Pueblos.Location = new System.Drawing.Point(11, 66);
+            this.lab_Pueblos.Name = "lab_Pueblos";
+            this.lab_Pueblos.Size = new System.Drawing.Size(58, 16);
+            this.lab_Pueblos.TabIndex = 99;
+            this.lab_Pueblos.Text = "Pueblos";
+            // 
             // formMovimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(679, 316);
+            this.Controls.Add(this.cbx_pueblos);
+            this.Controls.Add(this.lab_Pueblos);
             this.Controls.Add(this.tbx_CoordAtaque);
             this.Controls.Add(this.lab_coord2);
             this.Controls.Add(this.btn_Atacar);
@@ -309,5 +331,7 @@
         private System.Windows.Forms.TextBox tbx_CoordAtaque;
         private System.Windows.Forms.Label lab_coord2;
         private System.Windows.Forms.Button btn_Atacar;
+        private System.Windows.Forms.ComboBox cbx_pueblos;
+        private System.Windows.Forms.Label lab_Pueblos;
     }
 }

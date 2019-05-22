@@ -17,5 +17,9 @@ namespace WindowsFormsDAMapp
             InitializeComponent();
         }
 
+        private void formInicioSesion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

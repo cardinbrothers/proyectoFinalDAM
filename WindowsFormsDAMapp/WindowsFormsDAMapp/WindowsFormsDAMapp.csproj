@@ -115,6 +115,8 @@
     <Compile Include="Formularios\formVisionGeneral.Designer.cs">
       <DependentUpon>formVisionGeneral.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\sessionInfo.cs" />
+    <Compile Include="Helpers\webServiceInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Formularios\formBandejaEntrada.resx">
@@ -178,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PUNTO-ROJO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ico_circulo_azul_oscuro.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

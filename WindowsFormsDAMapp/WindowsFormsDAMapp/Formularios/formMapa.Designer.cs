@@ -136,6 +136,8 @@
             this.coordenada_2_0 = new System.Windows.Forms.PictureBox();
             this.coordenada_1_0 = new System.Windows.Forms.PictureBox();
             this.coordenada_0_0 = new System.Windows.Forms.PictureBox();
+            this.cbx_pueblos = new System.Windows.Forms.ComboBox();
+            this.lab_Pueblos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_9_9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_8_9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_7_9)).BeginInit();
@@ -1218,11 +1220,31 @@
             this.coordenada_0_0.TabIndex = 38;
             this.coordenada_0_0.TabStop = false;
             // 
+            // cbx_pueblos
+            // 
+            this.cbx_pueblos.FormattingEnabled = true;
+            this.cbx_pueblos.Location = new System.Drawing.Point(76, 65);
+            this.cbx_pueblos.Name = "cbx_pueblos";
+            this.cbx_pueblos.Size = new System.Drawing.Size(94, 21);
+            this.cbx_pueblos.TabIndex = 141;
+            // 
+            // lab_Pueblos
+            // 
+            this.lab_Pueblos.AutoSize = true;
+            this.lab_Pueblos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_Pueblos.Location = new System.Drawing.Point(12, 66);
+            this.lab_Pueblos.Name = "lab_Pueblos";
+            this.lab_Pueblos.Size = new System.Drawing.Size(58, 16);
+            this.lab_Pueblos.TabIndex = 140;
+            this.lab_Pueblos.Text = "Pueblos";
+            // 
             // Mapa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 432);
+            this.Controls.Add(this.cbx_pueblos);
+            this.Controls.Add(this.lab_Pueblos);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.coordenada_9_9);
@@ -1435,6 +1457,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_1_0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_0_0)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1548,5 +1571,7 @@
         private System.Windows.Forms.PictureBox coordenada_0_8;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbx_pueblos;
+        private System.Windows.Forms.Label lab_Pueblos;
     }
 }

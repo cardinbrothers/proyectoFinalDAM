@@ -69,7 +69,7 @@ namespace WindowsFormsDAMapp
                 Jugador.id_partida = infoSesion.id_partida;
 
                 // Creamos un objeto para realizar la peticion el web service
-                RestRequest peticion = new RestRequest("/api/Partida/iniciarSesion", Method.GET);
+                RestRequest peticion = new RestRequest("/api/Partida/iniciarSesion", Method.POST);
 
                 // Añadimos la informacion del usuario a la peticion
                 peticion.AddJsonBody(Jugador);
@@ -180,6 +180,15 @@ namespace WindowsFormsDAMapp
                 // Mostramos el mensaje
                 MessageBox.Show(mensaje);
             }
+        }
+
+        private void Btn_volver_Click(object sender, EventArgs e)
+        {
+            frm_MenuPrincipal formularioPrincipal = new frm_MenuPrincipal();
+
+            formularioPrincipal.Show();
+
+            this.Close();
         }
     }
 }

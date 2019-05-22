@@ -35,6 +35,7 @@
             this.btn_iniciarSesion = new System.Windows.Forms.Button();
             this.btn_crearCuenta = new System.Windows.Forms.Button();
             this.lab_partida = new System.Windows.Forms.Label();
+            this.btn_volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lab_contrasñea
@@ -104,11 +105,22 @@
             this.lab_partida.TabIndex = 20;
             this.lab_partida.Text = "Partida: 1";
             // 
+            // btn_volver
+            // 
+            this.btn_volver.Location = new System.Drawing.Point(266, 6);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(75, 23);
+            this.btn_volver.TabIndex = 21;
+            this.btn_volver.Text = "Volver";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.Btn_volver_Click);
+            // 
             // formInicioSesion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 239);
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.lab_partida);
             this.Controls.Add(this.btn_crearCuenta);
             this.Controls.Add(this.btn_iniciarSesion);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.Button btn_iniciarSesion;
         private System.Windows.Forms.Button btn_crearCuenta;
         private System.Windows.Forms.Label lab_partida;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

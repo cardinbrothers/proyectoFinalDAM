@@ -17,9 +17,8 @@ namespace WebService_ProyectoDAM.Servicios
         // Metodo que crea una partida a partir de los parametros recibidos
         public int crearPartida(infoPartidaEntity record)
         {
-            // Variable para devolver un codigo de error 0--> Todo correcto; 
-            //1 --> Error desconocido
-            int error = 0;
+            // Variable para devolver el idPartida
+            int idPartida;
 
             try
             {
@@ -43,15 +42,19 @@ namespace WebService_ProyectoDAM.Servicios
                     // Creamos un hilo aparte que desactivará la partida cuando esta acabe
                     Task.Run(() => desactivarPartida(partidaCreada.Duracion, partidaCreada.id_Partida));
 
+                    // Guardamos el idPartida en la variable que devolvemos
+                    idPartida = partidaCreada.id_Partida;
+
                 }
             }
             catch
             {
-                error = 1;
+                // Si algo falla devolvemos -1
+                idPartida = -1;
             }
 
             // Devolvemos el codigo de error
-            return error;
+            return idPartida;
         }
         
         // Metodo que desactiva una partida despues de esperar el tiempo indicado

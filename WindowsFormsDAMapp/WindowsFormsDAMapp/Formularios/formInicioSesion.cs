@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace WindowsFormsDAMapp
 {
-    public partial class frm_MenuPrincipal : Form
+    public partial class formInicioSesion : Form
     {
-        public frm_MenuPrincipal()
+        public formInicioSesion()
         {
             InitializeComponent();
         }
 
-        private void frm_MenuPrincipal_Load(object sender, EventArgs e)
+        private void formInicioSesion_Load(object sender, EventArgs e)
         {
 
         }

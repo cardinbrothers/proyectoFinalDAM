@@ -116,6 +116,7 @@
             this.Controls.Add(this.lab_nombreUsuario);
             this.Name = "formInicioSesion";
             this.Text = "Inicio Sesion";
+            this.Load += new System.EventHandler(this.formInicioSesion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

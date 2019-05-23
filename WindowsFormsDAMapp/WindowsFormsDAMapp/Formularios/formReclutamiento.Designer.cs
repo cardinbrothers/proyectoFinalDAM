@@ -531,6 +531,7 @@
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formReclutamiento";
             this.Text = "Reclutamiento";
+            this.Load += new System.EventHandler(this.formReclutamiento_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

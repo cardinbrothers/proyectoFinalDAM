@@ -45,7 +45,6 @@
             this.cbx_limiteJugadores = new System.Windows.Forms.ComboBox();
             this.cbx_limitePoblacion = new System.Windows.Forms.ComboBox();
             this.btn_recargar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lsv_PartidasActivas
@@ -224,21 +223,11 @@
             this.btn_recargar.UseVisualStyleBackColor = false;
             this.btn_recargar.Click += new System.EventHandler(this.Btn_recargar_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(423, 265);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "label1";
-            // 
             // frm_MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 350);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.cbx_limitePoblacion);
             this.Controls.Add(this.cbx_limiteJugadores);
             this.Controls.Add(this.cbx_Durarcion);
@@ -280,7 +269,6 @@
         private System.Windows.Forms.ComboBox cbx_Durarcion;
         private System.Windows.Forms.ComboBox cbx_limiteJugadores;
         private System.Windows.Forms.ComboBox cbx_limitePoblacion;
-        private System.Windows.Forms.Label label1;
     }
 }
 

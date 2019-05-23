@@ -48,6 +48,7 @@ namespace WindowsFormsDAMapp
                 infoJugadorEntity Jugador = new infoJugadorEntity();
 
                 string contraseñaEncriptada;
+                bool accesoPermitido = false;
 
                 // Encriptamos la contraseña
                 using (MD5 hash = MD5.Create())
@@ -86,7 +87,7 @@ namespace WindowsFormsDAMapp
                 switch (result)
                 {
                     case 0:
-                        mensaje = "Todo correcto";
+                        accesoPermitido = true;
                         break;
 
                     case 1:
@@ -102,8 +103,26 @@ namespace WindowsFormsDAMapp
                         break;
                 }
 
-                // Mostramos el mensaje
-                MessageBox.Show(mensaje);
+                if (accesoPermitido)
+                {
+                    infoSesion.nombreUsuario = tbx_nombreUsuario.Text;
+
+                    // Creamos un objeto del formulario de inicio de sesion
+                    formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+                    // Lanzamos el objeto de inicio de sesion   
+                    VisionGeneral.Show();
+
+                    // Cerramos este formulario
+                    this.Close();
+                }
+                else
+                {
+                    // Mostramos el mensaje
+                    MessageBox.Show(mensaje);
+                }
+
+
             }
         }
 
@@ -119,6 +138,7 @@ namespace WindowsFormsDAMapp
                 infoJugadorEntity jugadorNuevo = new infoJugadorEntity();
 
                 string contraseñaEncriptada;
+                bool acccesoPermitido = false;
 
                 // Encriptamos la contraseña
                 using (MD5 hash = MD5.Create())
@@ -157,7 +177,7 @@ namespace WindowsFormsDAMapp
                 switch (result)
                 {
                     case 0:
-                        mensaje = "Todo correcto";
+                        acccesoPermitido = true;
                         break;
 
                     case 1:
@@ -177,8 +197,24 @@ namespace WindowsFormsDAMapp
                         break;
                 }
 
-                // Mostramos el mensaje
-                MessageBox.Show(mensaje);
+                if (acccesoPermitido)
+                {
+                    infoSesion.nombreUsuario = tbx_nombreUsuario.Text;
+
+                    // Creamos un objeto del formulario de inicio de sesion
+                    formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+                    // Lanzamos el objeto de inicio de sesion   
+                    VisionGeneral.Show();
+
+                    // Cerramos este formulario
+                    this.Close();
+                }
+                else
+                {
+                    // Mostramos el mensaje
+                    MessageBox.Show(mensaje);
+                }
             }
         }
 

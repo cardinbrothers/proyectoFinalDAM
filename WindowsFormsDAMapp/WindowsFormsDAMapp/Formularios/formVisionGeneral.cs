@@ -139,6 +139,7 @@ namespace WindowsFormsDAMapp
         // Metodo asociado al evento recargar que lanza de nuevo la vision general
         private void btn_visionGeneral_Click(object sender, EventArgs e)
         {
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
             cbx_pueblos.DataSource = null;
             cbx_pueblos.Items.Clear();
 
@@ -146,6 +147,14 @@ namespace WindowsFormsDAMapp
             cbx_pueblos.ValueMember = "id_Pueblo";
             cbx_pueblos.DisplayMember = "coordenadas";
             cbx_pueblos.DataSource = listaPueblos;
+            try
+            {
+                cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+            }
+            catch
+            {
+
+            }
         }
 
         // Metodo asociado al boton reclutamiento para lanzar el formulario reclutamiento

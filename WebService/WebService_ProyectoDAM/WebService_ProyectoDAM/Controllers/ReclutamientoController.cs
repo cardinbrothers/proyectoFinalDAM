@@ -19,8 +19,6 @@ namespace WebService_ProyectoDAM.Controllers
         [HttpPost]
         public ordenReclutamientoEntity reclutarTropas(int idPueblo, int idTropa, int cantidad)
         {
-            //var json = JsonConvert.SerializeObject(servicio.reclutarTropas(idPueblo, idTropa, cantidad));
-
             return servicio.reclutarTropas(idPueblo, idTropa, cantidad);
         }
 
@@ -28,8 +26,6 @@ namespace WebService_ProyectoDAM.Controllers
         [HttpGet]
         public List<ordenReclutamientoEntity> obtenerOrdenes(int idPueblo)
         {
-            //var json = JsonConvert.SerializeObject(servicio.obtenerOrdenesActivas(idPueblo));
-
             return servicio.obtenerOrdenesActivas(idPueblo);
         }
 
@@ -40,5 +36,11 @@ namespace WebService_ProyectoDAM.Controllers
             return servicio.cancelarReclutamiento(idOrden);
         }
 
+        [Route("obtenerTropas")]
+        [HttpGet]
+        public List<infoTropasEntity> ObtenerTropas()
+        {
+            return servicio.obtenerInfoTropas();
+        }
     }
 }

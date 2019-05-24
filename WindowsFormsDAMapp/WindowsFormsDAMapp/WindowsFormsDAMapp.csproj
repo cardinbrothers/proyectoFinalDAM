@@ -56,6 +56,7 @@
     <Compile Include="Entidades\apoyosEntity.cs" />
     <Compile Include="Entidades\infoJugadorEntity.cs" />
     <Compile Include="Entidades\infoPartidaEntity.cs" />
+    <Compile Include="Entidades\infoTropasEntity.cs" />
     <Compile Include="Entidades\mensajesEntity.cs" />
     <Compile Include="Entidades\movimientossEntity.cs" />
     <Compile Include="Entidades\OrdenReclutamientoEntity.cs" />

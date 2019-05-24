@@ -45,11 +45,20 @@ namespace WebService_ProyectoDAM.Servicios
                                       register.poblacion
                                   }).FirstOrDefault();
 
+                    // Almacenamos la velocidad de la partida 
+                    var velPartida = (from register in context.Partida
+                                     from register2 in context.Jugador
+                                     from register3 in context.Pueblo
+                                     where register.id_Partida == register2.id_Partida &&
+                                     register2.nombreUsuario == register3.propietario &&
+                                     register3.id_Pueblo == idPueblo
+                                     select register.Velocidad).FirstOrDefault();
+
                     // Comprobamos si hay espacio en el pueblo para reclutar la cantidad de tropas pedida por el usuario
                     if (reclutamiento.poblacion * cantidad < pueblo.poblacion)
                     {
                         // Calculamos cuanto tarda en total en realizarse el reclutamiento
-                        tiempoTotal = reclutamiento.tiempoReclutamiento.TotalSeconds * cantidad;
+                        tiempoTotal = (reclutamiento.tiempoReclutamiento.TotalSeconds * cantidad/ velPartida);
 
                         // Almacenamos toda la informacion necesaria en la tabla de ordenesReclutamiento
                         ordenReclutamiento insertOrden = new ordenReclutamiento();
@@ -268,6 +277,47 @@ namespace WebService_ProyectoDAM.Servicios
 
             // Devolvemos la informacion de reclutamiento
             return error;
+        }
+
+        // Metodo para obtener la informacion de las tropas
+        public List<infoTropasEntity> obtenerInfoTropas()
+        {
+            List<infoTropasEntity> listaTropas = new List<infoTropasEntity>();
+
+            try
+            {
+                using (var context = new ProyectoDAMEntities())
+                {
+                    // Almacenamos todas las tropas de la base de datos
+                    var tropas = from register in context.Tropas
+                                 select register;
+
+
+                    // Tratamos cada orden almacenada con un foreach
+                    foreach (var tropa in tropas)
+                    {
+                        infoTropasEntity tropaAux = new infoTropasEntity();
+
+                        // Almacenamos lo necesario en el objeto auxiliar
+                        tropaAux.id_Tropa = tropa.id_Tropas;
+                        tropaAux.nombre = tropa.nombre;
+                        tropaAux.poblacion = tropa.poblacion;
+                        tropaAux.potencia = tropa.potencia;
+                        tropaAux.tiempoReclutamiento = tropa.tiempoReclutamiento;
+
+                        // Añadimos el objeto auxiliar a la lista que devolveremos
+                        listaTropas.Add(tropaAux);
+                        
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            // Devolvemos la lista
+            return listaTropas;
         }
     }
 }

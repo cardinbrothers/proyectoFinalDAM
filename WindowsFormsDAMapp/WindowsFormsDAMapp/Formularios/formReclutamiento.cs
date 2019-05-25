@@ -194,6 +194,7 @@ namespace WindowsFormsDAMapp
                 {
                     case 0:
                         introducirReclutamiento(result);
+                        listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
                         lab_PoblacionPueblo.Text = String.Format("Poblacion: {0}/{1}", listaPueblos.FindAll(x => x.id_Pueblo == id_Pueblo).FirstOrDefault().poblacionRestante, paramsPartida.limitePoblacion);
 
                         break;

@@ -140,16 +140,17 @@ namespace WindowsFormsDAMapp
         private void btn_visionGeneral_Click(object sender, EventArgs e)
         {
             infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
-            cbx_pueblos.DataSource = null;
-            cbx_pueblos.Items.Clear();
 
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
-            cbx_pueblos.ValueMember = "id_Pueblo";
-            cbx_pueblos.DisplayMember = "coordenadas";
+
             cbx_pueblos.DataSource = listaPueblos;
             try
             {
-                cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() != null)
+                {
+                    cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+
+                }
             }
             catch
             {
@@ -160,17 +161,20 @@ namespace WindowsFormsDAMapp
         // Metodo asociado al boton reclutamiento para lanzar el formulario reclutamiento
         private void btn_reclutamiento_Click(object sender, EventArgs e)
         {
-            // Añadimos el id del pueblo actual
-            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                // Añadimos el id del pueblo actual
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+                // Creamos un objeto del formulario de reclutamiento
+                formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
 
-            // Creamos un objeto del formulario de reclutamiento
-            formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
+                // Lanzamos el formulario de reclutamiento
+                reclutamiento.Show();
 
-            // Lanzamos el formulario de reclutamiento
-            reclutamiento.Show();
-
-            // Cerramos este formulario
-            this.Close();
+                // Cerramos este formulario
+                this.Close();
+            }
+            
         }
     }
 }

@@ -40,10 +40,7 @@ namespace WebService_ProyectoDAM.Servicios
                     // Almacenamos la informacion del pueblo necesaria para calcular si es posible el reclutamiento
                     var pueblo = (from register in context.Pueblo
                                   where register.id_Pueblo == idPueblo
-                                  select new
-                                  {
-                                      register.poblacion
-                                  }).FirstOrDefault();
+                                  select register).FirstOrDefault();
 
                     // Almacenamos la velocidad de la partida 
                     var velPartida = (from register in context.Partida
@@ -68,6 +65,31 @@ namespace WebService_ProyectoDAM.Servicios
                         insertOrden.horaFin = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").AddSeconds(tiempoTotal);
 
                         context.ordenReclutamiento.Add(insertOrden);
+
+                        // Restamos la poblacion al pueblo
+                        switch (insertOrden.tropa)
+                        {
+                            case 1:
+                                pueblo.poblacion -= 1 * insertOrden.cantidad;
+                                break;
+                            case 2:
+                                pueblo.poblacion -= 1 * insertOrden.cantidad;
+
+                                break;
+                            case 4:
+                                pueblo.poblacion -= 1 * insertOrden.cantidad;
+
+                                break;
+                            case 7:
+                                pueblo.poblacion -= 3 * insertOrden.cantidad;
+
+                                break;
+                            case 10:
+                                pueblo.poblacion -= 5 * insertOrden.cantidad;
+
+                                break;
+                        }
+
                         context.SaveChanges();
 
                         // Almacenamos la informacion en la entidad que devolveremos al usuario
@@ -147,27 +169,19 @@ namespace WebService_ProyectoDAM.Servicios
                         {
                             case 1:
                                 pueblo.arqueros = pueblo.arqueros + ordenCompletada.cantidad;
-                                pueblo.poblacion -= 1 * ordenCompletada.cantidad;
                                 break;
                             case 2:
                                 pueblo.ballesteros = pueblo.ballesteros + ordenCompletada.cantidad;
-                                pueblo.poblacion -= 1 * ordenCompletada.cantidad;
 
                                 break;
                             case 4:
                                 pueblo.piqueros = pueblo.piqueros + ordenCompletada.cantidad;
-                                pueblo.poblacion -= 1 * ordenCompletada.cantidad;
-
                                 break;
                             case 7:
                                 pueblo.caballeros = pueblo.caballeros + ordenCompletada.cantidad;
-                                pueblo.poblacion -= 3 * ordenCompletada.cantidad;
-
                                 break;
                             case 10:
                                 pueblo.paladines = pueblo.paladines + ordenCompletada.cantidad;
-                                pueblo.poblacion -= 5 * ordenCompletada.cantidad;
-
                                 break;
                         }
 
@@ -263,11 +277,42 @@ namespace WebService_ProyectoDAM.Servicios
                                        register.terminado == false
                                        select register).FirstOrDefault();
 
+
                     // Comprobamos que exista una orden con ese id y no haya terminado ya 
                     if (ordenBorrar != null)
                     {
+                        // Obtenemos el pueblo
+                        var pueblo = (from register in context.Pueblo
+                                      where register.id_Pueblo == ordenBorrar.pueblo
+                                      select register).FirstOrDefault();
+
                         // Borramos la orden indicada
                         context.ordenReclutamiento.Remove(ordenBorrar);
+
+                        // Sumamos la poblacion al pueblo
+                        switch (ordenBorrar.tropa)
+                        {
+                            case 1:
+                                pueblo.poblacion += 1 * ordenBorrar.cantidad;
+                                break;
+                            case 2:
+                                pueblo.poblacion += 1 * ordenBorrar.cantidad;
+
+                                break;
+                            case 4:
+                                pueblo.poblacion += 1 * ordenBorrar.cantidad;
+
+                                break;
+                            case 7:
+                                pueblo.poblacion += 3 * ordenBorrar.cantidad;
+
+                                break;
+                            case 10:
+                                pueblo.poblacion += 5 * ordenBorrar.cantidad;
+
+                                break;
+                        }
+
                         context.SaveChanges();
 
                     }

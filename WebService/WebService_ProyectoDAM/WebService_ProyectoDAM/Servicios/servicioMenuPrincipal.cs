@@ -187,8 +187,7 @@ namespace WebService_ProyectoDAM.Servicios
                 {
                     // Combrobamos si existe ya un jugador con ese nombre de usuario
                     var jugadores = (from register in context.Jugador
-                                     where register.nombreUsuario == jugador.nombreUsuario &&
-                                     register.id_Partida == jugador.id_partida
+                                     where register.nombreUsuario == jugador.nombreUsuario
                                      select new
                                      {
                                          register.nombreUsuario

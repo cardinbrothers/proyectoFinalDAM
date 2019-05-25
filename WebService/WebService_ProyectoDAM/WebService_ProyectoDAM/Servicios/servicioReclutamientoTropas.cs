@@ -145,20 +145,29 @@ namespace WebService_ProyectoDAM.Servicios
                         // Incrementamos la tropa que corresponda
                         switch (ordenCompletada.tropa)
                         {
-                            case 0:
-                                pueblo.arqueros = pueblo.arqueros + ordenCompletada.cantidad;
-                                break;
                             case 1:
-                                pueblo.ballesteros = pueblo.ballesteros + ordenCompletada.cantidad;
+                                pueblo.arqueros = pueblo.arqueros + ordenCompletada.cantidad;
+                                pueblo.poblacion -= 1 * ordenCompletada.cantidad;
                                 break;
                             case 2:
-                                pueblo.piqueros = pueblo.piqueros + ordenCompletada.cantidad;
-                                break;
-                            case 3:
-                                pueblo.caballeros = pueblo.caballeros + ordenCompletada.cantidad;
+                                pueblo.ballesteros = pueblo.ballesteros + ordenCompletada.cantidad;
+                                pueblo.poblacion -= 1 * ordenCompletada.cantidad;
+
                                 break;
                             case 4:
+                                pueblo.piqueros = pueblo.piqueros + ordenCompletada.cantidad;
+                                pueblo.poblacion -= 1 * ordenCompletada.cantidad;
+
+                                break;
+                            case 7:
+                                pueblo.caballeros = pueblo.caballeros + ordenCompletada.cantidad;
+                                pueblo.poblacion -= 3 * ordenCompletada.cantidad;
+
+                                break;
+                            case 10:
                                 pueblo.paladines = pueblo.paladines + ordenCompletada.cantidad;
+                                pueblo.poblacion -= 5 * ordenCompletada.cantidad;
+
                                 break;
                         }
 
@@ -198,8 +207,8 @@ namespace WebService_ProyectoDAM.Servicios
                 {
                     // Almacenamos todas las ordenes que no hayan sido completadas del pueblo recibido
                     var ordenesPueblo = from register in context.ordenReclutamiento
-                                        where register.pueblo == idPueblo && register.terminado == true
-                                         select register;
+                                        where register.pueblo == idPueblo && register.terminado == false
+                                        select register;
 
 
                     // Tratamos cada orden almacenada con un foreach

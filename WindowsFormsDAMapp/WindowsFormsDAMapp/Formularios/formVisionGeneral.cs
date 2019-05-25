@@ -104,19 +104,19 @@ namespace WindowsFormsDAMapp
                     switch (i)
                     {
                         case 0:
-                            lsv_tropas.Items[i].SubItems[0].Text = pueblo.arqueros.ToString();
+                            lsv_tropas.Items[i].SubItems[1].Text = pueblo.arqueros.ToString();
                             break;
                         case 1:
-                            lsv_tropas.Items[i].SubItems[0].Text = pueblo.ballesteros.ToString();
+                            lsv_tropas.Items[i].SubItems[1].Text = pueblo.ballesteros.ToString();
                             break;
                         case 2:
-                            lsv_tropas.Items[i].SubItems[0].Text = pueblo.piqueros.ToString();
+                            lsv_tropas.Items[i].SubItems[1].Text = pueblo.piqueros.ToString();
                             break;
                         case 3:
-                            lsv_tropas.Items[i].SubItems[0].Text = pueblo.caballeros.ToString();
+                            lsv_tropas.Items[i].SubItems[1].Text = pueblo.caballeros.ToString();
                             break;
                         case 4:
-                            lsv_tropas.Items[i].SubItems[0].Text = pueblo.paladines.ToString();
+                            lsv_tropas.Items[i].SubItems[1].Text = pueblo.paladines.ToString();
                             break;
                     }
                 }

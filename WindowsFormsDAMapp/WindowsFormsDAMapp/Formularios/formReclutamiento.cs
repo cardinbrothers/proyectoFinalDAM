@@ -21,6 +21,7 @@ namespace WindowsFormsDAMapp
         webServiceInfo session = new webServiceInfo();
         infoPartidaEntity paramsPartida;
         List<puebloEntity> listaPueblos;
+        List<ordenReclutamientoEntity> listaOrdenes;
 
         public formReclutamiento(sessionInfo infoSesion)
         {
@@ -38,6 +39,12 @@ namespace WindowsFormsDAMapp
 
             // Obtenemos los pueblos del jugador
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+
+            // Obtenemos la lista de reclutamientos
+            obtenerOrdenes();
+
+            // Introducimos el tiempo de las tropas segun la velocidad
+            tiempoTropas();
 
             // Introducimos los pueblos en el comboBox
             cbx_pueblos.ValueMember = "id_Pueblo";
@@ -143,10 +150,11 @@ namespace WindowsFormsDAMapp
 
         private void btn_reclutar_Click(object sender, EventArgs e)
         {
-            int id_Pueblo = 0, id_Tropa = 0, cantidad = 0;
+            int id_Pueblo = 0, id_Tropa = -1, cantidad = 0;
 
             id_Pueblo = (int)cbx_pueblos.SelectedValue;
             
+            // Obtenemos el id tropa y cantidad de los textbox
             foreach (var tbx in this.Controls)
             {
                 if (tbx is TextBox)
@@ -157,31 +165,137 @@ namespace WindowsFormsDAMapp
                     {
                         id_Tropa = Convert.ToInt32(tbxAux.Tag);
                         cantidad = Convert.ToInt32(tbxAux.Text);
-
                     }
                 }
             }
 
+            // Comprobamos si hay algun dato en algun textboxç
+            if (id_Tropa != -1 && cantidad > 0)
+            {
+                // Creamos un objeto para realizar la peticion el web service
+                RestRequest peticion = new RestRequest("/api/Reclutamiento/reclutarTropas", Method.POST);
+
+                // Añadimos el nombre del usuario a la peticion
+                peticion.AddQueryParameter("idPueblo", id_Pueblo.ToString());
+
+                // Añadimos el nombre del usuario a la peticion
+                peticion.AddQueryParameter("idTropa", id_Tropa.ToString());
+
+                // Añadimos el nombre del usuario a la peticion
+                peticion.AddQueryParameter("cantidad", cantidad.ToString());
+
+                // Obtenemos el resultado de la peticion
+                var response = restClient.Execute(peticion);
+
+                // Deserializamos el resultado de la peticion recibido para almacenarlo
+                ordenReclutamientoEntity result = JsonConvert.DeserializeObject<ordenReclutamientoEntity>(response.Content);
+
+                switch (result.error)
+                {
+                    case 0:
+                        introducirReclutamiento(result);
+                        lab_PoblacionPueblo.Text = String.Format("Poblacion: {0}/{1}", listaPueblos.FindAll(x => x.id_Pueblo == id_Pueblo).FirstOrDefault().poblacionRestante, paramsPartida.limitePoblacion);
+
+                        break;
+                    case 1:
+                        MessageBox.Show("No tienes suficiente poblacion");
+                        break;
+                    case 2:
+                        MessageBox.Show("Algo salio mal");
+                        break;
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se han elegido unidades");
+            }
+        }
+
+        private void introducirReclutamiento(ordenReclutamientoEntity orden)
+        {
+            string nombreTropa = "";
+
+            // Obtenemos el nombre de la tropa
+            switch (orden.id_Tropa)
+            {
+                case 1:
+                    nombreTropa = "Arqueros";
+                    break;
+                case 2:
+                    nombreTropa = "Ballesteros";
+                    break;
+                case 4:
+                    nombreTropa = "Piqueros";
+                    break;
+                case 7:
+                    nombreTropa = "Caballeros";
+                    break;
+                case 10:
+                    nombreTropa = "Paladines";
+                    break;
+            }
+
+            ListViewItem itemAux = new ListViewItem(nombreTropa);
+
+            // Añadimos la cantidad y timepo restante al listview
+            itemAux.SubItems.Add(orden.cantidad.ToString());
+            itemAux.SubItems.Add((orden.horaFin - DateTime.Now).ToString());
+
+            lsv_cola.Items.Add(itemAux);
+
+        }
+
+        private void obtenerOrdenes()
+        {
             // Creamos un objeto para realizar la peticion el web service
-            RestRequest peticion = new RestRequest("/api/Reclutamiento/reclutarTropas", Method.POST);
+            RestRequest peticion = new RestRequest("/api/Reclutamiento/obtenerOrdenes", Method.GET);
 
-            // Añadimos el nombre del usuario a la peticion
-            peticion.AddQueryParameter("idPueblo", id_Pueblo.ToString());
-
-            // Añadimos el nombre del usuario a la peticion
-            peticion.AddQueryParameter("idTropa", id_Tropa.ToString());
-
-            // Añadimos el nombre del usuario a la peticion
-            peticion.AddQueryParameter("cantidad", cantidad.ToString());
+            // Añadimos el id del pueblo a la peticion
+            peticion.AddParameter("idPueblo", infoSesion.id_Pueblo.ToString());
 
             // Obtenemos el resultado de la peticion
             var response = restClient.Execute(peticion);
 
             // Deserializamos el resultado de la peticion recibido para almacenarlo
-            ordenReclutamientoEntity result = JsonConvert.DeserializeObject<ordenReclutamientoEntity>(response.Content);
+            List<ordenReclutamientoEntity> result = JsonConvert.DeserializeObject<List<ordenReclutamientoEntity>>(response.Content);
 
-            int a = 0;
+            listaOrdenes = result;
+
+            // Introducimos las ordenes en el listview
+            foreach (var orden in listaOrdenes)
+            {
+                introducirReclutamiento(orden);
+            }
         }
 
+        private void tiempoTropas()
+        {
+            TimeSpan arqueros = new TimeSpan(0, 0, 60 / paramsPartida.velocidad);
+            TimeSpan ballesteros = new TimeSpan(0, 0, 300 / paramsPartida.velocidad); ;
+            TimeSpan piqueros = new TimeSpan(0, 0, 60 / paramsPartida.velocidad);
+            TimeSpan caballeros = new TimeSpan(0, 0, 420 / paramsPartida.velocidad);
+            TimeSpan paladines = new TimeSpan(0, 0, 1200 / paramsPartida.velocidad);
+
+            lab_tiempo1.Text = arqueros.ToString();
+            lab_tiempo2.Text = ballesteros.ToString();
+            lab_tiempo3.Text = piqueros.ToString();
+            lab_tiempo4.Text = caballeros.ToString();
+            lab_tiempo5.Text = paladines.ToString();
+        }
+
+        private void Btn_visionGeneral_Click(object sender, EventArgs e)
+        {
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+            // Creamos un objeto del formulario de inicio de sesion
+            formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+            // Lanzamos el objeto de inicio de sesion   
+            VisionGeneral.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
     }
 }

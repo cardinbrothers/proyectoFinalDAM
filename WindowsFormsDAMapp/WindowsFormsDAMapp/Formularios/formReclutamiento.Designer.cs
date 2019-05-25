@@ -135,6 +135,7 @@
             this.btn_visionGeneral.TabIndex = 25;
             this.btn_visionGeneral.Text = "Visión General";
             this.btn_visionGeneral.UseVisualStyleBackColor = true;
+            this.btn_visionGeneral.Click += new System.EventHandler(this.Btn_visionGeneral_Click);
             // 
             // lab_cola
             // 
@@ -428,7 +429,7 @@
             this.tbx_arquero.Name = "tbx_arquero";
             this.tbx_arquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_arquero.TabIndex = 63;
-            this.tbx_arquero.Tag = "0";
+            this.tbx_arquero.Tag = "1";
             this.tbx_arquero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
             this.tbx_arquero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
@@ -438,7 +439,7 @@
             this.tbx_ballestero.Name = "tbx_ballestero";
             this.tbx_ballestero.Size = new System.Drawing.Size(50, 20);
             this.tbx_ballestero.TabIndex = 64;
-            this.tbx_ballestero.Tag = "1";
+            this.tbx_ballestero.Tag = "2";
             this.tbx_ballestero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
             this.tbx_ballestero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
@@ -448,7 +449,7 @@
             this.tbx_piquero.Name = "tbx_piquero";
             this.tbx_piquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_piquero.TabIndex = 65;
-            this.tbx_piquero.Tag = "2";
+            this.tbx_piquero.Tag = "4";
             this.tbx_piquero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
             this.tbx_piquero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
@@ -458,7 +459,7 @@
             this.tbx_caballero.Name = "tbx_caballero";
             this.tbx_caballero.Size = new System.Drawing.Size(50, 20);
             this.tbx_caballero.TabIndex = 66;
-            this.tbx_caballero.Tag = "3";
+            this.tbx_caballero.Tag = "7";
             this.tbx_caballero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
             this.tbx_caballero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
@@ -468,7 +469,7 @@
             this.tbx_paladin.Name = "tbx_paladin";
             this.tbx_paladin.Size = new System.Drawing.Size(50, 20);
             this.tbx_paladin.TabIndex = 67;
-            this.tbx_paladin.Tag = "4";
+            this.tbx_paladin.Tag = "10";
             this.tbx_paladin.TextChanged += new System.EventHandler(this.textBoxTextChanged);
             this.tbx_paladin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
@@ -485,6 +486,7 @@
             // 
             // cbx_pueblos
             // 
+            this.cbx_pueblos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_pueblos.FormattingEnabled = true;
             this.cbx_pueblos.Location = new System.Drawing.Point(69, 65);
             this.cbx_pueblos.Name = "cbx_pueblos";

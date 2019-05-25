@@ -176,5 +176,23 @@ namespace WindowsFormsDAMapp
             }
             
         }
+
+        private void Btn_Clasificacion_Click(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                // Añadimos el id del pueblo actual
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                // Creamos un objeto del formulario de reclutamiento
+                formClasificacion clasificacion = new formClasificacion(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                clasificacion.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+        }
     }
 }

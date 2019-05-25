@@ -85,6 +85,7 @@
             this.btn_reclutamiento.TabIndex = 30;
             this.btn_reclutamiento.Text = "Reclutamiento";
             this.btn_reclutamiento.UseVisualStyleBackColor = true;
+            this.btn_reclutamiento.Click += new System.EventHandler(this.Btn_reclutamiento_Click);
             // 
             // btn_movimientos
             // 
@@ -125,6 +126,7 @@
             this.btn_Clasificacion.TabIndex = 26;
             this.btn_Clasificacion.Text = "Clasificación";
             this.btn_Clasificacion.UseVisualStyleBackColor = true;
+            this.btn_Clasificacion.Click += new System.EventHandler(this.Btn_Clasificacion_Click);
             // 
             // btn_visionGeneral
             // 
@@ -154,6 +156,7 @@
             this.col_cantidad,
             this.col_tiempoRestante});
             this.lsv_cola.Location = new System.Drawing.Point(10, 124);
+            this.lsv_cola.MultiSelect = false;
             this.lsv_cola.Name = "lsv_cola";
             this.lsv_cola.Size = new System.Drawing.Size(246, 280);
             this.lsv_cola.TabIndex = 32;
@@ -182,6 +185,7 @@
             this.btn_cancelar.TabIndex = 33;
             this.btn_cancelar.Text = "Cancelar";
             this.btn_cancelar.UseVisualStyleBackColor = true;
+            this.btn_cancelar.Click += new System.EventHandler(this.Btn_cancelar_Click);
             // 
             // lab_tropa
             // 
@@ -377,11 +381,11 @@
             // 
             this.lab_poblacion5.AutoSize = true;
             this.lab_poblacion5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion5.Location = new System.Drawing.Point(551, 335);
+            this.lab_poblacion5.Location = new System.Drawing.Point(558, 335);
             this.lab_poblacion5.Name = "lab_poblacion5";
-            this.lab_poblacion5.Size = new System.Drawing.Size(22, 16);
+            this.lab_poblacion5.Size = new System.Drawing.Size(15, 16);
             this.lab_poblacion5.TabIndex = 62;
-            this.lab_poblacion5.Text = "14";
+            this.lab_poblacion5.Text = "5";
             // 
             // lab_poblacion4
             // 

@@ -264,7 +264,7 @@ namespace WebService_ProyectoDAM.Servicios
         // Metodo para cancelar el reclutamiento indicado
         public int cancelarReclutamiento(int idOrden)
         {
-            // Devolvemos en el error 0 --> Todo correcto; 1 --> Falta poblacion; 2 --> Error desconocido
+            // Devolvemos en el error 0 --> Todo correcto; 1 --> No existe; 2 --> Error desconocido
             int error = 0;
 
             try

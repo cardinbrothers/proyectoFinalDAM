@@ -99,6 +99,7 @@
             this.btn_visionGeneral.TabIndex = 43;
             this.btn_visionGeneral.Text = "Visión General";
             this.btn_visionGeneral.UseVisualStyleBackColor = true;
+            this.btn_visionGeneral.Click += new System.EventHandler(this.Btn_visionGeneral_Click);
             // 
             // lsv_clasificacion
             // 
@@ -144,6 +145,7 @@
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formClasificacion";
             this.Text = "Clasificacion";
+            this.Load += new System.EventHandler(this.FormClasificacion_Load);
             this.ResumeLayout(false);
 
         }

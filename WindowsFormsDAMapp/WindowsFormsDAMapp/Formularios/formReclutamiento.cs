@@ -40,9 +40,6 @@ namespace WindowsFormsDAMapp
             // Obtenemos los pueblos del jugador
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
 
-            // Obtenemos la lista de reclutamientos
-            obtenerOrdenes();
-
             // Introducimos el tiempo de las tropas segun la velocidad
             tiempoTropas();
 
@@ -103,6 +100,10 @@ namespace WindowsFormsDAMapp
 
                 // Introducimos la poblacion en el label correspondiente
                 lab_PoblacionPueblo.Text = String.Format("Poblacion: {0}/{1}", pueblo.poblacionRestante, paramsPartida.limitePoblacion);
+
+                // Obtenemos las ordenes de reclutamiento   
+                lsv_cola.Items.Clear();
+                obtenerOrdenes(id_Pueblo);
               
             }
 
@@ -193,10 +194,7 @@ namespace WindowsFormsDAMapp
                 switch (result.error)
                 {
                     case 0:
-                        introducirReclutamiento(result);
-                        listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
-                        lab_PoblacionPueblo.Text = String.Format("Poblacion: {0}/{1}", listaPueblos.FindAll(x => x.id_Pueblo == id_Pueblo).FirstOrDefault().poblacionRestante, paramsPartida.limitePoblacion);
-
+                        Btn_reclutamiento_Click(null, null);
                         break;
                     case 1:
                         MessageBox.Show("No tienes suficiente poblacion");
@@ -247,13 +245,13 @@ namespace WindowsFormsDAMapp
 
         }
 
-        private void obtenerOrdenes()
+        private void obtenerOrdenes(int id_Pueblo)
         {
             // Creamos un objeto para realizar la peticion el web service
             RestRequest peticion = new RestRequest("/api/Reclutamiento/obtenerOrdenes", Method.GET);
 
             // Añadimos el id del pueblo a la peticion
-            peticion.AddParameter("idPueblo", infoSesion.id_Pueblo.ToString());
+            peticion.AddParameter("idPueblo", id_Pueblo.ToString());
 
             // Obtenemos el resultado de la peticion
             var response = restClient.Execute(peticion);
@@ -297,6 +295,69 @@ namespace WindowsFormsDAMapp
 
             // Cerramos este formulario
             this.Close();
+        }
+
+        private void Btn_reclutamiento_Click(object sender, EventArgs e)
+        {
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+            listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+
+            cbx_pueblos.DataSource = listaPueblos;
+            try
+            {
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() != null)
+                {
+                    cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Btn_Clasificacion_Click(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                // Añadimos el id del pueblo actual
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                // Creamos un objeto del formulario de reclutamiento
+                formClasificacion clasificacion = new formClasificacion(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                clasificacion.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+        }
+
+        private void Btn_cancelar_Click(object sender, EventArgs e)
+        {
+            if(lsv_cola.SelectedItems.Count > 0)
+            {
+                int id_Orden = listaOrdenes[lsv_cola.SelectedIndices[0]].id_Orden;
+
+                // Creamos un objeto para realizar la peticion el web service
+                RestRequest peticion = new RestRequest("/api/Reclutamiento/cancelar", Method.POST);
+
+                // Añadimos el nombre del usuario a la peticion
+                peticion.AddQueryParameter("idOrden", id_Orden.ToString());
+
+                // Obtenemos el resultado de la peticion
+                var response = restClient.Execute(peticion);
+
+                // Deserializamos el resultado de la peticion recibido para almacenarlo
+                int result = JsonConvert.DeserializeObject<int>(response.Content);
+
+                // Actualizamos
+                Btn_reclutamiento_Click(null, null);
+
+            }
         }
     }
 }

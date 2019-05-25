@@ -111,6 +111,7 @@
             this.btn_Clasificacion.TabIndex = 20;
             this.btn_Clasificacion.Text = "Clasificación";
             this.btn_Clasificacion.UseVisualStyleBackColor = true;
+            this.btn_Clasificacion.Click += new System.EventHandler(this.Btn_Clasificacion_Click);
             // 
             // btn_mensajes
             // 

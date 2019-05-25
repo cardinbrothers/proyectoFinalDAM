@@ -40,6 +40,7 @@
             this.lab_usuario = new System.Windows.Forms.Label();
             this.tbx_contenidoMensaje = new System.Windows.Forms.TextBox();
             this.btn_enviar = new System.Windows.Forms.Button();
+            this.btn_volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_reclutamiento
@@ -51,6 +52,7 @@
             this.btn_reclutamiento.TabIndex = 54;
             this.btn_reclutamiento.Text = "Reclutamiento";
             this.btn_reclutamiento.UseVisualStyleBackColor = true;
+            this.btn_reclutamiento.Click += new System.EventHandler(this.Btn_reclutamiento_Click);
             // 
             // btn_movimientos
             // 
@@ -81,6 +83,7 @@
             this.btn_mensajes.TabIndex = 51;
             this.btn_mensajes.Text = "Mensajes";
             this.btn_mensajes.UseVisualStyleBackColor = true;
+            this.btn_mensajes.Click += new System.EventHandler(this.Btn_mensajes_Click);
             // 
             // btn_Clasificacion
             // 
@@ -91,6 +94,7 @@
             this.btn_Clasificacion.TabIndex = 50;
             this.btn_Clasificacion.Text = "Clasificación";
             this.btn_Clasificacion.UseVisualStyleBackColor = true;
+            this.btn_Clasificacion.Click += new System.EventHandler(this.Btn_Clasificacion_Click);
             // 
             // btn_visionGeneral
             // 
@@ -101,6 +105,7 @@
             this.btn_visionGeneral.TabIndex = 49;
             this.btn_visionGeneral.Text = "Visión General";
             this.btn_visionGeneral.UseVisualStyleBackColor = true;
+            this.btn_visionGeneral.Click += new System.EventHandler(this.Btn_visionGeneral_Click);
             // 
             // tbx_asunto
             // 
@@ -153,12 +158,24 @@
             this.btn_enviar.TabIndex = 95;
             this.btn_enviar.Text = "Enviar Mensaje";
             this.btn_enviar.UseVisualStyleBackColor = true;
+            this.btn_enviar.Click += new System.EventHandler(this.Btn_enviar_Click);
+            // 
+            // btn_volver
+            // 
+            this.btn_volver.Location = new System.Drawing.Point(37, 360);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(94, 23);
+            this.btn_volver.TabIndex = 96;
+            this.btn_volver.Text = "Cerrar Sesion";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.Btn_volver_Click);
             // 
             // formEnviarMensaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 395);
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_enviar);
             this.Controls.Add(this.tbx_contenidoMensaje);
             this.Controls.Add(this.tbx_asunto);
@@ -193,5 +210,6 @@
         private System.Windows.Forms.Label lab_usuario;
         private System.Windows.Forms.TextBox tbx_contenidoMensaje;
         private System.Windows.Forms.Button btn_enviar;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

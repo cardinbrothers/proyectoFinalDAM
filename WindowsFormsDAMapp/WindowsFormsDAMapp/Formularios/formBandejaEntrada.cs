@@ -135,5 +135,14 @@ namespace WindowsFormsDAMapp
 
             this.Close();
         }
+
+        private void Btn_redactar_Click(object sender, EventArgs e)
+        {
+            formEnviarMensaje enviarMensaje = new formEnviarMensaje(infoSesion);
+
+            enviarMensaje.Show();
+
+            this.Close();
+        }
     }
 }

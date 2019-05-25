@@ -33,10 +33,10 @@ namespace WebService_ProyectoDAM.Servicios
                     if (existeUsuario != null)
                     {
                         // Comprobamos que haya un asunto
-                        if (mensaje.asunto != null)
+                        if (!String.IsNullOrEmpty(mensaje.asunto))
                         {
                             // Comprobamos que haya un contenido del mensaje
-                            if (mensaje.contenido != null)
+                            if (!String.IsNullOrEmpty(mensaje.contenido))
                             {
                                 // Creamos el mensaje que almacenaremos en la base de datos
                                 Mensaje mensajeNuevo = new Mensaje();

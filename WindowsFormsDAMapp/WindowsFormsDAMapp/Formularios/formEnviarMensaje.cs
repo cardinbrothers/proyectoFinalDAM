@@ -16,10 +16,9 @@ namespace WindowsFormsDAMapp
 {
     public partial class formEnviarMensaje : Form
     {
-        sessionInfo infoSesion;
+        sessionInfo infoSesion; 
         RestClient restClient = new RestClient();
         webServiceInfo session = new webServiceInfo();
-        List<mensajesEntity> listaMensajes;
 
         public formEnviarMensaje(sessionInfo info)
         {
@@ -32,33 +31,110 @@ namespace WindowsFormsDAMapp
             // Introducimos la cadena del servicio
             restClient = new RestClient(session.CadenaConexion);
 
-            // Obtenemos la lista de mensajes
-            listaMensajes = obtenerMensajes();
-
-            // Introducimos los mensajes en el listView
-
         }
 
-        private List<mensajesEntity> obtenerMensajes()
+        private void Btn_enviar_Click(object sender, EventArgs e)
         {
-            // Creamos un objeto para realizar la peticion el web service
-            RestRequest peticion = new RestRequest("/api/Mensaje/obtenerMensajesP", Method.GET);
+            mensajesEntity mensajeEnviado = new mensajesEntity();
 
-            // Añadimos el id de la partida a la peticion
-            peticion.AddParameter("id_Partida", infoSesion.nombreUsuario);
+            mensajeEnviado.asunto = tbx_asunto.Text;
+            mensajeEnviado.usuarioEmisor = infoSesion.nombreUsuario;
+            mensajeEnviado.usuarioReceptor = tbx_jugador.Text;
+            mensajeEnviado.contenido = tbx_contenidoMensaje.Text;
+
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Mensaje/mandarMensaje", Method.POST);
+
+            // Añadimos la informacion del usuario nuevo a la peticion
+            peticion.AddJsonBody(mensajeEnviado);
 
             // Obtenemos el resultado de la peticion
             var response = restClient.Execute(peticion);
 
-            // Deserializamos el resultado de la peticion recibido para almacenarlo
-            List<mensajesEntity> result = JsonConvert.DeserializeObject<List<mensajesEntity>>(response.Content);
+            // Deserializamos el resultado de la peticion recibido para almacenarlo en un int
+            int result = JsonConvert.DeserializeObject<int>(response.Content);
 
-            return result;
+            switch (result)
+            {
+                case 0:
+                    MessageBox.Show("Mensaje Enviado correctamente");
+                    tbx_asunto.Clear();
+                    tbx_contenidoMensaje.Clear();
+                    tbx_jugador.Clear();
+                    break;
+                case 1:
+                    MessageBox.Show("El jugador introducido no exite");
+                    break;
+                case 2:
+                    MessageBox.Show("El asunto del mensaje no puede ir vacío");
+                    break;
+                case 3:
+                    MessageBox.Show("El contenido del mensaje no puede ir vacío");
+                    break;
+                case 4:
+                    MessageBox.Show("Error desconocido");
+                    break;
+            }
+
+
         }
 
-        private void mostrarMensajes(List<mensajesEntity> mensajes)
+        private void Btn_volver_Click(object sender, EventArgs e)
         {
-             
+            frm_MenuPrincipal formularioPrincipal = new frm_MenuPrincipal();
+
+            formularioPrincipal.Show();
+
+            this.Close();
+        }
+
+        private void Btn_visionGeneral_Click(object sender, EventArgs e)
+        {
+
+            // Creamos un objeto del formulario de inicio de sesion
+            formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+            // Lanzamos el objeto de inicio de sesion   
+            VisionGeneral.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
+
+        private void Btn_reclutamiento_Click(object sender, EventArgs e)
+        {
+            // Creamos un objeto del formulario de reclutamiento
+            formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
+
+            // Lanzamos el formulario de reclutamiento
+            reclutamiento.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
+
+        private void Btn_Clasificacion_Click(object sender, EventArgs e)
+        {
+            // Creamos un objeto del formulario de reclutamiento
+            formClasificacion clasificacion = new formClasificacion(infoSesion);
+
+            // Lanzamos el formulario de reclutamiento
+            clasificacion.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
+
+        private void Btn_mensajes_Click(object sender, EventArgs e)
+        {
+            // Creamos un objeto del formulario de reclutamiento
+            formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
+
+            // Lanzamos el formulario de reclutamiento
+            bandejaEntrada.Show();
+
+            // Cerramos este formulario
+            this.Close();
         }
     }
     

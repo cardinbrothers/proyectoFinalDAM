@@ -143,6 +143,7 @@
             this.btn_redactar.TabIndex = 52;
             this.btn_redactar.Text = "Nuevo Mensaje";
             this.btn_redactar.UseVisualStyleBackColor = true;
+            this.btn_redactar.Click += new System.EventHandler(this.Btn_redactar_Click);
             // 
             // btn_volver
             // 

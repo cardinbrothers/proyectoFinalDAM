@@ -11,5 +11,7 @@ namespace WindowsFormsDAMapp.Helpers
         public int id_partida { get; set; }
 
         public string nombreUsuario { get; set; }
+
+        public int id_Pueblo { get; set; }
     }
 }

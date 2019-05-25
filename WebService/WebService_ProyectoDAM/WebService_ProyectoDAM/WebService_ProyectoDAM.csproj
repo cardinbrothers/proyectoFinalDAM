@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiEntities\apoyosEntity.cs" />
+    <Compile Include="ApiEntities\infoTropasEntity.cs" />
     <Compile Include="ApiEntities\potenciajugadorEntity.cs" />
     <Compile Include="ApiEntities\infoJugadorEntity.cs" />
     <Compile Include="ApiEntities\infoPartidaEntity.cs" />

@@ -28,6 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Arqueros",
+            "0"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Ballesteros",
+            "0"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Piqueros",
+            "0"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Caballeros",
+            "0"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Paladines",
+            "0"}, -1);
             this.cbx_pueblos = new System.Windows.Forms.ComboBox();
             this.lab_Pueblos = new System.Windows.Forms.Label();
             this.btn_visionGeneral = new System.Windows.Forms.Button();
@@ -53,15 +68,18 @@
             this.col_tiempoRestante2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_horaLlegada2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_tipo2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btn_volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbx_pueblos
             // 
+            this.cbx_pueblos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_pueblos.FormattingEnabled = true;
             this.cbx_pueblos.Location = new System.Drawing.Point(71, 58);
             this.cbx_pueblos.Name = "cbx_pueblos";
             this.cbx_pueblos.Size = new System.Drawing.Size(94, 21);
             this.cbx_pueblos.TabIndex = 18;
+            this.cbx_pueblos.SelectedIndexChanged += new System.EventHandler(this.cbx_pueblos_SelectedIndexChanged);
             // 
             // lab_Pueblos
             // 
@@ -82,6 +100,7 @@
             this.btn_visionGeneral.TabIndex = 19;
             this.btn_visionGeneral.Text = "Visión General";
             this.btn_visionGeneral.UseVisualStyleBackColor = true;
+            this.btn_visionGeneral.Click += new System.EventHandler(this.btn_visionGeneral_Click);
             // 
             // btn_Clasificacion
             // 
@@ -132,6 +151,7 @@
             this.btn_reclutamiento.TabIndex = 24;
             this.btn_reclutamiento.Text = "Reclutamiento";
             this.btn_reclutamiento.UseVisualStyleBackColor = true;
+            this.btn_reclutamiento.Click += new System.EventHandler(this.btn_reclutamiento_Click);
             // 
             // lab_tropas
             // 
@@ -148,6 +168,12 @@
             this.lsv_tropas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_tropas,
             this.col_cantidad});
+            this.lsv_tropas.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5});
             this.lsv_tropas.Location = new System.Drawing.Point(10, 135);
             this.lsv_tropas.Name = "lsv_tropas";
             this.lsv_tropas.Size = new System.Drawing.Size(155, 182);
@@ -261,11 +287,22 @@
             // 
             this.col_tipo2.Text = "Tipo";
             // 
+            // btn_volver
+            // 
+            this.btn_volver.Location = new System.Drawing.Point(588, 445);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(94, 23);
+            this.btn_volver.TabIndex = 33;
+            this.btn_volver.Text = "Cerrar Sesion";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.btn_volver_Click);
+            // 
             // formVisionGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 480);
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.lab_movimientosSalientes);
             this.Controls.Add(this.lab_movimientosEntrantes);
@@ -316,5 +353,6 @@
         private System.Windows.Forms.ColumnHeader col_tiempoRestante2;
         private System.Windows.Forms.ColumnHeader col_horaLlegada2;
         private System.Windows.Forms.ColumnHeader col_tipo2;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

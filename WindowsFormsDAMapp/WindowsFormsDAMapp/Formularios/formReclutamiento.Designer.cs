@@ -72,6 +72,8 @@
             this.btn_reclutar = new System.Windows.Forms.Button();
             this.cbx_pueblos = new System.Windows.Forms.ComboBox();
             this.lab_Pueblos = new System.Windows.Forms.Label();
+            this.lab_PoblacionPueblo = new System.Windows.Forms.Label();
+            this.btn_volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_reclutamiento
@@ -426,6 +428,9 @@
             this.tbx_arquero.Name = "tbx_arquero";
             this.tbx_arquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_arquero.TabIndex = 63;
+            this.tbx_arquero.Tag = "0";
+            this.tbx_arquero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
+            this.tbx_arquero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
             // tbx_ballestero
             // 
@@ -433,6 +438,9 @@
             this.tbx_ballestero.Name = "tbx_ballestero";
             this.tbx_ballestero.Size = new System.Drawing.Size(50, 20);
             this.tbx_ballestero.TabIndex = 64;
+            this.tbx_ballestero.Tag = "1";
+            this.tbx_ballestero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
+            this.tbx_ballestero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
             // tbx_piquero
             // 
@@ -440,6 +448,9 @@
             this.tbx_piquero.Name = "tbx_piquero";
             this.tbx_piquero.Size = new System.Drawing.Size(50, 20);
             this.tbx_piquero.TabIndex = 65;
+            this.tbx_piquero.Tag = "2";
+            this.tbx_piquero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
+            this.tbx_piquero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
             // tbx_caballero
             // 
@@ -447,6 +458,9 @@
             this.tbx_caballero.Name = "tbx_caballero";
             this.tbx_caballero.Size = new System.Drawing.Size(50, 20);
             this.tbx_caballero.TabIndex = 66;
+            this.tbx_caballero.Tag = "3";
+            this.tbx_caballero.TextChanged += new System.EventHandler(this.textBoxTextChanged);
+            this.tbx_caballero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
             // tbx_paladin
             // 
@@ -454,6 +468,9 @@
             this.tbx_paladin.Name = "tbx_paladin";
             this.tbx_paladin.Size = new System.Drawing.Size(50, 20);
             this.tbx_paladin.TabIndex = 67;
+            this.tbx_paladin.Tag = "4";
+            this.tbx_paladin.TextChanged += new System.EventHandler(this.textBoxTextChanged);
+            this.tbx_paladin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbxTropa_KeyPressed);
             // 
             // btn_reclutar
             // 
@@ -464,6 +481,7 @@
             this.btn_reclutar.TabIndex = 68;
             this.btn_reclutar.Text = "Reclutar";
             this.btn_reclutar.UseVisualStyleBackColor = true;
+            this.btn_reclutar.Click += new System.EventHandler(this.btn_reclutar_Click);
             // 
             // cbx_pueblos
             // 
@@ -472,6 +490,7 @@
             this.cbx_pueblos.Name = "cbx_pueblos";
             this.cbx_pueblos.Size = new System.Drawing.Size(94, 21);
             this.cbx_pueblos.TabIndex = 70;
+            this.cbx_pueblos.SelectedIndexChanged += new System.EventHandler(this.cbx_pueblos_SelectedIndexChanged);
             // 
             // lab_Pueblos
             // 
@@ -483,11 +502,32 @@
             this.lab_Pueblos.TabIndex = 69;
             this.lab_Pueblos.Text = "Pueblos";
             // 
+            // lab_PoblacionPueblo
+            // 
+            this.lab_PoblacionPueblo.AutoSize = true;
+            this.lab_PoblacionPueblo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_PoblacionPueblo.Location = new System.Drawing.Point(539, 66);
+            this.lab_PoblacionPueblo.Name = "lab_PoblacionPueblo";
+            this.lab_PoblacionPueblo.Size = new System.Drawing.Size(107, 16);
+            this.lab_PoblacionPueblo.TabIndex = 71;
+            this.lab_PoblacionPueblo.Text = "Población: 10/20";
+            // 
+            // btn_volver
+            // 
+            this.btn_volver.Location = new System.Drawing.Point(567, 430);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(94, 23);
+            this.btn_volver.TabIndex = 72;
+            this.btn_volver.Text = "Cerrar Sesion";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            // 
             // formReclutamiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 469);
+            this.Controls.Add(this.btn_volver);
+            this.Controls.Add(this.lab_PoblacionPueblo);
             this.Controls.Add(this.cbx_pueblos);
             this.Controls.Add(this.lab_Pueblos);
             this.Controls.Add(this.btn_reclutar);
@@ -531,6 +571,8 @@
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formReclutamiento";
             this.Text = "Reclutamiento";
+            this.Load += new System.EventHandler(this.formReclutamiento_Load);
+            this.TextChanged += new System.EventHandler(this.textBoxTextChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,5 +624,7 @@
         private System.Windows.Forms.Button btn_reclutar;
         private System.Windows.Forms.ComboBox cbx_pueblos;
         private System.Windows.Forms.Label lab_Pueblos;
+        private System.Windows.Forms.Label lab_PoblacionPueblo;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

@@ -133,8 +133,7 @@ namespace WebService_ProyectoDAM.Servicios
                 {
                     // Obtenemos los mensajes secundarios del id_mensaje recibido
                     var listaSecundarios = from register in context.Mensaje
-                                           where true
-                                           // && register.dependido == id_Mensaje  --> Lo de actualizar la base de datos
+                                           where register.mensajePadre == id_Mensaje
                                            select register;
 
                     // Tratamos cada mensaje con un foreach
@@ -188,6 +187,7 @@ namespace WebService_ProyectoDAM.Servicios
                         mensajeNuevo.fecha = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
                         mensajeNuevo.contenido = mensaje.contenido;
                         mensajeNuevo.mensajePadre = mensaje.mensajePadre;
+                        mensajeNuevo.asunto = mensaje.asunto;
 
                         // Almacenamos el mensaje en la base de datos
                         context.Mensaje.Add(mensajeNuevo);
@@ -200,7 +200,7 @@ namespace WebService_ProyectoDAM.Servicios
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
                 // Error desconocido
                 error = 2;

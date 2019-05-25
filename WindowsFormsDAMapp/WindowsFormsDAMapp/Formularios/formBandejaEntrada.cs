@@ -144,5 +144,22 @@ namespace WindowsFormsDAMapp
 
             this.Close();
         }
+
+        private void Lsv_mensajes_DoubleClick(object sender, EventArgs e)
+        {
+            mensajesEntity mensajePadre;
+
+            // Obtenemos el mensaje padre
+            mensajePadre = listaMensajes[lsv_mensajes.SelectedIndices[0]];
+
+            // Creamos un objeto del formulario contestar mensaje
+            formContestarMensaje responderMensaje = new formContestarMensaje(mensajePadre, infoSesion);
+
+            // Lanzamos el formulario
+            responderMensaje.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
     }
 }

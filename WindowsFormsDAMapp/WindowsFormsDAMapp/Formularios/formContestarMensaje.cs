@@ -69,16 +69,16 @@ namespace WindowsFormsDAMapp
                 if (mensaje.usuarioReceptor == infoSesion.nombreUsuario)
                 {
                     // Introducimos el autor + 2 saltos de linea
-                    cadenaMensajes += mensaje.usuarioEmisor + " escribió en el día " + mensaje.fecha.ToShortDateString() + ": /n/n";
+                    cadenaMensajes += mensaje.usuarioEmisor + " escribió en el día " + mensaje.fecha.ToShortDateString() + ": \n\n";
                 }
                 else
                 {
                     // Introducimos el autor + 2 saltos de linea
-                    cadenaMensajes += "Tu escribiste en el día " + mensaje.fecha.ToShortDateString() + ": /n/n";
+                    cadenaMensajes += "Tu escribiste en el día " + mensaje.fecha.ToShortDateString() + ": \n\n";
                 }
 
                 // Introducimos el contenid + 3 saltos de linea
-                cadenaMensajes += mensaje.contenido + "/n/n/n";
+                cadenaMensajes += mensaje.contenido + "\n\n\n";
 
             }
 
@@ -101,7 +101,7 @@ namespace WindowsFormsDAMapp
             tbx_respuesta.Visible = false;
             btn_aceptar.Visible = false;
             btn_cancelar.Visible = false;
-            btn_responder.Visible = false;
+            btn_responder.Visible = true;
             tbx_respuesta.Clear();
 
             // Obtenemos la lista de mensajes
@@ -167,9 +167,9 @@ namespace WindowsFormsDAMapp
 
         private void Btn_volver_Click(object sender, EventArgs e)
         {
-            formEnviarMensaje enviarMensaje = new formEnviarMensaje(infoSesion);
+            frm_MenuPrincipal formularioPrincipal = new frm_MenuPrincipal();
 
-            enviarMensaje.Show();
+            formularioPrincipal.Show();
 
             this.Close();
         }

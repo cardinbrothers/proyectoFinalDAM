@@ -113,11 +113,13 @@
             this.col_jugador,
             this.col_fecha});
             this.lsv_mensajes.Location = new System.Drawing.Point(12, 62);
+            this.lsv_mensajes.MultiSelect = false;
             this.lsv_mensajes.Name = "lsv_mensajes";
             this.lsv_mensajes.Size = new System.Drawing.Size(636, 296);
             this.lsv_mensajes.TabIndex = 51;
             this.lsv_mensajes.UseCompatibleStateImageBehavior = false;
             this.lsv_mensajes.View = System.Windows.Forms.View.Details;
+            this.lsv_mensajes.DoubleClick += new System.EventHandler(this.Lsv_mensajes_DoubleClick);
             // 
             // col_asunto
             // 

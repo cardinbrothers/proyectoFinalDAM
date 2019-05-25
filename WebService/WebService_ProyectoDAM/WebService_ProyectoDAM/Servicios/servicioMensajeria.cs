@@ -179,7 +179,7 @@ namespace WebService_ProyectoDAM.Servicios
                 using (var context = new ProyectoDAMEntities())
                 {
                     // Comprobamos que haya un contenido del mensaje
-                    if (mensaje.contenido != null)
+                    if (!String.IsNullOrEmpty(mensaje.contenido))
                     {
                         // Creamos el mensaje que almacenaremos en la base de datos
                         Mensaje mensajeNuevo = new Mensaje();

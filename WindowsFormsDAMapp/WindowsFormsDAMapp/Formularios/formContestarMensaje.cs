@@ -127,6 +127,7 @@ namespace WindowsFormsDAMapp
             }
             mensajeEnviado.contenido = tbx_respuesta.Text;
             mensajeEnviado.mensajePadre = mensajePadre.id_Mensaje;
+            mensajeEnviado.asunto = mensajePadre.asunto;
 
             // Creamos un objeto para realizar la peticion el web service
             RestRequest peticion = new RestRequest("/api/Mensaje/responderMensaje", Method.POST);
@@ -147,7 +148,7 @@ namespace WindowsFormsDAMapp
                     tbx_respuesta.Visible = false;
                     btn_aceptar.Visible = false;
                     btn_cancelar.Visible = false;
-                    btn_responder.Visible = false;
+                    btn_responder.Visible = true;
                     tbx_respuesta.Clear();
 
                     // Obtenemos la lista de mensajes

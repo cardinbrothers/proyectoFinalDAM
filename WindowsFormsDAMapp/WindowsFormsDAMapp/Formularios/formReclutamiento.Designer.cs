@@ -526,6 +526,7 @@
             this.btn_volver.TabIndex = 72;
             this.btn_volver.Text = "Cerrar Sesion";
             this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.Btn_volver_Click);
             // 
             // formReclutamiento
             // 

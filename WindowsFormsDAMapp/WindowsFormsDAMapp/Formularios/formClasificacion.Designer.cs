@@ -38,6 +38,7 @@
             this.col_jugador = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_pueblos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_potencia = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btn_volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_reclutamiento
@@ -49,6 +50,7 @@
             this.btn_reclutamiento.TabIndex = 48;
             this.btn_reclutamiento.Text = "Reclutamiento";
             this.btn_reclutamiento.UseVisualStyleBackColor = true;
+            this.btn_reclutamiento.Click += new System.EventHandler(this.Btn_reclutamiento_Click);
             // 
             // btn_movimientos
             // 
@@ -89,6 +91,7 @@
             this.btn_Clasificacion.TabIndex = 44;
             this.btn_Clasificacion.Text = "Clasificación";
             this.btn_Clasificacion.UseVisualStyleBackColor = true;
+            this.btn_Clasificacion.Click += new System.EventHandler(this.Btn_Clasificacion_Click);
             // 
             // btn_visionGeneral
             // 
@@ -131,11 +134,22 @@
             this.col_potencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.col_potencia.Width = 144;
             // 
+            // btn_volver
+            // 
+            this.btn_volver.Location = new System.Drawing.Point(344, 449);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(94, 23);
+            this.btn_volver.TabIndex = 73;
+            this.btn_volver.Text = "Cerrar Sesion";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.Btn_volver_Click);
+            // 
             // formClasificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 442);
+            this.ClientSize = new System.Drawing.Size(451, 484);
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.lsv_clasificacion);
             this.Controls.Add(this.btn_reclutamiento);
             this.Controls.Add(this.btn_movimientos);
@@ -162,5 +176,6 @@
         private System.Windows.Forms.ColumnHeader col_jugador;
         private System.Windows.Forms.ColumnHeader col_pueblos;
         private System.Windows.Forms.ColumnHeader col_potencia;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

@@ -63,6 +63,8 @@ namespace WindowsFormsDAMapp
         // Metodo para visualizar la clasificacione en el listView
         private void mostrarClasificacion(List<potenciaJugadorEntity> clasificacion)
         {
+            lsv_clasificacion.Items.Clear();
+
             foreach (var jugador in clasificacion)
             {
                 // Introducimos la informacion en el listview
@@ -103,6 +105,38 @@ namespace WindowsFormsDAMapp
 
             // Cerramos este formulario
             this.Close();
+        }
+
+        private void Btn_reclutamiento_Click(object sender, EventArgs e)
+        {
+            // Creamos un objeto del formulario de reclutamiento
+            formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
+
+            // Lanzamos el formulario de reclutamiento
+            reclutamiento.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
+
+        // Metodo para volver al menu principal
+        private void Btn_volver_Click(object sender, EventArgs e)
+        {
+            frm_MenuPrincipal formularioPrincipal = new frm_MenuPrincipal();
+
+            formularioPrincipal.Show();
+
+            this.Close();
+        }
+
+        // Metodo asociado a la recarga de la vista
+        private void Btn_Clasificacion_Click(object sender, EventArgs e)
+        {
+            // Obtenemos la clasificacion de la partida
+            listaClasificacion = obtenerClasificacion();
+
+            // Mostramos la clasificacion de la partida
+            mostrarClasificacion(listaClasificacion);
         }
     }
 }

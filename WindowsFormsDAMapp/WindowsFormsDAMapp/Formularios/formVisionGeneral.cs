@@ -139,15 +139,19 @@ namespace WindowsFormsDAMapp
         // Metodo asociado al evento recargar que lanza de nuevo la vision general
         private void btn_visionGeneral_Click(object sender, EventArgs e)
         {
+            // Obtenemos el pueblo seleccionado actualmente
             infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
+            // Obtenemos los pueblos del jugador de nuevo
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
-
             cbx_pueblos.DataSource = listaPueblos;
+
             try
             {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
                 if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() != null)
                 {
+                    // Seleccionamos el pueblo anterior
                     cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
 
                 }

@@ -268,14 +268,17 @@ namespace WindowsFormsDAMapp
             }
         }
 
+        // Metodo para introducir el tiempo que tarda cada tropa segun la velocidad de la partida
         private void tiempoTropas()
         {
+            // Creamos los objetos TimeSpan con los tiempos
             TimeSpan arqueros = new TimeSpan(0, 0, 60 / paramsPartida.velocidad);
             TimeSpan ballesteros = new TimeSpan(0, 0, 300 / paramsPartida.velocidad); ;
             TimeSpan piqueros = new TimeSpan(0, 0, 60 / paramsPartida.velocidad);
             TimeSpan caballeros = new TimeSpan(0, 0, 420 / paramsPartida.velocidad);
             TimeSpan paladines = new TimeSpan(0, 0, 1200 / paramsPartida.velocidad);
 
+            // Introducimos los tiempos en los labels
             lab_tiempo1.Text = arqueros.ToString();
             lab_tiempo2.Text = ballesteros.ToString();
             lab_tiempo3.Text = piqueros.ToString();
@@ -296,18 +299,23 @@ namespace WindowsFormsDAMapp
             // Cerramos este formulario
             this.Close();
         }
-
+        
+        // Metodo para recargar la vista
         private void Btn_reclutamiento_Click(object sender, EventArgs e)
         {
+            // Obtenemos el pueblo seleccionado actualmente
             infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
+            // Obtenemos los pueblos del jugador de nuevo
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
-
             cbx_pueblos.DataSource = listaPueblos;
+
             try
             {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
                 if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() != null)
                 {
+                    // Seleccionamos el pueblo anterior
                     cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
 
                 }
@@ -358,6 +366,16 @@ namespace WindowsFormsDAMapp
                 Btn_reclutamiento_Click(null, null);
 
             }
+        }
+
+        // Metodo para volver al menu principal
+        private void Btn_volver_Click(object sender, EventArgs e)
+        {
+            frm_MenuPrincipal formularioPrincipal = new frm_MenuPrincipal();
+
+            formularioPrincipal.Show();
+
+            this.Close();
         }
     }
 }

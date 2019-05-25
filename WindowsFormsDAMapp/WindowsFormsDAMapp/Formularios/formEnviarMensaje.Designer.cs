@@ -146,6 +146,7 @@
             this.tbx_contenidoMensaje.Location = new System.Drawing.Point(37, 150);
             this.tbx_contenidoMensaje.Multiline = true;
             this.tbx_contenidoMensaje.Name = "tbx_contenidoMensaje";
+            this.tbx_contenidoMensaje.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbx_contenidoMensaje.Size = new System.Drawing.Size(573, 187);
             this.tbx_contenidoMensaje.TabIndex = 94;
             // 

@@ -69,16 +69,16 @@ namespace WindowsFormsDAMapp
                 if (mensaje.usuarioReceptor == infoSesion.nombreUsuario)
                 {
                     // Introducimos el autor + 2 saltos de linea
-                    cadenaMensajes += mensaje.usuarioEmisor + " escribió en el día " + mensaje.fecha.ToShortDateString() + ": \n\n";
+                    cadenaMensajes += mensaje.usuarioEmisor + " escribió en el día " + mensaje.fecha.ToShortDateString() + Environment.NewLine + Environment.NewLine;
                 }
                 else
                 {
                     // Introducimos el autor + 2 saltos de linea
-                    cadenaMensajes += "Tu escribiste en el día " + mensaje.fecha.ToShortDateString() + ": \n\n";
+                    cadenaMensajes += "Tu escribiste en el día " + mensaje.fecha.ToShortDateString() + Environment.NewLine + Environment.NewLine;
                 }
 
                 // Introducimos el contenid + 3 saltos de linea
-                cadenaMensajes += mensaje.contenido + "\n\n\n";
+                cadenaMensajes += mensaje.contenido + Environment.NewLine + Environment.NewLine + Environment.NewLine;
 
             }
 

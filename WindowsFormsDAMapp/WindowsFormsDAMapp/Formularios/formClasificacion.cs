@@ -138,5 +138,19 @@ namespace WindowsFormsDAMapp
             // Mostramos la clasificacion de la partida
             mostrarClasificacion(listaClasificacion);
         }
+
+        private void Btn_mensajes_Click(object sender, EventArgs e)
+        {
+
+            // Creamos un objeto del formulario de reclutamiento
+            formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
+
+            // Lanzamos el formulario de reclutamiento
+            bandejaEntrada.Show();
+
+            // Cerramos este formulario
+            this.Close();
+            
+        }
     }
 }

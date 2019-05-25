@@ -377,5 +377,23 @@ namespace WindowsFormsDAMapp
 
             this.Close();
         }
+
+        private void Btn_mensajes_Click(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                // Añadimos el id del pueblo actual
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                // Creamos un objeto del formulario de reclutamiento
+                formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                bandejaEntrada.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+        }
     }
 }

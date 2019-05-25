@@ -39,6 +39,7 @@
             this.col_jugador = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_fecha = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_redactar = new System.Windows.Forms.Button();
+            this.btn_volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_reclutamiento
@@ -50,6 +51,7 @@
             this.btn_reclutamiento.TabIndex = 48;
             this.btn_reclutamiento.Text = "Reclutamiento";
             this.btn_reclutamiento.UseVisualStyleBackColor = true;
+            this.btn_reclutamiento.Click += new System.EventHandler(this.Btn_reclutamiento_Click);
             // 
             // btn_movimientos
             // 
@@ -80,6 +82,7 @@
             this.btn_mensajes.TabIndex = 45;
             this.btn_mensajes.Text = "Mensajes";
             this.btn_mensajes.UseVisualStyleBackColor = true;
+            this.btn_mensajes.Click += new System.EventHandler(this.Btn_mensajes_Click);
             // 
             // btn_Clasificacion
             // 
@@ -90,6 +93,7 @@
             this.btn_Clasificacion.TabIndex = 44;
             this.btn_Clasificacion.Text = "Clasificación";
             this.btn_Clasificacion.UseVisualStyleBackColor = true;
+            this.btn_Clasificacion.Click += new System.EventHandler(this.Btn_Clasificacion_Click);
             // 
             // btn_visionGeneral
             // 
@@ -100,6 +104,7 @@
             this.btn_visionGeneral.TabIndex = 43;
             this.btn_visionGeneral.Text = "Visión General";
             this.btn_visionGeneral.UseVisualStyleBackColor = true;
+            this.btn_visionGeneral.Click += new System.EventHandler(this.Btn_visionGeneral_Click);
             // 
             // lsv_mensajes
             // 
@@ -139,11 +144,22 @@
             this.btn_redactar.Text = "Nuevo Mensaje";
             this.btn_redactar.UseVisualStyleBackColor = true;
             // 
+            // btn_volver
+            // 
+            this.btn_volver.Location = new System.Drawing.Point(12, 393);
+            this.btn_volver.Name = "btn_volver";
+            this.btn_volver.Size = new System.Drawing.Size(94, 23);
+            this.btn_volver.TabIndex = 74;
+            this.btn_volver.Text = "Cerrar Sesion";
+            this.btn_volver.UseVisualStyleBackColor = true;
+            this.btn_volver.Click += new System.EventHandler(this.Btn_volver_Click);
+            // 
             // formBandejaEntrada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 428);
+            this.Controls.Add(this.btn_volver);
             this.Controls.Add(this.btn_redactar);
             this.Controls.Add(this.lsv_mensajes);
             this.Controls.Add(this.btn_reclutamiento);
@@ -154,6 +170,7 @@
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formBandejaEntrada";
             this.Text = "Bandeja de Entrada";
+            this.Load += new System.EventHandler(this.FormBandejaEntrada_Load);
             this.ResumeLayout(false);
 
         }
@@ -171,5 +188,6 @@
         private System.Windows.Forms.ColumnHeader col_jugador;
         private System.Windows.Forms.ColumnHeader col_fecha;
         private System.Windows.Forms.Button btn_redactar;
+        private System.Windows.Forms.Button btn_volver;
     }
 }

@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "Arqueros",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "Ballesteros",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "Piqueros",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "Caballeros",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
             "Paladines",
             "0"}, -1);
             this.cbx_pueblos = new System.Windows.Forms.ComboBox();
@@ -122,6 +122,7 @@
             this.btn_mensajes.TabIndex = 21;
             this.btn_mensajes.Text = "Mensajes";
             this.btn_mensajes.UseVisualStyleBackColor = true;
+            this.btn_mensajes.Click += new System.EventHandler(this.Btn_mensajes_Click);
             // 
             // btn_mapa
             // 
@@ -170,11 +171,11 @@
             this.col_tropas,
             this.col_cantidad});
             this.lsv_tropas.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5});
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
             this.lsv_tropas.Location = new System.Drawing.Point(10, 135);
             this.lsv_tropas.Name = "lsv_tropas";
             this.lsv_tropas.Size = new System.Drawing.Size(155, 182);

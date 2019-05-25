@@ -81,6 +81,7 @@
             this.btn_mensajes.TabIndex = 45;
             this.btn_mensajes.Text = "Mensajes";
             this.btn_mensajes.UseVisualStyleBackColor = true;
+            this.btn_mensajes.Click += new System.EventHandler(this.Btn_mensajes_Click);
             // 
             // btn_Clasificacion
             // 

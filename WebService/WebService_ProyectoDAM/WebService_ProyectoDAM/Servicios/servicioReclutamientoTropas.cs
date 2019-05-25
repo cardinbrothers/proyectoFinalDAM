@@ -55,7 +55,7 @@ namespace WebService_ProyectoDAM.Servicios
                                      select register.Velocidad).FirstOrDefault();
 
                     // Comprobamos si hay espacio en el pueblo para reclutar la cantidad de tropas pedida por el usuario
-                    if (reclutamiento.poblacion * cantidad < pueblo.poblacion)
+                    if (reclutamiento.poblacion * cantidad <= pueblo.poblacion)
                     {
                         // Calculamos cuanto tarda en total en realizarse el reclutamiento
                         tiempoTotal = (reclutamiento.tiempoReclutamiento.TotalSeconds * cantidad/ velPartida);
@@ -215,7 +215,7 @@ namespace WebService_ProyectoDAM.Servicios
                     foreach (var orden in ordenesPueblo)
                     {
                         // Comprobamos si la hora de finalizar ya ha excedido la hora actual
-                        if (orden.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"))
+                        if (orden.horaFin < TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"))
                         {
                             // Llamamos al metodo que completa la orden de reclutamiento
                             completarOrdenReclutamiento(orden.idOrden);

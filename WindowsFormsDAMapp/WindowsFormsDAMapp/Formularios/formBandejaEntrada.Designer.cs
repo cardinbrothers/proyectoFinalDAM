@@ -62,6 +62,7 @@
             this.btn_movimientos.TabIndex = 47;
             this.btn_movimientos.Text = "Movimientos";
             this.btn_movimientos.UseVisualStyleBackColor = true;
+            this.btn_movimientos.Click += new System.EventHandler(this.btn_movimientos_Click);
             // 
             // btn_mapa
             // 

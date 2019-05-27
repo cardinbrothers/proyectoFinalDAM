@@ -288,16 +288,19 @@ namespace WindowsFormsDAMapp
 
         private void Btn_visionGeneral_Click(object sender, EventArgs e)
         {
-            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
-            // Creamos un objeto del formulario de inicio de sesion
-            formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+                // Creamos un objeto del formulario de inicio de sesion
+                formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
 
-            // Lanzamos el objeto de inicio de sesion   
-            VisionGeneral.Show();
+                // Lanzamos el objeto de inicio de sesion   
+                VisionGeneral.Show();
 
-            // Cerramos este formulario
-            this.Close();
+                // Cerramos este formulario
+                this.Close();
+            }
         }
         
         // Metodo para recargar la vista
@@ -394,6 +397,28 @@ namespace WindowsFormsDAMapp
                 // Cerramos este formulario
                 this.Close();
             }
+        }
+
+        private void btn_movimientos_Click(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                // Creamos un objeto del formulario de inicio de sesion
+                formMovimientos frm_Movimientos = new formMovimientos(infoSesion);
+
+                // Lanzamos el objeto de inicio de sesion   
+                frm_Movimientos.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+        }
+
+        private void btn_mapa_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

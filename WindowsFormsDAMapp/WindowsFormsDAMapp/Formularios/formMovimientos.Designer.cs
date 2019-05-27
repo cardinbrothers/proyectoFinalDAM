@@ -85,6 +85,7 @@
             this.btn_mapa.TabIndex = 40;
             this.btn_mapa.Text = "Mapa";
             this.btn_mapa.UseVisualStyleBackColor = true;
+            this.btn_mapa.Click += new System.EventHandler(this.btn_mapa_Click);
             // 
             // btn_mensajes
             // 

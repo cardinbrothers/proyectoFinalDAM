@@ -41,6 +41,7 @@ namespace WebService_ProyectoDAM.Servicios
                     insertMovimiento.piqueros = movimiento.piqueros;
                     insertMovimiento.caballeros = movimiento.caballeros;
                     insertMovimiento.paladines = movimiento.paladines;
+                    insertMovimiento.tipoMovimiento = movimiento.tipoMovimiento;
 
                     // Añadimos el registro del movimiento a la tabla de movimientos y confirmamos los cambios en la base de datos
                     context.Movimientos.Add(insertMovimiento);

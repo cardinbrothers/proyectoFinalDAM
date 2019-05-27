@@ -152,5 +152,17 @@ namespace WindowsFormsDAMapp
             this.Close();
             
         }
+
+        private void btn_movimientos_Click(object sender, EventArgs e)
+        {
+            // Creamos un objeto del formulario de inicio de sesion
+            formMovimientos frm_Movimientos = new formMovimientos(infoSesion);
+
+            // Lanzamos el objeto de inicio de sesion   
+            frm_Movimientos.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
     }
 }

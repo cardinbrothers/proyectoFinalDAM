@@ -25,10 +25,10 @@ namespace WebService_ProyectoDAM.Servicios
 
                     // Restamos las tropas mandadas en el movimiento del pueblo
                     puebloOrigen.arqueros -= movimiento.arqueros;
-                    puebloOrigen.ballesteros -= movimiento.arqueros;
-                    puebloOrigen.piqueros -= movimiento.arqueros;
-                    puebloOrigen.caballeros -= movimiento.arqueros;
-                    puebloOrigen.paladines -= movimiento.arqueros;
+                    puebloOrigen.ballesteros -= movimiento.ballesteros;
+                    puebloOrigen.piqueros -= movimiento.piqueros;
+                    puebloOrigen.caballeros -= movimiento.caballeros;
+                    puebloOrigen.paladines -= movimiento.paladines;
 
                     // Creamos un registro de movimiento con la informacion recibida
                     Movimientos insertMovimiento = new Movimientos();
@@ -41,6 +41,7 @@ namespace WebService_ProyectoDAM.Servicios
                     insertMovimiento.piqueros = movimiento.piqueros;
                     insertMovimiento.caballeros = movimiento.caballeros;
                     insertMovimiento.paladines = movimiento.paladines;
+                    insertMovimiento.tipoMovimiento = movimiento.tipoMovimiento;
 
                     // Añadimos el registro del movimiento a la tabla de movimientos y confirmamos los cambios en la base de datos
                     context.Movimientos.Add(insertMovimiento);

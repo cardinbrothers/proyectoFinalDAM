@@ -52,7 +52,7 @@ namespace WebService_ProyectoDAM.Servicios
 
                 }
             }
-            catch(Exception e)
+            catch
             {
 
             }
@@ -92,30 +92,35 @@ namespace WebService_ProyectoDAM.Servicios
                     // Obtenemos los movientos de la base de datos
                     var movimientos = from register in context.Movimientos
                                       where (register.puebloOrigen == id_Pueblo ||
-                                      register.puebloDestino == id_Pueblo) &&
-                                      register.horaLlegada > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
-                    select register;
+                                      register.puebloDestino == id_Pueblo) //&&
+                                      //register.horaLlegada.TimeOfDay > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").TimeOfDay
+                                      select register;
 
                     // Tratamos cada moviento con un foreach
                     foreach (var movimiento in movimientos)
                     {
-                        // Creamos un objeto auxiliar para almacenar la informacion de el movimiento
-                        movimientosEntity movimientoAux = new movimientosEntity();
-                        movimientoAux.id_Movimiento = movimiento.id_Movimiento;
-                        movimientoAux.puebloOrigen = movimiento.puebloOrigen;
-                        movimientoAux.puebloDestino = movimiento.puebloDestino;
-                        movimientoAux.tipoMovimiento = movimiento.tipoMovimiento;
-                        movimientoAux.duracion = movimiento.duracion.ToString();
-                        movimientoAux.horaLlegada = movimiento.horaLlegada;
-                        movimientoAux.arqueros = movimiento.arqueros;
-                        movimientoAux.ballesteros = movimiento.ballesteros;
-                        movimientoAux.piqueros = movimiento.piqueros;
-                        movimientoAux.caballeros = movimiento.caballeros;
-                        movimientoAux.paladines = movimiento.paladines;
-                        movimientoAux.vencedor = movimiento.vencedor;
+                        if (movimiento.horaLlegada > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"))
+                        {
 
-                        // Añadimos la variable auxiliar a la lista que devolveremos
-                        listaMovimientos.Add(movimientoAux);
+
+                            // Creamos un objeto auxiliar para almacenar la informacion de el movimiento
+                            movimientosEntity movimientoAux = new movimientosEntity();
+                            movimientoAux.id_Movimiento = movimiento.id_Movimiento;
+                            movimientoAux.puebloOrigen = movimiento.puebloOrigen;
+                            movimientoAux.puebloDestino = movimiento.puebloDestino;
+                            movimientoAux.tipoMovimiento = movimiento.tipoMovimiento;
+                            movimientoAux.duracion = movimiento.duracion.ToString();
+                            movimientoAux.horaLlegada = movimiento.horaLlegada;
+                            movimientoAux.arqueros = movimiento.arqueros;
+                            movimientoAux.ballesteros = movimiento.ballesteros;
+                            movimientoAux.piqueros = movimiento.piqueros;
+                            movimientoAux.caballeros = movimiento.caballeros;
+                            movimientoAux.paladines = movimiento.paladines;
+                            movimientoAux.vencedor = movimiento.vencedor;
+
+                            // Añadimos la variable auxiliar a la lista que devolveremos
+                            listaMovimientos.Add(movimientoAux);
+                        }
                     }
                 }
             }

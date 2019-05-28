@@ -200,7 +200,7 @@ namespace WebService_ProyectoDAM.Servicios
                     }
                 }
             }
-            catch(Exception e)
+            catch
             {
                 // Error desconocido
                 error = 2;

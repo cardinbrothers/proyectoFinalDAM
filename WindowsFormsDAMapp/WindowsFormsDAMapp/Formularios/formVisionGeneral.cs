@@ -40,6 +40,11 @@ namespace WindowsFormsDAMapp
             // Obtenemos los pueblos del jugador
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
 
+            if (infoSesion.id_Pueblo == 0)
+            {
+                infoSesion.id_Pueblo = listaPueblos.First().id_Pueblo;
+            }
+
             // obtenemos los movimientos del pueblo
             listaMovimientos = obtenerMovimientos(infoSesion.id_Pueblo);
 
@@ -260,7 +265,10 @@ namespace WindowsFormsDAMapp
 
         private void mostrarMovimientos(List<movimientossEntity> listaMovimientos)
         {
-            foreach(var movimiento in listaMovimientos)
+            lsv_entrantes.Items.Clear();
+            lsv_Salientes.Items.Clear();
+
+            foreach (var movimiento in listaMovimientos)
             {
                 if (movimiento.puebloOrigen == infoSesion.id_Pueblo)
                 {

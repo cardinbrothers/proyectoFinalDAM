@@ -261,7 +261,7 @@ namespace WindowsFormsDAMapp
                 peticion.AddParameter("id_Partida", infoSesion.id_partida);
 
                 // Añadimos las coordenadas a la peticion
-                peticion.AddParameter("coordenada", tbx_coordApoyo.Text);
+                peticion.AddParameter("coordenada", tbx_CoordAtaque.Text);
 
                 // Obtenemos el resultado de la peticion
                 var response = restClient.Execute(peticion);
@@ -310,7 +310,7 @@ namespace WindowsFormsDAMapp
                         peticion2.AddParameter("id_Partida", infoSesion.id_partida);
 
                         // Añadimos las coordenadas a la peticion
-                        peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
+                        peticion2.AddParameter("coordenada1", tbx_CoordAtaque.Text);
                         peticion2.AddParameter("coordenada2", listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault().coordenadas);
 
 

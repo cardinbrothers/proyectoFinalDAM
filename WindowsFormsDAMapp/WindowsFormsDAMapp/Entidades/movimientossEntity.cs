@@ -17,7 +17,7 @@ namespace WindowsFormsDAMapp.Entidades
 
         public DateTime horaLlegada { get; set; }
 
-        public TimeSpan duracion { get; set; }
+        public String duracion { get; set; }
 
         public int arqueros { get; set; }
 

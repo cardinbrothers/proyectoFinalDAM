@@ -34,8 +34,8 @@ namespace WebService_ProyectoDAM.Servicios
                     Movimientos insertMovimiento = new Movimientos();
                     insertMovimiento.puebloOrigen = movimiento.puebloOrigen;
                     insertMovimiento.puebloDestino = movimiento.puebloDestino;
-                    insertMovimiento.duracion = movimiento.duracion;
-                    insertMovimiento.horaLlegada = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").AddSeconds(movimiento.duracion.TotalSeconds);
+                    insertMovimiento.duracion = Convert.ToDateTime(movimiento.duracion).TimeOfDay;
+                    insertMovimiento.horaLlegada = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").AddSeconds(Convert.ToDateTime(movimiento.duracion).TimeOfDay.TotalSeconds);
                     insertMovimiento.arqueros = movimiento.arqueros;
                     insertMovimiento.ballesteros = movimiento.ballesteros;
                     insertMovimiento.piqueros = movimiento.piqueros;
@@ -52,7 +52,7 @@ namespace WebService_ProyectoDAM.Servicios
 
                 }
             }
-            catch
+            catch(Exception e)
             {
 
             }
@@ -105,7 +105,7 @@ namespace WebService_ProyectoDAM.Servicios
                         movimientoAux.puebloOrigen = movimiento.puebloOrigen;
                         movimientoAux.puebloDestino = movimiento.puebloDestino;
                         movimientoAux.tipoMovimiento = movimiento.tipoMovimiento;
-                        movimientoAux.duracion = movimiento.duracion;
+                        movimientoAux.duracion = movimiento.duracion.ToString();
                         movimientoAux.horaLlegada = movimiento.horaLlegada;
                         movimientoAux.arqueros = movimiento.arqueros;
                         movimientoAux.ballesteros = movimiento.ballesteros;
@@ -146,7 +146,7 @@ namespace WebService_ProyectoDAM.Servicios
                     foreach (var movimiento in movimentosAcabados)
                     {
                         // Comprobamos si el movimiento era un apoyo
-                        if (movimiento.tipoMovimiento == "apoyo")
+                        if (movimiento.tipoMovimiento == "P")
                         {
                             // Creamos un objeto para usar los metodos del servicio de apoyos
                             servicioManejoApoyos apoyos = new servicioManejoApoyos();
@@ -347,7 +347,7 @@ namespace WebService_ProyectoDAM.Servicios
                     // Obtenemos la informacion del movimiento de la base de datos
                     var resultadoVencedor = (from register in context.Movimientos
                                             where register.id_Movimiento == id_movimiento && 
-                                            register.tipoMovimiento == "ataque"
+                                            register.tipoMovimiento == "A"
                                             select register).FirstOrDefault();
 
                     // Comprobamos que exista el movimiento

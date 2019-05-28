@@ -44,7 +44,7 @@ namespace WindowsFormsDAMapp
             listaMovimientos = obtenerMovimientos(infoSesion.id_Pueblo);
 
             // Introducir los movimientos en listView
-
+            mostrarMovimientos(listaMovimientos);
 
             // Introducimos los pueblos en el comboBox
             cbx_pueblos.ValueMember = "id_Pueblo";
@@ -128,6 +128,7 @@ namespace WindowsFormsDAMapp
 
                 // Actualizamos los movimientos
                 listaMovimientos = obtenerMovimientos(id_Pueblo);
+                mostrarMovimientos(listaMovimientos);
             }
 
         }

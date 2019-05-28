@@ -455,7 +455,19 @@ namespace WindowsFormsDAMapp
 
         private void btn_mapa_Click(object sender, EventArgs e)
         {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
+                // Creamos un objeto del formulario de inicio de sesion
+                frmMapa frm_mapa = new frmMapa(infoSesion);
+
+                // Lanzamos el objeto de inicio de sesion   
+                frm_mapa.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
         }
 
         private void Cbx_pueblos_SelectedIndexChanged(object sender, EventArgs e)
@@ -468,6 +480,23 @@ namespace WindowsFormsDAMapp
                 infoPueblo = obtenerInfoPueblo(id_Pueblo);
                 tropasDefReales = obtenerTropas(id_Pueblo);
 
+            }
+        }
+
+        private void btn_reclutamiento_Click(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                // Añadimos el id del pueblo actual
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+                // Creamos un objeto del formulario de reclutamiento
+                formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                reclutamiento.Show();
+
+                // Cerramos este formulario
+                this.Close();
             }
         }
     }

@@ -64,6 +64,7 @@
             this.btn_reclutamiento.TabIndex = 42;
             this.btn_reclutamiento.Text = "Reclutamiento";
             this.btn_reclutamiento.UseVisualStyleBackColor = true;
+            this.btn_reclutamiento.Click += new System.EventHandler(this.btn_reclutamiento_Click);
             // 
             // btn_movimientos
             // 

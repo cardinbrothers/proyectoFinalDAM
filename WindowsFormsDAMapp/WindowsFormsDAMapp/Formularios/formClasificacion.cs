@@ -164,5 +164,17 @@ namespace WindowsFormsDAMapp
             // Cerramos este formulario
             this.Close();
         }
+
+        private void btn_mapa_Click(object sender, EventArgs e)
+        {
+            // Creamos un objeto del formulario de inicio de sesion
+            frmMapa frm_mapa = new frmMapa(infoSesion);
+
+            // Lanzamos el objeto de inicio de sesion   
+            frm_mapa.Show();
+
+            // Cerramos este formulario
+            this.Close();
+        }
     }
 }

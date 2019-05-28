@@ -17,7 +17,7 @@ namespace WebService_ProyectoDAM.ApiEntities
 
         public DateTime horaLlegada { get; set; }
 
-        public TimeSpan duracion { get; set; }
+        public string duracion { get; set; }
 
         public int arqueros { get; set; }
 

@@ -140,7 +140,7 @@ namespace WindowsFormsDAMapp
 
         private void btn_apoyar_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(tbx_arquero.Text) && !String.IsNullOrEmpty(tbx_ballestero.Text))
+            if (!String.IsNullOrEmpty(tbx_arquero.Text) || !String.IsNullOrEmpty(tbx_ballestero.Text))
             {
                 // Creamos las variables para almacenar el numero de tropas
                 int arqueros, ballesteros; 
@@ -173,7 +173,7 @@ namespace WindowsFormsDAMapp
                         arqueros = 0;
                     }
 
-                    if (!String.IsNullOrEmpty(tbx_arquero.Text))
+                    if (!String.IsNullOrEmpty(tbx_ballestero.Text))
                     {
                         ballesteros = Convert.ToInt32(tbx_ballestero.Text);
                     }
@@ -182,10 +182,8 @@ namespace WindowsFormsDAMapp
                         ballesteros = 0;
                     }
 
-                    if (arqueros > tropasDefReales.arqueros || ballesteros > tropasDefReales.ballesteros)
+                    if (arqueros <= tropasDefReales.arqueros && ballesteros <= tropasDefReales.ballesteros)
                     {
-
-
 
                         // Creamos un objeto para realizar la peticion el web service
                         RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
@@ -195,7 +193,7 @@ namespace WindowsFormsDAMapp
 
                         // Añadimos las coordenadas a la peticion
                         peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
-                        peticion2.AddParameter("coordenada2", cbx_pueblos.SelectedText);
+                        peticion2.AddParameter("coordenada2", listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault().coordenadas);
 
 
                         // Obtenemos el resultado de la peticion
@@ -208,13 +206,13 @@ namespace WindowsFormsDAMapp
                         movimientossEntity nuevoMovimiento = new movimientossEntity();
                         nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
                         nuevoMovimiento.puebloDestino = idPuebloDestino;
-                        nuevoMovimiento.duracion = tiempoDistancia;
+                        nuevoMovimiento.duracion = tiempoDistancia.ToString();
                         nuevoMovimiento.piqueros = 0;
                         nuevoMovimiento.caballeros = 0;
                         nuevoMovimiento.paladines = 0;
                         nuevoMovimiento.arqueros = arqueros;
                         nuevoMovimiento.ballesteros = ballesteros;
-                        nuevoMovimiento.tipoMovimiento = "apoyo";
+                        nuevoMovimiento.tipoMovimiento = "P";
 
                         // Creamos un objeto para realizar la peticion el web service
                         RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
@@ -223,7 +221,7 @@ namespace WindowsFormsDAMapp
                         peticion3.AddJsonBody(nuevoMovimiento);
 
                         // Ejecutamos la peticion
-                        restClient.Execute(peticion3);
+                        var response3 = restClient.Execute(peticion3);
 
                         // Limpiamso los text boxes
                         tbx_arquero.Clear();
@@ -251,7 +249,7 @@ namespace WindowsFormsDAMapp
         private void btn_Atacar_Click(object sender, EventArgs e)
         {
 
-            if (!String.IsNullOrEmpty(tbx_piquero.Text) && !String.IsNullOrEmpty(tbx_caballero.Text) && !String.IsNullOrEmpty(tbx_paladin.Text))
+            if (!String.IsNullOrEmpty(tbx_piquero.Text) || !String.IsNullOrEmpty(tbx_caballero.Text) || !String.IsNullOrEmpty(tbx_paladin.Text))
             {
                 // Creamos las variables para almacenar el numero de tropas
                 int piqueros, caballeros, paladines;
@@ -302,11 +300,8 @@ namespace WindowsFormsDAMapp
                         paladines = 0;
                     }
 
-                    if (piqueros > infoPueblo.piqueros || caballeros > infoPueblo.caballeros || paladines > infoPueblo.paladines)
+                    if (piqueros <= infoPueblo.piqueros && caballeros <= infoPueblo.caballeros && paladines <= infoPueblo.paladines)
                     {
-
-
-
 
                         // Creamos un objeto para realizar la peticion el web service
                         RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
@@ -316,7 +311,7 @@ namespace WindowsFormsDAMapp
 
                         // Añadimos las coordenadas a la peticion
                         peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
-                        peticion2.AddParameter("coordenada2", cbx_pueblos.SelectedText);
+                        peticion2.AddParameter("coordenada2", listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault().coordenadas);
 
 
                         // Obtenemos el resultado de la peticion
@@ -329,13 +324,13 @@ namespace WindowsFormsDAMapp
                         movimientossEntity nuevoMovimiento = new movimientossEntity();
                         nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
                         nuevoMovimiento.puebloDestino = idPuebloDestino;
-                        nuevoMovimiento.duracion = tiempoDistancia;
+                        nuevoMovimiento.duracion = tiempoDistancia.ToString();
                         nuevoMovimiento.piqueros = piqueros;
                         nuevoMovimiento.caballeros = caballeros;
                         nuevoMovimiento.paladines = paladines;
                         nuevoMovimiento.arqueros = 0;
                         nuevoMovimiento.ballesteros = 0;
-                        nuevoMovimiento.tipoMovimiento = "ataque";
+                        nuevoMovimiento.tipoMovimiento = "A";
 
                         // Creamos un objeto para realizar la peticion el web service
                         RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
@@ -460,7 +455,19 @@ namespace WindowsFormsDAMapp
 
         private void btn_mapa_Click(object sender, EventArgs e)
         {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
+                // Creamos un objeto del formulario de inicio de sesion
+                frmMapa frm_mapa = new frmMapa(infoSesion);
+
+                // Lanzamos el objeto de inicio de sesion   
+                frm_mapa.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
         }
 
         private void Cbx_pueblos_SelectedIndexChanged(object sender, EventArgs e)
@@ -473,6 +480,23 @@ namespace WindowsFormsDAMapp
                 infoPueblo = obtenerInfoPueblo(id_Pueblo);
                 tropasDefReales = obtenerTropas(id_Pueblo);
 
+            }
+        }
+
+        private void btn_reclutamiento_Click(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                // Añadimos el id del pueblo actual
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+                // Creamos un objeto del formulario de reclutamiento
+                formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                reclutamiento.Show();
+
+                // Cerramos este formulario
+                this.Close();
             }
         }
     }

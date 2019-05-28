@@ -44,7 +44,7 @@ namespace WindowsFormsDAMapp
             listaMovimientos = obtenerMovimientos(infoSesion.id_Pueblo);
 
             // Introducir los movimientos en listView
-
+            mostrarMovimientos(listaMovimientos);
 
             // Introducimos los pueblos en el comboBox
             cbx_pueblos.ValueMember = "id_Pueblo";
@@ -128,6 +128,7 @@ namespace WindowsFormsDAMapp
 
                 // Actualizamos los movimientos
                 listaMovimientos = obtenerMovimientos(id_Pueblo);
+                mostrarMovimientos(listaMovimientos);
             }
 
         }
@@ -279,6 +280,23 @@ namespace WindowsFormsDAMapp
 
                     lsv_entrantes.Items.Add(itemAux);
                 }
+            }
+        }
+
+        private void btn_mapa_Click(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                // Creamos un objeto del formulario de inicio de sesion
+                frmMapa frm_mapa = new frmMapa(infoSesion);
+
+                // Lanzamos el objeto de inicio de sesion   
+                frm_mapa.Show();
+
+                // Cerramos este formulario
+                this.Close();
             }
         }
     }

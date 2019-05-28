@@ -21,6 +21,7 @@ namespace WindowsFormsDAMapp
         webServiceInfo session = new webServiceInfo();
         infoPartidaEntity paramsPartida;
         List<puebloEntity> listaPueblos;
+        List<movimientossEntity> listaMovimientos;
 
         public formVisionGeneral(sessionInfo infoSesion)
         {
@@ -40,6 +41,10 @@ namespace WindowsFormsDAMapp
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
 
             // obtenemos los movimientos del pueblo
+            listaMovimientos = obtenerMovimientos(infoSesion.id_Pueblo);
+
+            // Introducir los movimientos en listView
+
 
             // Introducimos los pueblos en el comboBox
             cbx_pueblos.ValueMember = "id_Pueblo";
@@ -122,6 +127,7 @@ namespace WindowsFormsDAMapp
                 }
 
                 // Actualizamos los movimientos
+                listaMovimientos = obtenerMovimientos(id_Pueblo);
             }
 
         }
@@ -231,6 +237,48 @@ namespace WindowsFormsDAMapp
 
                 // Cerramos este formulario
                 this.Close();
+            }
+        }
+
+        private List<movimientossEntity> obtenerMovimientos(int id_Pueblo)
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Movimientos/obtenerMovimientos", Method.GET);
+
+            // Añadimos el id de la partida a la peticion
+            peticion.AddParameter("id_Pueblo", id_Pueblo);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            List<movimientossEntity> result = JsonConvert.DeserializeObject<List<movimientossEntity>>(response.Content);
+
+            return result;
+        }
+
+        private void mostrarMovimientos(List<movimientossEntity> listaMovimientos)
+        {
+            foreach(var movimiento in listaMovimientos)
+            {
+                if (movimiento.puebloOrigen == infoSesion.id_Pueblo)
+                {
+                    ListViewItem itemAux = new ListViewItem(movimiento.puebloDestino.ToString());
+                    itemAux.SubItems.Add((movimiento.horaLlegada - DateTime.Now).ToString());
+                    itemAux.SubItems.Add(movimiento.horaLlegada.ToString());
+                    itemAux.SubItems.Add(movimiento.tipoMovimiento);
+
+                    lsv_Salientes.Items.Add(itemAux);
+                }
+                else
+                {
+                    ListViewItem itemAux = new ListViewItem(movimiento.puebloOrigen.ToString());
+                    itemAux.SubItems.Add((movimiento.horaLlegada - DateTime.Now).ToString());
+                    itemAux.SubItems.Add(movimiento.horaLlegada.ToString());
+                    itemAux.SubItems.Add(movimiento.tipoMovimiento);
+
+                    lsv_entrantes.Items.Add(itemAux);
+                }
             }
         }
     }

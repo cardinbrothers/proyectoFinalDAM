@@ -233,7 +233,6 @@
             this.tbx_coordApoyo.Size = new System.Drawing.Size(50, 20);
             this.tbx_coordApoyo.TabIndex = 95;
             this.tbx_coordApoyo.Tag = "";
-            this.tbx_coordApoyo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_Tropas_KeyPress);
             // 
             // lab_coord
             // 
@@ -252,7 +251,6 @@
             this.tbx_CoordAtaque.Size = new System.Drawing.Size(50, 20);
             this.tbx_CoordAtaque.TabIndex = 98;
             this.tbx_CoordAtaque.Tag = "";
-            this.tbx_CoordAtaque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_Tropas_KeyPress);
             // 
             // lab_coord2
             // 
@@ -283,6 +281,7 @@
             this.cbx_pueblos.Name = "cbx_pueblos";
             this.cbx_pueblos.Size = new System.Drawing.Size(94, 21);
             this.cbx_pueblos.TabIndex = 100;
+            this.cbx_pueblos.SelectedIndexChanged += new System.EventHandler(this.Cbx_pueblos_SelectedIndexChanged);
             // 
             // lab_Pueblos
             // 

@@ -63,7 +63,7 @@
             this.col_tipoMovimiento = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lab_movimientosEntrantes = new System.Windows.Forms.Label();
             this.lab_movimientosSalientes = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lsv_Salientes = new System.Windows.Forms.ListView();
             this.col_destino = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_tiempoRestante2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_horaLlegada2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -257,19 +257,19 @@
             this.lab_movimientosSalientes.TabIndex = 31;
             this.lab_movimientosSalientes.Text = "Movimientos Salidas";
             // 
-            // listView1
+            // lsv_Salientes
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lsv_Salientes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_destino,
             this.col_tiempoRestante2,
             this.col_horaLlegada2,
             this.col_tipo2});
-            this.listView1.Location = new System.Drawing.Point(270, 288);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(359, 148);
-            this.listView1.TabIndex = 32;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lsv_Salientes.Location = new System.Drawing.Point(270, 288);
+            this.lsv_Salientes.Name = "lsv_Salientes";
+            this.lsv_Salientes.Size = new System.Drawing.Size(359, 148);
+            this.lsv_Salientes.TabIndex = 32;
+            this.lsv_Salientes.UseCompatibleStateImageBehavior = false;
+            this.lsv_Salientes.View = System.Windows.Forms.View.Details;
             // 
             // col_destino
             // 
@@ -306,7 +306,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 480);
             this.Controls.Add(this.btn_volver);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lsv_Salientes);
             this.Controls.Add(this.lab_movimientosSalientes);
             this.Controls.Add(this.lab_movimientosEntrantes);
             this.Controls.Add(this.lsv_entrantes);
@@ -351,7 +351,7 @@
         private System.Windows.Forms.ColumnHeader col_tipoMovimiento;
         private System.Windows.Forms.Label lab_movimientosEntrantes;
         private System.Windows.Forms.Label lab_movimientosSalientes;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lsv_Salientes;
         private System.Windows.Forms.ColumnHeader col_destino;
         private System.Windows.Forms.ColumnHeader col_tiempoRestante2;
         private System.Windows.Forms.ColumnHeader col_horaLlegada2;

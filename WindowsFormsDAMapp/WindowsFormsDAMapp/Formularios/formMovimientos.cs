@@ -21,6 +21,8 @@ namespace WindowsFormsDAMapp
         webServiceInfo session = new webServiceInfo();
         infoPartidaEntity paramsPartida;
         List<puebloEntity> listaPueblos;
+        puebloEntity infoPueblo;
+        tropasDefensivasEntity tropasDefReales;
 
 
         public formMovimientos(sessionInfo infoSesion)
@@ -40,6 +42,11 @@ namespace WindowsFormsDAMapp
             // Obtenemos los pueblos del jugador
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
 
+            // Obtenemos la info del pueblo
+            infoPueblo = obtenerInfoPueblo(infoSesion.id_Pueblo);
+
+            // Obtenemos las tropas reales del pueblo
+            tropasDefReales = obtenerTropas(infoSesion.id_Pueblo);
 
             // Introducimos los pueblos en el comboBox
             cbx_pueblos.ValueMember = "id_Pueblo";
@@ -48,6 +55,42 @@ namespace WindowsFormsDAMapp
 
             // Seleccionamos el pueblo deseado
             cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+        }
+
+        // Metodo para obtener la info del pueblo
+        private puebloEntity obtenerInfoPueblo(int idPueblo)
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Pueblo/obtenerPueblo", Method.GET);
+
+            // Añadimos el nombre del usuario a la peticion
+            peticion.AddParameter("id_Pueblo", idPueblo);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            puebloEntity result = JsonConvert.DeserializeObject<puebloEntity>(response.Content);
+
+            return result;
+        }
+
+        // Metodo para obtener la info del pueblo
+        private  tropasDefensivasEntity obtenerTropas (int idPueblo)
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Pueblo/obtenerDefReal", Method.GET);
+
+            // Añadimos el nombre del usuario a la peticion
+            peticion.AddParameter("id_Pueblo", idPueblo);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            tropasDefensivasEntity result = JsonConvert.DeserializeObject<tropasDefensivasEntity>(response.Content);
+
+            return result;
         }
 
         // Metodo para obtener los parametros de la partida
@@ -139,50 +182,59 @@ namespace WindowsFormsDAMapp
                         ballesteros = 0;
                     }
 
-                    // Creamos un objeto para realizar la peticion el web service
-                    RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
-
-                    // Añadimos el id de la partida a la peticion
-                    peticion2.AddParameter("id_Partida", infoSesion.id_partida);
-
-                    // Añadimos las coordenadas a la peticion
-                    peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
-                    peticion2.AddParameter("coordenada2", cbx_pueblos.SelectedText);
+                    if (arqueros > tropasDefReales.arqueros || ballesteros > tropasDefReales.ballesteros)
+                    {
 
 
-                    // Obtenemos el resultado de la peticion
-                    var response2 = restClient.Execute(peticion2);
 
-                    // Deserializamos el resultado de la peticion recibido para almacenarlo
-                    TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
+                        // Creamos un objeto para realizar la peticion el web service
+                        RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
 
-                    // Creamos un nuevo movimiento
-                    movimientossEntity nuevoMovimiento = new movimientossEntity();
-                    nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
-                    nuevoMovimiento.puebloDestino = idPuebloDestino;
-                    nuevoMovimiento.duracion = tiempoDistancia;
-                    nuevoMovimiento.piqueros = 0;
-                    nuevoMovimiento.caballeros = 0;
-                    nuevoMovimiento.paladines = 0;
-                    nuevoMovimiento.arqueros = arqueros;
-                    nuevoMovimiento.ballesteros = ballesteros;
-                    nuevoMovimiento.tipoMovimiento = "apoyo";
+                        // Añadimos el id de la partida a la peticion
+                        peticion2.AddParameter("id_Partida", infoSesion.id_partida);
 
-                    // Creamos un objeto para realizar la peticion el web service
-                    RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
+                        // Añadimos las coordenadas a la peticion
+                        peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
+                        peticion2.AddParameter("coordenada2", cbx_pueblos.SelectedText);
 
-                    // Añadimos el objeto
-                    peticion3.AddJsonBody(nuevoMovimiento);
 
-                    // Ejecutamos la peticion
-                    restClient.Execute(peticion3);
+                        // Obtenemos el resultado de la peticion
+                        var response2 = restClient.Execute(peticion2);
 
-                    // Limpiamso los text boxes
-                    tbx_arquero.Clear();
-                    tbx_ballestero.Clear();
+                        // Deserializamos el resultado de la peticion recibido para almacenarlo
+                        TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
 
-                    MessageBox.Show("Apoyo enviado correctamente");
+                        // Creamos un nuevo movimiento
+                        movimientossEntity nuevoMovimiento = new movimientossEntity();
+                        nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
+                        nuevoMovimiento.puebloDestino = idPuebloDestino;
+                        nuevoMovimiento.duracion = tiempoDistancia;
+                        nuevoMovimiento.piqueros = 0;
+                        nuevoMovimiento.caballeros = 0;
+                        nuevoMovimiento.paladines = 0;
+                        nuevoMovimiento.arqueros = arqueros;
+                        nuevoMovimiento.ballesteros = ballesteros;
+                        nuevoMovimiento.tipoMovimiento = "apoyo";
 
+                        // Creamos un objeto para realizar la peticion el web service
+                        RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
+
+                        // Añadimos el objeto
+                        peticion3.AddJsonBody(nuevoMovimiento);
+
+                        // Ejecutamos la peticion
+                        restClient.Execute(peticion3);
+
+                        // Limpiamso los text boxes
+                        tbx_arquero.Clear();
+                        tbx_ballestero.Clear();
+
+                        MessageBox.Show("Apoyo enviado correctamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No tienes suficientes tropaspara enviar el ataque");
+                    }
                 }
                 else
                 {
@@ -250,49 +302,61 @@ namespace WindowsFormsDAMapp
                         paladines = 0;
                     }
 
-                    // Creamos un objeto para realizar la peticion el web service
-                    RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
-
-                    // Añadimos el id de la partida a la peticion
-                    peticion2.AddParameter("id_Partida", infoSesion.id_partida);
-
-                    // Añadimos las coordenadas a la peticion
-                    peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
-                    peticion2.AddParameter("coordenada2", cbx_pueblos.SelectedText);
+                    if (piqueros > infoPueblo.piqueros || caballeros > infoPueblo.caballeros || paladines > infoPueblo.paladines)
+                    {
 
 
-                    // Obtenemos el resultado de la peticion
-                    var response2 = restClient.Execute(peticion2);
 
-                    // Deserializamos el resultado de la peticion recibido para almacenarlo
-                    TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
 
-                    // Creamos un nuevo movimiento
-                    movimientossEntity nuevoMovimiento = new movimientossEntity();
-                    nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
-                    nuevoMovimiento.puebloDestino = idPuebloDestino;
-                    nuevoMovimiento.duracion = tiempoDistancia;
-                    nuevoMovimiento.piqueros = piqueros;
-                    nuevoMovimiento.caballeros = caballeros;
-                    nuevoMovimiento.paladines = paladines;
-                    nuevoMovimiento.arqueros = 0;
-                    nuevoMovimiento.ballesteros = 0;
-                    nuevoMovimiento.tipoMovimiento = "ataque";
+                        // Creamos un objeto para realizar la peticion el web service
+                        RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
 
-                    // Creamos un objeto para realizar la peticion el web service
-                    RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
+                        // Añadimos el id de la partida a la peticion
+                        peticion2.AddParameter("id_Partida", infoSesion.id_partida);
 
-                    // Añadimos el objeto
-                    peticion3.AddJsonBody(nuevoMovimiento);
+                        // Añadimos las coordenadas a la peticion
+                        peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
+                        peticion2.AddParameter("coordenada2", cbx_pueblos.SelectedText);
 
-                    // Ejecutamos la peticion
-                    restClient.Execute(peticion3);
 
-                    // Limpiamso los text boxes
-                    tbx_arquero.Clear();
-                    tbx_ballestero.Clear();
+                        // Obtenemos el resultado de la peticion
+                        var response2 = restClient.Execute(peticion2);
 
-                    MessageBox.Show("Ataque enviado correctamente");
+                        // Deserializamos el resultado de la peticion recibido para almacenarlo
+                        TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
+
+                        // Creamos un nuevo movimiento
+                        movimientossEntity nuevoMovimiento = new movimientossEntity();
+                        nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
+                        nuevoMovimiento.puebloDestino = idPuebloDestino;
+                        nuevoMovimiento.duracion = tiempoDistancia;
+                        nuevoMovimiento.piqueros = piqueros;
+                        nuevoMovimiento.caballeros = caballeros;
+                        nuevoMovimiento.paladines = paladines;
+                        nuevoMovimiento.arqueros = 0;
+                        nuevoMovimiento.ballesteros = 0;
+                        nuevoMovimiento.tipoMovimiento = "ataque";
+
+                        // Creamos un objeto para realizar la peticion el web service
+                        RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
+
+                        // Añadimos el objeto
+                        peticion3.AddJsonBody(nuevoMovimiento);
+
+                        // Ejecutamos la peticion
+                        restClient.Execute(peticion3);
+
+                        // Limpiamso los text boxes
+                        tbx_arquero.Clear();
+                        tbx_ballestero.Clear();
+
+                        MessageBox.Show("Ataque enviado correctamente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No dispones de tropas suficientes para realizar el ataque");
+
+                    }
 
                 }
                 else
@@ -397,6 +461,19 @@ namespace WindowsFormsDAMapp
         private void btn_mapa_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Cbx_pueblos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbx_pueblos.Items.Count > 0 && cbx_pueblos.DataSource != null)
+            {
+                // Almacenamos el id del pueblo seleccionado
+                int id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                infoPueblo = obtenerInfoPueblo(id_Pueblo);
+                tropasDefReales = obtenerTropas(id_Pueblo);
+
+            }
         }
     }
 }

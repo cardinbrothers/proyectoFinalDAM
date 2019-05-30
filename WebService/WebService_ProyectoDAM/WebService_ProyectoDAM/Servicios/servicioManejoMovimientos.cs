@@ -42,6 +42,7 @@ namespace WebService_ProyectoDAM.Servicios
                     insertMovimiento.caballeros = movimiento.caballeros;
                     insertMovimiento.paladines = movimiento.paladines;
                     insertMovimiento.tipoMovimiento = movimiento.tipoMovimiento;
+                    insertMovimiento.vencedor = -1;
 
                     // Añadimos el registro del movimiento a la tabla de movimientos y confirmamos los cambios en la base de datos
                     context.Movimientos.Add(insertMovimiento);
@@ -89,38 +90,34 @@ namespace WebService_ProyectoDAM.Servicios
             {
                 using (var context = new ProyectoDAMEntities())
                 {
+                    DateTime horaActual = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
+
                     // Obtenemos los movientos de la base de datos
                     var movimientos = from register in context.Movimientos
                                       where (register.puebloOrigen == id_Pueblo ||
-                                      register.puebloDestino == id_Pueblo) //&&
-                                      //register.horaLlegada.TimeOfDay > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time").TimeOfDay
+                                      register.puebloDestino == id_Pueblo) &&
+                                      register.horaLlegada > horaActual
                                       select register;
 
                     // Tratamos cada moviento con un foreach
                     foreach (var movimiento in movimientos)
                     {
-                        if (movimiento.horaLlegada > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time"))
-                        {
+                        // Creamos un objeto auxiliar para almacenar la informacion de el movimiento
+                        movimientosEntity movimientoAux = new movimientosEntity();
+                        movimientoAux.id_Movimiento = movimiento.id_Movimiento;
+                        movimientoAux.puebloOrigen = movimiento.puebloOrigen;
+                        movimientoAux.puebloDestino = movimiento.puebloDestino;
+                        movimientoAux.tipoMovimiento = movimiento.tipoMovimiento;
+                        movimientoAux.duracion = movimiento.duracion.ToString();
+                        movimientoAux.horaLlegada = movimiento.horaLlegada;
+                        movimientoAux.arqueros = movimiento.arqueros;
+                        movimientoAux.ballesteros = movimiento.ballesteros;
+                        movimientoAux.piqueros = movimiento.piqueros;
+                        movimientoAux.caballeros = movimiento.caballeros;
+                        movimientoAux.paladines = movimiento.paladines;
 
-
-                            // Creamos un objeto auxiliar para almacenar la informacion de el movimiento
-                            movimientosEntity movimientoAux = new movimientosEntity();
-                            movimientoAux.id_Movimiento = movimiento.id_Movimiento;
-                            movimientoAux.puebloOrigen = movimiento.puebloOrigen;
-                            movimientoAux.puebloDestino = movimiento.puebloDestino;
-                            movimientoAux.tipoMovimiento = movimiento.tipoMovimiento;
-                            movimientoAux.duracion = movimiento.duracion.ToString();
-                            movimientoAux.horaLlegada = movimiento.horaLlegada;
-                            movimientoAux.arqueros = movimiento.arqueros;
-                            movimientoAux.ballesteros = movimiento.ballesteros;
-                            movimientoAux.piqueros = movimiento.piqueros;
-                            movimientoAux.caballeros = movimiento.caballeros;
-                            movimientoAux.paladines = movimiento.paladines;
-                            movimientoAux.vencedor = movimiento.vencedor;
-
-                            // Añadimos la variable auxiliar a la lista que devolveremos
-                            listaMovimientos.Add(movimientoAux);
-                        }
+                        // Añadimos la variable auxiliar a la lista que devolveremos
+                        listaMovimientos.Add(movimientoAux);
                     }
                 }
             }
@@ -143,7 +140,6 @@ namespace WebService_ProyectoDAM.Servicios
                     // Obtenemos la lista de movimientos terminados
                     var movimentosAcabados = from register in context.Movimientos
                                              where register.id_Movimiento == id_movimiento &&
-                                             register.horaLlegada < TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time") &&
                                              register.vencedor == -1
                                              select register;
 
@@ -210,11 +206,11 @@ namespace WebService_ProyectoDAM.Servicios
                         var infoPuebloAtacante = (from register in context.Pueblo
                                               where register.id_Pueblo == infoAtaque.puebloOrigen
                                               select register).FirstOrDefault();
-
+                        DateTime horaActual = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
                         // Obtenemos los apoyos destinados en el pueblo defensor de la batalla
                         var infoApoyos = from register in context.Apoyos
                                          where register.puebloDestino == infoAtaque.puebloDestino &&
-                                         register.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
+                                         register.horaFin > horaActual
                                          select register;
 
                         // Creamos los objetos de los servicios de manejo de pueblos y apoyos para llamar a sus metodos

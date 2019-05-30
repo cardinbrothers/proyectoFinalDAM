@@ -57,6 +57,8 @@ namespace WindowsFormsDAMapp
             // Deserializamos el resultado de la peticion recibido para almacenarlo
             List<potenciaJugadorEntity> result = JsonConvert.DeserializeObject<List<potenciaJugadorEntity>>(response.Content);
 
+            result.OrderByDescending(x => x.potenciaJugador);
+
             return result;
         }
 

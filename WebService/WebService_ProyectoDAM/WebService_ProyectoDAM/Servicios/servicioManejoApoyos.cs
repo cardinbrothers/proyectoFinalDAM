@@ -24,7 +24,7 @@ namespace WebService_ProyectoDAM.Servicios
                     // Obtenemos el movimiento de tropas que ha finalizado
                     var movimiento = (from register in context.Movimientos
                                       where register.id_Movimiento == id_Movimiento &&
-                                      register.tipoMovimiento == "apoyo" &&
+                                      register.tipoMovimiento == "P" &&
                                       register.vencedor == -1
                                       select new
                                       {
@@ -42,7 +42,7 @@ namespace WebService_ProyectoDAM.Servicios
                         Apoyos insertApoyo = new Apoyos();
                         insertApoyo.puebloOrigen = movimiento.puebloOrigen;
                         insertApoyo.puebloDestino = movimiento.puebloDestino;
-                        insertApoyo.horaFin = movimiento.horaLlegada.AddMinutes(20);
+                        insertApoyo.horaFin = movimiento.horaLlegada.AddMinutes(10);
                         insertApoyo.arqueros = movimiento.arqueros;
                         insertApoyo.ballesteros = movimiento.ballesteros;
 
@@ -295,9 +295,10 @@ namespace WebService_ProyectoDAM.Servicios
             {
                 using (var context = new ProyectoDAMEntities())
                 {
+                    DateTime tiempoAhora = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
                     // obtenemos los apoyos que han superado su limite de tiempo
                     var apoyosFinalizados = from register in context.Apoyos
-                                            where register.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
+                                            where register.horaFin > tiempoAhora
                     select register;
 
                     // Tratamos cada apoyo con un foreach

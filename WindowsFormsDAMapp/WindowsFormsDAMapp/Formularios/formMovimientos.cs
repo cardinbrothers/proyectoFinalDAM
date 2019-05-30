@@ -31,6 +31,15 @@ namespace WindowsFormsDAMapp
             InitializeComponent();
         }
 
+        public formMovimientos(sessionInfo infoSesion, string coordsObjetivo)
+        {
+            this.infoSesion = infoSesion;
+            InitializeComponent();
+            tbx_coordApoyo.Text = coordsObjetivo;
+            tbx_CoordAtaque.Text = coordsObjetivo;
+
+        }
+
         private void formMovimientos_Load(object sender, EventArgs e)
         {
             // Introducimos la cadena del servicio

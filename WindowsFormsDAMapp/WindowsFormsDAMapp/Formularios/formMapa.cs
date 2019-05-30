@@ -107,6 +107,8 @@ namespace WindowsFormsDAMapp
                 if (pbx is PictureBox)
                 {
                     PictureBox pbxAux = (PictureBox)pbx;
+                    pbxAux.Enabled = true;
+
 
                     // Comprobamos si la coordenada es del pueblo actual, de uno propio o de un enemigo para pintar de diferentes colores segun corresponda
                     if ((string)pbxAux.Tag == coordActual)
@@ -128,6 +130,11 @@ namespace WindowsFormsDAMapp
                             {
                                 // Si es el pueblo es enemigo pintamos de rojo
                                 pbxAux.Image = Properties.Resources.punto_rojo;
+                            }
+                            else
+                            {
+                                // Deshabilitamos el picture box si no tiene pueblo asignado
+                                pbxAux.Enabled = false;
                             }
                         }
 
@@ -286,6 +293,28 @@ namespace WindowsFormsDAMapp
 
             //Pintamos los pueblos
             pintarCoordenadas();
+        }
+
+        private void coordenadaDoubleClick(object sender, MouseEventArgs e)
+        {
+            PictureBox pbxAux = (PictureBox)sender;
+
+            string coords = (string)pbxAux.Tag;
+
+            if (cbx_pueblos.SelectedValue != null)
+            {
+                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                // Creamos un objeto del formulario de inicio de sesion
+                formMovimientos frm_Movimientos = new formMovimientos(infoSesion, coords);
+
+                // Lanzamos el objeto de inicio de sesion   
+                frm_Movimientos.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+
         }
     }
 }

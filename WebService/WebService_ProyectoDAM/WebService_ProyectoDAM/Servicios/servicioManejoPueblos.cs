@@ -205,16 +205,17 @@ namespace WebService_ProyectoDAM.Servicios
                                            register2.nombreUsuario == nuevoPropietario
                                            select register.limitePoblacion).FirstOrDefault();
 
+                    DateTime tiempoActual = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time");
                     // Obtenemos los apoyos originados del pueblo
                     var apoyos = from register in context.Apoyos
                                  where register.puebloOrigen == id_pueblo &&
-                                 register.horaFin > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time")
+                                 register.horaFin > tiempoActual
                                  select register;
 
                     // Obtenemos los movimientos originados del pueblo
                     var movimientos = from register in context.Movimientos
                                       where register.puebloOrigen == id_pueblo &&
-                                      register.horaLlegada > TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central Europe Standard Time") &&
+                                      register.horaLlegada > tiempoActual &&
                                       register.vencedor == -1
                                       select register;
 

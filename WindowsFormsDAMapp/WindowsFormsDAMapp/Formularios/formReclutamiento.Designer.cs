@@ -515,11 +515,11 @@
             // 
             this.lab_PoblacionPueblo.AutoSize = true;
             this.lab_PoblacionPueblo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_PoblacionPueblo.Location = new System.Drawing.Point(539, 66);
+            this.lab_PoblacionPueblo.Location = new System.Drawing.Point(501, 65);
             this.lab_PoblacionPueblo.Name = "lab_PoblacionPueblo";
-            this.lab_PoblacionPueblo.Size = new System.Drawing.Size(107, 16);
+            this.lab_PoblacionPueblo.Size = new System.Drawing.Size(160, 16);
             this.lab_PoblacionPueblo.TabIndex = 71;
-            this.lab_PoblacionPueblo.Text = "Población: 10/20";
+            this.lab_PoblacionPueblo.Text = "Nivel de Población: 10/20";
             // 
             // btn_volver
             // 

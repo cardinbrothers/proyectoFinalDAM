@@ -278,15 +278,15 @@ namespace WebService_ProyectoDAM.Servicios
                         else
                         {
                             // Calculamos el ratio de perdidas
-                            double ratioPerdidas = Math.Round((double)potenciaDefJugador / resultadoBatalla, 2);
+                            double ratioPerdidas = Math.Round((double)potenciaAtqJugador / resultadoBatalla, 2);
 
                             // Cambiamos el campo de vencedor del movimiento a 2 porque el vencedor es el atacante
                             infoAtaque.vencedor = 2;
 
                             // Calculamos las tropas supervivientes de cada tipo
                             int piquerosSupervivientes = (int)Math.Round(infoAtaque.piqueros / ratioPerdidas);
-                            int caballerosSupervivientes = (int)Math.Round(infoAtaque.piqueros / ratioPerdidas);
-                            int paladinessupervivientes = (int)Math.Round(infoAtaque.piqueros / ratioPerdidas);
+                            int caballerosSupervivientes = (int)Math.Round(infoAtaque.caballeros / ratioPerdidas);
+                            int paladinessupervivientes = (int)Math.Round(infoAtaque.paladines / ratioPerdidas);
 
                             // Sumamos las tropas supervivientes al pueblo atacante y restamos la poblacion de aquellas que no sobrevivieron
                             infoPuebloAtacante.piqueros += piquerosSupervivientes;
@@ -320,6 +320,8 @@ namespace WebService_ProyectoDAM.Servicios
                                 servicioPueblo.cambiarPropietarioPueblo(infoPuebloDefensor.id_Pueblo, infoPuebloAtacante.propietario);
                             }
                         }
+
+                        context.SaveChanges();
 
                     }
                 }

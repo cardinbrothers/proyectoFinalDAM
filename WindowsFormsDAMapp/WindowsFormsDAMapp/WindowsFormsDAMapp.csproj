@@ -185,13 +185,13 @@
     <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\punto-azul-png.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\PUNTO-ROJO.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ico_circulo_azul_oscuro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\punto-azul-png.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -199,11 +199,11 @@
             // 
             this.lab_poblacion.AutoSize = true;
             this.lab_poblacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_poblacion.Location = new System.Drawing.Point(575, 59);
+            this.lab_poblacion.Location = new System.Drawing.Point(522, 58);
             this.lab_poblacion.Name = "lab_poblacion";
-            this.lab_poblacion.Size = new System.Drawing.Size(107, 16);
+            this.lab_poblacion.Size = new System.Drawing.Size(160, 16);
             this.lab_poblacion.TabIndex = 27;
-            this.lab_poblacion.Text = "Población: 10/20";
+            this.lab_poblacion.Text = "Nivel de Población: 10/20";
             // 
             // lsv_entrantes
             // 

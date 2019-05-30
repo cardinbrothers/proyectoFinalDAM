@@ -313,6 +313,17 @@ namespace WindowsFormsDAMapp
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
             cbx_pueblos.DataSource = listaPueblos;
 
+            tbx_arquero.ReadOnly = false;
+            tbx_piquero.ReadOnly = false;
+            tbx_ballestero.ReadOnly = false;
+            tbx_caballero.ReadOnly = false;
+            tbx_paladin.ReadOnly = false;
+            tbx_arquero.Clear();
+            tbx_piquero.Clear();
+            tbx_ballestero.Clear();
+            tbx_caballero.Clear();
+            tbx_paladin.Clear();
+
             try
             {
                 // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador

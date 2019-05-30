@@ -81,8 +81,8 @@ namespace WebService_ProyectoDAM.Servicios
             string coordenadas;
 
             // Obtenemos un numeo aleatorio del 0 al 20 para los ejes
-            ejex = rnd.Next(11);
-            ejey = rnd.Next(11);
+            ejex = rnd.Next(10);
+            ejey = rnd.Next(10);
 
             // Creamos la coordenada con los valores de ambos ejes
             coordenadas = String.Format("({0},{1})", ejex, ejey);

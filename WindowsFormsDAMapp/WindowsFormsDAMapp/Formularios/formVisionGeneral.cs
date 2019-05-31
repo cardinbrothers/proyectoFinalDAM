@@ -11,6 +11,7 @@ using WindowsFormsDAMapp.Helpers;
 using WindowsFormsDAMapp.Entidades;
 using RestSharp;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace WindowsFormsDAMapp
 {
@@ -22,6 +23,7 @@ namespace WindowsFormsDAMapp
         infoPartidaEntity paramsPartida;
         List<puebloEntity> listaPueblos;
         List<movimientossEntity> listaMovimientos;
+        tropasDefensivasEntity cantDeffPropias;
 
         public formVisionGeneral(sessionInfo infoSesion)
         {
@@ -31,14 +33,17 @@ namespace WindowsFormsDAMapp
 
         private void FormVisionGeneral_Load(object sender, EventArgs e)
         {
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
             // Introducimos la cadena del servicio
             restClient = new RestClient(session.CadenaConexion);
 
             // Obtenemos los paramtros de configuracion de la partida
             paramsPartida = obtenerParametrosPartida(infoSesion.id_partida);
 
-            // Obtenemos los pueblos del jugador
-            listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
 
             if (infoSesion.id_Pueblo == 0)
             {
@@ -94,9 +99,33 @@ namespace WindowsFormsDAMapp
 
         }
 
+        // Metodo para obtener la info del pueblo
+        private tropasDefensivasEntity obtenerTropasPropias(int idPueblo)
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Pueblo/obtenerDefReal", Method.GET);
+
+            // Añadimos el nombre del usuario a la peticion
+            peticion.AddParameter("id_Pueblo", idPueblo);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            tropasDefensivasEntity result = JsonConvert.DeserializeObject<tropasDefensivasEntity>(response.Content);
+
+            return result;
+        }
+
         // Introducimmos los valores del pueblo de poblacion, tropas y los movimientos
         private void cbx_pueblos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
             if (cbx_pueblos.Items.Count > 0 && cbx_pueblos.DataSource != null)
             {
                 // Almacenamos el id del pueblo seleccionado
@@ -108,16 +137,22 @@ namespace WindowsFormsDAMapp
                 // Introducimos la poblacion en el label correspondiente
                 lab_poblacion.Text = String.Format("Poblacion: {0}/{1}", pueblo.poblacionRestante, paramsPartida.limitePoblacion);
 
+                // Obtenemos las tropas deff propias
+                cantDeffPropias = obtenerTropasPropias(id_Pueblo);
+
                 // Cambiamos el valor de las tropas
                 for (int i = 0; i < 5; i++)
                 {
                     switch (i)
                     {
                         case 0:
-                            lsv_tropas.Items[i].SubItems[1].Text = pueblo.arqueros.ToString();
+                            lsv_tropas.Items[i].SubItems[1].Text = cantDeffPropias.arqueros.ToString();
+                            lsv_tropas.Items[i].SubItems[2].Text = (pueblo.arqueros - cantDeffPropias.arqueros).ToString();
                             break;
                         case 1:
-                            lsv_tropas.Items[i].SubItems[1].Text = pueblo.ballesteros.ToString();
+                            lsv_tropas.Items[i].SubItems[1].Text = cantDeffPropias.ballesteros.ToString();
+                            lsv_tropas.Items[i].SubItems[2].Text = (pueblo.ballesteros - cantDeffPropias.ballesteros).ToString();
+
                             break;
                         case 2:
                             lsv_tropas.Items[i].SubItems[1].Text = pueblo.piqueros.ToString();
@@ -151,11 +186,16 @@ namespace WindowsFormsDAMapp
         // Metodo asociado al evento recargar que lanza de nuevo la vision general
         private void btn_visionGeneral_Click(object sender, EventArgs e)
         {
+
             // Obtenemos el pueblo seleccionado actualmente
             infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
-            // Obtenemos los pueblos del jugador de nuevo
-            listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
             cbx_pueblos.DataSource = listaPueblos;
 
             try
@@ -177,6 +217,12 @@ namespace WindowsFormsDAMapp
         // Metodo asociado al boton reclutamiento para lanzar el formulario reclutamiento
         private void btn_reclutamiento_Click(object sender, EventArgs e)
         {
+            // Obtenemos el pueblo seleccionado actualmente
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
             if (cbx_pueblos.SelectedValue != null)
             {
                 // Añadimos el id del pueblo actual
@@ -195,6 +241,12 @@ namespace WindowsFormsDAMapp
 
         private void Btn_Clasificacion_Click(object sender, EventArgs e)
         {
+            // Obtenemos el pueblo seleccionado actualmente
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
             if (cbx_pueblos.SelectedValue != null)
             {
                 // Añadimos el id del pueblo actual
@@ -213,6 +265,12 @@ namespace WindowsFormsDAMapp
 
         private void Btn_mensajes_Click(object sender, EventArgs e)
         {
+            // Obtenemos el pueblo seleccionado actualmente
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
             if (cbx_pueblos.SelectedValue != null)
             {
                 // Añadimos el id del pueblo actual
@@ -231,6 +289,12 @@ namespace WindowsFormsDAMapp
 
         private void btn_movimientos_Click(object sender, EventArgs e)
         {
+            // Obtenemos el pueblo seleccionado actualmente
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
             if (cbx_pueblos.SelectedValue != null)
             {
                 infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
@@ -293,6 +357,12 @@ namespace WindowsFormsDAMapp
 
         private void btn_mapa_Click(object sender, EventArgs e)
         {
+            // Obtenemos el pueblo seleccionado actualmente
+            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
             if (cbx_pueblos.SelectedValue != null)
             {
                 infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
@@ -307,5 +377,41 @@ namespace WindowsFormsDAMapp
                 this.Close();
             }
         }
+
+        // Comprobar si ha finalizado la partida
+        private void comprobarFinPartida()
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Partida/comprobarFinallizacion", Method.GET);
+
+            // Añadimos el id de la partida a la peticion
+            peticion.AddParameter("id_Partida", infoSesion.id_partida);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            potenciaJugadorEntity result = JsonConvert.DeserializeObject<potenciaJugadorEntity>(response.Content);
+
+            if (result != null)
+            {
+                var userResponse = MessageBox.Show("La partida ha finalizado! el ganador es: " + result.nombreJugador + "!!!");
+                btn_volver_Click(null, null);
+            }
+        }
+
+        // Comprobar si nos han quitado todos los pueblos
+        private void comprobarPosesionPueblos()
+        {
+            // Obtenemos los pueblos del jugador
+            listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+
+            if (listaPueblos.Count <= 0)
+            {
+                var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
+                btn_volver_Click(null, null);
+            }
+        }
+
     }
 }

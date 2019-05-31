@@ -24,15 +24,6 @@ namespace WebService_ProyectoDAM.Controllers
             return Ok("pong!");
         }
 
-        [Route("prueba")]
-        [HttpPost]
-        public string GetByFilter([FromBody] infoPartidaEntity record)
-        {
-            var json = JsonConvert.SerializeObject(record);
-
-            return json;
-        }
-
         [Route("crearPartida")]
         [HttpPost]
         public int crearPartida([FromBody] infoPartidaEntity record)

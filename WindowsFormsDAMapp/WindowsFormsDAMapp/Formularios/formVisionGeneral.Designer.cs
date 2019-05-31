@@ -28,20 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "Arqueros",
+            "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "Ballesteros",
+            "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "Piqueros",
+            "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "Caballeros",
+            "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
             "Paladines",
+            "0",
             "0"}, -1);
             this.cbx_pueblos = new System.Windows.Forms.ComboBox();
             this.lab_Pueblos = new System.Windows.Forms.Label();
@@ -54,7 +59,8 @@
             this.lab_tropas = new System.Windows.Forms.Label();
             this.lsv_tropas = new System.Windows.Forms.ListView();
             this.col_tropas = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.col_cantidad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.col_cantidadPropia = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.col_cantidadExterna = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lab_poblacion = new System.Windows.Forms.Label();
             this.lsv_entrantes = new System.Windows.Forms.ListView();
             this.col_puebloOrigen = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -171,16 +177,17 @@
             // 
             this.lsv_tropas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.col_tropas,
-            this.col_cantidad});
+            this.col_cantidadPropia,
+            this.col_cantidadExterna});
             this.lsv_tropas.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5});
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
             this.lsv_tropas.Location = new System.Drawing.Point(10, 135);
             this.lsv_tropas.Name = "lsv_tropas";
-            this.lsv_tropas.Size = new System.Drawing.Size(155, 182);
+            this.lsv_tropas.Size = new System.Drawing.Size(214, 182);
             this.lsv_tropas.TabIndex = 26;
             this.lsv_tropas.UseCompatibleStateImageBehavior = false;
             this.lsv_tropas.View = System.Windows.Forms.View.Details;
@@ -190,10 +197,14 @@
             this.col_tropas.Text = "Tropas";
             this.col_tropas.Width = 84;
             // 
-            // col_cantidad
+            // col_cantidadPropia
             // 
-            this.col_cantidad.Text = "Cantidad";
-            this.col_cantidad.Width = 66;
+            this.col_cantidadPropia.Text = "Propias";
+            this.col_cantidadPropia.Width = 66;
+            // 
+            // col_cantidadExterna
+            // 
+            this.col_cantidadExterna.Text = "Externas";
             // 
             // lab_poblacion
             // 
@@ -323,6 +334,7 @@
             this.Controls.Add(this.cbx_pueblos);
             this.Controls.Add(this.lab_Pueblos);
             this.Name = "formVisionGeneral";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vision General";
             this.Load += new System.EventHandler(this.FormVisionGeneral_Load);
             this.ResumeLayout(false);
@@ -343,7 +355,7 @@
         private System.Windows.Forms.Label lab_tropas;
         private System.Windows.Forms.ListView lsv_tropas;
         private System.Windows.Forms.ColumnHeader col_tropas;
-        private System.Windows.Forms.ColumnHeader col_cantidad;
+        private System.Windows.Forms.ColumnHeader col_cantidadPropia;
         private System.Windows.Forms.Label lab_poblacion;
         private System.Windows.Forms.ListView lsv_entrantes;
         private System.Windows.Forms.ColumnHeader col_puebloOrigen;
@@ -358,5 +370,6 @@
         private System.Windows.Forms.ColumnHeader col_horaLlegada2;
         private System.Windows.Forms.ColumnHeader col_tipo2;
         private System.Windows.Forms.Button btn_volver;
+        private System.Windows.Forms.ColumnHeader col_cantidadExterna;
     }
 }

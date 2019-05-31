@@ -335,6 +335,7 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formMovimientos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Movimientos";
             this.Load += new System.EventHandler(this.formMovimientos_Load);
             this.ResumeLayout(false);

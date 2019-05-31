@@ -580,6 +580,7 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formReclutamiento";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reclutamiento";
             this.Load += new System.EventHandler(this.formReclutamiento_Load);
             this.TextChanged += new System.EventHandler(this.textBoxTextChanged);

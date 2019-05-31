@@ -32,6 +32,7 @@
             this.col_Partida = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_Velocidad = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_tiempoRestante = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.col_limitePoblacion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_plazasLibres = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lab_velocidad = new System.Windows.Forms.Label();
             this.lab_PartidasActivas = new System.Windows.Forms.Label();
@@ -53,11 +54,13 @@
             this.col_Partida,
             this.col_Velocidad,
             this.col_tiempoRestante,
+            this.col_limitePoblacion,
             this.col_plazasLibres});
+            this.lsv_PartidasActivas.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lsv_PartidasActivas.Location = new System.Drawing.Point(12, 54);
             this.lsv_PartidasActivas.MultiSelect = false;
             this.lsv_PartidasActivas.Name = "lsv_PartidasActivas";
-            this.lsv_PartidasActivas.Size = new System.Drawing.Size(337, 277);
+            this.lsv_PartidasActivas.Size = new System.Drawing.Size(392, 277);
             this.lsv_PartidasActivas.TabIndex = 0;
             this.lsv_PartidasActivas.UseCompatibleStateImageBehavior = false;
             this.lsv_PartidasActivas.View = System.Windows.Forms.View.Details;
@@ -66,6 +69,7 @@
             // col_Partida
             // 
             this.col_Partida.Text = "Partida";
+            this.col_Partida.Width = 48;
             // 
             // col_Velocidad
             // 
@@ -74,7 +78,12 @@
             // col_tiempoRestante
             // 
             this.col_tiempoRestante.Text = "Tiempo Restante";
-            this.col_tiempoRestante.Width = 136;
+            this.col_tiempoRestante.Width = 98;
+            // 
+            // col_limitePoblacion
+            // 
+            this.col_limitePoblacion.Text = "Limite de Poblacion";
+            this.col_limitePoblacion.Width = 105;
             // 
             // col_plazasLibres
             // 
@@ -85,7 +94,7 @@
             // 
             this.lab_velocidad.AutoSize = true;
             this.lab_velocidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_velocidad.Location = new System.Drawing.Point(389, 77);
+            this.lab_velocidad.Location = new System.Drawing.Point(423, 77);
             this.lab_velocidad.Name = "lab_velocidad";
             this.lab_velocidad.Size = new System.Drawing.Size(70, 16);
             this.lab_velocidad.TabIndex = 1;
@@ -103,7 +112,7 @@
             // 
             // btnCrearPartida
             // 
-            this.btnCrearPartida.Location = new System.Drawing.Point(648, 265);
+            this.btnCrearPartida.Location = new System.Drawing.Point(682, 265);
             this.btnCrearPartida.Name = "btnCrearPartida";
             this.btnCrearPartida.Size = new System.Drawing.Size(91, 36);
             this.btnCrearPartida.TabIndex = 4;
@@ -115,7 +124,7 @@
             // 
             this.lab_crearPartida.AutoSize = true;
             this.lab_crearPartida.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_crearPartida.Location = new System.Drawing.Point(493, 29);
+            this.lab_crearPartida.Location = new System.Drawing.Point(527, 29);
             this.lab_crearPartida.Name = "lab_crearPartida";
             this.lab_crearPartida.Size = new System.Drawing.Size(149, 16);
             this.lab_crearPartida.TabIndex = 12;
@@ -125,7 +134,7 @@
             // 
             this.lab_duracion.AutoSize = true;
             this.lab_duracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_duracion.Location = new System.Drawing.Point(389, 121);
+            this.lab_duracion.Location = new System.Drawing.Point(423, 121);
             this.lab_duracion.Name = "lab_duracion";
             this.lab_duracion.Size = new System.Drawing.Size(101, 16);
             this.lab_duracion.TabIndex = 13;
@@ -135,7 +144,7 @@
             // 
             this.lab_limiteJugadores.AutoSize = true;
             this.lab_limiteJugadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_limiteJugadores.Location = new System.Drawing.Point(389, 165);
+            this.lab_limiteJugadores.Location = new System.Drawing.Point(423, 165);
             this.lab_limiteJugadores.Name = "lab_limiteJugadores";
             this.lab_limiteJugadores.Size = new System.Drawing.Size(126, 16);
             this.lab_limiteJugadores.TabIndex = 14;
@@ -145,7 +154,7 @@
             // 
             this.lab_limitePoblacion.AutoSize = true;
             this.lab_limitePoblacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_limitePoblacion.Location = new System.Drawing.Point(389, 211);
+            this.lab_limitePoblacion.Location = new System.Drawing.Point(423, 211);
             this.lab_limitePoblacion.Name = "lab_limitePoblacion";
             this.lab_limitePoblacion.Size = new System.Drawing.Size(126, 16);
             this.lab_limitePoblacion.TabIndex = 15;
@@ -161,7 +170,7 @@
             "4",
             "8",
             "16"});
-            this.cbx_velocidad.Location = new System.Drawing.Point(550, 72);
+            this.cbx_velocidad.Location = new System.Drawing.Point(584, 72);
             this.cbx_velocidad.Name = "cbx_velocidad";
             this.cbx_velocidad.Size = new System.Drawing.Size(189, 21);
             this.cbx_velocidad.TabIndex = 16;
@@ -177,7 +186,7 @@
             "60",
             "120",
             "360"});
-            this.cbx_Durarcion.Location = new System.Drawing.Point(550, 120);
+            this.cbx_Durarcion.Location = new System.Drawing.Point(584, 120);
             this.cbx_Durarcion.Name = "cbx_Durarcion";
             this.cbx_Durarcion.Size = new System.Drawing.Size(189, 21);
             this.cbx_Durarcion.TabIndex = 17;
@@ -191,7 +200,7 @@
             "4",
             "8",
             "16"});
-            this.cbx_limiteJugadores.Location = new System.Drawing.Point(550, 164);
+            this.cbx_limiteJugadores.Location = new System.Drawing.Point(584, 164);
             this.cbx_limiteJugadores.Name = "cbx_limiteJugadores";
             this.cbx_limiteJugadores.Size = new System.Drawing.Size(189, 21);
             this.cbx_limiteJugadores.TabIndex = 18;
@@ -206,7 +215,7 @@
             "20",
             "50",
             "100"});
-            this.cbx_limitePoblacion.Location = new System.Drawing.Point(550, 210);
+            this.cbx_limitePoblacion.Location = new System.Drawing.Point(584, 210);
             this.cbx_limitePoblacion.Name = "cbx_limitePoblacion";
             this.cbx_limitePoblacion.Size = new System.Drawing.Size(189, 21);
             this.cbx_limitePoblacion.TabIndex = 19;
@@ -227,7 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 350);
+            this.ClientSize = new System.Drawing.Size(789, 350);
             this.Controls.Add(this.cbx_limitePoblacion);
             this.Controls.Add(this.cbx_limiteJugadores);
             this.Controls.Add(this.cbx_Durarcion);
@@ -242,6 +251,7 @@
             this.Controls.Add(this.lab_velocidad);
             this.Controls.Add(this.lsv_PartidasActivas);
             this.Name = "frm_MenuPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu Principal";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Frm_MenuPrincipal_FormClosed);
             this.Load += new System.EventHandler(this.frm_MenuPrincipal_Load);
@@ -269,6 +279,7 @@
         private System.Windows.Forms.ComboBox cbx_Durarcion;
         private System.Windows.Forms.ComboBox cbx_limiteJugadores;
         private System.Windows.Forms.ComboBox cbx_limitePoblacion;
+        private System.Windows.Forms.ColumnHeader col_limitePoblacion;
     }
 }
 

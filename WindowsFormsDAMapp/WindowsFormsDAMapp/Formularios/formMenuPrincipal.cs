@@ -78,6 +78,7 @@ namespace WindowsFormsDAMapp
                 // Añadimos el resto de informacion al item de listview
                 itemAux.SubItems.Add("x" + partida.velocidad.ToString());
                 itemAux.SubItems.Add(Math.Round(tiempoRestante.TotalMinutes).ToString() + " minutos");
+                itemAux.SubItems.Add(partida.limitePoblacion.ToString());
                 itemAux.SubItems.Add(plazasLibres.ToString());
 
                 // Añadimos el item al ListView

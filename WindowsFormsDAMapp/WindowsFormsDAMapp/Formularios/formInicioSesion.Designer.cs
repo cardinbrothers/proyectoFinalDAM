@@ -129,6 +129,7 @@
             this.Controls.Add(this.lab_contrasñea);
             this.Controls.Add(this.lab_nombreUsuario);
             this.Name = "formInicioSesion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio Sesion";
             this.Load += new System.EventHandler(this.formInicioSesion_Load);
             this.ResumeLayout(false);

@@ -192,6 +192,7 @@
             this.Controls.Add(this.btn_visionGeneral);
             this.Controls.Add(this.tbx_respuesta);
             this.Name = "formContestarMensaje";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contestar Mensaje";
             this.Load += new System.EventHandler(this.FormContestarMensaje_Load);
             this.ResumeLayout(false);

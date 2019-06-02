@@ -33,11 +33,11 @@ namespace WindowsFormsDAMapp
 
         private void FormVisionGeneral_Load(object sender, EventArgs e)
         {
-            // Comprobar si se ha acabado la partida
-            comprobarFinPartida();
-
             // Introducimos la cadena del servicio
             restClient = new RestClient(session.CadenaConexion);
+
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
             // Obtenemos los paramtros de configuracion de la partida
             paramsPartida = obtenerParametrosPartida(infoSesion.id_partida);
@@ -481,7 +481,7 @@ namespace WindowsFormsDAMapp
             // Obtenemos los pueblos del jugador
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
 
-            if (listaPueblos.Count <= 0)
+            if (listaPueblos.Count <= 0 || listaPueblos == null)
             {
                 var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
                 btn_volver_Click(null, null);

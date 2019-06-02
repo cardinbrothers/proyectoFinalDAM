@@ -30,15 +30,15 @@ namespace WindowsFormsDAMapp
 
         private void FormEnviarMensaje_Load(object sender, EventArgs e)
         {
+            // Introducimos la cadena del servicio
+            restClient = new RestClient(session.CadenaConexion);
+            
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
-
-            // Introducimos la cadena del servicio
-            restClient = new RestClient(session.CadenaConexion);
-
+                    
         }
 
         private void Btn_enviar_Click(object sender, EventArgs e)

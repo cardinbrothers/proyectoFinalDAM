@@ -32,11 +32,11 @@ namespace WindowsFormsDAMapp
         private void Mapa_Load(object sender, EventArgs e)
         {
 
-            // Comprobar si se ha acabado la partida
-            comprobarFinPartida();
-
             // Introducimos la cadena del servicio
             restClient = new RestClient(session.CadenaConexion);
+
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
@@ -464,7 +464,7 @@ namespace WindowsFormsDAMapp
             // Obtenemos los pueblos del jugador
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
 
-            if (listaPueblos.Count <= 0)
+            if (listaPueblos.Count <= 0 || listaPueblos == null)
             {
                 var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
                 btn_volver_Click(null, null);

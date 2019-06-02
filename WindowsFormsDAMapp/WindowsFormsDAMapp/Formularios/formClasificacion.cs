@@ -32,15 +32,15 @@ namespace WindowsFormsDAMapp
 
         private void FormClasificacion_Load(object sender, EventArgs e)
         {
+            // Introducimos la cadena del servicio
+            restClient = new RestClient(session.CadenaConexion);
+
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
-
-            // Introducimos la cadena del servicio
-            restClient = new RestClient(session.CadenaConexion);
-
+            
             // Obtenemos la clasificacion de la partida
             listaClasificacion = obtenerClasificacion();
 
@@ -320,7 +320,7 @@ namespace WindowsFormsDAMapp
             // Obtenemos los pueblos del jugador
             listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
 
-            if (listaPueblos.Count <= 0)
+            if (listaPueblos.Count <= 0 || listaPueblos == null)
             {
                 var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
                 Btn_volver_Click(null, null);

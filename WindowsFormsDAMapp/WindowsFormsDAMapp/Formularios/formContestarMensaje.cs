@@ -21,6 +21,8 @@ namespace WindowsFormsDAMapp
         webServiceInfo session = new webServiceInfo();
         List<mensajesEntity> listaMensajes;
         mensajesEntity mensajePadre;
+        List<puebloEntity> listaPueblos;
+
 
         public formContestarMensaje(mensajesEntity mensajePadre, sessionInfo info)
         {
@@ -31,6 +33,12 @@ namespace WindowsFormsDAMapp
 
         private void FormContestarMensaje_Load(object sender, EventArgs e)
         {
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
             // Introducimos la cadena del servicio
             restClient = new RestClient(session.CadenaConexion);
 
@@ -113,6 +121,12 @@ namespace WindowsFormsDAMapp
 
         private void Btn_aceptar_Click(object sender, EventArgs e)
         {
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
+
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
             mensajesEntity mensajeEnviado = new mensajesEntity();
 
             mensajeEnviado.usuarioEmisor = infoSesion.nombreUsuario;
@@ -176,75 +190,246 @@ namespace WindowsFormsDAMapp
         }
 
         private void Btn_visionGeneral_Click(object sender, EventArgs e)
-        {
-            // Creamos un objeto del formulario de inicio de sesion
-            formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+        { 
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
-            // Lanzamos el objeto de inicio de sesion   
-            VisionGeneral.Show();
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
 
-            // Cerramos este formulario
-            this.Close();
+            try
+            {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+
+                }
+
+                // Creamos un objeto del formulario de inicio de sesion
+                formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+                // Lanzamos el objeto de inicio de sesion   
+                VisionGeneral.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void Btn_reclutamiento_Click(object sender, EventArgs e)
         {
-            // Creamos un objeto del formulario de reclutamiento
-            formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
-            // Lanzamos el formulario de reclutamiento
-            reclutamiento.Show();
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
 
-            // Cerramos este formulario
-            this.Close();
+            try
+            {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+
+                }
+
+                // Creamos un objeto del formulario de reclutamiento
+                formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                reclutamiento.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void Btn_Clasificacion_Click(object sender, EventArgs e)
         {
-            // Creamos un objeto del formulario de reclutamiento
-            formClasificacion clasificacion = new formClasificacion(infoSesion);
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
-            // Lanzamos el formulario de reclutamiento
-            clasificacion.Show();
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
 
-            // Cerramos este formulario
-            this.Close();
+            try
+            {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
+
+                // Creamos un objeto del formulario de reclutamiento
+                formClasificacion clasificacion = new formClasificacion(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                clasificacion.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void Btn_mensajes_Click(object sender, EventArgs e)
         {
-            // Creamos un objeto del formulario de reclutamiento
-            formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
 
-            // Lanzamos el formulario de reclutamiento
-            bandejaEntrada.Show();
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
-            // Cerramos este formulario
-            this.Close();
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
+            try
+            {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
+                // Creamos un objeto del formulario de reclutamiento
+                formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
+
+                // Lanzamos el formulario de reclutamiento
+                bandejaEntrada.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void btn_mapa_Click(object sender, EventArgs e)
         {
-            // Creamos un objeto del formulario de inicio de sesion
-            frmMapa frm_mapa = new frmMapa(infoSesion);
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
-            // Lanzamos el objeto de inicio de sesion   
-            frm_mapa.Show();
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
 
-            // Cerramos este formulario
-            this.Close();
+            try
+            {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
+                
+                // Creamos un objeto del formulario de inicio de sesion
+                frmMapa frm_mapa = new frmMapa(infoSesion);
+
+                // Lanzamos el objeto de inicio de sesion   
+                frm_mapa.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void btn_movimientos_Click(object sender, EventArgs e)
         {
-            // Creamos un objeto del formulario de inicio de sesion
-            formMovimientos frm_movimientos = new formMovimientos(infoSesion);
+            // Comprobar si se ha acabado la partida
+            comprobarFinPartida();
 
-            // Lanzamos el objeto de inicio de sesion   
-            frm_movimientos.Show();
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
 
-            // Cerramos este formulario
-            this.Close();
+            try
+            {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
+
+                // Creamos un objeto del formulario de inicio de sesion
+                formMovimientos frm_Movimientos = new formMovimientos(infoSesion);
+
+                // Lanzamos el objeto de inicio de sesion   
+                frm_Movimientos.Show();
+
+                // Cerramos este formulario
+                this.Close();
+            }
+            catch
+            {
+
+            }
+        }
+
+
+        // Comprobar si ha finalizado la partida
+        private void comprobarFinPartida()
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Partida/comprobarFinallizacion", Method.GET);
+
+            // Añadimos el id de la partida a la peticion
+            peticion.AddParameter("id_Partida", infoSesion.id_partida);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            potenciaJugadorEntity result = JsonConvert.DeserializeObject<potenciaJugadorEntity>(response.Content);
+
+            if (result != null)
+            {
+                var userResponse = MessageBox.Show("La partida ha finalizado! el ganador es: " + result.nombreJugador + "!!!");
+                Btn_volver_Click(null, null);
+
+            }
+        }
+
+        private List<puebloEntity> obtenerListaPueblos(string nombreUsuario)
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Pueblo/obtenerListaPueblos", Method.GET);
+
+            // Añadimos el nombre del usuario a la peticion
+            peticion.AddParameter("propietario", nombreUsuario);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            List<puebloEntity> result = JsonConvert.DeserializeObject<List<puebloEntity>>(response.Content);
+
+            return result;
+
+        }
+
+        // Comprobar si nos han quitado todos los pueblos
+        private void comprobarPosesionPueblos()
+        {
+            // Obtenemos los pueblos del jugador
+            listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+
+            if (listaPueblos.Count <= 0)
+            {
+                var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
+                Btn_volver_Click(null, null);
+            }
         }
     }
 }

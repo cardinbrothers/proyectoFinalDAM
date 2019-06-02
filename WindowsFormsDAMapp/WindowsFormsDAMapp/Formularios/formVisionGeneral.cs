@@ -61,6 +61,10 @@ namespace WindowsFormsDAMapp
             cbx_pueblos.DisplayMember = "coordenadas";
             cbx_pueblos.DataSource = listaPueblos;
 
+
+            // Seleccionamos el pueblo deseado
+            cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+
         }
 
         // Metodo para obtener los parametros de la partida
@@ -126,7 +130,7 @@ namespace WindowsFormsDAMapp
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
 
-            if (cbx_pueblos.Items.Count > 0 && cbx_pueblos.DataSource != null)
+            if (listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault() != null)
             {
                 // Almacenamos el id del pueblo seleccionado
                 int id_Pueblo = (int)cbx_pueblos.SelectedValue;
@@ -169,6 +173,11 @@ namespace WindowsFormsDAMapp
                 // Actualizamos los movimientos
                 listaMovimientos = obtenerMovimientos(id_Pueblo);
                 mostrarMovimientos(listaMovimientos);
+            }
+            else
+            {
+                MessageBox.Show("Ya no posees el pueblo");
+                cbx_pueblos.DataSource = listaPueblos;
             }
 
         }
@@ -223,10 +232,20 @@ namespace WindowsFormsDAMapp
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
-            if (cbx_pueblos.SelectedValue != null)
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
+            cbx_pueblos.DataSource = listaPueblos;
+
+            try
             {
-                // Añadimos el id del pueblo actual
-                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+
+                }
+
                 // Creamos un objeto del formulario de reclutamiento
                 formReclutamiento reclutamiento = new formReclutamiento(infoSesion);
 
@@ -236,7 +255,10 @@ namespace WindowsFormsDAMapp
                 // Cerramos este formulario
                 this.Close();
             }
-            
+            catch
+            {
+
+            }            
         }
 
         private void Btn_Clasificacion_Click(object sender, EventArgs e)
@@ -247,10 +269,18 @@ namespace WindowsFormsDAMapp
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
-            if (cbx_pueblos.SelectedValue != null)
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
+            cbx_pueblos.DataSource = listaPueblos;
+
+            try
             {
-                // Añadimos el id del pueblo actual
-                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
 
                 // Creamos un objeto del formulario de reclutamiento
                 formClasificacion clasificacion = new formClasificacion(infoSesion);
@@ -261,6 +291,10 @@ namespace WindowsFormsDAMapp
                 // Cerramos este formulario
                 this.Close();
             }
+            catch
+            {
+
+            }          
         }
 
         private void Btn_mensajes_Click(object sender, EventArgs e)
@@ -271,11 +305,18 @@ namespace WindowsFormsDAMapp
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
-            if (cbx_pueblos.SelectedValue != null)
-            {
-                // Añadimos el id del pueblo actual
-                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
 
+            cbx_pueblos.DataSource = listaPueblos;
+
+            try
+            {
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
                 // Creamos un objeto del formulario de reclutamiento
                 formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
 
@@ -285,19 +326,33 @@ namespace WindowsFormsDAMapp
                 // Cerramos este formulario
                 this.Close();
             }
+            catch
+            {
+
+            }
         }
 
         private void btn_movimientos_Click(object sender, EventArgs e)
         {
+
             // Obtenemos el pueblo seleccionado actualmente
             infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
-            if (cbx_pueblos.SelectedValue != null)
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
+            cbx_pueblos.DataSource = listaPueblos;
+
+            try
             {
-                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
 
                 // Creamos un objeto del formulario de inicio de sesion
                 formMovimientos frm_Movimientos = new formMovimientos(infoSesion);
@@ -308,6 +363,11 @@ namespace WindowsFormsDAMapp
                 // Cerramos este formulario
                 this.Close();
             }
+            catch
+            {
+
+            }            
+            
         }
 
         private List<movimientossEntity> obtenerMovimientos(int id_Pueblo)
@@ -363,9 +423,19 @@ namespace WindowsFormsDAMapp
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
-            if (cbx_pueblos.SelectedValue != null)
+            // Comprobamos si se posee al menos un pueblo y los almacenamos
+            comprobarPosesionPueblos();
+
+            cbx_pueblos.DataSource = listaPueblos;
+
+            try
             {
-                infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                {
+                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                }
+
 
                 // Creamos un objeto del formulario de inicio de sesion
                 frmMapa frm_mapa = new frmMapa(infoSesion);
@@ -376,6 +446,11 @@ namespace WindowsFormsDAMapp
                 // Cerramos este formulario
                 this.Close();
             }
+            catch
+            {
+
+            }
+
         }
 
         // Comprobar si ha finalizado la partida

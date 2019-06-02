@@ -38,6 +38,8 @@ namespace WindowsFormsDAMapp
 
         private void Btn_iniciarSesion_Click(object sender, EventArgs e)
         {
+            comprobarFinPartida();
+
             if (String.IsNullOrEmpty(tbx_nombreUsuario.Text) || String.IsNullOrEmpty(tbx_contraseña.Text))
             {
                 MessageBox.Show("El usuario y la contraseña no pueden estar vacios");
@@ -128,6 +130,8 @@ namespace WindowsFormsDAMapp
 
         private void Btn_crearCuenta_Click(object sender, EventArgs e)
         {
+            comprobarFinPartida();
+
             if (String.IsNullOrEmpty(tbx_nombreUsuario.Text) || String.IsNullOrEmpty(tbx_contraseña.Text))
             {
                 MessageBox.Show("El usuario y la contraseña no pueden estar vacios");
@@ -225,6 +229,30 @@ namespace WindowsFormsDAMapp
             formularioPrincipal.Show();
 
             this.Close();
+        }
+
+
+        // Comprobar si ha finalizado la partida
+        private void comprobarFinPartida()
+        {
+            // Creamos un objeto para realizar la peticion el web service
+            RestRequest peticion = new RestRequest("/api/Partida/comprobarFinallizacion", Method.GET);
+
+            // Añadimos el id de la partida a la peticion
+            peticion.AddParameter("id_Partida", infoSesion.id_partida);
+
+            // Obtenemos el resultado de la peticion
+            var response = restClient.Execute(peticion);
+
+            // Deserializamos el resultado de la peticion recibido para almacenarlo
+            potenciaJugadorEntity result = JsonConvert.DeserializeObject<potenciaJugadorEntity>(response.Content);
+
+            if (result != null)
+            {
+                var userResponse = MessageBox.Show("La partida ha finalizado! el ganador es: " + result.nombreJugador + "!!!");
+                Btn_volver_Click(null, null);
+
+            }
         }
     }
 }

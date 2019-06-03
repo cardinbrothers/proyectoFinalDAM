@@ -337,6 +337,7 @@
             this.Name = "formMovimientos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Movimientos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formMovimientos_FormClosing);
             this.Load += new System.EventHandler(this.formMovimientos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -194,6 +194,7 @@
             this.Name = "formContestarMensaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contestar Mensaje";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formContestarMensaje_FormClosing);
             this.Load += new System.EventHandler(this.FormContestarMensaje_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

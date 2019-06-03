@@ -22,7 +22,7 @@ namespace WindowsFormsDAMapp
         webServiceInfo session = new webServiceInfo();
         List<potenciaJugadorEntity> listaClasificacion;
         List<puebloEntity> listaPueblos;
-
+        bool SalidaForm = false;
 
         public formClasificacion(sessionInfo infoSesion)
         {
@@ -65,7 +65,7 @@ namespace WindowsFormsDAMapp
             // Deserializamos el resultado de la peticion recibido para almacenarlo
             List<potenciaJugadorEntity> result = JsonConvert.DeserializeObject<List<potenciaJugadorEntity>>(response.Content);
 
-            result.OrderByDescending(x => x.potenciaJugador);
+            result = result.OrderByDescending(x => x.potenciaJugador).ToList();
 
             return result;
         }
@@ -74,6 +74,7 @@ namespace WindowsFormsDAMapp
         private void mostrarClasificacion(List<potenciaJugadorEntity> clasificacion)
         {
             lsv_clasificacion.Items.Clear();
+
 
             foreach (var jugador in clasificacion)
             {
@@ -317,13 +318,16 @@ namespace WindowsFormsDAMapp
         // Comprobar si nos han quitado todos los pueblos
         private void comprobarPosesionPueblos()
         {
-            // Obtenemos los pueblos del jugador
-            listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
-
-            if (listaPueblos.Count <= 0 || listaPueblos == null)
+           if (!SalidaForm)
             {
-                var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
-                Btn_volver_Click(null, null);
+                // Obtenemos los pueblos del jugador
+                listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+
+                if (listaPueblos.Count <= 0 || listaPueblos == null)
+                {
+                    var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
+                    Btn_volver_Click(null, null);
+                }
             }
         }
 
@@ -343,6 +347,11 @@ namespace WindowsFormsDAMapp
 
             return result;
 
+        }
+
+        private void formClasificacion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SalidaForm = true;
         }
     }
 }

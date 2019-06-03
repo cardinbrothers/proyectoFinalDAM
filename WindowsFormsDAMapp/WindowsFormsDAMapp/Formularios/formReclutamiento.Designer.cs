@@ -582,6 +582,7 @@
             this.Name = "formReclutamiento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reclutamiento";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formReclutamiento_FormClosing);
             this.Load += new System.EventHandler(this.formReclutamiento_Load);
             this.TextChanged += new System.EventHandler(this.textBoxTextChanged);
             this.ResumeLayout(false);

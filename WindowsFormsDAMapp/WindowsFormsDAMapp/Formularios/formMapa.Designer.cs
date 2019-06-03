@@ -1675,6 +1675,7 @@
             this.Name = "frmMapa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mapa";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMapa_FormClosing);
             this.Load += new System.EventHandler(this.Mapa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_9_9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_8_9)).EndInit();

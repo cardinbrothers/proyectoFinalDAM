@@ -176,6 +176,7 @@
             this.Name = "formBandejaEntrada";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bandeja de Entrada";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formBandejaEntrada_FormClosing);
             this.Load += new System.EventHandler(this.FormBandejaEntrada_Load);
             this.ResumeLayout(false);
 

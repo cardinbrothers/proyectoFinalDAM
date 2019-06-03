@@ -21,7 +21,7 @@ namespace WindowsFormsDAMapp
         webServiceInfo session = new webServiceInfo();
         List<mensajesEntity> listaMensajes;
         List<puebloEntity> listaPueblos;
-
+        bool SalidaForm = false;
 
         public formBandejaEntrada(sessionInfo info)
         {
@@ -383,14 +383,22 @@ namespace WindowsFormsDAMapp
         // Comprobar si nos han quitado todos los pueblos
         private void comprobarPosesionPueblos()
         {
-            // Obtenemos los pueblos del jugador
-            listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
-
-            if (listaPueblos.Count <= 0 || listaPueblos == null)
+           if (!SalidaForm)
             {
-                var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
-                Btn_volver_Click(null, null);
+                // Obtenemos los pueblos del jugador
+                listaPueblos = obtenerListaPueblos(infoSesion.nombreUsuario);
+
+                if (listaPueblos.Count <= 0 || listaPueblos == null)
+                {
+                    var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
+                    Btn_volver_Click(null, null);
+                }
             }
+        }
+
+        private void formBandejaEntrada_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SalidaForm = true;
         }
     }
 }

@@ -336,6 +336,7 @@
             this.Name = "formVisionGeneral";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vision General";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formVisionGeneral_FormClosing);
             this.Load += new System.EventHandler(this.FormVisionGeneral_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

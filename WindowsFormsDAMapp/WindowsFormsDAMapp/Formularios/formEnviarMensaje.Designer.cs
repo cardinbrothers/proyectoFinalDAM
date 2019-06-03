@@ -194,6 +194,7 @@
             this.Name = "formEnviarMensaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Enviar Mensaje";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formEnviarMensaje_FormClosing);
             this.Load += new System.EventHandler(this.FormEnviarMensaje_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

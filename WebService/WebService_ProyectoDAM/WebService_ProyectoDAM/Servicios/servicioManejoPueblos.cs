@@ -420,10 +420,10 @@ namespace WebService_ProyectoDAM.Servicios
                     if (variableVelocidad != 0)
                     {
                         // Calculamos los minutos multiplicando la distancia por 0.5 y por la velocidad de la partida
-                        int minutos = (int)Math.Round(distancia * 0.5 / variableVelocidad);
+                        int segundos = (int)Math.Round(distancia * 30 / variableVelocidad);
 
                         // Iniciamos el objeto TimeSpan con los minutos calculados
-                        tiempoDistancia = new TimeSpan(0, minutos, 0);
+                        tiempoDistancia = new TimeSpan(0, 0, segundos);
                     }
                     
                 }

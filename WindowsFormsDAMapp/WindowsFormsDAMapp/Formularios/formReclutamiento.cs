@@ -339,20 +339,23 @@ namespace WindowsFormsDAMapp
 
             try
             {
-                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
-                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                if (!SalidaForm)
                 {
-                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                    if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                    {
+                        infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
 
+                    }
+                    // Creamos un objeto del formulario de inicio de sesion
+                    formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+                    // Lanzamos el objeto de inicio de sesion   
+                    VisionGeneral.Show();
+
+                    // Cerramos este formulario
+                    this.Close();
                 }
-                // Creamos un objeto del formulario de inicio de sesion
-                formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
-
-                // Lanzamos el objeto de inicio de sesion   
-                VisionGeneral.Show();
-
-                // Cerramos este formulario
-                this.Close();
             }
             catch
             {
@@ -416,20 +419,23 @@ namespace WindowsFormsDAMapp
 
             try
             {
-                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
-                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                if (!SalidaForm)
                 {
-                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                    if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                    {
+                        infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    }
+
+                    // Creamos un objeto del formulario de reclutamiento
+                    formClasificacion clasificacion = new formClasificacion(infoSesion);
+
+                    // Lanzamos el formulario de reclutamiento
+                    clasificacion.Show();
+
+                    // Cerramos este formulario
+                    this.Close();
                 }
-
-                // Creamos un objeto del formulario de reclutamiento
-                formClasificacion clasificacion = new formClasificacion(infoSesion);
-
-                // Lanzamos el formulario de reclutamiento
-                clasificacion.Show();
-
-                // Cerramos este formulario
-                this.Close();
             }
             catch
             {
@@ -504,19 +510,22 @@ namespace WindowsFormsDAMapp
 
             try
             {
-                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
-                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                if (!SalidaForm)
                 {
-                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                    if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                    {
+                        infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    }
+                    // Creamos un objeto del formulario de reclutamiento
+                    formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
+
+                    // Lanzamos el formulario de reclutamiento
+                    bandejaEntrada.Show();
+
+                    // Cerramos este formulario
+                    this.Close();
                 }
-                // Creamos un objeto del formulario de reclutamiento
-                formBandejaEntrada bandejaEntrada = new formBandejaEntrada(infoSesion);
-
-                // Lanzamos el formulario de reclutamiento
-                bandejaEntrada.Show();
-
-                // Cerramos este formulario
-                this.Close();
             }
             catch
             {
@@ -539,20 +548,23 @@ namespace WindowsFormsDAMapp
 
             try
             {
-                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
-                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                if (!SalidaForm)
                 {
-                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                    if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                    {
+                        infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    }
+
+                    // Creamos un objeto del formulario de inicio de sesion
+                    formMovimientos frm_Movimientos = new formMovimientos(infoSesion);
+
+                    // Lanzamos el objeto de inicio de sesion   
+                    frm_Movimientos.Show();
+
+                    // Cerramos este formulario
+                    this.Close();
                 }
-
-                // Creamos un objeto del formulario de inicio de sesion
-                formMovimientos frm_Movimientos = new formMovimientos(infoSesion);
-
-                // Lanzamos el objeto de inicio de sesion   
-                frm_Movimientos.Show();
-
-                // Cerramos este formulario
-                this.Close();
             }
             catch
             {
@@ -575,21 +587,24 @@ namespace WindowsFormsDAMapp
 
             try
             {
-                // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
-                if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                if (!SalidaForm)
                 {
-                    infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
+                    if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
+                    {
+                        infoSesion.id_Pueblo = listaPueblos[0].id_Pueblo;
+                    }
+
+
+                    // Creamos un objeto del formulario de inicio de sesion
+                    frmMapa frm_mapa = new frmMapa(infoSesion);
+
+                    // Lanzamos el objeto de inicio de sesion   
+                    frm_mapa.Show();
+
+                    // Cerramos este formulario
+                    this.Close();
                 }
-
-
-                // Creamos un objeto del formulario de inicio de sesion
-                frmMapa frm_mapa = new frmMapa(infoSesion);
-
-                // Lanzamos el objeto de inicio de sesion   
-                frm_mapa.Show();
-
-                // Cerramos este formulario
-                this.Close();
             }
             catch
             {
@@ -630,7 +645,7 @@ namespace WindowsFormsDAMapp
                 if (listaPueblos.Count <= 0 || listaPueblos == null)
                 {
                     var userResponse = MessageBox.Show("Te han quitado todos los pueblos, perdiste la partida.");
-                    btn_volver_Click(null, null);
+                    Btn_volver_Click(null, null);
                 }
             }
         }

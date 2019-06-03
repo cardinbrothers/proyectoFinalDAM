@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Arqueros",
             "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Ballesteros",
             "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Piqueros",
             "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "Caballeros",
             "0",
             "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "Paladines",
             "0",
             "0"}, -1);
@@ -180,11 +180,11 @@
             this.col_cantidadPropia,
             this.col_cantidadExterna});
             this.lsv_tropas.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem6,
-            listViewItem7,
-            listViewItem8,
-            listViewItem9,
-            listViewItem10});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5});
             this.lsv_tropas.Location = new System.Drawing.Point(10, 135);
             this.lsv_tropas.Name = "lsv_tropas";
             this.lsv_tropas.Size = new System.Drawing.Size(214, 182);
@@ -225,7 +225,7 @@
             this.col_tipoMovimiento});
             this.lsv_entrantes.Location = new System.Drawing.Point(270, 96);
             this.lsv_entrantes.Name = "lsv_entrantes";
-            this.lsv_entrantes.Size = new System.Drawing.Size(359, 148);
+            this.lsv_entrantes.Size = new System.Drawing.Size(386, 148);
             this.lsv_entrantes.TabIndex = 28;
             this.lsv_entrantes.UseCompatibleStateImageBehavior = false;
             this.lsv_entrantes.View = System.Windows.Forms.View.Details;
@@ -243,7 +243,7 @@
             // col_horaLlegada
             // 
             this.col_horaLlegada.Text = "Hora Llegada";
-            this.col_horaLlegada.Width = 113;
+            this.col_horaLlegada.Width = 140;
             // 
             // col_tipoMovimiento
             // 
@@ -278,7 +278,7 @@
             this.col_tipo2});
             this.lsv_Salientes.Location = new System.Drawing.Point(270, 288);
             this.lsv_Salientes.Name = "lsv_Salientes";
-            this.lsv_Salientes.Size = new System.Drawing.Size(359, 148);
+            this.lsv_Salientes.Size = new System.Drawing.Size(386, 148);
             this.lsv_Salientes.TabIndex = 32;
             this.lsv_Salientes.UseCompatibleStateImageBehavior = false;
             this.lsv_Salientes.View = System.Windows.Forms.View.Details;
@@ -291,12 +291,12 @@
             // col_tiempoRestante2
             // 
             this.col_tiempoRestante2.Text = "Tiempo Restante";
-            this.col_tiempoRestante2.Width = 98;
+            this.col_tiempoRestante2.Width = 93;
             // 
             // col_horaLlegada2
             // 
             this.col_horaLlegada2.Text = "Hora Llegada";
-            this.col_horaLlegada2.Width = 113;
+            this.col_horaLlegada2.Width = 145;
             // 
             // col_tipo2
             // 

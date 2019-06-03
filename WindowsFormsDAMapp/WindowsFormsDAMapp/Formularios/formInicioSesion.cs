@@ -181,7 +181,7 @@ namespace WindowsFormsDAMapp
                         break;
 
                     case 1:
-                        mensaje = "Nombre de usuario ya existenteo";
+                        mensaje = "Nombre de usuario ya existente";
                         break;
 
                     case 2:

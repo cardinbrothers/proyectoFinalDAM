@@ -337,18 +337,36 @@ namespace WindowsFormsDAMapp
                 if (movimiento.puebloOrigen == infoSesion.id_Pueblo)
                 {
                     ListViewItem itemAux = new ListViewItem(movimiento.puebloDestino.ToString());
-                    itemAux.SubItems.Add((movimiento.horaLlegada - DateTime.Now).ToString());
+                    itemAux.SubItems.Add((movimiento.horaLlegada - DateTime.Now).ToString(@"hh\:mm\:ss"));
                     itemAux.SubItems.Add(movimiento.horaLlegada.ToString());
-                    itemAux.SubItems.Add(movimiento.tipoMovimiento);
+                    if (movimiento.tipoMovimiento == "P")
+                    {
+                        itemAux.SubItems.Add("Apoyo");
+
+                    }
+                    else
+                    {
+                        itemAux.SubItems.Add("Ataque");
+
+                    }
 
                     lsv_Salientes.Items.Add(itemAux);
                 }
                 else
                 {
                     ListViewItem itemAux = new ListViewItem(movimiento.puebloOrigen.ToString());
-                    itemAux.SubItems.Add((movimiento.horaLlegada - DateTime.Now).ToString());
+                    itemAux.SubItems.Add((movimiento.horaLlegada - DateTime.Now).ToString(@"hh\:mm\:ss"));
                     itemAux.SubItems.Add(movimiento.horaLlegada.ToString());
-                    itemAux.SubItems.Add(movimiento.tipoMovimiento);
+                    if (movimiento.tipoMovimiento == "P")
+                    {
+                        itemAux.SubItems.Add("Apoyo");
+
+                    }
+                    else
+                    {
+                        itemAux.SubItems.Add("Ataque");
+
+                    }
 
                     lsv_entrantes.Items.Add(itemAux);
                 }

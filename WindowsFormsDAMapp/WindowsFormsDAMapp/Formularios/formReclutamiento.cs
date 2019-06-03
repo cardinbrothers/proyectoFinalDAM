@@ -239,7 +239,7 @@ namespace WindowsFormsDAMapp
 
             // Añadimos la cantidad y timepo restante al listview
             itemAux.SubItems.Add(orden.cantidad.ToString());
-            itemAux.SubItems.Add((orden.horaFin - DateTime.Now).ToString());
+            itemAux.SubItems.Add((orden.horaFin - DateTime.Now).ToString(@"hh\:mm\:ss"));
 
             lsv_cola.Items.Add(itemAux);
 

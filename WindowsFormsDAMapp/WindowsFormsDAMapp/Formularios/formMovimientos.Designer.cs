@@ -335,10 +335,11 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formMovimientos";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Movimientos";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formMovimientos_FormClosing);
             this.Load += new System.EventHandler(this.formMovimientos_Load);
+            this.LocationChanged += new System.EventHandler(this.FormMovimientos_LocationChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

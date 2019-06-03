@@ -133,6 +133,7 @@
             this.Text = "Inicio Sesion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formInicioSesion_FormClosing);
             this.Load += new System.EventHandler(this.formInicioSesion_Load);
+            this.LocationChanged += new System.EventHandler(this.FormInicioSesion_LocationChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

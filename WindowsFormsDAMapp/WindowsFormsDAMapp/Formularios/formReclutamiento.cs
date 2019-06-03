@@ -56,6 +56,9 @@ namespace WindowsFormsDAMapp
             cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
 
             this.Location = infoSesion.posicionFormulario;
+
+            this.Text = "Jugador: " + infoSesion.nombreUsuario;
+
         }
 
         // Metodo para obtener los parametros de la partida
@@ -660,6 +663,13 @@ namespace WindowsFormsDAMapp
         private void formReclutamiento_FormClosing(object sender, FormClosingEventArgs e)
         {
             SalidaForm = true;
+        }
+
+        private void FormReclutamiento_LocationChanged(object sender, EventArgs e)
+        {
+            formReclutamiento frmAux = (formReclutamiento)sender;
+            Point position = frmAux.Location;
+            infoSesion.posicionFormulario = position;
         }
     }
 }

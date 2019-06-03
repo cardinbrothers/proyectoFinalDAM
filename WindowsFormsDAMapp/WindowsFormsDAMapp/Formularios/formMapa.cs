@@ -56,6 +56,11 @@ namespace WindowsFormsDAMapp
 
             //Pintamos los pueblos
             pintarCoordenadas();
+
+            this.Location = infoSesion.posicionFormulario;
+
+            this.Text = "Jugador: " + infoSesion.nombreUsuario;
+
         }
 
         private List<puebloEntity> obtenerListaPueblos(string nombreUsuario)
@@ -497,6 +502,13 @@ namespace WindowsFormsDAMapp
         private void frmMapa_FormClosing(object sender, FormClosingEventArgs e)
         {
             SalidaForm = true;
+        }
+
+        private void FrmMapa_LocationChanged(object sender, EventArgs e)
+        {
+            frmMapa frmAux = (frmMapa)sender;
+            Point position = frmAux.Location;
+            infoSesion.posicionFormulario = position;
         }
     }
 }

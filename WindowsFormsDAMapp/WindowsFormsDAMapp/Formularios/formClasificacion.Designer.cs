@@ -161,10 +161,11 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formClasificacion";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Clasificacion";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formClasificacion_FormClosing);
             this.Load += new System.EventHandler(this.FormClasificacion_Load);
+            this.LocationChanged += new System.EventHandler(this.FormClasificacion_LocationChanged);
             this.ResumeLayout(false);
 
         }

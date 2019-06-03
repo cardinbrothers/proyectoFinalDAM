@@ -47,6 +47,11 @@ namespace WindowsFormsDAMapp
 
             // Introducimos los mensajes en el listView
             mostrarMensajes(listaMensajes);
+
+            this.Location = infoSesion.posicionFormulario;
+
+            this.Text = "Jugador: " + infoSesion.nombreUsuario;
+
         }
 
         private List<mensajesEntity> obtenerMensajes()
@@ -459,6 +464,13 @@ namespace WindowsFormsDAMapp
         private void formContestarMensaje_FormClosing(object sender, FormClosingEventArgs e)
         {
             SalidaForm = true;
+        }
+
+        private void FormContestarMensaje_LocationChanged(object sender, EventArgs e)
+        {
+            formContestarMensaje frmAux = (formContestarMensaje)sender;
+            Point position = frmAux.Location;
+            infoSesion.posicionFormulario = position;
         }
     }
 }

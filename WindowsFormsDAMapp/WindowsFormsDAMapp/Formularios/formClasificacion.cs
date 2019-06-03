@@ -47,6 +47,9 @@ namespace WindowsFormsDAMapp
             // Mostramos la clasificacion de la partida
             mostrarClasificacion(listaClasificacion);
 
+            this.Location = infoSesion.posicionFormulario;
+
+            this.Text = "Jugador: " + infoSesion.nombreUsuario;
 
         }
 
@@ -367,6 +370,13 @@ namespace WindowsFormsDAMapp
         private void formClasificacion_FormClosing(object sender, FormClosingEventArgs e)
         {
             SalidaForm = true;
+        }
+
+        private void FormClasificacion_LocationChanged(object sender, EventArgs e)
+        {
+            formClasificacion frmAux = (formClasificacion)sender;
+            Point position = frmAux.Location;
+            infoSesion.posicionFormulario = position;
         }
     }
 }

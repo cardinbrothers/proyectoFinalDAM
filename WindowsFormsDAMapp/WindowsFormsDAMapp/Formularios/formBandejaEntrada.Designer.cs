@@ -174,10 +174,11 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formBandejaEntrada";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Bandeja de Entrada";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formBandejaEntrada_FormClosing);
             this.Load += new System.EventHandler(this.FormBandejaEntrada_Load);
+            this.LocationChanged += new System.EventHandler(this.FormBandejaEntrada_LocationChanged);
             this.ResumeLayout(false);
 
         }

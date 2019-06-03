@@ -63,6 +63,11 @@ namespace WindowsFormsDAMapp
             // Seleccionamos el pueblo deseado
             cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
 
+            this.Location = infoSesion.posicionFormulario;
+
+            this.Text = "Jugador: " + infoSesion.nombreUsuario;
+
+
         }
 
         // Metodo para obtener los parametros de la partida

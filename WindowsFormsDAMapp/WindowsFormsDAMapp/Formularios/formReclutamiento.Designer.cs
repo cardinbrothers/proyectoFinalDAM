@@ -580,11 +580,11 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "formReclutamiento";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Reclutamiento";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formReclutamiento_FormClosing);
             this.Load += new System.EventHandler(this.formReclutamiento_Load);
-            this.TextChanged += new System.EventHandler(this.textBoxTextChanged);
+            this.LocationChanged += new System.EventHandler(this.FormReclutamiento_LocationChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

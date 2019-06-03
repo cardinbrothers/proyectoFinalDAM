@@ -1673,10 +1673,11 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Name = "frmMapa";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Mapa";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMapa_FormClosing);
             this.Load += new System.EventHandler(this.Mapa_Load);
+            this.LocationChanged += new System.EventHandler(this.FrmMapa_LocationChanged);
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_9_9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_8_9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.coordenada_7_9)).EndInit();

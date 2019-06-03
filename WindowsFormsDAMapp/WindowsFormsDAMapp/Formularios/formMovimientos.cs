@@ -68,6 +68,11 @@ namespace WindowsFormsDAMapp
 
             // Seleccionamos el pueblo deseado
             cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+
+            this.Location = infoSesion.posicionFormulario;
+
+            this.Text = "Jugador: " + infoSesion.nombreUsuario;
+
         }
 
         // Metodo para obtener la info del pueblo
@@ -722,6 +727,13 @@ namespace WindowsFormsDAMapp
         private void formMovimientos_FormClosing(object sender, FormClosingEventArgs e)
         {
             SalidaForm = true;
+        }
+
+        private void FormMovimientos_LocationChanged(object sender, EventArgs e)
+        {
+            formMovimientos frmAux = (formMovimientos)sender;
+            Point position = frmAux.Location;
+            infoSesion.posicionFormulario = position;
         }
     }
 }

@@ -38,7 +38,11 @@ namespace WindowsFormsDAMapp
 
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
-                    
+
+            this.Location = infoSesion.posicionFormulario;
+
+            this.Text = "Jugador: " + infoSesion.nombreUsuario;
+
         }
 
         private void Btn_enviar_Click(object sender, EventArgs e)
@@ -372,6 +376,13 @@ namespace WindowsFormsDAMapp
         private void formEnviarMensaje_FormClosing(object sender, FormClosingEventArgs e)
         {
             SalidaForm = true;
+        }
+
+        private void FormEnviarMensaje_LocationChanged(object sender, EventArgs e)
+        {
+            formEnviarMensaje frmAux = (formEnviarMensaje)sender;
+            Point position = frmAux.Location;
+            infoSesion.posicionFormulario = position;
         }
     }
     

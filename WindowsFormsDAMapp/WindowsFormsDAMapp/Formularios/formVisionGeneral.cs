@@ -46,16 +46,13 @@ namespace WindowsFormsDAMapp
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
 
-            if (infoSesion.id_Pueblo == 0)
+            if (infoSesion.id_Pueblo == 0 && listaPueblos.Count> 0)
             {
                 infoSesion.id_Pueblo = listaPueblos.First().id_Pueblo;
             }
 
             // obtenemos los movimientos del pueblo
             listaMovimientos = obtenerMovimientos(infoSesion.id_Pueblo);
-
-            // Introducir los movimientos en listView
-            mostrarMovimientos(listaMovimientos);
 
             // Introducimos los pueblos en el comboBox
             cbx_pueblos.ValueMember = "id_Pueblo";
@@ -410,7 +407,7 @@ namespace WindowsFormsDAMapp
 
             foreach (var movimiento in listaMovimientos)
             {
-                if (movimiento.puebloOrigen == infoSesion.id_Pueblo)
+                if (movimiento.puebloOrigen == (int)cbx_pueblos.SelectedValue)
                 {
                     ListViewItem itemAux = new ListViewItem(movimiento.puebloDestino.ToString());
                     itemAux.SubItems.Add((movimiento.horaLlegada - DateTime.Now).ToString(@"hh\:mm\:ss"));

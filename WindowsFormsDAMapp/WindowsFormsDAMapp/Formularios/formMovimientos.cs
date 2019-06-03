@@ -250,6 +250,8 @@ namespace WindowsFormsDAMapp
                                 tbx_ballestero.Clear();
 
                                 MessageBox.Show("Apoyo enviado correctamente");
+                                tbx_arquero.Clear();
+                                tbx_ballestero.Clear();
                             }
                             else
                             {
@@ -387,6 +389,9 @@ namespace WindowsFormsDAMapp
                                 tbx_ballestero.Clear();
 
                                 MessageBox.Show("Ataque enviado correctamente");
+                                tbx_caballero.Clear();
+                                tbx_piquero.Clear();
+                                tbx_paladin.Clear();
                             }
                             else
                             {

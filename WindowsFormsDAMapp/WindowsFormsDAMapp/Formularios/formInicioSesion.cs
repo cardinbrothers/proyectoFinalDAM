@@ -20,7 +20,7 @@ namespace WindowsFormsDAMapp
         sessionInfo infoSesion;
         RestClient restClient = new RestClient();
         webServiceInfo session = new webServiceInfo();
-        bool SalidaForm = true;
+        bool SalidaForm = false;
 
         public formInicioSesion(sessionInfo infoSesion)
         {

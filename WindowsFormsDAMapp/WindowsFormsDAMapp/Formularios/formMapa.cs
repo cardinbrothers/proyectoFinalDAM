@@ -41,13 +41,15 @@ namespace WindowsFormsDAMapp
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
 
+            int id_Pueblo = infoSesion.id_Pueblo;
+
             // Introducimos los pueblos en el comboBox
             cbx_pueblos.ValueMember = "id_Pueblo";
             cbx_pueblos.DisplayMember = "coordenadas";
             cbx_pueblos.DataSource = listaPueblos;
 
             // Seleccionamos el pueblo deseado
-            cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+            cbx_pueblos.SelectedValue = id_Pueblo;
 
             // obtenemos todos las coords
             listaCoordsPartida = obtenerCoordsPartida(infoSesion.id_partida);
@@ -231,7 +233,7 @@ namespace WindowsFormsDAMapp
         private void btn_visionGeneral_Click(object sender, EventArgs e)
         {
             // Obtenemos el pueblo seleccionado actualmente
-            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            int id_pueblo = (int)cbx_pueblos.SelectedValue;
 
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
@@ -245,6 +247,8 @@ namespace WindowsFormsDAMapp
             {
                 if (!SalidaForm)
                 {
+                    infoSesion.id_Pueblo = id_pueblo;
+
                     // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
                     if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
                     {
@@ -271,8 +275,7 @@ namespace WindowsFormsDAMapp
 
         private void btn_movimientos_Click(object sender, EventArgs e)
         {
-            // Obtenemos el pueblo seleccionado actualmente
-            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            int id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
@@ -286,6 +289,8 @@ namespace WindowsFormsDAMapp
             {
                 if (!SalidaForm)
                 {
+                    infoSesion.id_Pueblo = id_Pueblo;
+
                     // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
                     if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
                     {
@@ -311,7 +316,7 @@ namespace WindowsFormsDAMapp
         private void btn_Clasificacion_Click(object sender, EventArgs e)
         {
             // Obtenemos el pueblo seleccionado actualmente
-            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            int id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
@@ -325,6 +330,8 @@ namespace WindowsFormsDAMapp
             {
                 if (!SalidaForm)
                 {
+                    infoSesion.id_Pueblo = id_Pueblo;
+
                     // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
                     if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
                     {
@@ -350,7 +357,7 @@ namespace WindowsFormsDAMapp
         private void btn_mensajes_Click(object sender, EventArgs e)
         {
             // Obtenemos el pueblo seleccionado actualmente
-            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            int id_Pueblo = (int)cbx_pueblos.SelectedValue;
 
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
@@ -364,6 +371,8 @@ namespace WindowsFormsDAMapp
             {
                 if (!SalidaForm)
                 {
+                    infoSesion.id_Pueblo = id_Pueblo;
+
                     // Comprobamos que el pueblo seleccionado sigue perteneciendo al jugador
                     if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() == null)
                     {
@@ -388,7 +397,7 @@ namespace WindowsFormsDAMapp
         private void btn_mapa_Click(object sender, EventArgs e)
         {
             // Obtenemos el pueblo seleccionado
-            infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
+            int id_pueblo = (int)cbx_pueblos.SelectedValue;
 
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
@@ -402,7 +411,7 @@ namespace WindowsFormsDAMapp
             if (listaPueblos.FindAll(x => x.id_Pueblo == infoSesion.id_Pueblo).FirstOrDefault() != null)
             {
                 // Seleccionamos el pueblo anterior
-                cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+                cbx_pueblos.SelectedValue = id_pueblo;
 
             }
         }

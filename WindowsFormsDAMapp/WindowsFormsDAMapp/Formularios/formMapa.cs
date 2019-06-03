@@ -436,8 +436,11 @@ namespace WindowsFormsDAMapp
             }
             else
             {
-                MessageBox.Show("Ya no posees el pueblo");
-                cbx_pueblos.DataSource = listaPueblos;
+                if (!SalidaForm)
+                {
+                    MessageBox.Show("Ya no posees el pueblo");
+                    cbx_pueblos.DataSource = listaPueblos;
+                }
             }
 
 

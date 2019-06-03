@@ -20,7 +20,7 @@ namespace WindowsFormsDAMapp
         sessionInfo infoSesion;
         RestClient restClient = new RestClient();
         webServiceInfo session = new webServiceInfo();
-
+        bool SalidaForm = true;
 
         public formInicioSesion(sessionInfo infoSesion)
         {
@@ -39,185 +39,189 @@ namespace WindowsFormsDAMapp
         private void Btn_iniciarSesion_Click(object sender, EventArgs e)
         {
             comprobarFinPartida();
-
-            if (String.IsNullOrEmpty(tbx_nombreUsuario.Text) || String.IsNullOrEmpty(tbx_contraseña.Text))
+            if (!SalidaForm)
             {
-                MessageBox.Show("El usuario y la contraseña no pueden estar vacios");
-            }
-            else
-            {
-                // Creamos un objeto de entidad de jugador
-                infoJugadorEntity Jugador = new infoJugadorEntity();
-
-                string contraseñaEncriptada;
-                bool accesoPermitido = false;
-
-                // Encriptamos la contraseña
-                using (MD5 hash = MD5.Create())
+                if (String.IsNullOrEmpty(tbx_nombreUsuario.Text) || String.IsNullOrEmpty(tbx_contraseña.Text))
                 {
-                    byte[] data = hash.ComputeHash(Encoding.UTF8.GetBytes(tbx_contraseña.Text));
-                    StringBuilder sBuilder = new StringBuilder();
-
-                    for (int i = 0; i < data.Length; i++)
-                    {
-                        sBuilder.Append(data[i].ToString("x2"));
-                    }
-
-                    contraseñaEncriptada = sBuilder.ToString();
-                }
-
-                // Guardamos la informacion del usuario
-                Jugador.nombreUsuario = tbx_nombreUsuario.Text;
-                Jugador.contraseña = contraseñaEncriptada;
-                Jugador.id_partida = infoSesion.id_partida;
-
-                // Creamos un objeto para realizar la peticion el web service
-                RestRequest peticion = new RestRequest("/api/Partida/iniciarSesion", Method.POST);
-
-                // Añadimos la informacion del usuario a la peticion
-                peticion.AddJsonBody(Jugador);
-
-                // Obtenemos el resultado de la peticion
-                var response = restClient.Execute(peticion);
-
-                // Deserializamos el resultado de la peticion recibido para almacenarlo en un int
-                int result = JsonConvert.DeserializeObject<int>(response.Content);
-
-                string mensaje = "";
-
-                // Segun el resultado recibido mandamos un mensaje
-                switch (result)
-                {
-                    case 0:
-                        accesoPermitido = true;
-                        break;
-
-                    case 1:
-                        mensaje = "No existe el usuario para la partida indicada";
-                        break;
-
-                    case 2:
-                        mensaje = "Contrasñe incorrecta";
-                        break;
-
-                    case 3:
-                        mensaje = "Error desconocido";
-                        break;
-                }
-
-                if (accesoPermitido)
-                {
-                    infoSesion.nombreUsuario = tbx_nombreUsuario.Text;
-
-                    // Creamos un objeto del formulario de inicio de sesion
-                    formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
-
-                    // Lanzamos el objeto de inicio de sesion   
-                    VisionGeneral.Show();
-
-                    // Cerramos este formulario
-                    this.Close();
+                    MessageBox.Show("El usuario y la contraseña no pueden estar vacios");
                 }
                 else
                 {
-                    // Mostramos el mensaje
-                    MessageBox.Show(mensaje);
+                    // Creamos un objeto de entidad de jugador
+                    infoJugadorEntity Jugador = new infoJugadorEntity();
+
+                    string contraseñaEncriptada;
+                    bool accesoPermitido = false;
+
+                    // Encriptamos la contraseña
+                    using (MD5 hash = MD5.Create())
+                    {
+                        byte[] data = hash.ComputeHash(Encoding.UTF8.GetBytes(tbx_contraseña.Text));
+                        StringBuilder sBuilder = new StringBuilder();
+
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            sBuilder.Append(data[i].ToString("x2"));
+                        }
+
+                        contraseñaEncriptada = sBuilder.ToString();
+                    }
+
+                    // Guardamos la informacion del usuario
+                    Jugador.nombreUsuario = tbx_nombreUsuario.Text;
+                    Jugador.contraseña = contraseñaEncriptada;
+                    Jugador.id_partida = infoSesion.id_partida;
+
+                    // Creamos un objeto para realizar la peticion el web service
+                    RestRequest peticion = new RestRequest("/api/Partida/iniciarSesion", Method.POST);
+
+                    // Añadimos la informacion del usuario a la peticion
+                    peticion.AddJsonBody(Jugador);
+
+                    // Obtenemos el resultado de la peticion
+                    var response = restClient.Execute(peticion);
+
+                    // Deserializamos el resultado de la peticion recibido para almacenarlo en un int
+                    int result = JsonConvert.DeserializeObject<int>(response.Content);
+
+                    string mensaje = "";
+
+                    // Segun el resultado recibido mandamos un mensaje
+                    switch (result)
+                    {
+                        case 0:
+                            accesoPermitido = true;
+                            break;
+
+                        case 1:
+                            mensaje = "No existe el usuario para la partida indicada";
+                            break;
+
+                        case 2:
+                            mensaje = "Contrasñe incorrecta";
+                            break;
+
+                        case 3:
+                            mensaje = "Error desconocido";
+                            break;
+                    }
+
+                    if (accesoPermitido)
+                    {
+                        infoSesion.nombreUsuario = tbx_nombreUsuario.Text;
+
+                        // Creamos un objeto del formulario de inicio de sesion
+                        formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+                        // Lanzamos el objeto de inicio de sesion   
+                        VisionGeneral.Show();
+
+                        // Cerramos este formulario
+                        this.Close();
+                    }
+                    else
+                    {
+                        // Mostramos el mensaje
+                        MessageBox.Show(mensaje);
+                    }
+
+
                 }
-
-
             }
         }
 
         private void Btn_crearCuenta_Click(object sender, EventArgs e)
         {
             comprobarFinPartida();
-
-            if (String.IsNullOrEmpty(tbx_nombreUsuario.Text) || String.IsNullOrEmpty(tbx_contraseña.Text))
+            if (!SalidaForm)
             {
-                MessageBox.Show("El usuario y la contraseña no pueden estar vacios");
-            }
-            else
-            {
-                // Creamos un objeto de entidad de jugador
-                infoJugadorEntity jugadorNuevo = new infoJugadorEntity();
-
-                string contraseñaEncriptada;
-                bool acccesoPermitido = false;
-
-                // Encriptamos la contraseña
-                using (MD5 hash = MD5.Create())
+                if (String.IsNullOrEmpty(tbx_nombreUsuario.Text) || String.IsNullOrEmpty(tbx_contraseña.Text))
                 {
-                    byte[] data = hash.ComputeHash(Encoding.UTF8.GetBytes(tbx_contraseña.Text));
-                    StringBuilder sBuilder = new StringBuilder();
-
-                    for (int i = 0; i < data.Length; i++)
-                    {
-                        sBuilder.Append(data[i].ToString("x2"));
-                    }
-
-                    contraseñaEncriptada = sBuilder.ToString();
-                }
-
-                // Guardamos la informacion del usuario
-                jugadorNuevo.nombreUsuario = tbx_nombreUsuario.Text;
-                jugadorNuevo.contraseña = contraseñaEncriptada;
-                jugadorNuevo.id_partida = infoSesion.id_partida;
-
-                // Creamos un objeto para realizar la peticion el web service
-                RestRequest peticion = new RestRequest("/api/Partida/crearJugador", Method.POST);
-
-                // Añadimos la informacion del usuario nuevo a la peticion
-                peticion.AddJsonBody(jugadorNuevo);
-
-                // Obtenemos el resultado de la peticion
-                var response = restClient.Execute(peticion);
-
-                // Deserializamos el resultado de la peticion recibido para almacenarlo en un int
-                int result = JsonConvert.DeserializeObject<int>(response.Content);
-
-                string mensaje = "";
-
-                // Segun el resultado recibido mandamos un mensaje
-                switch (result)
-                {
-                    case 0:
-                        acccesoPermitido = true;
-                        break;
-
-                    case 1:
-                        mensaje = "Nombre de usuario ya existente";
-                        break;
-
-                    case 2:
-                        mensaje = "Limite de jugadores para la partida ya alcanzado";
-                        break;
-
-                    case 3:
-                        mensaje = "Partida expirada";
-                        break;
-
-                    case 4:
-                        mensaje = "Error desconocido";
-                        break;
-                }
-
-                if (acccesoPermitido)
-                {
-                    infoSesion.nombreUsuario = tbx_nombreUsuario.Text;
-
-                    // Creamos un objeto del formulario de inicio de sesion
-                    formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
-
-                    // Lanzamos el objeto de inicio de sesion   
-                    VisionGeneral.Show();
-
-                    // Cerramos este formulario
-                    this.Close();
+                    MessageBox.Show("El usuario y la contraseña no pueden estar vacios");
                 }
                 else
                 {
-                    // Mostramos el mensaje
-                    MessageBox.Show(mensaje);
+                    // Creamos un objeto de entidad de jugador
+                    infoJugadorEntity jugadorNuevo = new infoJugadorEntity();
+
+                    string contraseñaEncriptada;
+                    bool acccesoPermitido = false;
+
+                    // Encriptamos la contraseña
+                    using (MD5 hash = MD5.Create())
+                    {
+                        byte[] data = hash.ComputeHash(Encoding.UTF8.GetBytes(tbx_contraseña.Text));
+                        StringBuilder sBuilder = new StringBuilder();
+
+                        for (int i = 0; i < data.Length; i++)
+                        {
+                            sBuilder.Append(data[i].ToString("x2"));
+                        }
+
+                        contraseñaEncriptada = sBuilder.ToString();
+                    }
+
+                    // Guardamos la informacion del usuario
+                    jugadorNuevo.nombreUsuario = tbx_nombreUsuario.Text;
+                    jugadorNuevo.contraseña = contraseñaEncriptada;
+                    jugadorNuevo.id_partida = infoSesion.id_partida;
+
+                    // Creamos un objeto para realizar la peticion el web service
+                    RestRequest peticion = new RestRequest("/api/Partida/crearJugador", Method.POST);
+
+                    // Añadimos la informacion del usuario nuevo a la peticion
+                    peticion.AddJsonBody(jugadorNuevo);
+
+                    // Obtenemos el resultado de la peticion
+                    var response = restClient.Execute(peticion);
+
+                    // Deserializamos el resultado de la peticion recibido para almacenarlo en un int
+                    int result = JsonConvert.DeserializeObject<int>(response.Content);
+
+                    string mensaje = "";
+
+                    // Segun el resultado recibido mandamos un mensaje
+                    switch (result)
+                    {
+                        case 0:
+                            acccesoPermitido = true;
+                            break;
+
+                        case 1:
+                            mensaje = "Nombre de usuario ya existente";
+                            break;
+
+                        case 2:
+                            mensaje = "Limite de jugadores para la partida ya alcanzado";
+                            break;
+
+                        case 3:
+                            mensaje = "Partida expirada";
+                            break;
+
+                        case 4:
+                            mensaje = "Error desconocido";
+                            break;
+                    }
+
+                    if (acccesoPermitido)
+                    {
+                        infoSesion.nombreUsuario = tbx_nombreUsuario.Text;
+
+                        // Creamos un objeto del formulario de inicio de sesion
+                        formVisionGeneral VisionGeneral = new formVisionGeneral(infoSesion);
+
+                        // Lanzamos el objeto de inicio de sesion   
+                        VisionGeneral.Show();
+
+                        // Cerramos este formulario
+                        this.Close();
+                    }
+                    else
+                    {
+                        // Mostramos el mensaje
+                        MessageBox.Show(mensaje);
+                    }
                 }
             }
         }
@@ -253,6 +257,11 @@ namespace WindowsFormsDAMapp
                 Btn_volver_Click(null, null);
 
             }
+        }
+
+        private void formInicioSesion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SalidaForm = true;
         }
     }
 }

@@ -176,74 +176,77 @@ namespace WindowsFormsDAMapp
 
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
-
-            if (listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault() != null)
+            if (!SalidaForm)
             {
 
-                int id_Pueblo = 0, id_Tropa = -1, cantidad = 0;
-
-                id_Pueblo = (int)cbx_pueblos.SelectedValue;
-
-                // Obtenemos el id tropa y cantidad de los textbox
-                foreach (var tbx in this.Controls)
+                if (listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault() != null)
                 {
-                    if (tbx is TextBox)
-                    {
-                        TextBox tbxAux = (TextBox)tbx;
 
-                        if (!String.IsNullOrEmpty(tbxAux.Text))
+                    int id_Pueblo = 0, id_Tropa = -1, cantidad = 0;
+
+                    id_Pueblo = (int)cbx_pueblos.SelectedValue;
+
+                    // Obtenemos el id tropa y cantidad de los textbox
+                    foreach (var tbx in this.Controls)
+                    {
+                        if (tbx is TextBox)
                         {
-                            id_Tropa = Convert.ToInt32(tbxAux.Tag);
-                            cantidad = Convert.ToInt32(tbxAux.Text);
+                            TextBox tbxAux = (TextBox)tbx;
+
+                            if (!String.IsNullOrEmpty(tbxAux.Text))
+                            {
+                                id_Tropa = Convert.ToInt32(tbxAux.Tag);
+                                cantidad = Convert.ToInt32(tbxAux.Text);
+                            }
                         }
                     }
-                }
 
-                // Comprobamos si hay algun dato en algun textboxç
-                if (id_Tropa != -1 && cantidad > 0)
-                {
-                    // Creamos un objeto para realizar la peticion el web service
-                    RestRequest peticion = new RestRequest("/api/Reclutamiento/reclutarTropas", Method.POST);
-
-                    // Añadimos el nombre del usuario a la peticion
-                    peticion.AddQueryParameter("idPueblo", id_Pueblo.ToString());
-
-                    // Añadimos el nombre del usuario a la peticion
-                    peticion.AddQueryParameter("idTropa", id_Tropa.ToString());
-
-                    // Añadimos el nombre del usuario a la peticion
-                    peticion.AddQueryParameter("cantidad", cantidad.ToString());
-
-                    // Obtenemos el resultado de la peticion
-                    var response = restClient.Execute(peticion);
-
-                    // Deserializamos el resultado de la peticion recibido para almacenarlo
-                    ordenReclutamientoEntity result = JsonConvert.DeserializeObject<ordenReclutamientoEntity>(response.Content);
-
-                    switch (result.error)
+                    // Comprobamos si hay algun dato en algun textboxç
+                    if (id_Tropa != -1 && cantidad > 0)
                     {
-                        case 0:
-                            Btn_reclutamiento_Click(null, null);
-                            break;
-                        case 1:
-                            MessageBox.Show("No tienes suficiente poblacion");
-                            break;
-                        case 2:
-                            MessageBox.Show("Algo salio mal");
-                            break;
+                        // Creamos un objeto para realizar la peticion el web service
+                        RestRequest peticion = new RestRequest("/api/Reclutamiento/reclutarTropas", Method.POST);
 
+                        // Añadimos el nombre del usuario a la peticion
+                        peticion.AddQueryParameter("idPueblo", id_Pueblo.ToString());
+
+                        // Añadimos el nombre del usuario a la peticion
+                        peticion.AddQueryParameter("idTropa", id_Tropa.ToString());
+
+                        // Añadimos el nombre del usuario a la peticion
+                        peticion.AddQueryParameter("cantidad", cantidad.ToString());
+
+                        // Obtenemos el resultado de la peticion
+                        var response = restClient.Execute(peticion);
+
+                        // Deserializamos el resultado de la peticion recibido para almacenarlo
+                        ordenReclutamientoEntity result = JsonConvert.DeserializeObject<ordenReclutamientoEntity>(response.Content);
+
+                        switch (result.error)
+                        {
+                            case 0:
+                                Btn_reclutamiento_Click(null, null);
+                                break;
+                            case 1:
+                                MessageBox.Show("No tienes suficiente poblacion");
+                                break;
+                            case 2:
+                                MessageBox.Show("Algo salio mal");
+                                break;
+
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("No se han elegido unidades");
+                    }
+
                 }
                 else
                 {
-                    MessageBox.Show("No se han elegido unidades");
+                    MessageBox.Show("Ya no posees el pueblo");
+                    cbx_pueblos.DataSource = listaPueblos;
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Ya no posees el pueblo");
-                cbx_pueblos.DataSource = listaPueblos;
             }
 
 
@@ -478,8 +481,11 @@ namespace WindowsFormsDAMapp
             }
             else
             {
-                MessageBox.Show("Ya no posees el pueblo");
-                cbx_pueblos.DataSource = listaPueblos;
+                if (!SalidaForm)
+                {
+                    MessageBox.Show("Ya no posees el pueblo");
+                    cbx_pueblos.DataSource = listaPueblos;
+                }
             }
 
             

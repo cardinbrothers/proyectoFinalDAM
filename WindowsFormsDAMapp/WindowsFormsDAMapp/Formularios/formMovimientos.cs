@@ -158,120 +158,122 @@ namespace WindowsFormsDAMapp
 
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
-
-            if (listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault() != null)
+            if (!SalidaForm)
             {
-                if (!String.IsNullOrEmpty(tbx_arquero.Text) || !String.IsNullOrEmpty(tbx_ballestero.Text))
+                if (listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault() != null)
                 {
-                    // Creamos las variables para almacenar el numero de tropas
-                    int arqueros, ballesteros;
-
-                    // Creamos un objeto para realizar la peticion el web service
-                    RestRequest peticion = new RestRequest("/api/Pueblo/obtenerId", Method.GET);
-
-                    // Añadimos el id de la partida a la peticion
-                    peticion.AddParameter("id_Partida", infoSesion.id_partida);
-
-                    // Añadimos las coordenadas a la peticion
-                    peticion.AddParameter("coordenada", tbx_coordApoyo.Text);
-
-                    // Obtenemos el resultado de la peticion
-                    var response = restClient.Execute(peticion);
-
-                    // Deserializamos el resultado de la peticion recibido para almacenarlo
-                    int idPuebloDestino = JsonConvert.DeserializeObject<int>(response.Content);
-
-                    // Comprobamos que exista un pueblo con las coordenadas indicadas
-                    if (idPuebloDestino != -1)
+                    if (!String.IsNullOrEmpty(tbx_arquero.Text) || !String.IsNullOrEmpty(tbx_ballestero.Text))
                     {
-                        // Guardamos la cantidad de tropas introducidas por el usuario
-                        if (!String.IsNullOrEmpty(tbx_arquero.Text))
+                        // Creamos las variables para almacenar el numero de tropas
+                        int arqueros, ballesteros;
+
+                        // Creamos un objeto para realizar la peticion el web service
+                        RestRequest peticion = new RestRequest("/api/Pueblo/obtenerId", Method.GET);
+
+                        // Añadimos el id de la partida a la peticion
+                        peticion.AddParameter("id_Partida", infoSesion.id_partida);
+
+                        // Añadimos las coordenadas a la peticion
+                        peticion.AddParameter("coordenada", tbx_coordApoyo.Text);
+
+                        // Obtenemos el resultado de la peticion
+                        var response = restClient.Execute(peticion);
+
+                        // Deserializamos el resultado de la peticion recibido para almacenarlo
+                        int idPuebloDestino = JsonConvert.DeserializeObject<int>(response.Content);
+
+                        // Comprobamos que exista un pueblo con las coordenadas indicadas
+                        if (idPuebloDestino != -1)
                         {
-                            arqueros = Convert.ToInt32(tbx_arquero.Text);
+                            // Guardamos la cantidad de tropas introducidas por el usuario
+                            if (!String.IsNullOrEmpty(tbx_arquero.Text))
+                            {
+                                arqueros = Convert.ToInt32(tbx_arquero.Text);
+                            }
+                            else
+                            {
+                                arqueros = 0;
+                            }
+
+                            if (!String.IsNullOrEmpty(tbx_ballestero.Text))
+                            {
+                                ballesteros = Convert.ToInt32(tbx_ballestero.Text);
+                            }
+                            else
+                            {
+                                ballesteros = 0;
+                            }
+
+                            if (arqueros <= tropasDefReales.arqueros && ballesteros <= tropasDefReales.ballesteros)
+                            {
+
+                                // Creamos un objeto para realizar la peticion el web service
+                                RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
+
+                                // Añadimos el id de la partida a la peticion
+                                peticion2.AddParameter("id_Partida", infoSesion.id_partida);
+
+                                // Añadimos las coordenadas a la peticion
+                                peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
+                                peticion2.AddParameter("coordenada2", listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault().coordenadas);
+
+
+                                // Obtenemos el resultado de la peticion
+                                var response2 = restClient.Execute(peticion2);
+
+                                // Deserializamos el resultado de la peticion recibido para almacenarlo
+                                TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
+
+                                // Creamos un nuevo movimiento
+                                movimientossEntity nuevoMovimiento = new movimientossEntity();
+                                nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
+                                nuevoMovimiento.puebloDestino = idPuebloDestino;
+                                nuevoMovimiento.duracion = tiempoDistancia.ToString();
+                                nuevoMovimiento.piqueros = 0;
+                                nuevoMovimiento.caballeros = 0;
+                                nuevoMovimiento.paladines = 0;
+                                nuevoMovimiento.arqueros = arqueros;
+                                nuevoMovimiento.ballesteros = ballesteros;
+                                nuevoMovimiento.tipoMovimiento = "P";
+
+                                // Creamos un objeto para realizar la peticion el web service
+                                RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
+
+                                // Añadimos el objeto
+                                peticion3.AddJsonBody(nuevoMovimiento);
+
+                                // Ejecutamos la peticion
+                                var response3 = restClient.Execute(peticion3);
+
+                                // Limpiamso los text boxes
+                                tbx_arquero.Clear();
+                                tbx_ballestero.Clear();
+
+                                MessageBox.Show("Apoyo enviado correctamente");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No tienes suficientes tropaspara enviar el apoyo");
+                            }
                         }
                         else
                         {
-                            arqueros = 0;
-                        }
-
-                        if (!String.IsNullOrEmpty(tbx_ballestero.Text))
-                        {
-                            ballesteros = Convert.ToInt32(tbx_ballestero.Text);
-                        }
-                        else
-                        {
-                            ballesteros = 0;
-                        }
-
-                        if (arqueros <= tropasDefReales.arqueros && ballesteros <= tropasDefReales.ballesteros)
-                        {
-
-                            // Creamos un objeto para realizar la peticion el web service
-                            RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
-
-                            // Añadimos el id de la partida a la peticion
-                            peticion2.AddParameter("id_Partida", infoSesion.id_partida);
-
-                            // Añadimos las coordenadas a la peticion
-                            peticion2.AddParameter("coordenada1", tbx_coordApoyo.Text);
-                            peticion2.AddParameter("coordenada2", listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault().coordenadas);
-
-
-                            // Obtenemos el resultado de la peticion
-                            var response2 = restClient.Execute(peticion2);
-
-                            // Deserializamos el resultado de la peticion recibido para almacenarlo
-                            TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
-
-                            // Creamos un nuevo movimiento
-                            movimientossEntity nuevoMovimiento = new movimientossEntity();
-                            nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
-                            nuevoMovimiento.puebloDestino = idPuebloDestino;
-                            nuevoMovimiento.duracion = tiempoDistancia.ToString();
-                            nuevoMovimiento.piqueros = 0;
-                            nuevoMovimiento.caballeros = 0;
-                            nuevoMovimiento.paladines = 0;
-                            nuevoMovimiento.arqueros = arqueros;
-                            nuevoMovimiento.ballesteros = ballesteros;
-                            nuevoMovimiento.tipoMovimiento = "P";
-
-                            // Creamos un objeto para realizar la peticion el web service
-                            RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
-
-                            // Añadimos el objeto
-                            peticion3.AddJsonBody(nuevoMovimiento);
-
-                            // Ejecutamos la peticion
-                            var response3 = restClient.Execute(peticion3);
-
-                            // Limpiamso los text boxes
-                            tbx_arquero.Clear();
-                            tbx_ballestero.Clear();
-
-                            MessageBox.Show("Apoyo enviado correctamente");
-                        }
-                        else
-                        {
-                            MessageBox.Show("No tienes suficientes tropaspara enviar el apoyo");
+                            MessageBox.Show("Cordenadas introducidas invalidas");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Cordenadas introducidas invalidas");
+                        MessageBox.Show("Has de introducir al menos una unidad");
+
                     }
+
                 }
                 else
                 {
-                    MessageBox.Show("Has de introducir al menos una unidad");
-
+                    MessageBox.Show("Ya no posees el pueblo");
+                    cbx_pueblos.DataSource = listaPueblos;
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Ya no posees el pueblo");
-                cbx_pueblos.DataSource = listaPueblos;
-            }          
+            }      
         }
 
         private void btn_Atacar_Click(object sender, EventArgs e)
@@ -283,130 +285,133 @@ namespace WindowsFormsDAMapp
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
 
-            if (listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault() != null)
+            if (!SalidaForm)
             {
-
-                if (!String.IsNullOrEmpty(tbx_piquero.Text) || !String.IsNullOrEmpty(tbx_caballero.Text) || !String.IsNullOrEmpty(tbx_paladin.Text))
+                if (listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault() != null)
                 {
-                    // Creamos las variables para almacenar el numero de tropas
-                    int piqueros, caballeros, paladines;
 
-                    // Creamos un objeto para realizar la peticion el web service
-                    RestRequest peticion = new RestRequest("/api/Pueblo/obtenerId", Method.GET);
-
-                    // Añadimos el id de la partida a la peticion
-                    peticion.AddParameter("id_Partida", infoSesion.id_partida);
-
-                    // Añadimos las coordenadas a la peticion
-                    peticion.AddParameter("coordenada", tbx_CoordAtaque.Text);
-
-                    // Obtenemos el resultado de la peticion
-                    var response = restClient.Execute(peticion);
-
-                    // Deserializamos el resultado de la peticion recibido para almacenarlo
-                    int idPuebloDestino = JsonConvert.DeserializeObject<int>(response.Content);
-
-                    // Comprobamos que exista un pueblo con las coordenadas indicadas
-                    if (idPuebloDestino != -1)
+                    if (!String.IsNullOrEmpty(tbx_piquero.Text) || !String.IsNullOrEmpty(tbx_caballero.Text) || !String.IsNullOrEmpty(tbx_paladin.Text))
                     {
-                        // Guardamos la cantidad de tropas introducidas por el usuario
-                        if (!String.IsNullOrEmpty(tbx_piquero.Text))
+                        // Creamos las variables para almacenar el numero de tropas
+                        int piqueros, caballeros, paladines;
+
+                        // Creamos un objeto para realizar la peticion el web service
+                        RestRequest peticion = new RestRequest("/api/Pueblo/obtenerId", Method.GET);
+
+                        // Añadimos el id de la partida a la peticion
+                        peticion.AddParameter("id_Partida", infoSesion.id_partida);
+
+                        // Añadimos las coordenadas a la peticion
+                        peticion.AddParameter("coordenada", tbx_CoordAtaque.Text);
+
+                        // Obtenemos el resultado de la peticion
+                        var response = restClient.Execute(peticion);
+
+                        // Deserializamos el resultado de la peticion recibido para almacenarlo
+                        int idPuebloDestino = JsonConvert.DeserializeObject<int>(response.Content);
+
+                        // Comprobamos que exista un pueblo con las coordenadas indicadas
+                        if (idPuebloDestino != -1)
                         {
-                            piqueros = Convert.ToInt32(tbx_piquero.Text);
+                            // Guardamos la cantidad de tropas introducidas por el usuario
+                            if (!String.IsNullOrEmpty(tbx_piquero.Text))
+                            {
+                                piqueros = Convert.ToInt32(tbx_piquero.Text);
+                            }
+                            else
+                            {
+                                piqueros = 0;
+                            }
+
+                            if (!String.IsNullOrEmpty(tbx_caballero.Text))
+                            {
+                                caballeros = Convert.ToInt32(tbx_caballero.Text);
+                            }
+                            else
+                            {
+                                caballeros = 0;
+                            }
+
+                            if (!String.IsNullOrEmpty(tbx_paladin.Text))
+                            {
+                                paladines = Convert.ToInt32(tbx_paladin.Text);
+                            }
+                            else
+                            {
+                                paladines = 0;
+                            }
+
+                            if (piqueros <= infoPueblo.piqueros && caballeros <= infoPueblo.caballeros && paladines <= infoPueblo.paladines)
+                            {
+
+                                // Creamos un objeto para realizar la peticion el web service
+                                RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
+
+                                // Añadimos el id de la partida a la peticion
+                                peticion2.AddParameter("id_Partida", infoSesion.id_partida);
+
+                                // Añadimos las coordenadas a la peticion
+                                peticion2.AddParameter("coordenada1", tbx_CoordAtaque.Text);
+                                peticion2.AddParameter("coordenada2", listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault().coordenadas);
+
+
+                                // Obtenemos el resultado de la peticion
+                                var response2 = restClient.Execute(peticion2);
+
+                                // Deserializamos el resultado de la peticion recibido para almacenarlo
+                                TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
+
+                                // Creamos un nuevo movimiento
+                                movimientossEntity nuevoMovimiento = new movimientossEntity();
+                                nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
+                                nuevoMovimiento.puebloDestino = idPuebloDestino;
+                                nuevoMovimiento.duracion = tiempoDistancia.ToString();
+                                nuevoMovimiento.piqueros = piqueros;
+                                nuevoMovimiento.caballeros = caballeros;
+                                nuevoMovimiento.paladines = paladines;
+                                nuevoMovimiento.arqueros = 0;
+                                nuevoMovimiento.ballesteros = 0;
+                                nuevoMovimiento.tipoMovimiento = "A";
+
+                                // Creamos un objeto para realizar la peticion el web service
+                                RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
+
+                                // Añadimos el objeto
+                                peticion3.AddJsonBody(nuevoMovimiento);
+
+                                // Ejecutamos la peticion
+                                restClient.Execute(peticion3);
+
+                                // Limpiamso los text boxes
+                                tbx_arquero.Clear();
+                                tbx_ballestero.Clear();
+
+                                MessageBox.Show("Ataque enviado correctamente");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No dispones de tropas suficientes para realizar el ataque");
+
+                            }
+
                         }
                         else
                         {
-                            piqueros = 0;
+                            MessageBox.Show("Cordenadas introducidas invalidas");
                         }
-
-                        if (!String.IsNullOrEmpty(tbx_caballero.Text))
-                        {
-                            caballeros = Convert.ToInt32(tbx_caballero.Text);
-                        }
-                        else
-                        {
-                            caballeros = 0;
-                        }
-
-                        if (!String.IsNullOrEmpty(tbx_paladin.Text))
-                        {
-                            paladines = Convert.ToInt32(tbx_paladin.Text);
-                        }
-                        else
-                        {
-                            paladines = 0;
-                        }
-
-                        if (piqueros <= infoPueblo.piqueros && caballeros <= infoPueblo.caballeros && paladines <= infoPueblo.paladines)
-                        {
-
-                            // Creamos un objeto para realizar la peticion el web service
-                            RestRequest peticion2 = new RestRequest("/api/Pueblo/obtenerDistancia", Method.GET);
-
-                            // Añadimos el id de la partida a la peticion
-                            peticion2.AddParameter("id_Partida", infoSesion.id_partida);
-
-                            // Añadimos las coordenadas a la peticion
-                            peticion2.AddParameter("coordenada1", tbx_CoordAtaque.Text);
-                            peticion2.AddParameter("coordenada2", listaPueblos.FindAll(x => x.id_Pueblo == (int)cbx_pueblos.SelectedValue).FirstOrDefault().coordenadas);
-
-
-                            // Obtenemos el resultado de la peticion
-                            var response2 = restClient.Execute(peticion2);
-
-                            // Deserializamos el resultado de la peticion recibido para almacenarlo
-                            TimeSpan tiempoDistancia = JsonConvert.DeserializeObject<TimeSpan>(response2.Content);
-
-                            // Creamos un nuevo movimiento
-                            movimientossEntity nuevoMovimiento = new movimientossEntity();
-                            nuevoMovimiento.puebloOrigen = (int)cbx_pueblos.SelectedValue;
-                            nuevoMovimiento.puebloDestino = idPuebloDestino;
-                            nuevoMovimiento.duracion = tiempoDistancia.ToString();
-                            nuevoMovimiento.piqueros = piqueros;
-                            nuevoMovimiento.caballeros = caballeros;
-                            nuevoMovimiento.paladines = paladines;
-                            nuevoMovimiento.arqueros = 0;
-                            nuevoMovimiento.ballesteros = 0;
-                            nuevoMovimiento.tipoMovimiento = "A";
-
-                            // Creamos un objeto para realizar la peticion el web service
-                            RestRequest peticion3 = new RestRequest("/api/Movimientos/realizarMovimiento", Method.POST);
-
-                            // Añadimos el objeto
-                            peticion3.AddJsonBody(nuevoMovimiento);
-
-                            // Ejecutamos la peticion
-                            restClient.Execute(peticion3);
-
-                            // Limpiamso los text boxes
-                            tbx_arquero.Clear();
-                            tbx_ballestero.Clear();
-
-                            MessageBox.Show("Ataque enviado correctamente");
-                        }
-                        else
-                        {
-                            MessageBox.Show("No dispones de tropas suficientes para realizar el ataque");
-
-                        }
-
                     }
                     else
                     {
-                        MessageBox.Show("Cordenadas introducidas invalidas");
+                        MessageBox.Show("Has de introducir al menos una unidad");
+
                     }
+
                 }
                 else
                 {
-                    MessageBox.Show("Has de introducir al menos una unidad");
-
+                    MessageBox.Show("Ya no posees el pueblo");
+                    cbx_pueblos.DataSource = listaPueblos;
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Ya no posees el pueblo");
-                cbx_pueblos.DataSource = listaPueblos;
             }
 
             

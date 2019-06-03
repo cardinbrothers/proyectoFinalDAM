@@ -155,28 +155,31 @@ namespace WindowsFormsDAMapp
             // Deserializamos el resultado de la peticion recibido para almacenarlo en un int
             int result = JsonConvert.DeserializeObject<int>(response.Content);
 
-            switch (result)
+            if (!SalidaForm)
             {
-                case 0:
-                    MessageBox.Show("Mensaje Enviado correctamente");
-                    tbx_respuesta.Visible = false;
-                    btn_aceptar.Visible = false;
-                    btn_cancelar.Visible = false;
-                    btn_responder.Visible = true;
-                    tbx_respuesta.Clear();
+                switch (result)
+                {
+                    case 0:
+                        MessageBox.Show("Mensaje Enviado correctamente");
+                        tbx_respuesta.Visible = false;
+                        btn_aceptar.Visible = false;
+                        btn_cancelar.Visible = false;
+                        btn_responder.Visible = true;
+                        tbx_respuesta.Clear();
 
-                    // Obtenemos la lista de mensajes
-                    listaMensajes = obtenerMensajes();
+                        // Obtenemos la lista de mensajes
+                        listaMensajes = obtenerMensajes();
 
-                    // Introducimos los mensajes en el listView
-                    mostrarMensajes(listaMensajes);
-                    break;
-                case 1:
-                    MessageBox.Show("El contenido del mensaje no puede ir vacío");
-                    break;
-                case 2:
-                    MessageBox.Show("Error desconocido");
-                    break;
+                        // Introducimos los mensajes en el listView
+                        mostrarMensajes(listaMensajes);
+                        break;
+                    case 1:
+                        MessageBox.Show("El contenido del mensaje no puede ir vacío");
+                        break;
+                    case 2:
+                        MessageBox.Show("Error desconocido");
+                        break;
+                }
             }
         }
 

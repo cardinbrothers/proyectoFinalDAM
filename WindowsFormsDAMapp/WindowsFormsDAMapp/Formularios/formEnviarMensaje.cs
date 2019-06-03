@@ -67,27 +67,30 @@ namespace WindowsFormsDAMapp
 
             // Deserializamos el resultado de la peticion recibido para almacenarlo en un int
             int result = JsonConvert.DeserializeObject<int>(response.Content);
-
-            switch (result)
+            if (!SalidaForm)
             {
-                case 0:
-                    MessageBox.Show("Mensaje Enviado correctamente");
-                    tbx_asunto.Clear();
-                    tbx_contenidoMensaje.Clear();
-                    tbx_jugador.Clear();
-                    break;
-                case 1:
-                    MessageBox.Show("El jugador introducido no exite");
-                    break;
-                case 2:
-                    MessageBox.Show("El asunto del mensaje no puede ir vacío");
-                    break;
-                case 3:
-                    MessageBox.Show("El contenido del mensaje no puede ir vacío");
-                    break;
-                case 4:
-                    MessageBox.Show("Error desconocido");
-                    break;
+
+                switch (result)
+                {
+                    case 0:
+                        MessageBox.Show("Mensaje Enviado correctamente");
+                        tbx_asunto.Clear();
+                        tbx_contenidoMensaje.Clear();
+                        tbx_jugador.Clear();
+                        break;
+                    case 1:
+                        MessageBox.Show("El jugador introducido no exite");
+                        break;
+                    case 2:
+                        MessageBox.Show("El asunto del mensaje no puede ir vacío");
+                        break;
+                    case 3:
+                        MessageBox.Show("El contenido del mensaje no puede ir vacío");
+                        break;
+                    case 4:
+                        MessageBox.Show("Error desconocido");
+                        break;
+                }
             }
 
 

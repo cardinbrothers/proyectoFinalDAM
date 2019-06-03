@@ -131,6 +131,7 @@
             this.Name = "formInicioSesion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio Sesion";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formInicioSesion_FormClosing);
             this.Load += new System.EventHandler(this.formInicioSesion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

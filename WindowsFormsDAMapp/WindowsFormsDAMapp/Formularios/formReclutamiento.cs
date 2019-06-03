@@ -32,7 +32,6 @@ namespace WindowsFormsDAMapp
 
         private void formReclutamiento_Load(object sender, EventArgs e)
         {
-
             // Introducimos la cadena del servicio
             restClient = new RestClient(session.CadenaConexion);
 
@@ -55,6 +54,8 @@ namespace WindowsFormsDAMapp
 
             // Seleccionamos el pueblo deseado
             cbx_pueblos.SelectedValue = infoSesion.id_Pueblo;
+
+            this.Location = infoSesion.posicionFormulario;
         }
 
         // Metodo para obtener los parametros de la partida

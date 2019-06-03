@@ -338,6 +338,7 @@
             this.Text = "Vision General";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formVisionGeneral_FormClosing);
             this.Load += new System.EventHandler(this.FormVisionGeneral_Load);
+            this.LocationChanged += new System.EventHandler(this.formVisionGeneral_LocationChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

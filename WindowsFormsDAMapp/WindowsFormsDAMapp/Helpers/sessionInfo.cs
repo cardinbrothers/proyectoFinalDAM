@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace WindowsFormsDAMapp.Helpers
 {
@@ -13,5 +14,7 @@ namespace WindowsFormsDAMapp.Helpers
         public string nombreUsuario { get; set; }
 
         public int id_Pueblo { get; set; }
+
+        public Point posicionFormulario { get; set; }
     }
 }

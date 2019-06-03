@@ -529,5 +529,12 @@ namespace WindowsFormsDAMapp
         {
             SalidaForm = true;
         }
+
+        private void formVisionGeneral_LocationChanged(object sender, EventArgs e)
+        {
+            formVisionGeneral frmAux = (formVisionGeneral)sender;
+            Point position = frmAux.Location;
+            infoSesion.posicionFormulario = position;
+        }
     }
 }

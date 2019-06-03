@@ -368,8 +368,7 @@ namespace WindowsFormsDAMapp
             // Comprobamos si se posee al menos un pueblo y los almacenamos
             comprobarPosesionPueblos();
 
-            // Comprobamos si se posee al menos un pueblo y los almacenamos
-            comprobarPosesionPueblos();
+            cbx_pueblos.DataSource = listaPueblos;
 
             tbx_arquero.ReadOnly = false;
             tbx_piquero.ReadOnly = false;

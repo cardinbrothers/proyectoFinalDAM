@@ -164,7 +164,6 @@ namespace WindowsFormsDAMapp
             // Comprobar si se ha acabado la partida
             comprobarFinPartida();
 
-
             // Obtenemos el pueblo seleccionado
             infoSesion.id_Pueblo = (int)cbx_pueblos.SelectedValue;
 

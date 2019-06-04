@@ -250,6 +250,8 @@
             this.Controls.Add(this.lab_PartidasActivas);
             this.Controls.Add(this.lab_velocidad);
             this.Controls.Add(this.lsv_PartidasActivas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frm_MenuPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu Principal";

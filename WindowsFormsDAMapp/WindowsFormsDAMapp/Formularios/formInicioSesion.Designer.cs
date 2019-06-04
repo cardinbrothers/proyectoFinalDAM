@@ -128,6 +128,8 @@
             this.Controls.Add(this.tbx_nombreUsuario);
             this.Controls.Add(this.lab_contrasñea);
             this.Controls.Add(this.lab_nombreUsuario);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "formInicioSesion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio Sesion";

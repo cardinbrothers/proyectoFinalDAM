@@ -579,6 +579,8 @@
             this.Controls.Add(this.btn_mensajes);
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "formReclutamiento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Reclutamiento";

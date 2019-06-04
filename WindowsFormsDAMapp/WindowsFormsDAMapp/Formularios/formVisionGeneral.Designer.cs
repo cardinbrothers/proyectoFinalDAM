@@ -333,6 +333,8 @@
             this.Controls.Add(this.btn_visionGeneral);
             this.Controls.Add(this.cbx_pueblos);
             this.Controls.Add(this.lab_Pueblos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "formVisionGeneral";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Vision General";

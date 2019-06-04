@@ -191,6 +191,8 @@
             this.Controls.Add(this.btn_Clasificacion);
             this.Controls.Add(this.btn_visionGeneral);
             this.Controls.Add(this.tbx_respuesta);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "formContestarMensaje";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Contestar Mensaje";

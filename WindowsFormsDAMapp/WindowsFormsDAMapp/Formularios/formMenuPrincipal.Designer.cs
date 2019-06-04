@@ -225,7 +225,7 @@
             this.btn_recargar.BackColor = System.Drawing.Color.Transparent;
             this.btn_recargar.BackgroundImage = global::WindowsFormsDAMapp.Properties.Resources.refresh;
             this.btn_recargar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_recargar.Location = new System.Drawing.Point(325, 29);
+            this.btn_recargar.Location = new System.Drawing.Point(380, 29);
             this.btn_recargar.Name = "btn_recargar";
             this.btn_recargar.Size = new System.Drawing.Size(24, 23);
             this.btn_recargar.TabIndex = 3;

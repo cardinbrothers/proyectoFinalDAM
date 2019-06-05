@@ -209,7 +209,11 @@ namespace WindowsFormsDAMapp
                                 ballesteros = 0;
                             }
 
-                            if (arqueros <= tropasDefReales.arqueros && ballesteros <= tropasDefReales.ballesteros)
+                            if (arqueros == 0 && ballesteros == 0)
+                            {
+                                MessageBox.Show("Has de introducir al menos una unidad");
+                            }
+                            else if (arqueros <= tropasDefReales.arqueros && ballesteros <= tropasDefReales.ballesteros)
                             {
 
                                 // Creamos un objeto para realizar la peticion el web service
@@ -348,6 +352,11 @@ namespace WindowsFormsDAMapp
                                 paladines = 0;
                             }
 
+                            if (piqueros == 0 && caballeros == 0 && paladines == 0)
+                            {
+                                MessageBox.Show("Has de introducir al menos una unidad");
+                            }
+                            else
                             if (piqueros <= infoPueblo.piqueros && caballeros <= infoPueblo.caballeros && paladines <= infoPueblo.paladines)
                             {
 
